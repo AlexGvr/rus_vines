@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#7b1e3a">
+<title>Своё Вино — скан</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon.svg">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">Своё Вино</div>
+  <div class="ver" id="dp-version"></div>
+</header>
+
+<main>
+  <section id="tab-scan" class="tab active">
+    <div class="scan-hero">
+      <div class="scan-circle" id="scan-btn" role="button" aria-label="Сканировать этикетку">
+        <svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.6">
+          <path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2"/>
+          <circle cx="12" cy="12" r="3.2"/>
+        </svg>
+        <span>Сканировать<br>этикетку</span>
+      </div>
+      <p class="hint">Сфотографируйте этикетку бутылки —<br>приложение найдёт вино в базе. Работает без сети.</p>
+      <input type="file" id="scan-input" accept="image/*" capture="environment" hidden>
+    </div>
+    <div class="scan-progress" id="scan-progress" hidden>
+      <img id="scan-preview" alt="">
+      <div class="bar"><div class="bar-fill" id="scan-bar"></div></div>
+      <div class="scan-status" id="scan-status">Распознаю текст…</div>
+    </div>
+    <div id="scan-result" hidden></div>
+  </section>
+
+  <section id="tab-catalog" class="tab">
+    <div class="search-row">
+      <input type="search" id="search" placeholder="Название, винодельня, сорт…" autocomplete="off">
+    </div>
+    <div class="chips" id="color-chips">
+      <button class="chip" data-color="Белое">Белое</button>
+      <button class="chip" data-color="Красное">Красное</button>
+      <button class="chip" data-color="Розовое">Розовое</button>
+      <button class="chip" data-color="Оранжевое">Оранжевое</button>
+    </div>
+    <div class="selects">
+      <select id="f-sweetness"><option value="">Категория</option></select>
+      <select id="f-region"><option value="">Регион</option></select>
+      <select id="f-grape"><option value="">Сорт</option></select>
+    </div>
+    <div class="count" id="count"></div>
+    <ul class="wine-list" id="list"></ul>
+    <div id="list-sentinel"></div>
+  </section>
+
+  <section id="tab-mine" class="tab">
+    <h2 class="sec">Избранное</h2>
+    <ul class="wine-list" id="fav-list"></ul>
+    <div class="empty" id="fav-empty">Пока пусто — жмите ♥ на карточке вина</div>
+    <h2 class="sec">История сканов</h2>
+    <ul class="wine-list" id="hist-list"></ul>
+    <div class="empty" id="hist-empty">Отсканируйте первую бутылку</div>
+  </section>
+</main>
+
+<nav class="tabbar">
+  <button class="tabbtn active" data-tab="tab-scan">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="3"/></svg>
+    <span>Скан</span>
+  </button>
+  <button class="tabbtn" data-tab="tab-catalog">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+    <span>Каталог</span>
+  </button>
+  <button class="tabbtn" data-tab="tab-mine">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.6-9.5-9C.8 8.6 2.5 5 6 5c2.2 0 3.5 1.2 6 3.7C14.5 6.2 15.8 5 18 5c3.5 0 5.2 3.6 3.5 7-2.5 4.4-9.5 9-9.5 9z"/></svg>
+    <span>Мои вина</span>
+  </button>
+</nav>
+
+<div id="detail" class="detail" hidden></div>
+
+<script src="vendor/tesseract/tesseract.min.js"></script>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

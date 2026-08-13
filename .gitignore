@@ -1,0 +1,5 @@
+node_modules/
+data/raw/
+data/eval_photos/
+__pycache__/
+*.traineddata

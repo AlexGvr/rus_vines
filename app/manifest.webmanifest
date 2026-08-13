@@ -1,0 +1,13 @@
+{
+  "name": "Своё Вино — скан этикеток",
+  "short_name": "Своё Вино",
+  "description": "Офлайн-распознавание российских вин по фото этикетки",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#f7f4f1",
+  "theme_color": "#7b1e3a",
+  "lang": "ru",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
