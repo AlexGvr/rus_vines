@@ -1,0 +1,808 @@
+{
+ "translit": [
+  [
+   "aristov",
+   "аристов"
+  ],
+  [
+   "riesling",
+   "риеслинг"
+  ],
+  [
+   "shchedrin",
+   "щедрин"
+  ],
+  [
+   "chateau",
+   "чатеау"
+  ],
+  [
+   "yubileynaya",
+   "юбилеиная"
+  ],
+  [
+   "quantum",
+   "квантум"
+  ]
+ ],
+ "tokenize": [
+  [
+   "ARISTOV ARTE «Лесная Просека» 2022 брют 12%",
+   [
+    "аристов",
+    "арте",
+    "лесная",
+    "просека",
+    "2022",
+    "брют",
+    "12"
+   ]
+  ],
+  [
+   "Château Tamagne  сухое ГОСТ",
+   [
+    "ч",
+    "теау",
+    "тамагне",
+    "сухое"
+   ]
+  ]
+ ],
+ "years": [
+  [
+   "урожай 2021 и 1998",
+   [
+    "2021",
+    "1998"
+   ]
+  ]
+ ],
+ "queries": [
+  {
+   "q": "ARISTOV ARTE лесная просека игристое брют",
+   "top": [
+    {
+     "slug": "lesnaya-proseka",
+     "c": 0.454182
+    },
+    {
+     "slug": "igristoe-vino-ekstra-bryut-beloe-di-caspico",
+     "c": 0.266195
+    },
+    {
+     "slug": "lorio-bryut-belyj",
+     "c": 0.266195
+    },
+    {
+     "slug": "lorio-bryut-rozovoe-igristoe",
+     "c": 0.266195
+    },
+    {
+     "slug": "myshako-igristoe-beloe-bryut",
+     "c": 0.266195
+    }
+   ]
+  },
+  {
+   "q": "ALMA VALLEY riesling 2022 крым",
+   "top": [
+    {
+     "slug": "alma-valley-risling-beloe-polusuhoe-125",
+     "c": 0.592906
+    },
+    {
+     "slug": "olymp-winery-adagum-valley-riesling-risling-reynskiy-beloe-suhoe-11",
+     "c": 0.565538
+    },
+    {
+     "slug": "alma-valley-locantita-merlot-cabernet-franc",
+     "c": 0.561077
+    },
+    {
+     "slug": "locantita-sauvignon-blanc-chardonnay",
+     "c": 0.453206
+    },
+    {
+     "slug": "alma-valley-graviti-pino-blan-beloe-suhoe-135",
+     "c": 0.453206
+    }
+   ]
+  },
+  {
+   "q": "фанагория каберне",
+   "top": [
+    {
+     "slug": "fanagoriya-100-ottenkov-krasnogo-kaberne-kaberne-sovinon-krasnoe-suhoe-135",
+     "c": 0.814793
+    },
+    {
+     "slug": "fanagoriya-rose-kaberne-sovinon-rozovoe-polusuhoe-13",
+     "c": 0.814793
+    },
+    {
+     "slug": "fanagoriya-rose-kaberne-fran-rozovoe-suhoe-13",
+     "c": 0.814793
+    },
+    {
+     "slug": "fanagoriya-101-ottenok-krasnogo-kaberne-kaberne-sovinon-krasnoe-suhoe-14",
+     "c": 0.814793
+    },
+    {
+     "slug": "fanagoriya-dekanter-kaberne-fran-2019-krasnoe-suhoe-13",
+     "c": 0.814793
+    }
+   ]
+  },
+  {
+   "q": "ГРАФ ВОРОНЦОВ брют белое",
+   "top": [
+    {
+     "slug": "derbent-vino-graf-vorontsov-bryut-beloe-sovinon-blan-105-125",
+     "c": 1
+    },
+    {
+     "slug": "derbent-vino-graf-vorontsov-bryut-rozovoe-pervenets-magaracha-105-125",
+     "c": 0.852568
+    },
+    {
+     "slug": "derbent-vino-graf-vorontsov-beloe-polusladkoe-sovinon-blan-105-125",
+     "c": 0.815432
+    },
+    {
+     "slug": "abrau-dyurso-udelnoe-vedomstvo-imperatorskoe-beloe-bryut",
+     "c": 0.332001
+    },
+    {
+     "slug": "bryut-beloe-zolotaya-balka",
+     "c": 0.332001
+    }
+   ]
+  },
+  {
+   "q": "шато тамань саперави",
+   "top": [
+    {
+     "slug": "kuban-vino-shato-tamane-rezerv-kollekshn-saperavi-2015-krasnoe-suhoe-13",
+     "c": 1
+    },
+    {
+     "slug": "kuban-vino-shato-tamane-terruar-krasnostop-saperavi-2022-krasnoe-suhoe-125",
+     "c": 1
+    },
+    {
+     "slug": "kuban-vino-shato-tamane-terruar-krasnostop-saperavi-2023-krasnoe-suhoe-125",
+     "c": 1
+    },
+    {
+     "slug": "shato-taman-saperavi",
+     "c": 1
+    },
+    {
+     "slug": "kuban-vino-shato-tamane-rezerv-premer-ruzh-kaberne-sovinon-krasnoe-suhoe-13",
+     "c": 0.790577
+    }
+   ]
+  },
+  {
+   "q": "Fanagoria Cru Lermont Saperavi 2020",
+   "top": [
+    {
+     "slug": "fanagoriya-cru-lermont-saperavi-saperavi-krasnoe-suhoe-135",
+     "c": 0.832951
+    },
+    {
+     "slug": "fanagoriya-cru-lermont-cabernet-sauvignon-kaberne-sovinon-krasnoe-suhoe-13",
+     "c": 0.65201
+    },
+    {
+     "slug": "fanagoriya-cru-lermont-chardonnay-shardone-beloe-suhoe-14",
+     "c": 0.65201
+    },
+    {
+     "slug": "fanagoriya-cru-lermont-petit-verdot-pti-verdo-krasnoe-suhoe-13",
+     "c": 0.65201
+    },
+    {
+     "slug": "cru-lermont-risling",
+     "c": 0.65201
+    }
+   ]
+  },
+  {
+   "q": "абрау дюрсо brut rose",
+   "top": [
+    {
+     "slug": "abrau-dyurso-abrau-durso-brut-rose-reserve-pino-nuar-beloe-bryut-12",
+     "c": 0.926253
+    },
+    {
+     "slug": "abrau-dyurso-brut-dor-rose-pino-nuar-rozovoe-bryut-12",
+     "c": 0.836119
+    },
+    {
+     "slug": "abrau-dyurso-imperial-brut-rose-pino-nuar-rozovoe-bryut-12",
+     "c": 0.836119
+    },
+    {
+     "slug": "abrau-dyurso-victor-dravigny-brut-rose-pino-nuar-rozovoe-bryut-12",
+     "c": 0.836119
+    },
+    {
+     "slug": "abrau-dyurso-abrau-durso-reserve-brut-shardone-beloe-bryut-115",
+     "c": 0.66711
+    }
+   ]
+  },
+  {
+   "q": "INKERMAN пино нуар",
+   "top": [
+    {
+     "slug": "inkermanskiy-zmv-inkerman-pino-blan-zero-dozazh-beloe-ekstra-bryut-12",
+     "c": 0.708756
+    },
+    {
+     "slug": "inkermanskiy-zmv-inkerman-roze-zero-dozazh-kokur-rozovoe-ekstra-bryut-12",
+     "c": 0.624983
+    },
+    {
+     "slug": "inkermanskiy-zmv-inkerman-rozovoe-polusladkoe-rkatsiteli-12",
+     "c": 0.624983
+    },
+    {
+     "slug": "inkerman-shato-ruzh",
+     "c": 0.624983
+    },
+    {
+     "slug": "abrau-dyurso-abrau-dyurso-pino-nuar-krasnoe-suhoe-13",
+     "c": 0.562526
+    }
+   ]
+  },
+  {
+   "q": "kuban vino шардоне сухое",
+   "top": [
+    {
+     "slug": "olymp-winery-adagum-chardonnay-kuban-shardone-beloe-suhoe-11",
+     "c": 0.646908
+    },
+    {
+     "slug": "chateau-tamagne-signature-shardone",
+     "c": 0.6066
+    },
+    {
+     "slug": "shato-taman-shardone",
+     "c": 0.6066
+    },
+    {
+     "slug": "kuban-vino-shato-tamane-shardone-beloe-suhoe-12",
+     "c": 0.6066
+    },
+    {
+     "slug": "kuban-vino-shato-tamane-rkatsiteli-myuller-turgau-shardone-2025-beloe-suhoe-12",
+     "c": 0.6066
+    }
+   ]
+  },
+  {
+   "q": "массандра портвейн",
+   "top": [
+    {
+     "slug": "massandra-portveyn-belyy-alushta-belye-sorta-vinograda-beloe-sladkoe-17",
+     "c": 0.848785
+    },
+    {
+     "slug": "massandra-portveyn-belyy-gurzuf-kokur-belyy-beloe-sladkoe-135",
+     "c": 0.848785
+    },
+    {
+     "slug": "massandra-portveyn-belyy-krymskiy-kokur-beloe-sladkoe-18",
+     "c": 0.848785
+    },
+    {
+     "slug": "massandra-portveyn-krasnyy-alushta-krasnye-sorta-vinograda-krasnoe-sladkoe-17",
+     "c": 0.848785
+    },
+    {
+     "slug": "massandra-portveyn-krasnyy-livadiya-kaberne-sovinon-krasnoe-sladkoe-185",
+     "c": 0.848785
+    }
+   ]
+  },
+  {
+   "q": "ZB wine рислинг",
+   "top": [
+    {
+     "slug": "zolotaya-balka-zb-wine-riesling-risling-beloe-polusuhoe-115",
+     "c": 0.920582
+    },
+    {
+     "slug": "zb-wine-moscato-beloe-polusladkoe",
+     "c": 0.735273
+    },
+    {
+     "slug": "zolotaya-balka-zb-wine-sauvignon-blanc-sovinon-blan-beloe-suhoe-125",
+     "c": 0.735273
+    },
+    {
+     "slug": "fanagoriya-ice-wine-risling-tihoe-beloe-sladkoe-10",
+     "c": 0.590476
+    },
+    {
+     "slug": "shato-pino-ice-wine-risling-risling-reynskiy-beloe-sladkoe-11",
+     "c": 0.590476
+    }
+   ]
+  },
+  {
+   "q": "голубицкое estate blanc de blancs",
+   "top": [
+    {
+     "slug": "pomeste-golubitskoe-tte-de-cheval-blanc-de-blancs-shardone-beloe-bryut-12",
+     "c": 0.862366
+    },
+    {
+     "slug": "golubitskoe-estate-tte-de-cheval-blanc-de-blancs-shardone-beloe-bryut-12",
+     "c": 0.862366
+    },
+    {
+     "slug": "magnatum-cuvee-m-blanc-de-blancs",
+     "c": 0.721396
+    },
+    {
+     "slug": "mantra-blanc-de-blancs",
+     "c": 0.721396
+    },
+    {
+     "slug": "magnatum-blanc-de-blancs",
+     "c": 0.721396
+    }
+   ]
+  },
+  {
+   "q": "мысхако красностоп 2021",
+   "top": [
+    {
+     "slug": "domaine-de-la-vivandiere-krasnostop-roze-rozovoe-suhoe-134",
+     "c": 0.506835
+    },
+    {
+     "slug": "imenie-sikory-krasnostop-zolotovskiy-na-terrasah-krasnoe-suhoe-14",
+     "c": 0.506835
+    },
+    {
+     "slug": "krasnostop-shato-taman",
+     "c": 0.506835
+    },
+    {
+     "slug": "krasnostop-zolotovskij",
+     "c": 0.506835
+    },
+    {
+     "slug": "kuban-vino-krasnostop-de-tamane-krasnostop-anapskiy-krasnoe-suhoe-13",
+     "c": 0.506835
+    }
+   ]
+  },
+  {
+   "q": "esse muscat",
+   "top": [
+    {
+     "slug": "esse-muskat-belyy-beloe-suhoe-135",
+     "c": 0.825195
+    },
+    {
+     "slug": "esse-demi-sec-muscat-nectar-muskat-belyy-beloe-ekstra-bryut-115",
+     "c": 0.825195
+    },
+    {
+     "slug": "esse-muskat-muskat-belyy-beloe-ekstra-bryut-115",
+     "c": 0.825195
+    },
+    {
+     "slug": "esse-muskat-muskat-belyy-beloe-suhoe-115",
+     "c": 0.825195
+    },
+    {
+     "slug": "esse-muskat-oranzh-muskat-belyy-beloe-suhoe-115",
+     "c": 0.825195
+    }
+   ]
+  },
+  {
+   "q": "дербент вино дикий виноград",
+   "top": [
+    {
+     "slug": "derbent-vino-di-kaspiko-merlo-krasnoe-polusladkoe-11",
+     "c": 0.510773
+    },
+    {
+     "slug": "igristoe-vino-ekstra-bryut-beloe-di-caspico",
+     "c": 0.510773
+    },
+    {
+     "slug": "igristoe-zhemchuzhnoe-vino-polusladkoe-beloe-di-kaspiko-fiori-di-mare-di-caspico-fiori-di-mare",
+     "c": 0.510773
+    },
+    {
+     "slug": "igristoe-zhemchuzhnoe-vino-polusladkoe-rozovoe-di-kaspiko-fiori-di-mare-di-caspico-fiori-di-mare",
+     "c": 0.510773
+    },
+    {
+     "slug": "igristoe-vino-bryut-beloe-di-kaspiko-blan-de-blan-di-caspico-blanc-de-blancs",
+     "c": 0.510773
+    }
+   ]
+  },
+  {
+   "q": "sikory пти вердо",
+   "top": [
+    {
+     "slug": "belbek-belbek-pti-verdo-krasnoe-suhoe-121",
+     "c": 0.698441
+    },
+    {
+     "slug": "domaine-lipko-pti-verdo-krasnoe-suhoe-14",
+     "c": 0.698441
+    },
+    {
+     "slug": "vibes-montepulchano-kaberne-fran-pti-verdo",
+     "c": 0.698441
+    },
+    {
+     "slug": "villa-di-alma-pti-verdo-krasnoe-suhoe-125",
+     "c": 0.698441
+    },
+    {
+     "slug": "vinodelnya-raevskoe-renessans-pti-verdo-krasnoe-suhoe-145",
+     "c": 0.698441
+    }
+   ]
+  },
+  {
+   "q": "новый свет брют розовое",
+   "top": [
+    {
+     "slug": "novyy-svet-dom-shampanskih-vin-igristoe-vino-vyderzhannoe-bryut-rozovoe-novyy-svet-pino-fran-135",
+     "c": 1
+    },
+    {
+     "slug": "novyy-svet-dom-shampanskih-vin-rossiyskoe-shampanskoe-kollektsionnoe-bryut-rozovoe-novyy-svet-pino-nuar-135",
+     "c": 1
+    },
+    {
+     "slug": "novyy-svet-dom-shampanskih-vin-rossiyskoe-shampanskoe-vyderzhannoe-bryut-rozovoe-novyy-svet-kaberne-kaberne-sovinon-11",
+     "c": 1
+    },
+    {
+     "slug": "novyy-svet-dom-shampanskih-vin-igristoe-vino-vyderzhannoe-bryut-rozovoe-novyy-svet-pino-nuar-125",
+     "c": 1
+    },
+    {
+     "slug": "novyy-svet-dom-shampanskih-vin-rossiyskoe-shampanskoe-kollektsionnoe-bryut-beloe-novyy-svet-kyuve-de-prestizh-pino-gri-millezim-rozovoe-125",
+     "c": 0.820321
+    }
+   ]
+  },
+  {
+   "q": "солнечная долина мускат белый",
+   "top": [
+    {
+     "slug": "solnechnaya-dolina-muskatnoe-festivalnoe-muskat-belyy-rozovoe-sladkoe-16",
+     "c": 0.627993
+    },
+    {
+     "slug": "solnechnaya-dolina-meganom-kokur-beloe-bryut",
+     "c": 0.529482
+    },
+    {
+     "slug": "aratti-muskat-belyj-polusuhoe",
+     "c": 0.470518
+    },
+    {
+     "slug": "aratti-muskat-belyj-suhoe",
+     "c": 0.470518
+    },
+    {
+     "slug": "massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13",
+     "c": 0.470518
+    }
+   ]
+  },
+  {
+   "q": "gai kodzor viognier",
+   "top": [
+    {
+     "slug": "vinogradniki-gay-kodzora-viognier-de-ga-kodzor-vione-beloe-suhoe-125",
+     "c": 0.662714
+    },
+    {
+     "slug": "vinogradniki-gay-kodzora-rose-cuvee-prestige-de-gai-kodzor-murvedr-rozovoe-suhoe-13",
+     "c": 0.653517
+    },
+    {
+     "slug": "vinogradniki-gay-kodzora-rose-de-gai-kodzor-grenash-rozovoe-suhoe-125",
+     "c": 0.653517
+    },
+    {
+     "slug": "vinogradniki-gay-kodzora-elegance-rose-de-gai-kodzor-sira-rozovoe-suhoe-125",
+     "c": 0.653517
+    },
+    {
+     "slug": "vinogradniki-gay-kodzora-gewurztraminer-de-gai-kodzor-gevyurtstraminer-beloe-polusuhoe-135",
+     "c": 0.653517
+    }
+   ]
+  },
+  {
+   "q": "лефкадия рислинг",
+   "top": [
+    {
+     "slug": "lefkadiya-beloe",
+     "c": 0.61459
+    },
+    {
+     "slug": "lefkadiya-krasnoe",
+     "c": 0.61459
+    },
+    {
+     "slug": "avtorskij-gid-artura-sarkisyana",
+     "c": 0.409727
+    },
+    {
+     "slug": "roze-malbek",
+     "c": 0.409727
+    },
+    {
+     "slug": "temelion-blanc-de-blancs",
+     "c": 0.409727
+    }
+   ]
+  },
+  {
+   "q": "опалиха пино гри",
+   "top": [
+    {
+     "slug": "b-yu-rne-pino-gri-beloe-suhoe",
+     "c": 0.63593
+    },
+    {
+     "slug": "b-yu-rne-pino-gri-pozdnij-sbor-sladkoe-beloe",
+     "c": 0.63593
+    },
+    {
+     "slug": "massandra-pino-gri-beloe-sladkoe-16",
+     "c": 0.63593
+    },
+    {
+     "slug": "massandra-vino-avtorskoe-pino-gri-beloe-suhoe-12",
+     "c": 0.63593
+    },
+    {
+     "slug": "pino-gri-avtorskoe",
+     "c": 0.63593
+    }
+   ]
+  },
+  {
+   "q": "усадьба дивноморское",
+   "top": [
+    {
+     "slug": "usadba-divnomorskoe-maris-blanc-de-noirs-extra-brut-pino-nuar-beloe-ekstra-bryut-105",
+     "c": 0.666667
+    },
+    {
+     "slug": "usadba-divnomorskoe-marselan-marselan-krasnoe-suhoe-149",
+     "c": 0.666667
+    },
+    {
+     "slug": "usadba-divnomorskoe-pinot-noir-pino-nuar-krasnoe-suhoe-12",
+     "c": 0.666667
+    },
+    {
+     "slug": "usadba-divnomorskoe-rebo-rebo-krasnoe-suhoe-165",
+     "c": 0.666667
+    },
+    {
+     "slug": "usadba-divnomorskoe-rose-vione-rozovoe-suhoe-125",
+     "c": 0.666667
+    }
+   ]
+  },
+  {
+   "q": "chateau tamagne reserve",
+   "top": [
+    {
+     "slug": "chateau-tamagne-nature-vert",
+     "c": 0.669017
+    },
+    {
+     "slug": "chateau-tamagne-select-blanc-brut",
+     "c": 0.669017
+    },
+    {
+     "slug": "chateau-tamagne-signature-kaberne",
+     "c": 0.669017
+    },
+    {
+     "slug": "chateau-tamagne-signature-shardone",
+     "c": 0.669017
+    },
+    {
+     "slug": "chateau-tamagne-select-blanc-brut-svo-yo-vino",
+     "c": 0.669017
+    }
+   ]
+  },
+  {
+   "q": "вилла звезда донская",
+   "top": [
+    {
+     "slug": "fanagoriya-sur-lie-vi-vi-aligote-beloe-suhoe-125",
+     "c": 0.301595
+    },
+    {
+     "slug": "belmas-winery-vi-vione-beloe-suhoe-122",
+     "c": 0.301595
+    },
+    {
+     "slug": "villa-di-alma-ekstra-bryut-kokur-beloe-125",
+     "c": 0.236545
+    },
+    {
+     "slug": "villa-di-alma-kaberne-sovinon-ekstra-bryut-rozovoe-125",
+     "c": 0.236545
+    },
+    {
+     "slug": "villa-sofiya-risling-beloe-suhoe-131",
+     "c": 0.236545
+    }
+   ]
+  },
+  {
+   "q": "плечистик цимлянский",
+   "top": [
+    {
+     "slug": "sober-bash-grani-plechistik-krasnoe-suhoe-12",
+     "c": 0.587538
+    },
+    {
+     "slug": "domaine-de-la-vivandiere-tsimlyanskiy-chyornyy-ctes-du-don-tsimlyanskiy-chernyy-rozovoe-suhoe-134",
+     "c": 0.412462
+    },
+    {
+     "slug": "tempelhof-winery-tsimlyanskiy-chernyy-krasnoe-suhoe-125",
+     "c": 0.412462
+    },
+    {
+     "slug": "vinodelnya-vedernikov-vedernikov-tsimlyanskiy-chyornyy-bryut-tsimlyanskiy-chernyy-beloe-12",
+     "c": 0.412462
+    },
+    {
+     "slug": "vinodelnya-vedernikov-vedernikov-tsimlyanskiy-chyornyy-tsimlyanskiy-chernyy-krasnoe-suhoe-14",
+     "c": 0.412462
+    }
+   ]
+  },
+  {
+   "q": "кокур белый качинский",
+   "top": [
+    {
+     "slug": "inkermanskiy-zmv-kokur-belyy-ekstra-bryut-beloe-135",
+     "c": 0.658614
+    },
+    {
+     "slug": "vinnyy-fort-adagum-kokur-belyy-beloe-suhoe-12",
+     "c": 0.658614
+    },
+    {
+     "slug": "zmv-koktebel-atmosfera-rkatsiteli-aligote-kokur-muskat-belyy-shardone-beloe-polusladkoe-11",
+     "c": 0.658614
+    },
+    {
+     "slug": "valerij-zaharin-kokur-i-ko-beloe-bryut",
+     "c": 0.445139
+    },
+    {
+     "slug": "valeriy-zaharin-kokur-klassika-kokur-belyy-beloe-bryut-115",
+     "c": 0.445139
+    }
+   ]
+  },
+  {
+   "q": "high hopes шираз",
+   "top": [
+    {
+     "slug": "chateau-de-talu-shiraz-rezerv-sira-krasnoe-suhoe-14",
+     "c": 0.356149
+    },
+    {
+     "slug": "vinodelnya-myshako-shiraz-black-out-krasnoe-suhoe-152",
+     "c": 0.356149
+    },
+    {
+     "slug": "agora-rosa-viva-cabernet-sauvignon-shiraz",
+     "c": 0.356149
+    },
+    {
+     "slug": "soyuz-vino-shato-de-mongolfer-shiraz-moellyo-krasnoe-polusladkoe-11",
+     "c": 0.356149
+    },
+    {
+     "slug": "agora-yachting-shiraz",
+     "c": 0.356149
+    }
+   ]
+  },
+  {
+   "q": "бельбек мерло розе",
+   "top": [
+    {
+     "slug": "belbek-belbek-roze-pino-nuar-rozovoe-suhoe-129",
+     "c": 0.703989
+    },
+    {
+     "slug": "belbek-belbek-merlo-krasnoe-suhoe-129",
+     "c": 0.662266
+    },
+    {
+     "slug": "dubinin-winery-merlo-roze-rozovoe-suhoe-125",
+     "c": 0.633745
+    },
+    {
+     "slug": "zmv-koktebel-roze-merlo-rozovoe-suhoe-12",
+     "c": 0.633745
+    },
+    {
+     "slug": "belbek-pino-nuar-roze-rozovoe-suhoe-115",
+     "c": 0.581904
+    }
+   ]
+  },
+  {
+   "q": "twk вайн крафт",
+   "top": [
+    {
+     "slug": "vinodelnya-batrak-prikumskoe-vitale-kraft-kaberne-sovinon-krasnoe-suhoe-135",
+     "c": 0.369035
+    },
+    {
+     "slug": "vinodelnya-batrak-vitale-kraft-kaberne-sovinon-krasnoe-suhoe-14",
+     "c": 0.369035
+    },
+    {
+     "slug": "wein-und-wasser-vayn-taym-sira-krym-krasnoe-suhoe-13",
+     "c": 0.369035
+    },
+    {
+     "slug": "wein-und-wasser-vayn-taym-sovinon-blan-krym-beloe-suhoe-12",
+     "c": 0.369035
+    }
+   ]
+  },
+  {
+   "q": "просто вино красное полусухое",
+   "top": [
+    {
+     "slug": "leto-kaberne-sovinon-2023-polusuhoe-krasnoe",
+     "c": 0.606587
+    },
+    {
+     "slug": "perovskih_polusuhoe_krasnoe",
+     "c": 0.606587
+    },
+    {
+     "slug": "fiori-di-mare-krasnoe-polusuhoe",
+     "c": 0.606587
+    },
+    {
+     "slug": "soyuz-vino-shato-de-mongolfer-shiraz-polusuhoe-krasnoe-11",
+     "c": 0.400952
+    },
+    {
+     "slug": "abrau-dyurso-russkoe-igristoe-polusuhoe-shardone-beloe-12",
+     "c": 0.359824
+    }
+   ]
+  }
+ ]
+}

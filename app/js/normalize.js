@@ -42,7 +42,9 @@ export function translitToken(tok) {
 }
 
 export function clean(text) {
-  return text.toLowerCase().replaceAll("ё", "е")
+  // 'İ' (U+0130): full vs simple case mapping расходятся между рантаймами —
+  // унифицируем до lowercase во всех трёх зеркалах (js/py/dart).
+  return text.replaceAll("İ", "I").toLowerCase().replaceAll("ё", "е")
     .replace(/[^a-zа-я0-9]+/g, " ")
     .replace(/\s+/g, " ").trim();
 }

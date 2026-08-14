@@ -49,7 +49,9 @@ def translit_token(tok: str) -> str:
 
 
 def clean(text: str) -> str:
-    text = text.lower().replace("ё", "е").replace("«", " ").replace("»", " ")
+    # 'İ' (U+0130): full vs simple case mapping расходятся между рантаймами —
+    # унифицируем до lowercase во всех трёх зеркалах (js/py/dart).
+    text = text.replace("İ", "I").lower().replace("ё", "е").replace("«", " ").replace("»", " ")
     text = re.sub(r"[^a-zа-я0-9]+", " ", text)
     return re.sub(r"\s+", " ", text).strip()
 

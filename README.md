@@ -24,6 +24,12 @@ app/        PWA (три таба: Скан / Каталог / Мои вина)
   data/wines.json     датапак (генерируется build_datapack.py)
   photos/             фото бутылок 400px (~25 MB, генерируется)
   sw.js               service worker: полный офлайн после первой загрузки
+mobile/     Flutter-приложение (Android/iOS), тот же продукт нативно
+  lib/core/           Dart-зеркало ядра (normalize + matcher)
+  lib/services/       датапак, «Мои вина» (shared_preferences), OCR (ML Kit)
+  lib/screens/        Скан / Каталог / Детальная / Мои вина
+  test/parity_test.dart  паритет Dart-ядра с JS по golden-файлу
+tools/gen_golden.mjs   генератор golden-эталона (перегенерять при правке ядра)
 data/       сырые карточки и собранный датапак (генерируется)
 ```
 
@@ -38,10 +44,20 @@ python3 etl/build_datapack.py
 npm install
 node core/eval.mjs 150
 
-# 3. Приложение
+# 3. Приложение (PWA)
 cd app && python3 -m http.server 8000
 # открыть http://localhost:8000 (на телефоне — «Добавить на экран Домой»)
+
+# 4. Flutter-приложение
+cd mobile && flutter test && flutter build apk --release
+# APK: mobile/build/app/outputs/flutter-apk/app-release.apk
 ```
+
+Flutter-порт: ядро идентично JS (паритет-тест по 30 запросам с точностью
+1e-4, эталон — tools/gen_golden.mjs). OCR — ML Kit (latin script): у ML Kit
+нет кириллической модели, латинские надписи этикеток закрываются
+транслитерацией в матчере; для кириллицы — Apple Vision (iOS), Tesseract FFI
+или серверный fallback. Заметки/оценки/избранное — shared_preferences.
 
 ## Как работает распознавание (офлайн)
 
