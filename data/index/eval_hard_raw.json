@@ -1,0 +1,42 @@
+[
+ {
+  "variant": "clean",
+  "index_size": 2088,
+  "garbage_in_index": 0,
+  "top1": 0.5775,
+  "top5": 0.815,
+  "garbage_top1": 0.0,
+  "gap_median": 0.014466702938079834,
+  "search_ms": 0.12020468711853027
+ },
+ {
+  "variant": "clean_detect",
+  "index_size": 2088,
+  "garbage_in_index": 0,
+  "top1": 0.4325,
+  "top5": 0.6375,
+  "garbage_top1": 0.0,
+  "gap_median": 0.009692251682281494,
+  "search_ms": 0.09215414524078369
+ },
+ {
+  "variant": "dirty",
+  "index_size": 6205,
+  "garbage_in_index": 4121,
+  "top1": 0.5325,
+  "top5": 0.75,
+  "garbage_top1": 0.1925,
+  "gap_median": 0.013079345226287842,
+  "search_ms": 0.18405556678771973
+ },
+ {
+  "variant": "dirty_detect",
+  "index_size": 6205,
+  "garbage_in_index": 4121,
+  "top1": 0.4175,
+  "top5": 0.6175,
+  "garbage_top1": 0.17,
+  "gap_median": 0.009357303380966187,
+  "search_ms": 0.2772742509841919
+ }
+]

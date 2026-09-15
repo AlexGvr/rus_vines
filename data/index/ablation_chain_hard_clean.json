@@ -1,67 +1,67 @@
 [
  {
   "variant": "clean_raw",
-  "index_size": 1939,
+  "index_size": 2088,
   "garbage_in_index": 0,
-  "top1": 0.5925,
-  "top5": 0.8175,
+  "top1": 0.5825,
+  "top5": 0.815,
   "garbage_top1": 0.0,
-  "gap_median": 0.016536951065063477,
-  "search_ms": 0.06710410118103027,
+  "gap_median": 0.014464706182479858,
+  "search_ms": 0.1334315538406372,
   "label": "без нормализации",
   "steps": "-",
-  "seconds": 117.7
+  "seconds": 124.9
  },
  {
   "variant": "clean_detect",
-  "index_size": 1939,
+  "index_size": 2088,
   "garbage_in_index": 0,
-  "top1": 0.7025,
-  "top5": 0.8375,
+  "top1": 0.73,
+  "top5": 0.865,
   "garbage_top1": 0.0,
-  "gap_median": 0.03315499424934387,
-  "search_ms": 0.05075275897979736,
+  "gap_median": 0.03331172466278076,
+  "search_ms": 0.11446654796600342,
   "label": "+детекция",
   "steps": "detect",
-  "seconds": 154.3
+  "seconds": 169.7
  },
  {
   "variant": "clean_detect_label",
-  "index_size": 1939,
+  "index_size": 2088,
   "garbage_in_index": 0,
-  "top1": 0.6425,
-  "top5": 0.7475,
+  "top1": 0.625,
+  "top5": 0.7675,
   "garbage_top1": 0.0,
-  "gap_median": 0.02954980731010437,
-  "search_ms": 0.04905223846435547,
+  "gap_median": 0.03552016615867615,
+  "search_ms": 0.05257904529571533,
   "label": "+этикетка",
   "steps": "detect,label",
-  "seconds": 159.2
+  "seconds": 168.4
  },
  {
   "variant": "clean_detect_label_dewarp",
-  "index_size": 1939,
+  "index_size": 2088,
   "garbage_in_index": 0,
-  "top1": 0.625,
-  "top5": 0.735,
+  "top1": 0.6275,
+  "top5": 0.745,
   "garbage_top1": 0.0,
-  "gap_median": 0.02892822027206421,
-  "search_ms": 0.12238264083862303,
+  "gap_median": 0.03284478187561035,
+  "search_ms": 0.06216049194335938,
   "label": "+разворот",
   "steps": "detect,label,dewarp",
-  "seconds": 177.0
+  "seconds": 184.8
  },
  {
   "variant": "clean_detect_label_dewarp_glare_balance",
-  "index_size": 1939,
+  "index_size": 2088,
   "garbage_in_index": 0,
-  "top1": 0.515,
-  "top5": 0.65,
+  "top1": 0.48,
+  "top5": 0.635,
   "garbage_top1": 0.0,
-  "gap_median": 0.01999017596244812,
-  "search_ms": 0.07024705410003662,
+  "gap_median": 0.017810344696044922,
+  "search_ms": 0.052237510681152344,
   "label": "+блик и свет",
   "steps": "detect,label,dewarp,glare,balance",
-  "seconds": 360.8
+  "seconds": 383.7
  }
 ]

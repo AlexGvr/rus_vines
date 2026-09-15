@@ -40,19 +40,28 @@ def uploads_dir() -> Path:
 
 
 def collect(variant: str) -> tuple[list[str], list[str | None]]:
-    """Список файлов индекса и slug каждого файла (None — мусор)."""
+    """Строки индекса: путь к файлу и slug позиции (None — мусор).
+
+    Единица индекса — позиция каталога, а не файл. Связь не взаимно
+    однозначная: четыре фото платформа повесила на две карточки каждое
+    (два винтажа или два сорта одной винодельни). Группировка по файлу
+    оставила бы от такой пары один slug, и вторая позиция выпала бы из
+    поиска целиком. Поэтому путь в списке может повторяться.
+    """
     catalog = json.loads(CATALOG.read_text())["wines"]
-    file2slug = {}
-    for wine in catalog:
-        if wine.get("photo"):
-            file2slug[Path(wine["photo"]).name] = wine["slug"]
+    updir = uploads_dir()
 
     if variant == "clean":
-        updir = uploads_dir()
-        paths = [str(updir / name) for name in file2slug]
-        return paths, [file2slug[Path(p).name] for p in paths]
+        rows = [(str(updir / Path(w["photo"]).name), w["slug"])
+                for w in catalog if w.get("photo")]
+        return [p for p, _ in rows], [s for _, s in rows]
 
-    updir = uploads_dir()
+    # В dirty строка — файл дампа, поэтому обратная свёртка неизбежна:
+    # общему фото достаётся первый по каталогу slug.
+    file2slug: dict[str, str] = {}
+    for wine in catalog:
+        if wine.get("photo"):
+            file2slug.setdefault(Path(wine["photo"]).name, wine["slug"])
     names = [n for n in sorted(updir.iterdir())
              if n.is_file() and not n.name.startswith(PREVIEW_PREFIXES)]
     paths = [str(p) for p in names]
@@ -71,20 +80,28 @@ def main() -> None:
 
     paths, slugs = collect(args.variant)
     garbage = sum(1 for s in slugs if s is None)
-    print(f"индекс {name} (шаги: {','.join(steps) or 'нет'}): файлов {len(paths)}, "
+    print(f"индекс {name} (шаги: {','.join(steps) or 'нет'}): строк {len(paths)}, "
           f"из них без привязки к каталогу (мусор): {garbage}")
 
+    # Считаем каждый файл один раз, даже если на него ссылаются две позиции:
+    # эмбеддинг зависит только от картинки.
+    unique = list(dict.fromkeys(paths))
     t0 = time.time()
-    vectors, kept = embed_paths(paths, batch_size=args.batch_size, steps=steps)
-    kept_slugs = [slugs[paths.index(p)] for p in kept] if len(kept) != len(paths) else slugs
-    print(f"эмбеддингов: {len(kept)} за {time.time() - t0:.0f} с, размерность {vectors.shape[1]}")
+    vectors, kept = embed_paths(unique, batch_size=args.batch_size, steps=steps)
+    # Битые файлы embed_paths пропускает молча, поэтому строки собираем по
+    # тем путям, для которых вектор действительно посчитан.
+    row_of_path = {path: i for i, path in enumerate(kept)}
+    rows = [(path, slug) for path, slug in zip(paths, slugs) if path in row_of_path]
+    vectors = vectors[[row_of_path[path] for path, _ in rows]]
+    print(f"эмбеддингов: {len(kept)} за {time.time() - t0:.0f} с, "
+          f"строк индекса: {len(rows)}, размерность {vectors.shape[1]}")
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     np.save(OUT_DIR / f"{name}.npy", vectors)
     with (OUT_DIR / f"{name}.csv").open("w", newline="", encoding="utf-8") as fh:
         writer = csv.writer(fh)
         writer.writerow(["path", "slug"])
-        for path, slug in zip(kept, kept_slugs):
+        for path, slug in rows:
             writer.writerow([str(Path(path).relative_to(ROOT)), slug or ""])
     print(f"сохранено: {OUT_DIR / (name + '.npy')}")
 

@@ -32,6 +32,7 @@ ROOT = Path(__file__).resolve().parent.parent
 CSV_PATH = ROOT / "dataset" / "strapi_output0709.csv"
 UPLOADS = next((ROOT / "dataset" / "uploads_root").rglob("uploads"), None)
 SCRAPE = ROOT / "data" / "datapack" / "wines.json"
+RAW_CARDS = ROOT / "data" / "raw" / "cards"
 OUT_DIR = ROOT / "data" / "catalog"
 
 # Размеры превью в порядке убывания качества: оригинал предпочтительнее,
@@ -60,9 +61,14 @@ def norm(text: str) -> str:
     return re.sub(r"[^\w]+", "_", text, flags=re.UNICODE).strip("_").lower()
 
 
-def index_uploads(uploads: Path) -> dict[str, dict[str, str]]:
-    """{стем без hash: {размер: имя файла}}. Стем — то, что Strapi сделал из имени."""
-    idx: dict[str, dict[str, str]] = defaultdict(dict)
+def index_uploads(uploads: Path) -> dict[str, list[dict[str, str]]]:
+    """{стем без hash: [{размер: имя файла}, ...]}.
+
+    Важно хранить ВСЕ файлы с одинаковым стемом, а не первый попавшийся:
+    у «Shardone» в дампе восемь разных файлов — по одному на винодельню.
+    Если оставить один, три карточки разных производителей получат одно фото.
+    """
+    by_hash: dict[tuple[str, str], dict[str, str]] = defaultdict(dict)
     for name in os.listdir(uploads):
         core, size = name, ""
         for prefix in ("thumbnail", "small", "medium", "large"):
@@ -72,8 +78,37 @@ def index_uploads(uploads: Path) -> dict[str, dict[str, str]]:
         m = re.match(r"^(.*)_([0-9a-f]{10})(\.\w+)$", core)
         if not m:
             continue
-        idx[m.group(1).lower()].setdefault(size, name)
+        by_hash[(m.group(1).lower(), m.group(2))][size] = name
+
+    idx: dict[str, list[dict[str, str]]] = defaultdict(list)
+    for (stem, _hash), sizes in by_hash.items():
+        idx[stem].append(sizes)
     return idx
+
+
+def api_photo_map(raw_cards: Path, available: set[str]) -> dict[str, str]:
+    """Точная привязка позиции к файлу из обхода каталога платформы.
+
+    В карточке API лежит `image.url` с готовым именем файла Strapi вместе
+    с хешем — это авторитетный ключ связи, которого нет в выгрузке кейса.
+    Угадывать по имени приходится только для позиций, до которых обход
+    не дошёл.
+    """
+    mapping: dict[str, str] = {}
+    if not raw_cards.is_dir():
+        return mapping
+    for path in raw_cards.glob("*.json"):
+        try:
+            card = json.loads(path.read_bytes())
+        except Exception:
+            continue
+        url = (card.get("image") or {}).get("url")
+        if not url:
+            continue
+        name = url.rsplit("/", 1)[-1]
+        if name in available:
+            mapping[card.get("slug") or path.stem] = name
+    return mapping
 
 
 def candidate_keys(row: dict) -> list[tuple[str, str]]:
@@ -86,6 +121,46 @@ def candidate_keys(row: dict) -> list[tuple[str, str]]:
         ("slug", row["Slug"].strip().replace("-", "_").lower()),
         ("title_translit", norm(translit(title))),
     ]
+
+
+def guess_photos(positions: dict[str, dict], api_map: dict[str, str],
+                 idx: dict[str, list[dict[str, str]]],
+                 claimed: set[str]) -> dict[str, tuple[str, str, str]]:
+    """Подбор файла по имени для позиций, которых нет в обходе каталога.
+
+    Неоднозначность здесь меряется конкуренцией позиций за имя, а не числом
+    файлов под ним. Несколько файлов с одним стемом — обычная перезаливка:
+    у «Frizante_beloe_suhoe» их четыре, и на всех одна и та же бутылка,
+    отличаются кроп и сжатие. А вот если на одно имя претендуют две разные
+    позиции, выбрать не из чего — ни имя, ни хеш не говорят, чьё это фото,
+    и ошибка испортит разом и индекс, и разметку тестов. Такие пропускаем.
+    """
+    # Каждой позиции — первый ключ, под которым в дампе есть свободный файл.
+    wanted: dict[str, list[str]] = defaultdict(list)
+    keyname: dict[str, tuple[str, str]] = {}
+    for slug, row in positions.items():
+        if slug in api_map:
+            continue
+        for name, key in candidate_keys(row):
+            free = [g for g in idx.get(key, []) if not set(g.values()) & claimed]
+            if free:
+                wanted[key].append(slug)
+                keyname[slug] = (name, key)
+                break
+
+    out: dict[str, tuple[str, str, str]] = {}
+    for slug, (name, key) in keyname.items():
+        if len(wanted[key]) != 1:
+            continue
+        free = [g for g in idx.get(key, []) if not set(g.values()) & claimed]
+        # Из перезаливок берём самую полную: оригинал предпочтительнее превью,
+        # среди оригиналов — самый тяжёлый файл, он же наименее пережатый.
+        best = max(free, key=lambda g: (
+            "" in g, (UPLOADS / g[next(s for s in SIZES if s in g)]).stat().st_size))
+        size = next(s for s in SIZES if s in best)
+        out[slug] = (best[size], size or "original", name)
+        claimed.add(best[size])
+    return out
 
 
 def load_scrape_extras() -> dict[str, dict]:
@@ -117,20 +192,25 @@ def main() -> int:
 
     idx = index_uploads(UPLOADS)
     extras = load_scrape_extras()
+    available = {name for sizes in idx.values() for group in sizes
+                 for name in group.values()}
+    api_map = api_photo_map(RAW_CARDS, available)
+    # Файлы, занятые точной привязкой, эвристике больше не предлагаем:
+    # иначе она снова раздаст одно фото нескольким винодельням.
+    claimed = set(api_map.values())
+
+    guessed = guess_photos(positions, api_map, idx, claimed)
 
     catalog, report = [], []
     stats = defaultdict(int)
     for slug, row in positions.items():
         photo_file = photo_size = strategy = None
-        for name, key in candidate_keys(row):
-            found = idx.get(key)
-            if not found:
-                continue
-            for size in SIZES:
-                if size in found:
-                    photo_file, photo_size, strategy = found[size], size or "original", name
-                    break
-            break
+
+        if slug in api_map:
+            photo_file, photo_size, strategy = api_map[slug], "original", "api"
+
+        elif slug in guessed:
+            photo_file, photo_size, strategy = guessed[slug]
 
         stats[f"{strategy or 'НЕТ'}/{photo_size or '-'}"] += 1
         stats["с фото" if photo_file else "без фото"] += 1

@@ -50,14 +50,19 @@ PRESETS = {
 
 def build(name: str, variant: str, steps: tuple[str, ...]) -> None:
     paths, slugs = collect(variant)
-    vectors, kept = embed_paths(paths, batch_size=32, progress_every=0, steps=steps)
-    kept_slugs = slugs if len(kept) == len(paths) else [slugs[paths.index(p)] for p in kept]
+    # Путь может повторяться: четыре фото каталога принадлежат двум позициям
+    # каждое. Считаем файл один раз и раздаём вектор всем его позициям.
+    unique = list(dict.fromkeys(paths))
+    vectors, kept = embed_paths(unique, batch_size=32, progress_every=0, steps=steps)
+    row_of_path = {path: i for i, path in enumerate(kept)}
+    rows = [(path, slug) for path, slug in zip(paths, slugs) if path in row_of_path]
+    vectors = vectors[[row_of_path[path] for path, _ in rows]]
     INDEX_DIR.mkdir(parents=True, exist_ok=True)
     np.save(INDEX_DIR / f"{name}.npy", vectors)
     with (INDEX_DIR / f"{name}.csv").open("w", newline="", encoding="utf-8") as fh:
         writer = csv.writer(fh)
         writer.writerow(["path", "slug"])
-        for path, slug in zip(kept, kept_slugs):
+        for path, slug in rows:
             writer.writerow([str(Path(path).relative_to(ROOT)), slug or ""])
 
 
