@@ -1,0 +1,13 @@
+{
+ "subset": "sharp",
+ "n": 400,
+ "topk": 20,
+ "cv_top1": 0.715,
+ "cv_topk": 0.8875,
+ "rerank_top1": 0.8525,
+ "rerank_top5": 0.8875,
+ "rerank_ms_mean": 344.9199221417075,
+ "rerank_ms_p95": 923.4201730461763,
+ "inliers_right_median": 125.0,
+ "inliers_wrong_median": 12.0
+}

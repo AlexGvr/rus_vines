@@ -107,39 +107,81 @@ def make_query(ref: Path, neighbours: list[Path], rng: random.Random,
     return canvas
 
 
+def near_duplicate_slugs(catalog: list[dict]) -> set[str]:
+    """Позиции, у которых есть тёзка той же винодельни."""
+    groups: dict[tuple[str, str], list[str]] = {}
+    for wine in catalog:
+        key = (wine["manufacturer"].strip().lower(), wine["title"].strip().lower())
+        groups.setdefault(key, []).append(wine["slug"])
+    return {slug for slugs in groups.values() if len(slugs) > 1 for slug in slugs}
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--count", type=int, default=400, help="сколько запросов собрать")
+    ap.add_argument("--count", type=int, default=400, help="сколько позиций взять")
     ap.add_argument("--seed", type=int, default=17)
     ap.add_argument("--hard", action="store_true", help="жёсткий режим искажений")
+    ap.add_argument("--name", default="", help="имя набора (папка и манифест)")
+    ap.add_argument("--repeats", type=int, default=1, help="кадров на позицию")
+    ap.add_argument("--min-side", type=int, default=0,
+                    help="брать только эталоны с длинной стороной не меньше N: "
+                         "на мелких фото текст этикетки не переживает пересъёмку "
+                         "и замер текстового канала получается заниженным")
+    ap.add_argument("--only-neardup", action="store_true",
+                    help="только позиции, у которых в каталоге есть тёзка")
+    ap.add_argument("--canvas", default="900x1200", help="размер кадра запроса, ШxВ")
     args = ap.parse_args()
 
+    global CANVAS
+    CANVAS = tuple(int(v) for v in args.canvas.lower().split("x"))
+
     catalog = json.loads(CATALOG.read_text())["wines"]
-    with_photo = [w for w in catalog if w.get("photo")]
+    with_photo = [w for w in catalog if w.get("photo") and (ROOT / w["photo"]).exists()]
+
+    if args.min_side:
+        kept = []
+        for wine in with_photo:
+            try:
+                with Image.open(ROOT / wine["photo"]) as im:
+                    if max(im.size) >= args.min_side:
+                        kept.append(wine)
+            except Exception:
+                continue
+        with_photo = kept
+    if args.only_neardup:
+        near = near_duplicate_slugs(catalog)
+        with_photo = [w for w in with_photo if w["slug"] in near]
+
+    if not with_photo:
+        raise SystemExit("под заданные условия не нашлось ни одной позиции")
+
     rng = random.Random(args.seed)
     picked = rng.sample(with_photo, min(args.count, len(with_photo)))
     pool = [ROOT / w["photo"] for w in rng.sample(with_photo, min(200, len(with_photo)))]
 
-    out_img = OUT_DIR / ("hard" if args.hard else "easy")
+    name = args.name or ("hard" if args.hard else "easy")
+    out_img = OUT_DIR / name
     out_img.mkdir(parents=True, exist_ok=True)
     for old in out_img.glob("*.jpg"):
         old.unlink()
 
     manifest = []
     for i, wine in enumerate(picked):
-        img = make_query(ROOT / wine["photo"], pool, rng, args.hard)
-        if img is None:
-            continue
-        name = f"q{i:04d}.jpg"
-        img.save(out_img / name, quality=rng.randint(62, 90))
-        manifest.append({"query_id": f"q-{i:06d}", "image": name, "slug": wine["slug"]})
+        for rep in range(args.repeats):
+            img = make_query(ROOT / wine["photo"], pool, rng, args.hard)
+            if img is None:
+                continue
+            filename = f"q{i:04d}_{rep}.jpg"
+            img.save(out_img / filename, quality=rng.randint(62, 90))
+            manifest.append({"query_id": f"q-{i:06d}-{rep}", "image": filename,
+                             "slug": wine["slug"]})
 
-    path = OUT_DIR / f"manifest_{'hard' if args.hard else 'easy'}.csv"
+    path = OUT_DIR / f"manifest_{name}.csv"
     with path.open("w", newline="", encoding="utf-8") as fh:
         writer = csv.DictWriter(fh, fieldnames=["query_id", "image", "slug"])
         writer.writeheader()
         writer.writerows(manifest)
-    print(f"запросов: {len(manifest)} → {out_img}")
+    print(f"позиций {len(picked)}, запросов {len(manifest)} → {out_img}")
     print(f"манифест: {path}")
 
 

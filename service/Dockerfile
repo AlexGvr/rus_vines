@@ -8,7 +8,7 @@ RUN pip install --no-cache-dir --index-url https://download.pytorch.org/whl/cu12
  && pip install --no-cache-dir \
       transformers fastapi uvicorn python-multipart pillow numpy
 
-COPY pipeline/embed.py /app/pipeline/
+COPY pipeline/embed.py pipeline/imageprep.py /app/pipeline/
 COPY service/main.py /app/service/
 
 EXPOSE 8080

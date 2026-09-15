@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""S0.4 — сервис распознавания вина по фотографии этикетки.
+"""Сервис распознавания вина по фотографии этикетки.
 
 Эндпоинты:
   POST /v1/eval/predict  — контракт скрипта оценки кейсодержателя:
@@ -8,7 +8,17 @@
                            top-1 и top-5, запасные варианты
   GET  /health           — готовность модели и индекса
 
-Индекс и модель поднимаются один раз при старте: холодный прогон модели
+Поиск двухступенчатый:
+  1) детектор вырезает бутылку, SigLIP отбирает двадцатку кандидатов —
+     дёшево, но не различает позиции одной серии;
+  2) локальные признаки считают, сколько точек этикетки совпало с каждым
+     кандидатом, и переупорядочивают выдачу.
+
+Вторая ступень поднимает top-1 с 71.5% до 85.2% на общем наборе и с 62.1%
+до 94.3% на почти-дублях (data/index/rerank_*.json). Она же даёт ответ
+«такого вина нет»: мало совпавших точек — значит похожего в каталоге нет.
+
+Модель, детектор и индекс поднимаются один раз при старте: холодный прогон
 стоит секунды, а SLA на запрос — три.
 """
 from __future__ import annotations
@@ -29,21 +39,30 @@ from PIL import Image, ImageFile
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "pipeline"))
 from embed import embed_images, load as load_model  # noqa: E402
-from normalize import normalize_batch  # noqa: E402
+from imageprep import normalize_batch  # noqa: E402
+from rerank import PrecomputedReranker  # noqa: E402
 
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
-# Индекс собран с тем же шагом нормализации, что применяется к запросу:
-# детекция бутылки в кадре даёт +11 п.п. top-1 (см. data/index/ablation_*.json).
+# Индекс собран с тем же шагом подготовки, что применяется к запросу:
+# детекция бутылки даёт +11 п.п. top-1 (data/index/ablation_*.json).
 # Остальные шаги конвейера на замере не оправдались и отключены.
 NORMALIZE_STEPS = ("detect",)
 INDEX_VARIANT = "clean_detect"
 CATALOG_PATH = ROOT / "data" / "catalog" / "catalog.json"
 INDEX_DIR = ROOT / "data" / "index"
 
-# Порог показа единственной карточки. Значение предварительное: калибруется
-# в спринте 2 по валидационному набору, сейчас служит заглушкой контракта.
-SINGLE_CARD_THRESHOLD = 0.75
+RERANK_TOPK = 20         # потолок точности = recall@20, дальше растёт только время
+
+# Два порога вместо одного (калибровка в data/index/rerank_sharp.json).
+# Абсолютный: меньше MIN_INLIERS совпавших точек — похожего в каталоге нет,
+# такое правило отсекает 46% неверных ответов, теряя 0.9% верных.
+# Относительный: доминирование лидера над вторым кандидатом. Порог 0.65
+# оставляет всего 6.8% неверных, но и 58% верных — слишком строго, чтобы
+# по нему прятать карточку, зато в самый раз, чтобы отличить уверенный
+# ответ от спорного.
+MIN_INLIERS = 15
+CONFIDENT_DOMINANCE = 0.65
 
 state: dict = {}
 
@@ -54,6 +73,7 @@ def build_state() -> None:
     state["vectors"] = np.load(INDEX_DIR / f"{INDEX_VARIANT}.npy")
     with (INDEX_DIR / f"{INDEX_VARIANT}.csv").open(encoding="utf-8") as fh:
         state["slugs"] = [row["slug"] or None for row in csv.DictReader(fh)]
+    state["reranker"] = PrecomputedReranker(INDEX_DIR / "sift")
     load_model()
     # Прогрев: первый прогон модели и детектора инициализирует ядра CUDA
     # и стоит секунды — на запросе такой задержки быть не должно.
@@ -71,42 +91,51 @@ async def lifespan(_: FastAPI):
 app = FastAPI(title="Сканер вин «Своё Вино»", lifespan=lifespan)
 
 
-def rank(image: Image.Image, top: int = 5) -> tuple[list[dict], float]:
-    """Кандидаты по убыванию близости и время поиска в миллисекундах."""
+def search_candidates(image: Image.Image, top: int = 5) -> tuple[list[dict], dict]:
+    """Двухступенчатый поиск. Возвращает кандидатов и тайминги по ступеням."""
     t0 = time.perf_counter()
-    prepared = normalize_batch([image], steps=NORMALIZE_STEPS)
-    query = embed_images(prepared)[0]
+    prepared = normalize_batch([image], steps=NORMALIZE_STEPS)[0]
+    query = embed_images([prepared])[0]
     scores = state["vectors"] @ query
-    order = np.argsort(-scores)[:60]
+    order = np.argsort(-scores)[:200]
 
-    ranked, seen = [], set()
+    shortlist, seen = [], set()
     for j in order:
         slug = state["slugs"][j]
         if slug is None or slug in seen:
             continue
         seen.add(slug)
-        ranked.append({"slug": slug, "score": float(scores[j])})
-        if len(ranked) == top:
+        shortlist.append({"slug": slug, "cv_score": float(scores[j])})
+        if len(shortlist) == RERANK_TOPK:
             break
-    return ranked, (time.perf_counter() - t0) * 1000
+    t_cv = (time.perf_counter() - t0) * 1000
+
+    t1 = time.perf_counter()
+    inliers = state["reranker"].scores(prepared, [c["slug"] for c in shortlist])
+    for candidate in shortlist:
+        candidate["inliers"] = int(inliers.get(candidate["slug"], 0))
+    shortlist.sort(key=lambda c: (-c["inliers"], -c["cv_score"]))
+    t_rerank = (time.perf_counter() - t1) * 1000
+
+    return shortlist[:top], {"cv_ms": round(t_cv, 1), "rerank_ms": round(t_rerank, 1)}
 
 
-def confidence(ranked: list[dict]) -> dict:
-    """Уверенность top-1 и отрыв от второго кандидата.
+def confidence(candidates: list[dict]) -> dict:
+    """Уверенность по инлаерам: величина абсолютная, в отличие от косинуса.
 
-    Косинус SigLIP лежит в узком диапазоне, поэтому как «уверенность»
-    отдаём softmax по кандидатам — он показывает не абсолютное сходство,
-    а насколько первый оторвался от остальных. Калибровка — спринт 2.
+    top1 — насколько лидер оторвался от второго кандидата; top5 — доля
+    инлаеров, собранная всей пятёркой, относительно шума.
     """
-    if not ranked:
-        return {"top1": 0.0, "top5": 0.0, "gap": 0.0}
-    scores = np.array([c["score"] for c in ranked], dtype=np.float64)
-    weights = np.exp((scores - scores.max()) / 0.01)
-    probs = weights / weights.sum()
+    if not candidates:
+        return {"top1": 0.0, "top5": 0.0, "inliers": 0, "gap": 0}
+    best = candidates[0]["inliers"]
+    second = candidates[1]["inliers"] if len(candidates) > 1 else 0
+    total = sum(c["inliers"] for c in candidates) or 1
     return {
-        "top1": round(float(probs[0]), 4),
-        "top5": round(float(probs.sum()), 4),
-        "gap": round(float(scores[0] - scores[1]), 4) if len(scores) > 1 else 0.0,
+        "top1": round(best / (best + second), 4) if best + second else 0.0,
+        "top5": round(min(total / (total + MIN_INLIERS), 1.0), 4),
+        "inliers": best,
+        "gap": best - second,
     }
 
 
@@ -118,6 +147,13 @@ async def read_image(upload: UploadFile) -> Image.Image | None:
         return None
 
 
+def card(candidate: dict) -> dict:
+    wine = dict(state["by_slug"].get(candidate["slug"], {}))
+    wine["inliers"] = candidate["inliers"]
+    wine["cv_score"] = round(candidate["cv_score"], 4)
+    return wine
+
+
 @app.get("/health")
 def health() -> dict:
     return {
@@ -125,17 +161,22 @@ def health() -> dict:
         "index": INDEX_VARIANT,
         "vectors": int(state["vectors"].shape[0]) if "vectors" in state else 0,
         "catalog": len(state.get("by_slug", {})),
+        "rerank_topk": RERANK_TOPK,
     }
 
 
 @app.post("/v1/eval/predict")
 async def eval_predict(image: UploadFile = File(...)) -> JSONResponse:
-    """Контракт скрипта оценки: ровно один slug плоским объектом."""
+    """Контракт скрипта оценки: ровно один slug плоским объектом.
+
+    Порог отсечки здесь не применяется: скрипт кейсодержателя ждёт лучший
+    ответ, а пустой slug засчитывается как промах в любом случае.
+    """
     img = await read_image(image)
     if img is None:
-        return JSONResponse({"slug": None}, status_code=200)
-    ranked, _ = rank(img, top=1)
-    return JSONResponse({"slug": ranked[0]["slug"] if ranked else None})
+        return JSONResponse({"slug": None})
+    candidates, _ = search_candidates(img, top=1)
+    return JSONResponse({"slug": candidates[0]["slug"] if candidates else None})
 
 
 @app.post("/v1/search")
@@ -144,13 +185,27 @@ async def search(image: UploadFile = File(...)) -> JSONResponse:
     if img is None:
         return JSONResponse({"error": "не удалось прочитать изображение"}, status_code=400)
 
-    ranked, search_ms = rank(img, top=5)
-    conf = confidence(ranked)
-    cards = [{**state["by_slug"].get(c["slug"], {}), "score": round(c["score"], 4)}
-             for c in ranked]
+    candidates, timings = search_candidates(img, top=5)
+    conf = confidence(candidates)
+    found = bool(candidates) and candidates[0]["inliers"] >= MIN_INLIERS
+
+    # Три состояния вместо «нашли или нет». Бинарное решение по одному порогу
+    # либо прячет треть верных ответов, либо пропускает половину неверных —
+    # середина честнее: уверенный ответ показываем одной карточкой, спорный
+    # тоже показываем, но с признанием сомнения и ближайшими вариантами.
+    if not found:
+        status = "not_found"
+    elif conf["top1"] >= CONFIDENT_DOMINANCE:
+        status = "confident"
+    else:
+        status = "uncertain"
+
     return JSONResponse({
-        "match": cards[0] if cards and conf["top1"] >= SINGLE_CARD_THRESHOLD else None,
-        "alternatives": cards if not cards or conf["top1"] < SINGLE_CARD_THRESHOLD else [],
+        "status": status,
+        "match": card(candidates[0]) if found else None,
+        "alternatives": [card(c) for c in candidates[1:]] if status == "confident"
+                        else [card(c) for c in candidates],
         "confidence": conf,
-        "latency_ms": round(search_ms, 1),
+        "latency_ms": {**timings,
+                       "total": round(timings["cv_ms"] + timings["rerank_ms"], 1)},
     })

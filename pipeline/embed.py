@@ -49,13 +49,13 @@ def embed_paths(paths: list[str], batch_size: int = 16, progress_every: int = 50
                 steps: tuple[str, ...] | None = None) -> tuple[np.ndarray, list[str]]:
     """Эмбеддинги по путям. Битые файлы пропускаются, возвращаются только живые.
 
-    steps — шаги нормализации (см. pipeline/normalize.py). Применяются к тем же
+    steps — шаги нормализации (см. pipeline/imageprep.py). Применяются к тем же
     пачкам, что уходят в модель: детекция работает батчем, это её дешёвый режим.
     """
     vecs, kept, buf, buf_paths = [], [], [], []
     normalize_batch = None
     if steps:
-        from normalize import normalize_batch  # импорт здесь: YOLO нужен не всегда
+        from imageprep import normalize_batch  # импорт здесь: YOLO нужен не всегда
 
     def flush():
         if buf:

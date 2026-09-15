@@ -7,6 +7,8 @@ __pycache__/
 dataset/
 *.zip
 *.rar
-data/index/*.npy
+*.npy
 data/queries/
 data/catalog/
+data/index/ocr_*.json
+yolo11*.pt
