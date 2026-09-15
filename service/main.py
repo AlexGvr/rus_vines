@@ -29,7 +29,7 @@ from __future__ import annotations
 import csv
 import io
 import json
-import math
+import os
 import sys
 import time
 from contextlib import asynccontextmanager
@@ -45,9 +45,10 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "pipeline"))
 from embed import embed_images, load as load_model  # noqa: E402
 from imageprep import normalize_batch  # noqa: E402
+import searchcore as core  # noqa: E402
 from ocr import load as load_ocr, read_words  # noqa: E402
 from rerank import PrecomputedReranker  # noqa: E402
-from text_match import TextChannel, resolve_close  # noqa: E402
+from text_match import TextChannel  # noqa: E402
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from recommend import QUESTIONS, Recommender  # noqa: E402
@@ -68,28 +69,36 @@ INDEX_DIR = ROOT / "data" / "index"
 
 RERANK_TOPK = 20         # потолок точности = recall@20, дальше растёт только время
 
-# Уверенность считается по четырём признакам сразу, а не по одному числу
+# Уверенность считается по пяти признакам сразу, а не по одному числу
 # инлаеров. Веса — логистическая регрессия, обученная на половине запросов
 # и проверенная на другой (pipeline/calibrate.py, data/index/calibration_*.json).
 # Отрицательные примеры получены вычёркиванием правильной позиции из индекса:
 # тот же снимок становится запросом к вину, которого в каталоге нет.
 #
-# Прежнее правило «инлаеров >= 15 и доминирование >= 0.65» на той же
-# отложенной половине давало точность 98.1% при охвате 53.5%, ложном отказе
-# 37.0% и ложном принятии 23.5%. Совместное правило на пороге 0.50 —
-# 98.6% / 74.0% / 16.5% / 19.0%: лучше сразу по всем четырём величинам.
+# Признаки считает pipeline/searchcore.py — тот же модуль, которым идёт
+# калибровка. Разъехавшиеся определения уже стоили ошибки: сервис брал
+# наибольший косинус в шортлисте вместо косинуса лидера и показывал
+# ошибочную карточку Katharon как уверенную на 80% там, где по формуле
+# обучения выходило 30%. Теперь считать порознь попросту негде.
 #
 # Признаки относительные: сравнивают лидера с остальным шортлистом, а не
-# с абсолютной шкалой. Первая версия брала абсолютный косинус, и на трёх
-# реальных фото кейса отказывала во всех случаях — у синтетического запроса,
-# полученного из файла эталона, косинус около 0.9, а у снимка с полки 0.75,
-# и обученный на синтетике порог туда не переносится. Отрыв от второго
-# кандидата и превышение над хвостом шортлиста от этого сдвига свободны.
-CONF_WEIGHTS = {"dominance": 4.1088, "log_inliers": 0.5030,
-                "cv_margin": 24.7299, "cv_lift": 9.7874,
-                "coverage": 4.5975, "bias": -8.9939}
-CONFIDENT_P = 0.70      # одна карточка без оговорок
-SHOW_P = 0.15           # ниже — карточку не показываем вовсе
+# с абсолютной шкалой. Абсолютные не переносятся с синтетики на съёмку —
+# у запроса, полученного из файла эталона, косинус около 0.9, а у снимка
+# с полки 0.75.
+#
+# Пороги на отложенной половине (data/index/calibration_sharp.json):
+#   показывать карточку  p >= 0.10 — здесь F1 топ-1 максимален, 93.0%,
+#                        точность 97.3%; порог ниже добирает полноту уже
+#                        только за счёт карточек для отсутствующих вин
+#   убирать оговорку     p >= 0.70 — точность 98.3%, охват 58.5%,
+#                        карточка без оговорок для отсутствующего вина 11%
+CONF_WEIGHTS = {"dominance": 4.4068, "log_inliers": 0.5282, "cv_margin": 8.1869, "cv_lift": 14.4323, "coverage": 4.5929, "text_support": -0.4506, "bias": -9.5306}
+# Пороги вынесены в окружение: они откалиброваны на синтетическом наборе,
+# а он систематически проще съёмки — у реального кадра и совпавших точек
+# меньше, и покрывают они этикетку хуже. Поднять или опустить порог после
+# сбора полевых фотографий должно быть можно без пересборки образа.
+CONFIDENT_P = float(os.environ.get("CONFIDENT_P", "0.70"))   # карточка без оговорок
+SHOW_P = float(os.environ.get("SHOW_P", "0.10"))             # ниже — не показываем
 
 # Разрешение противоречий текстом. Запускается только когда геометрия не
 # развела кандидатов: инлаеров у соседа не меньше CLOSE_WINDOW от лидера.
@@ -110,6 +119,13 @@ def build_state() -> None:
     with (INDEX_DIR / f"{INDEX_VARIANT}.csv").open(encoding="utf-8") as fh:
         state["slugs"] = [row["slug"] or None for row in csv.DictReader(fh)]
     state["reranker"] = PrecomputedReranker(INDEX_DIR / "sift")
+    # ТЗ требует показывать метрику уверенности (F1) для топ-1 и топ-5.
+    # Уверенность конкретного ответа сервис считает сам, а F1 — свойство
+    # конвейера целиком, поэтому берётся из отчёта замеров и отдаётся вместе
+    # с ответом: пользователю важно знать, чего стоит показанная карточка.
+    report = INDEX_DIR / "report_sharp.json"
+    state["quality"] = (json.loads(report.read_text(encoding="utf-8"))
+                        if report.exists() else {})
     state["recommender"] = Recommender(catalog)
     state["text"] = TextChannel(catalog)
     load_model()
@@ -138,7 +154,12 @@ app.add_middleware(
 
 def search_candidates(image: Image.Image,
                       top: int = 5) -> tuple[list[dict], dict, dict]:
-    """Двухступенчатый поиск: кандидаты, уверенность и тайминги по ступеням."""
+    """Поиск целиком: кандидаты, уверенность и тайминги по ступеням.
+
+    Все шаги берутся из pipeline/searchcore.py — того же модуля, которым
+    считает калибровка. Иначе пороги подбираются для одного конвейера,
+    а работает другой.
+    """
     t0 = time.perf_counter()
     views = {steps: normalize_batch([image], steps=steps)[0] for steps in QUERY_VIEWS}
     queries = embed_images(list(views.values()))
@@ -146,91 +167,44 @@ def search_candidates(image: Image.Image,
     # совпасть всем сразу, достаточно одной пары «вид запроса — вид эталона».
     scores = (state["vectors"] @ queries.T).max(axis=1)
     prepared = views[GEOMETRY_VIEW]
-    order = np.argsort(-scores)[:200]
-
-    shortlist, seen = [], set()
-    for j in order:
-        slug = state["slugs"][j]
-        if slug is None or slug in seen:
-            continue
-        seen.add(slug)
-        shortlist.append({"slug": slug, "cv_score": float(scores[j])})
-        if len(shortlist) == RERANK_TOPK:
-            break
+    candidates = core.shortlist(scores, state["slugs"], RERANK_TOPK)
     t_cv = (time.perf_counter() - t0) * 1000
 
     t1 = time.perf_counter()
-    stats = state["reranker"].stats(prepared, [c["slug"] for c in shortlist])
-    for candidate in shortlist:
-        match = stats.get(candidate["slug"])
-        candidate["inliers"] = int(match.inliers) if match else 0
-        candidate["coverage"] = round(match.coverage, 4) if match else 0.0
-    shortlist.sort(key=lambda c: (-c["inliers"], -c["cv_score"]))
+    core.rerank(prepared, candidates, state["reranker"])
     t_rerank = (time.perf_counter() - t1) * 1000
 
     t2 = time.perf_counter()
-    reasons = resolve_ties(shortlist, prepared)
+    core.resolve(candidates, prepared, state["text"], read_words,
+                 window=CLOSE_WINDOW, min_conf=OCR_MIN_CONF)
     t_text = (time.perf_counter() - t2) * 1000
 
     # Уверенность считается по всему шортлисту, а не по видимой пятёрке:
     # признак «превышение над шумом» смотрит на его хвост, и на усечённом
     # списке значил бы другое, чем при калибровке.
-    conf = confidence(shortlist)
-    return shortlist[:top], conf, {"cv_ms": round(t_cv, 1),
-                                   "rerank_ms": round(t_rerank, 1),
-                                   "text_ms": round(t_text, 1),
-                                   "resolved": bool(reasons)}
+    conf = confidence(candidates)
+    resolved = any(c.contradictions for c in candidates)
+    return ([c.as_dict() for c in candidates[:top]], conf,
+            {"cv_ms": round(t_cv, 1), "rerank_ms": round(t_rerank, 1),
+             "text_ms": round(t_text, 1), "resolved": resolved})
 
 
-def resolve_ties(shortlist: list[dict], prepared: Image.Image) -> dict[str, list[str]]:
-    """Переставляет близких кандидатов по прочитанному тексту, на месте.
+def confidence(candidates: list) -> dict:
+    """Уверенность в лидере и вероятность, что нужное вино есть в пятёрке.
 
-    Считать OCR на каждом запросе незачем: когда у лидера инлаеров на порядок
-    больше, текст ничего не решит, а время ответа вырастет на сотню миллисекунд.
+    ТЗ требует показывать метрику уверенности и для топ-1, и для топ-5:
+    от неё зависит, нужен ли пользователю экран вариантов вообще.
     """
-    best = shortlist[0]["inliers"] if shortlist else 0
-    if best <= 0 or sum(1 for c in shortlist if c["inliers"] >= best * CLOSE_WINDOW) < 2:
-        return {}
-    pairs = [(c["slug"], float(c["inliers"])) for c in shortlist]
-    ranked, reasons = resolve_close(pairs, read_words(prepared), state["text"],
-                                    window=CLOSE_WINDOW, min_conf=OCR_MIN_CONF)
-    if not any(reasons.values()):
-        return {}
-    position = {slug: i for i, (slug, _) in enumerate(ranked)}
-    shortlist.sort(key=lambda c: position.get(c["slug"], len(position)))
-    for candidate in shortlist:
-        if reasons.get(candidate["slug"]):
-            candidate["contradictions"] = reasons[candidate["slug"]]
-    return reasons
-
-
-def confidence(candidates: list[dict]) -> dict:
-    """Вероятность того, что лидер — действительно снятое вино.
-
-    Считается по четырём признакам сразу: отрыв от второго кандидата, число
-    совпавших точек, визуальная близость и раскладка совпадений по этикетке.
-    Ни один из них по отдельности не разделяет «то самое вино» и «похожее
-    вино той же серии»; отрыв и косинус дополняют друг друга.
-    """
-    if not candidates:
-        return {"probability": 0.0, "dominance": 0.0, "inliers": 0, "gap": 0}
-    best = candidates[0]["inliers"]
-    second = candidates[1]["inliers"] if len(candidates) > 1 else 0
-    dominance = best / (best + second) if best + second else 0.0
-    by_cv = sorted((c["cv_score"] for c in candidates), reverse=True)
-    tail = by_cv[5:] or by_cv
-    logit = (CONF_WEIGHTS["dominance"] * dominance
-             + CONF_WEIGHTS["log_inliers"] * math.log1p(best)
-             + CONF_WEIGHTS["cv_margin"] * (by_cv[0] - (by_cv[1] if len(by_cv) > 1
-                                                        else by_cv[0]))
-             + CONF_WEIGHTS["cv_lift"] * (by_cv[0] - sum(tail) / len(tail))
-             + CONF_WEIGHTS["coverage"] * candidates[0].get("coverage", 0.0)
-             + CONF_WEIGHTS["bias"])
+    feats = core.features(candidates)
+    leader = candidates[0] if candidates else None
+    rival = max((c.inliers for c in candidates[1:]), default=0) if candidates else 0
     return {
-        "probability": round(1.0 / (1.0 + math.exp(-max(min(logit, 30.0), -30.0))), 4),
-        "dominance": round(dominance, 4),
-        "inliers": best,
-        "gap": best - second,
+        "probability": round(core.probability(feats, CONF_WEIGHTS), 4),
+        "probability_top5": round(core.top5_probability(candidates, CONF_WEIGHTS), 4),
+        "dominance": round(feats["dominance"], 4),
+        "inliers": leader.inliers if leader else 0,
+        "gap": (leader.inliers - rival) if leader else 0,
+        "cv_margin": round(feats["cv_margin"], 4),
     }
 
 
@@ -244,11 +218,22 @@ async def read_image(upload: UploadFile) -> Image.Image | None:
 
 def card(candidate: dict) -> dict:
     wine = dict(state["by_slug"].get(candidate["slug"], {}))
-    wine["inliers"] = candidate["inliers"]
-    wine["cv_score"] = round(candidate["cv_score"], 4)
-    if candidate.get("contradictions"):
-        wine["contradictions"] = candidate["contradictions"]
+    wine.update({k: v for k, v in candidate.items() if k != "slug"})
+    wine["slug"] = candidate["slug"]
     return wine
+
+
+def quality_block() -> dict:
+    """Измеренное качество конвейера: F1 топ-1 и топ-5 на валидационном наборе."""
+    measured = (state.get("quality") or {}).get("f1", {}).get("по каталогу", {})
+    if not measured:
+        return {}
+    return {
+        "f1_top1": round(measured["top1"]["f1"], 4),
+        "f1_top5": round(measured["top5"]["f1"], 4),
+        "subset": (state.get("quality") or {}).get("subset"),
+        "n": (state.get("quality") or {}).get("answerable"),
+    }
 
 
 @app.get("/health")
@@ -258,6 +243,7 @@ def health() -> dict:
         "index": INDEX_VARIANT,
         "vectors": int(state["vectors"].shape[0]) if "vectors" in state else 0,
         "catalog": len(state.get("by_slug", {})),
+        "quality": quality_block(),
         "rerank_topk": RERANK_TOPK,
     }
 
@@ -344,9 +330,13 @@ async def search(image: UploadFile = File(...)) -> JSONResponse:
     return JSONResponse({
         "status": status,
         "match": card(candidates[0]) if found else None,
-        "alternatives": [card(c) for c in candidates[1:]] if status == "confident"
-                        else [card(c) for c in candidates],
+        # Когда карточка показана, лидер уже в match, и дублировать его
+        # в вариантах незачем. Когда не показана — наоборот, он должен войти
+        # в список похожего по виду, иначе лучший кандидат просто пропадает.
+        "alternatives": [card(c) for c in (candidates if not found
+                                           else candidates[1:])],
         "confidence": conf,
+        "quality": quality_block(),
         "latency_ms": {**timings,
                        "total": round(timings["cv_ms"] + timings["rerank_ms"]
                                       + timings["text_ms"], 1)},

@@ -190,10 +190,19 @@ def confident_attributes(words, min_conf: float = 0.60) -> Attributes:
 
 
 # Слова, которые стоят на каждой второй этикетке и потому ничего не различают.
-STOPWORDS = {"вино", "wine", "вина", "розовое", "белое", "красное", "сухое",
-             "полусухое", "сладкое", "полусладкое", "брют", "brut", "игристое",
-             "выдержанное", "россия", "russia", "крым", "кубань", "резерв",
-             "reserve", "премиум", "premium", "коллекционное", "натуральное"}
+# Цвет и сладость сюда не входят намеренно: у «Мускателя белого» и «Мускателя
+# розового» это единственное отличие. Общие для группы слова и так вычитаются
+# в discriminating(), а список нужен только против мусора вроде «вино России».
+STOPWORDS = {"вино", "wine", "вина", "россия", "russia", "крым", "кубань",
+             "выдержанное", "коллекционное", "натуральное", "года", "год"}
+
+# Порог нечёткого совпадения зависит от уверенности чтения. На этикетке
+# «Массандры» OCR читает БЕЛЫЙ как БЕАЫЙ с уверенностью 0.98 — шрифт
+# сливает Л и А. Ошибка в одну букву при такой уверенности — это всё ещё
+# уверенно прочитанное слово, а при чтении наугад одной буквы мало.
+SURE_CONF = 0.85
+SURE_MATCH = 0.70
+VAGUE_MATCH = 0.85
 
 
 def central_words(words, min_conf: float = 0.60, band: float = 0.72):
@@ -258,13 +267,14 @@ def resolve_close(candidates: list[tuple[str, float]], words,
         return candidates, {}
 
     marks = discriminating([slug for slug, _ in group], channel)
-    read = [t for w in central_words(words, min_conf)
+    read = [(t, w.conf) for w in central_words(words, min_conf)
             for t in clean(w.text).split() if len(t) >= 3]
 
     found: dict[str, list[str]] = {slug: [] for slug, _ in group}
-    for token in read:
+    for token, conf in read:
+        need = SURE_MATCH if conf >= SURE_CONF else VAGUE_MATCH
         owners = [slug for slug, marked in marks.items()
-                  if any(tokens_match(token, m) >= 0.85 for m in marked)]
+                  if any(tokens_match(token, m) >= need for m in marked)]
         # Слово, подходящее всем или никому, ничего не различает.
         if len(owners) != 1:
             continue

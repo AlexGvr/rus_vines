@@ -5,7 +5,15 @@ type SearchResult = {
   status: 'confident' | 'uncertain' | 'unsure'
   match: Record<string, any> | null
   alternatives: Record<string, any>[]
-  confidence: { probability: number; dominance: number; inliers: number; gap: number }
+  confidence: {
+    probability: number
+    probability_top5: number
+    dominance: number
+    inliers: number
+    gap: number
+    cv_margin: number
+  }
+  quality?: { f1_top1: number; f1_top5: number; subset: string; n: number }
   latency_ms: { cv_ms: number; rerank_ms: number; total: number }
 }
 
@@ -147,10 +155,15 @@ function reset() {
       <SommelierPanel :api-base="apiBase" />
 
       <p class="meta muted">
-        уверенность {{ Math.round(result.confidence.probability * 100) }}% ·
+        уверенность в карточке {{ Math.round(result.confidence.probability * 100) }}% ·
+        в пятёрке {{ Math.round(result.confidence.probability_top5 * 100) }}% ·
         совпавших точек {{ result.confidence.inliers }} ·
-        отрыв {{ result.confidence.gap }} ·
         {{ Math.round(result.latency_ms.total) }} мс
+      </p>
+      <p v-if="result.quality" class="meta muted">
+        F1 конвейера на валидационном наборе:
+        топ-1 {{ (result.quality.f1_top1 * 100).toFixed(1) }}% ·
+        топ-5 {{ (result.quality.f1_top5 * 100).toFixed(1) }}%
       </p>
       <button class="btn ghost again" @click="reset">Сканировать ещё раз</button>
     </section>
