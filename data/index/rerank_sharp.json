@@ -2,12 +2,12 @@
  "subset": "sharp",
  "n": 400,
  "topk": 20,
- "cv_top1": 0.7425,
- "cv_topk": 0.9125,
- "rerank_top1": 0.8775,
- "rerank_top5": 0.91,
- "rerank_ms_mean": 386.1529014160624,
- "rerank_ms_p95": 1003.8816867046977,
- "inliers_right_median": 123.0,
- "inliers_wrong_median": 19.0
+ "cv_top1": 0.8075,
+ "cv_topk": 0.9675,
+ "rerank_top1": 0.9025,
+ "rerank_top5": 0.9425,
+ "rerank_ms_mean": 355.7821049389895,
+ "rerank_ms_p95": 988.3503992226904,
+ "inliers_right_median": 121.0,
+ "inliers_wrong_median": 13.0
 }

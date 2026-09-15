@@ -2,12 +2,12 @@
  "subset": "neardup",
  "n": 189,
  "topk": 20,
- "cv_top1": 0.6031746031746031,
- "cv_topk": 0.9576719576719577,
- "rerank_top1": 0.9576719576719577,
- "rerank_top5": 0.9576719576719577,
- "rerank_ms_mean": 228.7802203686504,
- "rerank_ms_p95": 684.4311743043361,
+ "cv_top1": 0.6349206349206349,
+ "cv_topk": 0.9894179894179894,
+ "rerank_top1": 0.9682539682539683,
+ "rerank_top5": 0.9735449735449735,
+ "rerank_ms_mean": 223.91189125652312,
+ "rerank_ms_p95": 732.7101658098395,
  "inliers_right_median": 130.0,
- "inliers_wrong_median": 12.0
+ "inliers_wrong_median": 10.0
 }

@@ -48,11 +48,15 @@ from recommend import QUESTIONS, Recommender  # noqa: E402
 
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
-# Индекс собран с тем же шагом подготовки, что применяется к запросу:
-# детекция бутылки даёт +11 п.п. top-1 (data/index/ablation_*.json).
+# Позиция описывается двумя векторами, и запрос идёт теми же двумя видами:
+# кадром целиком и кропом по найденной бутылке. Одного кропа мало — когда
+# детектор берёт соседнюю бутылку, вектор описывает чужую этикетку, и нужная
+# позиция улетает ниже сотого места. Второй вид даёт ей независимый шанс:
+# recall@20 91.2% → 96.8% при нуле потерянных (data/index/multiview_sharp.json).
 # Остальные шаги конвейера на замере не оправдались и отключены.
-NORMALIZE_STEPS = ("detect",)
-INDEX_VARIANT = "clean_detect"
+QUERY_VIEWS: tuple[tuple[str, ...], ...] = ((), ("detect",))
+GEOMETRY_VIEW = ("detect",)     # SIFT работает по плотному кропу, не по кадру
+INDEX_VARIANT = "clean_mv"
 CATALOG_PATH = ROOT / "data" / "catalog" / "catalog.json"
 INDEX_DIR = ROOT / "data" / "index"
 
@@ -83,7 +87,8 @@ def build_state() -> None:
     # Прогрев: первый прогон модели и детектора инициализирует ядра CUDA
     # и стоит секунды — на запросе такой задержки быть не должно.
     warm = [Image.new("RGB", (384, 384), "white")]
-    embed_images(normalize_batch(warm, steps=NORMALIZE_STEPS))
+    for steps in QUERY_VIEWS:
+        embed_images(normalize_batch(warm, steps=steps))
 
 
 @asynccontextmanager
@@ -103,9 +108,12 @@ app.add_middleware(
 def search_candidates(image: Image.Image, top: int = 5) -> tuple[list[dict], dict]:
     """Двухступенчатый поиск. Возвращает кандидатов и тайминги по ступеням."""
     t0 = time.perf_counter()
-    prepared = normalize_batch([image], steps=NORMALIZE_STEPS)[0]
-    query = embed_images([prepared])[0]
-    scores = state["vectors"] @ query
+    views = {steps: normalize_batch([image], steps=steps)[0] for steps in QUERY_VIEWS}
+    queries = embed_images(list(views.values()))
+    # Строка индекса получает лучший косинус по видам запроса: видам не нужно
+    # совпасть всем сразу, достаточно одной пары «вид запроса — вид эталона».
+    scores = (state["vectors"] @ queries.T).max(axis=1)
+    prepared = views[GEOMETRY_VIEW]
     order = np.argsort(-scores)[:200]
 
     shortlist, seen = [], set()

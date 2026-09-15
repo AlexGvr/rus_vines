@@ -31,7 +31,6 @@ ROOT = Path(__file__).resolve().parent.parent
 INDEX_DIR = ROOT / "data" / "index"
 QUERIES = ROOT / "data" / "queries"
 CATALOG = ROOT / "data" / "catalog" / "catalog.json"
-STEPS = ("detect",)
 
 
 def main() -> None:
@@ -39,7 +38,11 @@ def main() -> None:
     ap.add_argument("--subset", default="sharp")
     ap.add_argument("--index", default="clean_detect")
     ap.add_argument("--topk", type=int, default=10)
+    ap.add_argument("--views", default="detect",
+                    help="виды запроса через запятую, как в build_index")
     args = ap.parse_args()
+    views = [tuple(s for s in spec.split("+") if s and s != "raw")
+             for spec in args.views.split(",")]
 
     wines = {w["slug"]: w for w in json.loads(CATALOG.read_text())["wines"]}
     manifest = list(csv.DictReader(
@@ -55,9 +58,15 @@ def main() -> None:
     with (INDEX_DIR / f"{args.index}.csv").open(encoding="utf-8") as fh:
         index_slugs = [row["slug"] or None for row in csv.DictReader(fh)]
 
-    qvec, kept = embed_paths(paths, batch_size=32, progress_every=0, steps=STEPS)
+    # Вид запроса — отдельный прогон модели; строка индекса получает лучший
+    # косинус по видам, поэтому видам не нужно совпасть всем сразу.
+    per_view = [embed_paths(paths, batch_size=32, progress_every=0, steps=steps)
+                for steps in views]
+    kept = per_view[0][1]
+    if any(k != kept for _, k in per_view):
+        sys.exit("виды разошлись по составу запросов")
     truth = [gold[p] for p in kept]
-    scores = qvec @ vectors.T
+    scores = np.maximum.reduce([qv @ vectors.T for qv, _ in per_view])
     order = np.argsort(-scores, axis=1)[:, :200]
 
     candidates = []
@@ -80,7 +89,9 @@ def main() -> None:
 
     for i, path in enumerate(kept):
         with Image.open(path) as raw:
-            crop = normalize_batch([raw.convert("RGB")], steps=STEPS)[0]
+            # Геометрия считается по плотному кропу: на кадре целиком точки
+            # этикетки занимают малую часть, и инлаеров получается меньше.
+            crop = normalize_batch([raw.convert("RGB")], steps=("detect",))[0]
         t0 = time.perf_counter()
         pairs = [(slug, wines[slug]["photo"]) for slug, _ in candidates[i]
                  if wines.get(slug, {}).get("photo")]

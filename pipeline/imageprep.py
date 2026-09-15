@@ -27,6 +27,12 @@ BOTTLE_CLASS = 39  # COCO: bottle
 ALL_STEPS = ("detect", "label", "dewarp", "glare", "balance")
 _yolo: dict = {}
 
+# Разрешение и порог детектора. Держатся в переменных окружения, потому что
+# менять их можно только одновременно для индекса и для запроса: кроп входит
+# в представление, и односторонняя правка сравнивает разные сущности.
+CONF = float(os.environ.get("YOLO_CONF", "0.20"))
+IMGSZ = int(os.environ.get("YOLO_IMGSZ", "640"))
+
 
 def _device() -> str:
     """Устройство инференса. Образ собирается и под CPU, поэтому жёстко
@@ -58,7 +64,7 @@ class Box:
         return max(0, self.x2 - self.x1) * max(0, self.y2 - self.y1)
 
 
-def detect_bottles(images: list[Image.Image], conf: float = 0.20,
+def detect_bottles(images: list[Image.Image], conf: float | None = None,
                    batch_size: int = 16) -> list[Box | None]:
     """Целевая бутылка на каждом кадре.
 
@@ -70,8 +76,9 @@ def detect_bottles(images: list[Image.Image], conf: float = 0.20,
     out: list[Box | None] = []
     for i in range(0, len(images), batch_size):
         chunk = [np.array(im.convert("RGB"))[:, :, ::-1] for im in images[i:i + batch_size]]
-        results = model.predict(chunk, classes=[BOTTLE_CLASS], conf=conf,
-                                verbose=False, device=_device())
+        results = model.predict(chunk, classes=[BOTTLE_CLASS],
+                                conf=CONF if conf is None else conf,
+                                imgsz=IMGSZ, verbose=False, device=_device())
         for im, res in zip(images[i:i + batch_size], results):
             width, height = im.size
             best, best_score = None, 0.0
