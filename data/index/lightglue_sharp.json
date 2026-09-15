@@ -1,0 +1,20 @@
+{
+ "subset": "sharp",
+ "n": 200,
+ "topk": 20,
+ "top1": {
+  "sift": 0.91,
+  "lightglue": 0.9,
+  "lightglue+ransac": 0.9
+ },
+ "top5": {
+  "sift": 0.94,
+  "lightglue": 0.935,
+  "lightglue+ransac": 0.935
+ },
+ "ms_per_query": {
+  "sift": 80.08963339263573,
+  "lightglue": 656.7631795804482,
+  "lightglue+ransac": 381.4947842201218
+ }
+}

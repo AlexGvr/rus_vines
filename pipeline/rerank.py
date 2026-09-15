@@ -13,6 +13,7 @@
 from __future__ import annotations
 
 from collections import OrderedDict
+from dataclasses import dataclass
 
 import cv2
 import numpy as np
@@ -58,6 +59,68 @@ def inlier_count(query_kp, query_desc, ref_kp, ref_desc) -> int:
     dst = np.float32([ref_kp[m.trainIdx].pt for m in good]).reshape(-1, 1, 2)
     _, mask = cv2.findHomography(src, dst, cv2.RANSAC, 5.0)
     return int(mask.sum()) if mask is not None else 0
+
+
+@dataclass(frozen=True)
+class MatchStats:
+    """Развёрнутый результат сопоставления пары «запрос — эталон».
+
+    Одно число инлаеров описывает совпадение бедно. Сто точек, слипшихся
+    на логотипе винодельни, и сто точек, разложенных по всей этикетке, —
+    разные события: первое означает «та же серия», второе «то же вино».
+    """
+    inliers: int
+    good: int            # прошедшие тест Лоу, до проверки гомографией
+    coverage: float      # доля ячеек сетки эталона, где есть инлаеры
+    spread: float        # площадь охвата инлаеров к площади всех точек эталона
+
+    @property
+    def precision(self) -> float:
+        """Доля совпавших точек, переживших проверку гомографией."""
+        return self.inliers / self.good if self.good else 0.0
+
+
+def _layout(points, mask, ref_kp, grid: int = 4) -> tuple[float, float]:
+    """Как инлаеры разложены по эталону: занятость сетки и охват."""
+    if mask is None or not len(points):
+        return 0.0, 0.0
+    chosen = [p for p, keep in zip(points, mask.ravel()) if keep]
+    if len(chosen) < 3:
+        return 0.0, 0.0
+    all_x = [kp.pt[0] for kp in ref_kp]
+    all_y = [kp.pt[1] for kp in ref_kp]
+    width = (max(all_x) - min(all_x)) or 1.0
+    height = (max(all_y) - min(all_y)) or 1.0
+    cells = {(min(int((x - min(all_x)) / width * grid), grid - 1),
+              min(int((y - min(all_y)) / height * grid), grid - 1))
+             for x, y in chosen}
+    xs = [x for x, _ in chosen]
+    ys = [y for _, y in chosen]
+    spread = ((max(xs) - min(xs)) * (max(ys) - min(ys))) / (width * height)
+    return len(cells) / (grid * grid), min(spread, 1.0)
+
+
+def match_stats(query_kp, query_desc, ref_kp, ref_desc) -> MatchStats:
+    """inlier_count плюс геометрия совпадения. Стоит столько же."""
+    empty = MatchStats(0, 0, 0.0, 0.0)
+    if query_desc is None or ref_desc is None:
+        return empty
+    if len(query_desc) < 2 or len(ref_desc) < 2:
+        return empty
+    _, bf = detector()
+    pairs = bf.knnMatch(query_desc, ref_desc, k=2)
+    good = [m for m, n in (p for p in pairs if len(p) == 2)
+            if m.distance < RATIO * n.distance]
+    if len(good) < MIN_MATCHES:
+        return MatchStats(len(good), len(good), 0.0, 0.0)
+    src = np.float32([query_kp[m.queryIdx].pt for m in good]).reshape(-1, 1, 2)
+    dst = np.float32([ref_kp[m.trainIdx].pt for m in good]).reshape(-1, 1, 2)
+    _, mask = cv2.findHomography(src, dst, cv2.RANSAC, 5.0)
+    if mask is None:
+        return MatchStats(0, len(good), 0.0, 0.0)
+    ref_points = [ref_kp[m.trainIdx].pt for m in good]
+    coverage, spread = _layout(ref_points, mask, ref_kp)
+    return MatchStats(int(mask.sum()), len(good), coverage, spread)
 
 
 class Reranker:

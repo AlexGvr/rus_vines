@@ -1,0 +1,20 @@
+{
+ "subset": "neardup",
+ "n": 189,
+ "topk": 20,
+ "top1": {
+  "sift": 0.9682539682539683,
+  "lightglue": 0.9365079365079365,
+  "lightglue+ransac": 0.9470899470899471
+ },
+ "top5": {
+  "sift": 0.9735449735449735,
+  "lightglue": 0.9682539682539683,
+  "lightglue+ransac": 0.9682539682539683
+ },
+ "ms_per_query": {
+  "sift": 89.12365058579891,
+  "lightglue": 510.6054828650067,
+  "lightglue+ransac": 382.2163098316798
+ }
+}

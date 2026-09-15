@@ -1,0 +1,30 @@
+{
+ "subset": "sharp",
+ "n": 400,
+ "topk": 20,
+ "index": "clean_mv",
+ "top1": {
+  "inliers": 0.9025,
+  "precision": 0.045,
+  "coverage": 0.86,
+  "spread": 0.6625,
+  "color": 0.385,
+  "inliers×precision": 0.895,
+  "inliers×coverage": 0.895,
+  "inliers×spread": 0.8875,
+  "inliers×color": 0.895,
+  "inliers×coverage×color": 0.895
+ },
+ "top5": {
+  "inliers": 0.9425,
+  "precision": 0.2925,
+  "coverage": 0.95,
+  "spread": 0.9325,
+  "color": 0.7825,
+  "inliers×precision": 0.94,
+  "inliers×coverage": 0.94,
+  "inliers×spread": 0.9375,
+  "inliers×color": 0.94,
+  "inliers×coverage×color": 0.9375
+ }
+}
