@@ -3,19 +3,22 @@
 Фотография этикетки — карточка вина из каталога платформы «Своё Вино».
 Кейс РСХБ.Цифра 2026.
 
-Поиск двухступенчатый: SigLIP 2 отбирает двадцать кандидатов по каталогу,
-локальные признаки решают, какой из них та же самая этикетка. Детали и
-обоснование решений — в [ARCHITECTURE.md](ARCHITECTURE.md).
+Поиск трёхступенчатый: SigLIP 2 отбирает двадцать кандидатов по каталогу
+(кадр идёт двумя видами — целиком и кропом по бутылке), локальные признаки
+решают, какой из них та же самая этикетка, а если они не развели лидеров —
+читается сама этикетка. Детали и обоснование решений —
+в [ARCHITECTURE.md](ARCHITECTURE.md).
 
 ## Результаты
 
 | метрика | значение | набор |
 |---|---|---|
-| top-1 | 87.8% | 400 синтетических запросов |
-| top-1 на почти-дублях | 95.8% | 189 запросов |
-| top-5 | 91.0% | 400 запросов |
-| время ответа, медиана | 561 мс | реальные фото кейса |
-| время ответа, 95-й процентиль | 723 мс | при SLA 3 с |
+| top-1 | 91.0% | 400 синтетических запросов |
+| top-1 на почти-дублях | 96.8% | 189 запросов |
+| top-5 | 94.2% | 400 запросов |
+| recall@20 (потолок уточнения) | 96.8% | 400 запросов |
+| время ответа, медиана | 635 мс | реальные фото кейса |
+| время ответа, максимум | 1213 мс | при SLA 3 с |
 
 Метрики получены на собственном валидационном наборе: правильные ответы
 кейса закрыты, а публичных фотографий три. Набор строится из эталонных фото
@@ -53,7 +56,7 @@ dataset/
 python3 -m venv .venv
 .venv/bin/pip install --index-url https://download.pytorch.org/whl/cu128 torch torchvision
 .venv/bin/pip install transformers ultralytics opencv-python-headless \
-    fastapi uvicorn python-multipart pillow numpy
+    fastapi uvicorn python-multipart pillow numpy easyocr
 ```
 
 Без видеокарты замените индекс на `https://download.pytorch.org/whl/cpu`.
@@ -62,7 +65,7 @@ python3 -m venv .venv
 
 ```bash
 .venv/bin/python pipeline/build_catalog.py       # каталог + привязка фото
-.venv/bin/python pipeline/build_index.py --variant clean --steps detect --name clean_detect
+.venv/bin/python pipeline/build_index.py --variant clean --views raw,detect --name clean_mv
 .venv/bin/python pipeline/build_rerank_index.py  # признаки эталонов
 ```
 
@@ -113,7 +116,9 @@ cd dataset/eval
 
 ```bash
 bash pipeline/harness.sh                                    # скрипт кейса + точность
-.venv/bin/python pipeline/eval_rerank.py --subset sharp --topk 20
+.venv/bin/python pipeline/eval_rerank.py --subset sharp --topk 20 \
+    --index clean_mv --views raw,detect
+.venv/bin/python pipeline/calibrate.py --subset sharp           # пороги выдачи
 .venv/bin/python pipeline/bench_latency.py --count 50        # время ответа
 ```
 
@@ -139,9 +144,12 @@ bash pipeline/harness.sh                                    # скрипт ке�
 | `GET` | `/health` | состояние модели и индекса |
 
 Ответ `/v1/search` различает три состояния: `confident` — одна карточка,
-`uncertain` — карточка с признанием сомнения и вариантами, `not_found` —
-такого вина в каталоге нет, показываем ближайшее по виду. Пороги
-откалиброваны на валидационном наборе, см. `data/index/rerank_sharp.json`.
+`uncertain` — карточка с признанием сомнения и вариантами, `unsure` —
+уверенно определить не удалось, показываем ближайшее по виду. Решает
+совместная оценка по отрыву кандидатов, числу совпавших точек, визуальной
+близости и раскладке совпадений; веса и пороги — в
+`data/index/calibration_sharp.json`, обучение и проверка в
+`pipeline/calibrate.py`.
 
 Эндпоинт оценки порог не применяет: скрипт кейсодержателя ждёт лучший ответ,
 и пустой slug засчитывается как промах в любом случае.

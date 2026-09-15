@@ -199,9 +199,15 @@ class PrecomputedReranker:
         return points, desc
 
     def scores(self, query: Image.Image, slugs: list[str]) -> dict[str, int]:
+        return {slug: stats.inliers
+                for slug, stats in self.stats(query, slugs).items()}
+
+    def stats(self, query: Image.Image, slugs: list[str]) -> dict[str, MatchStats]:
+        """Инлаеры вместе с раскладкой совпадений — цена та же.
+
+        Раскладка нужна решению о выдаче: сто точек, слипшихся на логотипе
+        винодельни, и сто точек по всей этикетке — разная уверенность.
+        """
         query_kp, query_desc = descriptors(query)
-        out = {}
-        for slug in slugs:
-            ref_kp, ref_desc = self.reference(slug)
-            out[slug] = inlier_count(query_kp, query_desc, ref_kp, ref_desc)
-        return out
+        return {slug: match_stats(query_kp, query_desc, *self.reference(slug))
+                for slug in slugs}

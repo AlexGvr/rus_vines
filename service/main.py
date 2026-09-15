@@ -8,15 +8,18 @@
                            top-1 и top-5, запасные варианты
   GET  /health           — готовность модели и индекса
 
-Поиск двухступенчатый:
-  1) детектор вырезает бутылку, SigLIP отбирает двадцатку кандидатов —
-     дёшево, но не различает позиции одной серии;
+Поиск трёхступенчатый:
+  1) кадр идёт двумя видами — целиком и кропом по найденной бутылке; SigLIP
+     отбирает двадцатку кандидатов, выдача сворачивается по slug;
   2) локальные признаки считают, сколько точек этикетки совпало с каждым
-     кандидатом, и переупорядочивают выдачу.
+     кандидатом, и переупорядочивают выдачу;
+  3) если геометрия не развела лидеров, этикетка читается: уверенно
+     прочитанное слово, принадлежащее одному кандидату, опускает остальных.
 
-Вторая ступень поднимает top-1 с 71.5% до 85.2% на общем наборе и с 62.1%
-до 94.3% на почти-дублях (data/index/rerank_*.json). Она же даёт ответ
-«такого вина нет»: мало совпавших точек — значит похожего в каталоге нет.
+Вклад ступеней на общем наборе (data/index/*_sharp.json): второй вид
+поднимает top-1 с 87.8% до 90.2%, разрешение противоречий — до 91.0%.
+Показывать ли карточку, решает совместная оценка уверенности, а не порог
+по одному числу.
 
 Модель, детектор и индекс поднимаются один раз при старте: холодный прогон
 стоит секунды, а SLA на запрос — три.
@@ -26,6 +29,7 @@ from __future__ import annotations
 import csv
 import io
 import json
+import math
 import sys
 import time
 from contextlib import asynccontextmanager
@@ -64,15 +68,28 @@ INDEX_DIR = ROOT / "data" / "index"
 
 RERANK_TOPK = 20         # потолок точности = recall@20, дальше растёт только время
 
-# Два порога вместо одного (калибровка в data/index/rerank_sharp.json).
-# Абсолютный: меньше MIN_INLIERS совпавших точек — похожего в каталоге нет,
-# такое правило отсекает 46% неверных ответов, теряя 0.9% верных.
-# Относительный: доминирование лидера над вторым кандидатом. Порог 0.65
-# оставляет всего 6.8% неверных, но и 58% верных — слишком строго, чтобы
-# по нему прятать карточку, зато в самый раз, чтобы отличить уверенный
-# ответ от спорного.
-MIN_INLIERS = 15
-CONFIDENT_DOMINANCE = 0.65
+# Уверенность считается по четырём признакам сразу, а не по одному числу
+# инлаеров. Веса — логистическая регрессия, обученная на половине запросов
+# и проверенная на другой (pipeline/calibrate.py, data/index/calibration_*.json).
+# Отрицательные примеры получены вычёркиванием правильной позиции из индекса:
+# тот же снимок становится запросом к вину, которого в каталоге нет.
+#
+# Прежнее правило «инлаеров >= 15 и доминирование >= 0.65» на той же
+# отложенной половине давало точность 98.1% при охвате 53.5%, ложном отказе
+# 37.0% и ложном принятии 23.5%. Совместное правило на пороге 0.50 —
+# 98.6% / 74.0% / 16.5% / 19.0%: лучше сразу по всем четырём величинам.
+#
+# Признаки относительные: сравнивают лидера с остальным шортлистом, а не
+# с абсолютной шкалой. Первая версия брала абсолютный косинус, и на трёх
+# реальных фото кейса отказывала во всех случаях — у синтетического запроса,
+# полученного из файла эталона, косинус около 0.9, а у снимка с полки 0.75,
+# и обученный на синтетике порог туда не переносится. Отрыв от второго
+# кандидата и превышение над хвостом шортлиста от этого сдвига свободны.
+CONF_WEIGHTS = {"dominance": 4.1088, "log_inliers": 0.5030,
+                "cv_margin": 24.7299, "cv_lift": 9.7874,
+                "coverage": 4.5975, "bias": -8.9939}
+CONFIDENT_P = 0.70      # одна карточка без оговорок
+SHOW_P = 0.15           # ниже — карточку не показываем вовсе
 
 # Разрешение противоречий текстом. Запускается только когда геометрия не
 # развела кандидатов: инлаеров у соседа не меньше CLOSE_WINDOW от лидера.
@@ -119,8 +136,9 @@ app.add_middleware(
     CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
 
-def search_candidates(image: Image.Image, top: int = 5) -> tuple[list[dict], dict]:
-    """Двухступенчатый поиск. Возвращает кандидатов и тайминги по ступеням."""
+def search_candidates(image: Image.Image,
+                      top: int = 5) -> tuple[list[dict], dict, dict]:
+    """Двухступенчатый поиск: кандидаты, уверенность и тайминги по ступеням."""
     t0 = time.perf_counter()
     views = {steps: normalize_batch([image], steps=steps)[0] for steps in QUERY_VIEWS}
     queries = embed_images(list(views.values()))
@@ -142,9 +160,11 @@ def search_candidates(image: Image.Image, top: int = 5) -> tuple[list[dict], dic
     t_cv = (time.perf_counter() - t0) * 1000
 
     t1 = time.perf_counter()
-    inliers = state["reranker"].scores(prepared, [c["slug"] for c in shortlist])
+    stats = state["reranker"].stats(prepared, [c["slug"] for c in shortlist])
     for candidate in shortlist:
-        candidate["inliers"] = int(inliers.get(candidate["slug"], 0))
+        match = stats.get(candidate["slug"])
+        candidate["inliers"] = int(match.inliers) if match else 0
+        candidate["coverage"] = round(match.coverage, 4) if match else 0.0
     shortlist.sort(key=lambda c: (-c["inliers"], -c["cv_score"]))
     t_rerank = (time.perf_counter() - t1) * 1000
 
@@ -152,8 +172,14 @@ def search_candidates(image: Image.Image, top: int = 5) -> tuple[list[dict], dic
     reasons = resolve_ties(shortlist, prepared)
     t_text = (time.perf_counter() - t2) * 1000
 
-    return shortlist[:top], {"cv_ms": round(t_cv, 1), "rerank_ms": round(t_rerank, 1),
-                             "text_ms": round(t_text, 1), "resolved": bool(reasons)}
+    # Уверенность считается по всему шортлисту, а не по видимой пятёрке:
+    # признак «превышение над шумом» смотрит на его хвост, и на усечённом
+    # списке значил бы другое, чем при калибровке.
+    conf = confidence(shortlist)
+    return shortlist[:top], conf, {"cv_ms": round(t_cv, 1),
+                                   "rerank_ms": round(t_rerank, 1),
+                                   "text_ms": round(t_text, 1),
+                                   "resolved": bool(reasons)}
 
 
 def resolve_ties(shortlist: list[dict], prepared: Image.Image) -> dict[str, list[str]]:
@@ -179,19 +205,30 @@ def resolve_ties(shortlist: list[dict], prepared: Image.Image) -> dict[str, list
 
 
 def confidence(candidates: list[dict]) -> dict:
-    """Уверенность по инлаерам: величина абсолютная, в отличие от косинуса.
+    """Вероятность того, что лидер — действительно снятое вино.
 
-    top1 — насколько лидер оторвался от второго кандидата; top5 — доля
-    инлаеров, собранная всей пятёркой, относительно шума.
+    Считается по четырём признакам сразу: отрыв от второго кандидата, число
+    совпавших точек, визуальная близость и раскладка совпадений по этикетке.
+    Ни один из них по отдельности не разделяет «то самое вино» и «похожее
+    вино той же серии»; отрыв и косинус дополняют друг друга.
     """
     if not candidates:
-        return {"top1": 0.0, "top5": 0.0, "inliers": 0, "gap": 0}
+        return {"probability": 0.0, "dominance": 0.0, "inliers": 0, "gap": 0}
     best = candidates[0]["inliers"]
     second = candidates[1]["inliers"] if len(candidates) > 1 else 0
-    total = sum(c["inliers"] for c in candidates) or 1
+    dominance = best / (best + second) if best + second else 0.0
+    by_cv = sorted((c["cv_score"] for c in candidates), reverse=True)
+    tail = by_cv[5:] or by_cv
+    logit = (CONF_WEIGHTS["dominance"] * dominance
+             + CONF_WEIGHTS["log_inliers"] * math.log1p(best)
+             + CONF_WEIGHTS["cv_margin"] * (by_cv[0] - (by_cv[1] if len(by_cv) > 1
+                                                        else by_cv[0]))
+             + CONF_WEIGHTS["cv_lift"] * (by_cv[0] - sum(tail) / len(tail))
+             + CONF_WEIGHTS["coverage"] * candidates[0].get("coverage", 0.0)
+             + CONF_WEIGHTS["bias"])
     return {
-        "top1": round(best / (best + second), 4) if best + second else 0.0,
-        "top5": round(min(total / (total + MIN_INLIERS), 1.0), 4),
+        "probability": round(1.0 / (1.0 + math.exp(-max(min(logit, 30.0), -30.0))), 4),
+        "dominance": round(dominance, 4),
         "inliers": best,
         "gap": best - second,
     }
@@ -209,6 +246,8 @@ def card(candidate: dict) -> dict:
     wine = dict(state["by_slug"].get(candidate["slug"], {}))
     wine["inliers"] = candidate["inliers"]
     wine["cv_score"] = round(candidate["cv_score"], 4)
+    if candidate.get("contradictions"):
+        wine["contradictions"] = candidate["contradictions"]
     return wine
 
 
@@ -278,7 +317,7 @@ async def eval_predict(image: UploadFile = File(...)) -> JSONResponse:
     img = await read_image(image)
     if img is None:
         return JSONResponse({"slug": None})
-    candidates, _ = search_candidates(img, top=1)
+    candidates, _, _ = search_candidates(img, top=1)
     return JSONResponse({"slug": candidates[0]["slug"] if candidates else None})
 
 
@@ -288,17 +327,16 @@ async def search(image: UploadFile = File(...)) -> JSONResponse:
     if img is None:
         return JSONResponse({"error": "не удалось прочитать изображение"}, status_code=400)
 
-    candidates, timings = search_candidates(img, top=5)
-    conf = confidence(candidates)
-    found = bool(candidates) and candidates[0]["inliers"] >= MIN_INLIERS
+    candidates, conf, timings = search_candidates(img, top=5)
+    found = bool(candidates) and conf["probability"] >= SHOW_P
 
     # Три состояния вместо «нашли или нет». Бинарное решение по одному порогу
     # либо прячет треть верных ответов, либо пропускает половину неверных —
     # середина честнее: уверенный ответ показываем одной карточкой, спорный
     # тоже показываем, но с признанием сомнения и ближайшими вариантами.
     if not found:
-        status = "not_found"
-    elif conf["top1"] >= CONFIDENT_DOMINANCE:
+        status = "unsure"
+    elif conf["probability"] >= CONFIDENT_P:
         status = "confident"
     else:
         status = "uncertain"

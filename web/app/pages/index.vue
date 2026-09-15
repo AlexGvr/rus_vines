@@ -2,10 +2,10 @@
 const apiBase = useRuntimeConfig().public.apiBase as string
 
 type SearchResult = {
-  status: 'confident' | 'uncertain' | 'not_found'
+  status: 'confident' | 'uncertain' | 'unsure'
   match: Record<string, any> | null
   alternatives: Record<string, any>[]
-  confidence: { top1: number; top5: number; inliers: number; gap: number }
+  confidence: { probability: number; dominance: number; inliers: number; gap: number }
   latency_ms: { cv_ms: number; rerank_ms: number; total: number }
 }
 
@@ -97,11 +97,13 @@ function reset() {
         </p>
       </template>
 
-      <!-- Нет в каталоге: не выдумываем ответ -->
+      <!-- Слабое совпадение: не выдумываем ответ и не врём про каталог -->
       <template v-else>
-        <p class="verdict missing">Такого вина в каталоге нет</p>
+        <p class="verdict missing">Не удалось уверенно определить вино</p>
         <p class="hint">
-          В базе «Своё Вино» пока нет этой позиции. Вот что похоже по виду:
+          Совпадение слишком слабое: этого вина может не быть в каталоге,
+          а может не хватить кадра. Переснимите этикетку крупнее и ровнее —
+          или посмотрите, что похоже по виду:
         </p>
       </template>
 
@@ -130,7 +132,7 @@ function reset() {
 
       <!-- Кандидаты: только когда ответ неточный -->
       <div v-if="result.status !== 'confident' && result.alternatives.length" class="block">
-        <h3>{{ result.status === 'not_found' ? 'Ближайшее по виду' : 'Другие варианты' }}</h3>
+        <h3>{{ result.status === 'unsure' ? 'Ближайшее по виду' : 'Другие варианты' }}</h3>
         <div class="list">
           <WineCard
             v-for="item in result.alternatives"
@@ -145,6 +147,7 @@ function reset() {
       <SommelierPanel :api-base="apiBase" />
 
       <p class="meta muted">
+        уверенность {{ Math.round(result.confidence.probability * 100) }}% ·
         совпавших точек {{ result.confidence.inliers }} ·
         отрыв {{ result.confidence.gap }} ·
         {{ Math.round(result.latency_ms.total) }} мс
