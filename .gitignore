@@ -3,3 +3,10 @@ data/raw/
 data/eval_photos/
 __pycache__/
 *.traineddata
+.venv/
+dataset/
+*.zip
+*.rar
+data/index/*.npy
+data/queries/
+data/catalog/

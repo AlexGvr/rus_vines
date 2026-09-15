@@ -1,0 +1,22 @@
+[
+ {
+  "variant": "clean",
+  "index_size": 1939,
+  "garbage_in_index": 0,
+  "top1": 0.5925,
+  "top5": 0.8175,
+  "garbage_top1": 0.0,
+  "gap_median": 0.016536951065063477,
+  "search_ms": 0.07180631160736084
+ },
+ {
+  "variant": "dirty",
+  "index_size": 6205,
+  "garbage_in_index": 4266,
+  "top1": 0.5275,
+  "top5": 0.755,
+  "garbage_top1": 0.2625,
+  "gap_median": 0.013406932353973389,
+  "search_ms": 0.27788877487182617
+ }
+]
