@@ -32,8 +32,9 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 
 import numpy as np
-from fastapi import FastAPI, File, UploadFile
-from fastapi.responses import JSONResponse
+from fastapi import Body, FastAPI, File, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse, JSONResponse
 from PIL import Image, ImageFile
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -41,6 +42,9 @@ sys.path.insert(0, str(ROOT / "pipeline"))
 from embed import embed_images, load as load_model  # noqa: E402
 from imageprep import normalize_batch  # noqa: E402
 from rerank import PrecomputedReranker  # noqa: E402
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from recommend import QUESTIONS, Recommender  # noqa: E402
 
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
@@ -74,6 +78,7 @@ def build_state() -> None:
     with (INDEX_DIR / f"{INDEX_VARIANT}.csv").open(encoding="utf-8") as fh:
         state["slugs"] = [row["slug"] or None for row in csv.DictReader(fh)]
     state["reranker"] = PrecomputedReranker(INDEX_DIR / "sift")
+    state["recommender"] = Recommender(catalog)
     load_model()
     # Прогрев: первый прогон модели и детектора инициализирует ядра CUDA
     # и стоит секунды — на запросе такой задержки быть не должно.
@@ -89,6 +94,10 @@ async def lifespan(_: FastAPI):
 
 
 app = FastAPI(title="Сканер вин «Своё Вино»", lifespan=lifespan)
+
+# Фронтенд поднимается своим dev-сервером, поэтому обращается с другого порта.
+app.add_middleware(
+    CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
 
 def search_candidates(image: Image.Image, top: int = 5) -> tuple[list[dict], dict]:
@@ -163,6 +172,51 @@ def health() -> dict:
         "catalog": len(state.get("by_slug", {})),
         "rerank_topk": RERANK_TOPK,
     }
+
+
+@app.get("/v1/wines/{slug}")
+def wine_card(slug: str) -> JSONResponse:
+    wine = state["by_slug"].get(slug)
+    if wine is None:
+        return JSONResponse({"error": "позиция не найдена"}, status_code=404)
+    return JSONResponse({
+        "wine": wine,
+        "pairings": state["recommender"].pairings(wine),
+        "similar": state["recommender"].similar(slug),
+    })
+
+
+@app.get("/v1/sommelier/questions")
+def sommelier_questions() -> JSONResponse:
+    return JSONResponse({"questions": QUESTIONS})
+
+
+@app.post("/v1/sommelier")
+def sommelier(answers: dict = Body(default_factory=dict)) -> JSONResponse:
+    """Подбор под ответы на наводящие вопросы.
+
+    Если под все условия сразу ничего не нашлось, мягко отпускаем блюдо:
+    пустой ответ на экране хуже, чем близкая по вкусу позиция.
+    """
+    picks = state["recommender"].sommelier(answers)
+    relaxed = False
+    if not picks and answers.get("dish"):
+        picks = state["recommender"].sommelier({**answers, "dish": ""})
+        relaxed = bool(picks)
+    return JSONResponse({"recommendations": picks, "relaxed": relaxed})
+
+
+@app.get("/v1/photo/{slug}")
+def wine_photo(slug: str):
+    """Фото эталона из дампа каталога — фронтенду нужен один адрес на позицию."""
+    wine = state["by_slug"].get(slug) or {}
+    photo = wine.get("photo")
+    if not photo:
+        return JSONResponse({"error": "нет фото"}, status_code=404)
+    path = ROOT / photo
+    if not path.exists():
+        return JSONResponse({"error": "файл отсутствует"}, status_code=404)
+    return FileResponse(path, media_type="image/webp")
 
 
 @app.post("/v1/eval/predict")

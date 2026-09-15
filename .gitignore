@@ -12,3 +12,6 @@ data/queries/
 data/catalog/
 data/index/ocr_*.json
 yolo11*.pt
+web/.nuxt/
+web/.output/
+web/node_modules/

@@ -2,10 +2,10 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "wine-app",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "8712", "--directory", "app"],
-      "port": 8712
+      "name": "wine-web",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--prefix", "web", "--", "--port", "3300"],
+      "port": 3300
     }
   ]
 }
