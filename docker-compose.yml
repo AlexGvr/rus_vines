@@ -1,18 +1,30 @@
+# Запуск сервиса распознавания. Фронтенд (web/) поднимается отдельно
+# командой npm run dev — он нужен только для демонстрации интерфейса.
+#
+#   docker compose up --build
+#
+# Секция deploy.resources требует установленного nvidia-container-toolkit.
+# Без GPU уберите её и пересоберите образ с процессорной сборкой torch:
+#   docker compose build --build-arg TORCH_INDEX=https://download.pytorch.org/whl/cpu
 services:
   api:
     build:
       context: .
       dockerfile: service/Dockerfile
+      args:
+        TORCH_INDEX: ${TORCH_INDEX:-https://download.pytorch.org/whl/cu128}
     ports:
       - "127.0.0.1:8080:8080"
     volumes:
-      # Индекс, каталог и веса монтируются, а не копируются в образ:
-      # индекс пересобирается чаще, чем меняется код сервиса.
+      # Каталог, векторный индекс и признаки эталонов монтируются, а не
+      # копируются в образ: они пересобираются чаще, чем меняется код.
       - ./data:/app/data:ro
       - ./dataset:/app/dataset:ro
+      # Веса SigLIP (около 3.5 ГБ) кэшируются между перезапусками.
       - hf-cache:/root/.cache/huggingface
     environment:
       HF_HOME: /root/.cache/huggingface
+      YOLO_WEIGHTS: /app/weights/yolo11m.pt
     deploy:
       resources:
         reservations:
@@ -26,7 +38,7 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
-      start_period: 180s
+      start_period: 300s
 
 volumes:
   hf-cache:

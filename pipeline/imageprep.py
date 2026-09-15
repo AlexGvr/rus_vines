@@ -16,6 +16,7 @@
 """
 from __future__ import annotations
 
+import os
 from dataclasses import dataclass
 
 import cv2
@@ -27,10 +28,21 @@ ALL_STEPS = ("detect", "label", "dewarp", "glare", "balance")
 _yolo: dict = {}
 
 
-def load_detector(weights: str = "yolo11m.pt"):
+def _device() -> str:
+    """Устройство инференса. Образ собирается и под CPU, поэтому жёстко
+    требовать видеокарту нельзя."""
+    if "device" not in _yolo:
+        import torch
+        _yolo["device"] = 0 if torch.cuda.is_available() else "cpu"
+    return _yolo["device"]
+
+
+def load_detector(weights: str | None = None):
+    """Детектор бутылок. Путь к весам можно задать через YOLO_WEIGHTS —
+    в образе они лежат рядом с кодом, чтобы не качаться при каждом старте."""
     if "model" not in _yolo:
         from ultralytics import YOLO
-        _yolo["model"] = YOLO(weights)
+        _yolo["model"] = YOLO(weights or os.environ.get("YOLO_WEIGHTS", "yolo11m.pt"))
     return _yolo["model"]
 
 
@@ -59,7 +71,7 @@ def detect_bottles(images: list[Image.Image], conf: float = 0.20,
     for i in range(0, len(images), batch_size):
         chunk = [np.array(im.convert("RGB"))[:, :, ::-1] for im in images[i:i + batch_size]]
         results = model.predict(chunk, classes=[BOTTLE_CLASS], conf=conf,
-                                verbose=False, device=0)
+                                verbose=False, device=_device())
         for im, res in zip(images[i:i + batch_size], results):
             width, height = im.size
             best, best_score = None, 0.0
