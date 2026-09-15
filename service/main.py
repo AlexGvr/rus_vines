@@ -29,10 +29,15 @@ from PIL import Image, ImageFile
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "pipeline"))
 from embed import embed_images, load as load_model  # noqa: E402
+from normalize import normalize_batch  # noqa: E402
 
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
-INDEX_VARIANT = "clean"
+# Индекс собран с тем же шагом нормализации, что применяется к запросу:
+# детекция бутылки в кадре даёт +11 п.п. top-1 (см. data/index/ablation_*.json).
+# Остальные шаги конвейера на замере не оправдались и отключены.
+NORMALIZE_STEPS = ("detect",)
+INDEX_VARIANT = "clean_detect"
 CATALOG_PATH = ROOT / "data" / "catalog" / "catalog.json"
 INDEX_DIR = ROOT / "data" / "index"
 
@@ -50,8 +55,10 @@ def build_state() -> None:
     with (INDEX_DIR / f"{INDEX_VARIANT}.csv").open(encoding="utf-8") as fh:
         state["slugs"] = [row["slug"] or None for row in csv.DictReader(fh)]
     load_model()
-    # Прогрев: первый прогон модели инициализирует ядра CUDA и стоит секунды.
-    embed_images([Image.new("RGB", (384, 384), "white")])
+    # Прогрев: первый прогон модели и детектора инициализирует ядра CUDA
+    # и стоит секунды — на запросе такой задержки быть не должно.
+    warm = [Image.new("RGB", (384, 384), "white")]
+    embed_images(normalize_batch(warm, steps=NORMALIZE_STEPS))
 
 
 @asynccontextmanager
@@ -67,7 +74,8 @@ app = FastAPI(title="Сканер вин «Своё Вино»", lifespan=lifesp
 def rank(image: Image.Image, top: int = 5) -> tuple[list[dict], float]:
     """Кандидаты по убыванию близости и время поиска в миллисекундах."""
     t0 = time.perf_counter()
-    query = embed_images([image])[0]
+    prepared = normalize_batch([image], steps=NORMALIZE_STEPS)
+    query = embed_images(prepared)[0]
     scores = state["vectors"] @ query
     order = np.argsort(-scores)[:60]
 

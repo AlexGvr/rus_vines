@@ -34,18 +34,20 @@ def load_index(variant: str) -> tuple[np.ndarray, list[str | None]]:
     return vectors, slugs
 
 
-def query_vectors(subset: str, cache: dict) -> tuple[np.ndarray, list[str]]:
+def query_vectors(subset: str, cache: dict,
+                  steps: tuple[str, ...] = ()) -> tuple[np.ndarray, list[str]]:
     """Эмбеддинги запросов считаются один раз и переиспользуются всеми вариантами."""
-    if subset in cache:
-        return cache[subset]
+    key = (subset, steps)
+    if key in cache:
+        return cache[key]
     manifest = list(csv.DictReader((QUERIES / f"manifest_{subset}.csv").open(encoding="utf-8")))
     paths = [str(QUERIES / subset / row["image"]) for row in manifest]
     t0 = time.time()
-    vectors, kept = embed_paths(paths, batch_size=32, progress_every=0)
+    vectors, kept = embed_paths(paths, batch_size=32, progress_every=0, steps=steps)
     truth = [manifest[paths.index(p)]["slug"] for p in kept]
     print(f"запросов: {len(kept)}, эмбеддинги за {time.time() - t0:.0f} с")
-    cache[subset] = (vectors, truth)
-    return cache[subset]
+    cache[key] = (vectors, truth)
+    return cache[key]
 
 
 def evaluate(variant: str, qvec: np.ndarray, truth: list[str]) -> dict:
@@ -97,10 +99,12 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--variants", nargs="+", default=["clean", "dirty"])
     ap.add_argument("--subset", default="hard")
+    ap.add_argument("--steps", default="", help="шаги нормализации запросов")
     args = ap.parse_args()
+    steps = tuple(s for s in args.steps.split(",") if s)
 
     cache: dict = {}
-    qvec, truth = query_vectors(args.subset, cache)
+    qvec, truth = query_vectors(args.subset, cache, steps)
 
     results = []
     for variant in args.variants:

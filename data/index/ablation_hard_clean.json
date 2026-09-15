@@ -1,0 +1,67 @@
+[
+ {
+  "variant": "clean_raw",
+  "index_size": 1939,
+  "garbage_in_index": 0,
+  "top1": 0.5925,
+  "top5": 0.8175,
+  "garbage_top1": 0.0,
+  "gap_median": 0.016536951065063477,
+  "search_ms": 0.06710410118103027,
+  "label": "без нормализации",
+  "steps": "-",
+  "seconds": 117.7
+ },
+ {
+  "variant": "clean_detect",
+  "index_size": 1939,
+  "garbage_in_index": 0,
+  "top1": 0.7025,
+  "top5": 0.8375,
+  "garbage_top1": 0.0,
+  "gap_median": 0.03315499424934387,
+  "search_ms": 0.05075275897979736,
+  "label": "+детекция",
+  "steps": "detect",
+  "seconds": 154.3
+ },
+ {
+  "variant": "clean_detect_label",
+  "index_size": 1939,
+  "garbage_in_index": 0,
+  "top1": 0.6425,
+  "top5": 0.7475,
+  "garbage_top1": 0.0,
+  "gap_median": 0.02954980731010437,
+  "search_ms": 0.04905223846435547,
+  "label": "+этикетка",
+  "steps": "detect,label",
+  "seconds": 159.2
+ },
+ {
+  "variant": "clean_detect_label_dewarp",
+  "index_size": 1939,
+  "garbage_in_index": 0,
+  "top1": 0.625,
+  "top5": 0.735,
+  "garbage_top1": 0.0,
+  "gap_median": 0.02892822027206421,
+  "search_ms": 0.12238264083862303,
+  "label": "+разворот",
+  "steps": "detect,label,dewarp",
+  "seconds": 177.0
+ },
+ {
+  "variant": "clean_detect_label_dewarp_glare_balance",
+  "index_size": 1939,
+  "garbage_in_index": 0,
+  "top1": 0.515,
+  "top5": 0.65,
+  "garbage_top1": 0.0,
+  "gap_median": 0.01999017596244812,
+  "search_ms": 0.07024705410003662,
+  "label": "+блик и свет",
+  "steps": "detect,label,dewarp,glare,balance",
+  "seconds": 360.8
+ }
+]

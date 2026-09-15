@@ -63,26 +63,30 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--variant", choices=["clean", "dirty"], required=True)
     ap.add_argument("--batch-size", type=int, default=32)
+    ap.add_argument("--steps", default="", help="шаги нормализации через запятую")
+    ap.add_argument("--name", default="", help="имя индекса (по умолчанию = вариант)")
     args = ap.parse_args()
+    steps = tuple(s for s in args.steps.split(",") if s)
+    name = args.name or args.variant
 
     paths, slugs = collect(args.variant)
     garbage = sum(1 for s in slugs if s is None)
-    print(f"вариант {args.variant}: файлов {len(paths)}, "
+    print(f"индекс {name} (шаги: {','.join(steps) or 'нет'}): файлов {len(paths)}, "
           f"из них без привязки к каталогу (мусор): {garbage}")
 
     t0 = time.time()
-    vectors, kept = embed_paths(paths, batch_size=args.batch_size)
+    vectors, kept = embed_paths(paths, batch_size=args.batch_size, steps=steps)
     kept_slugs = [slugs[paths.index(p)] for p in kept] if len(kept) != len(paths) else slugs
     print(f"эмбеддингов: {len(kept)} за {time.time() - t0:.0f} с, размерность {vectors.shape[1]}")
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    np.save(OUT_DIR / f"{args.variant}.npy", vectors)
-    with (OUT_DIR / f"{args.variant}.csv").open("w", newline="", encoding="utf-8") as fh:
+    np.save(OUT_DIR / f"{name}.npy", vectors)
+    with (OUT_DIR / f"{name}.csv").open("w", newline="", encoding="utf-8") as fh:
         writer = csv.writer(fh)
         writer.writerow(["path", "slug"])
         for path, slug in zip(kept, kept_slugs):
             writer.writerow([str(Path(path).relative_to(ROOT)), slug or ""])
-    print(f"сохранено: {OUT_DIR / (args.variant + '.npy')}")
+    print(f"сохранено: {OUT_DIR / (name + '.npy')}")
 
 
 if __name__ == "__main__":
