@@ -1,0 +1,29 @@
+{
+ "subset": "neardup",
+ "n": 189,
+ "index": "clean_mv",
+ "min_conf": 0.6,
+ "base_top1": 0.9682539682539683,
+ "ocr_ms_mean": 161.02795960920812,
+ "with_close_group": 19,
+ "by_window": {
+  "0.7": {
+   "top1": 0.9682539682539683,
+   "touched": 0,
+   "fixed": 0,
+   "broken": 0
+  },
+  "0.8": {
+   "top1": 0.9682539682539683,
+   "touched": 0,
+   "fixed": 0,
+   "broken": 0
+  },
+  "0.9": {
+   "top1": 0.9682539682539683,
+   "touched": 0,
+   "fixed": 0,
+   "broken": 0
+  }
+ }
+}

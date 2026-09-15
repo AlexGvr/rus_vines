@@ -41,7 +41,9 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "pipeline"))
 from embed import embed_images, load as load_model  # noqa: E402
 from imageprep import normalize_batch  # noqa: E402
+from ocr import load as load_ocr, read_words  # noqa: E402
 from rerank import PrecomputedReranker  # noqa: E402
+from text_match import TextChannel, resolve_close  # noqa: E402
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from recommend import QUESTIONS, Recommender  # noqa: E402
@@ -72,6 +74,15 @@ RERANK_TOPK = 20         # потолок точности = recall@20, даль
 MIN_INLIERS = 15
 CONFIDENT_DOMINANCE = 0.65
 
+# Разрешение противоречий текстом. Запускается только когда геометрия не
+# развела кандидатов: инлаеров у соседа не меньше CLOSE_WINDOW от лидера.
+# Правило одностороннее — уверенно прочитанное слово, принадлежащее ровно
+# одному кандидату, опускает остальных; неуверенное чтение не делает ничего.
+# На общем наборе это +0.8 п.п. top-1 (4 исправления против 1 поломки),
+# OCR при этом считается для 15% запросов (data/index/tiebreak_sharp.json).
+CLOSE_WINDOW = 0.80
+OCR_MIN_CONF = 0.60
+
 state: dict = {}
 
 
@@ -83,12 +94,15 @@ def build_state() -> None:
         state["slugs"] = [row["slug"] or None for row in csv.DictReader(fh)]
     state["reranker"] = PrecomputedReranker(INDEX_DIR / "sift")
     state["recommender"] = Recommender(catalog)
+    state["text"] = TextChannel(catalog)
     load_model()
+    load_ocr()
     # Прогрев: первый прогон модели и детектора инициализирует ядра CUDA
     # и стоит секунды — на запросе такой задержки быть не должно.
     warm = [Image.new("RGB", (384, 384), "white")]
     for steps in QUERY_VIEWS:
         embed_images(normalize_batch(warm, steps=steps))
+    read_words(warm[0])
 
 
 @asynccontextmanager
@@ -134,7 +148,34 @@ def search_candidates(image: Image.Image, top: int = 5) -> tuple[list[dict], dic
     shortlist.sort(key=lambda c: (-c["inliers"], -c["cv_score"]))
     t_rerank = (time.perf_counter() - t1) * 1000
 
-    return shortlist[:top], {"cv_ms": round(t_cv, 1), "rerank_ms": round(t_rerank, 1)}
+    t2 = time.perf_counter()
+    reasons = resolve_ties(shortlist, prepared)
+    t_text = (time.perf_counter() - t2) * 1000
+
+    return shortlist[:top], {"cv_ms": round(t_cv, 1), "rerank_ms": round(t_rerank, 1),
+                             "text_ms": round(t_text, 1), "resolved": bool(reasons)}
+
+
+def resolve_ties(shortlist: list[dict], prepared: Image.Image) -> dict[str, list[str]]:
+    """Переставляет близких кандидатов по прочитанному тексту, на месте.
+
+    Считать OCR на каждом запросе незачем: когда у лидера инлаеров на порядок
+    больше, текст ничего не решит, а время ответа вырастет на сотню миллисекунд.
+    """
+    best = shortlist[0]["inliers"] if shortlist else 0
+    if best <= 0 or sum(1 for c in shortlist if c["inliers"] >= best * CLOSE_WINDOW) < 2:
+        return {}
+    pairs = [(c["slug"], float(c["inliers"])) for c in shortlist]
+    ranked, reasons = resolve_close(pairs, read_words(prepared), state["text"],
+                                    window=CLOSE_WINDOW, min_conf=OCR_MIN_CONF)
+    if not any(reasons.values()):
+        return {}
+    position = {slug: i for i, (slug, _) in enumerate(ranked)}
+    shortlist.sort(key=lambda c: position.get(c["slug"], len(position)))
+    for candidate in shortlist:
+        if reasons.get(candidate["slug"]):
+            candidate["contradictions"] = reasons[candidate["slug"]]
+    return reasons
 
 
 def confidence(candidates: list[dict]) -> dict:
@@ -269,5 +310,6 @@ async def search(image: UploadFile = File(...)) -> JSONResponse:
                         else [card(c) for c in candidates],
         "confidence": conf,
         "latency_ms": {**timings,
-                       "total": round(timings["cv_ms"] + timings["rerank_ms"], 1)},
+                       "total": round(timings["cv_ms"] + timings["rerank_ms"]
+                                      + timings["text_ms"], 1)},
     })

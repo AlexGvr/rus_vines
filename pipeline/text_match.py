@@ -19,7 +19,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "core"))
-from matcher import Matcher  # noqa: E402
+from matcher import Matcher, tokens_match  # noqa: E402
 from normalize import clean  # noqa: E402
 
 CATALOG = ROOT / "data" / "catalog" / "catalog.json"
@@ -150,6 +150,131 @@ class TextChannel:
             if any(y in title for y in attrs.years):
                 votes.append(1.0)
         return sum(votes) / len(votes) if votes else 0.0
+
+
+    def contradictions(self, slug: str, attrs: Attributes) -> list[str]:
+        """Прочитанные атрибуты, которым карточка прямо противоречит.
+
+        Отличие от attribute_score — здесь только противоречия, без наград.
+        Награда за совпадение поднимает кандидата, у которого совпало
+        случайное слово, а противоречие — факт: на этикетке написано
+        «розовое», а в карточке белое вино, значит это не оно.
+        """
+        card = self.attributes_of.get(slug)
+        if card is None:
+            return []
+        out = []
+        if attrs.sweetness and card.sweetness and attrs.sweetness != card.sweetness:
+            out.append(f"сладость {attrs.sweetness} против {card.sweetness}")
+        if attrs.color and card.color and attrs.color not in card.color:
+            out.append(f"цвет {attrs.color} против «{card.color}»")
+        if attrs.years:
+            title = clean(self.by_slug[slug].get("title") or "")
+            in_title = re.findall(r"\b(19[89]\d|20[0-3]\d)\b", title)
+            # Противоречие только если в названии год есть и он другой:
+            # у большинства позиций года в названии нет вовсе.
+            if in_title and not (attrs.years & set(in_title)):
+                out.append(f"год {sorted(attrs.years)} против {in_title}")
+        return out
+
+
+def confident_attributes(words, min_conf: float = 0.60) -> Attributes:
+    """Атрибуты из уверенно прочитанных строк.
+
+    Порог выше рабочего порога OCR намеренно: неуверенное чтение не должно
+    ничего решать. Ошибочно прочитанное «розовое» вместо «белое» опустило бы
+    правильный ответ, а пропуск слова всего лишь оставляет решение зрению.
+    """
+    text = " ".join(w.text for w in words if w.conf >= min_conf)
+    return extract_attributes(text)
+
+
+# Слова, которые стоят на каждой второй этикетке и потому ничего не различают.
+STOPWORDS = {"вино", "wine", "вина", "розовое", "белое", "красное", "сухое",
+             "полусухое", "сладкое", "полусладкое", "брют", "brut", "игристое",
+             "выдержанное", "россия", "russia", "крым", "кубань", "резерв",
+             "reserve", "премиум", "premium", "коллекционное", "натуральное"}
+
+
+def central_words(words, min_conf: float = 0.60, band: float = 0.72):
+    """Уверенные строки из центральной части кропа.
+
+    Кроп по бутылке почти всегда прихватывает край соседней: на почти-дубле
+    «Велвет Сизон Рислинг» OCR уверенно читает CABERNET с соседа и уводит
+    решение в чужую сторону. Отсюда отбор по координатам — именно для этого
+    слова и хранят место на кадре.
+    """
+    picked = [w for w in words if w.conf >= min_conf]
+    if not picked:
+        return []
+    left = min(w.box[0] for w in picked)
+    right = max(w.box[2] for w in picked)
+    span = (right - left) or 1
+    center = (left + right) / 2
+    return [w for w in picked if abs(w.center_x - center) <= span * band / 2]
+
+
+def discriminating(candidates: list[str], channel: "TextChannel") -> dict[str, set[str]]:
+    """Токены, которыми кандидаты различаются между собой.
+
+    Общие слова серии («Велвет Сизон», «Фанагория») стоят у всех и решают
+    ничего не могут. Различает ровно то, что есть у одних и нет у других:
+    сорт винограда, год, категория. Их и ищем в прочитанном.
+    """
+    own = {}
+    for slug in candidates:
+        wine = channel.by_slug.get(slug) or {}
+        words = set()
+        for field_value in (wine.get("title") or "", " ".join(wine.get("grapes") or [])):
+            words |= {t for t in clean(field_value).split() if len(t) >= 3}
+        own[slug] = words - STOPWORDS
+    shared = set.intersection(*own.values()) if own else set()
+    return {slug: words - shared for slug, words in own.items()}
+
+
+def resolve_close(candidates: list[tuple[str, float]], words,
+                  channel: "TextChannel", window: float = 0.80,
+                  min_conf: float = 0.60,
+                  ) -> tuple[list[tuple[str, float]], dict[str, list[str]]]:
+    """Переупорядочивает только группу близких кандидатов.
+
+    Геометрия отвечает на вопрос «та же ли это этикетка» и обычно отвечает
+    уверенно: у верного кандидата инлаеров на порядок больше. Вмешиваться
+    туда текстом незачем. Работа текста — там, где геометрия сомневается:
+    позиции одной серии с близким числом инлаеров, различающиеся словом.
+
+    Правило одностороннее. Если уверенно прочитанное слово совпало с
+    различающим токеном ровно одного кандидата, остальные получают
+    противоречие. Совпадение никого не поднимает: слово могло попасть
+    в кадр случайно, а вот его отсутствие у кандидата — это факт о нём.
+    """
+    if len(candidates) < 2:
+        return candidates, {}
+    best = candidates[0][1]
+    if best <= 0:
+        return candidates, {}
+    group = [c for c in candidates if c[1] >= best * window]
+    if len(group) < 2:
+        return candidates, {}
+
+    marks = discriminating([slug for slug, _ in group], channel)
+    read = [t for w in central_words(words, min_conf)
+            for t in clean(w.text).split() if len(t) >= 3]
+
+    found: dict[str, list[str]] = {slug: [] for slug, _ in group}
+    for token in read:
+        owners = [slug for slug, marked in marks.items()
+                  if any(tokens_match(token, m) >= 0.85 for m in marked)]
+        # Слово, подходящее всем или никому, ничего не различает.
+        if len(owners) != 1:
+            continue
+        for slug in found:
+            if slug != owners[0]:
+                found[slug].append(f"на этикетке «{token}» — это {owners[0]}")
+    if not any(found.values()):
+        return candidates, found
+    reordered = sorted(group, key=lambda c: (len(found[c[0]]), -c[1]))
+    return reordered + candidates[len(group):], found
 
 
 def fuse(cv_candidates: list[tuple[str, float]], text_scores: dict[str, float],

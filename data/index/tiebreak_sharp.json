@@ -1,0 +1,29 @@
+{
+ "subset": "sharp",
+ "n": 400,
+ "index": "clean_mv",
+ "min_conf": 0.6,
+ "base_top1": 0.9025,
+ "ocr_ms_mean": 114.08447285304915,
+ "with_close_group": 61,
+ "by_window": {
+  "0.7": {
+   "top1": 0.91,
+   "touched": 5,
+   "fixed": 4,
+   "broken": 1
+  },
+  "0.8": {
+   "top1": 0.91,
+   "touched": 5,
+   "fixed": 4,
+   "broken": 1
+  },
+  "0.9": {
+   "top1": 0.91,
+   "touched": 5,
+   "fixed": 4,
+   "broken": 1
+  }
+ }
+}
