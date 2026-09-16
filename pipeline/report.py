@@ -63,7 +63,7 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--subset", default="sharp")
     ap.add_argument("--confident", type=float, default=0.70)
-    ap.add_argument("--show", type=float, default=0.10)
+    ap.add_argument("--show", type=float, default=0.06)
     ap.add_argument("--held-out", action="store_true",
                     help="считать только по отложенной половине, на которой "
                          "пороги не подбирались")

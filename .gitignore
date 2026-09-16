@@ -15,3 +15,8 @@ yolo11*.pt
 web/.nuxt/
 web/.output/
 web/node_modules/
+# Полевой набор: сами фотографии чужие, в репозиторий не кладём.
+# Пересобирается pipeline/collect_field.py по data/field/decisions.txt.
+data/field/*.jpg
+data/field/sheets/
+data/field/candidates.json

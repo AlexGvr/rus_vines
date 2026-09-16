@@ -1,0 +1,56 @@
+# Разметка полевого набора. Решения приняты по листам data/field/sheets.
+# slug — вино и этикетка есть в каталоге; «-» — вина в каталоге нет; «x» — кадр не годится.
+
+# Абрау «Купаж»: в каталоге этикетка другого поколения (рисунок машинки),
+# на снимках покупателей — пейзаж. Найти нельзя, это отрицательные примеры.
+11164638_0.jpg -
+11164638_1.jpg x   # рельеф стекла, этикетки не видно
+11164638_2.jpg x   # акцизная марка
+13153768_0.jpg -
+13153768_1.jpg -
+13153768_2.jpg x   # контрэтикетка
+13409943_0.jpg -
+13409943_1.jpg -
+13409943_2.jpg x   # контрэтикетка
+14029896_0.jpg -
+14029896_1.jpg x   # контрэтикетка
+14029896_2.jpg -
+5784977_0.jpg  -
+5784977_1.jpg  -
+5784977_2.jpg  x   # контрэтикетка
+9417887_0.jpg  -
+9417887_1.jpg  x   # контрэтикетка
+9417887_2.jpg  x   # пробка
+
+# «Золотая Балка» MY ROSE — в каталоге нет (есть соседи по серии)
+ir_etiketka-zashla-vot-vino-net-tot-sluchai_1.jpg -
+ir_etiketka-zashla-vot-vino-net-tot-sluchai_2.jpg -
+
+# Фанагория «Авторский стиль», «Номерной резерв», QORTIS — в каталоге нет
+ir_luchshee-iz-dostupnykh-vin-na-segodnya-m_0.jpg -
+ir_luchshee-iz-dostupnykh-vin-na-segodnya-m_2.jpg -
+ir_mozhet-li-deshevoe-vino-byt-khoroshim-ya_1.jpg -
+ir_mozhet-li-deshevoe-vino-byt-khoroshim-ya_2.jpg -
+ir_myagkoe-s-priyatnym-agodnym-vkusom-i-per_0.jpg -
+ir_myagkoe-s-priyatnym-agodnym-vkusom-i-per_1.jpg -
+ir_myagkoe-s-priyatnym-agodnym-vkusom-i-per_2.jpg -
+ir_podderzhivaem-otechestvennykh-proizvodit_0.jpg -
+ir_podderzhivaem-otechestvennykh-proizvodit_1.jpg -
+ir_podderzhivaem-otechestvennykh-proizvodit_2.jpg -
+ir_prekrasnyi-aperitiv-na-leto-interesnaya-_0.jpg -
+ir_prekrasnyi-aperitiv-na-leto-interesnaya-_1.jpg -
+ir_prekrasnyi-aperitiv-na-leto-interesnaya-_2.jpg -
+ir_pei-da-raduisya_0.jpg -
+ir_pei-da-raduisya_2.jpg -
+
+# Положительные: вино и этикетка совпадают с каталогом
+ir_ochen-vkusnoe-legkoe-vino-dlya-semeinogo_0.jpg fanagoriya-brule-muscat-ottonel-brut-muskat-ottonel-beloe-polusladkoe-12
+ir_pei-da-raduisya_1.jpg soyuz-vino-kanonicheskie-traditsii-krasnoe-sladkoe-kaberne-sovinon-115
+
+# BRÛLÉ Cuvée Rosé Demi-Sec — в каталоге только Brut, это другое вино
+ir_ochen-vkusnoe-legkoe-vino-dlya-semeinogo_1.jpg -
+
+# Публичный набор кейса
+02eef911.webp massandra-muskatel-belyy-belye-sorta-vinograda-beloe-sladkoe-16
+019c68d0.jpg -   # Табия Пино Нуар, в каталоге нет
+096ca74e.jpg -   # ARISTOV DONUM, в каталоге нет
