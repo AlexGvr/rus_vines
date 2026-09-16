@@ -38,6 +38,7 @@ class Candidate:
     coverage: float = 0.0
     contradictions: list[str] = field(default_factory=list)
     conflicts: list[str] = field(default_factory=list)
+    confirmed: list[str] = field(default_factory=list)
 
     def as_dict(self) -> dict:
         row = {"slug": self.slug, "cv_score": round(self.cv, 4),
@@ -46,6 +47,8 @@ class Candidate:
             row["contradictions"] = self.contradictions
         if self.conflicts:
             row["conflicts"] = self.conflicts
+        if self.confirmed:
+            row["confirmed"] = self.confirmed
         return row
 
 
@@ -114,6 +117,28 @@ def resolve(candidates: list[Candidate], crop: Image.Image, channel,
     return candidates
 
 
+def series_rivals(candidates: list[Candidate], by_slug: dict,
+                  share: float = 0.5) -> list[Candidate]:
+    """Соседи лидера по линейке, держащиеся близко по геометрии.
+
+    Окно близких кандидатов настроено на случай, когда геометрия не смогла
+    выбрать вовсе. Подмена внутри линейки выглядит иначе: лидер уверенно
+    впереди — 94 инлаера против 67, — но соперники это его же однофамильцы
+    с почти той же этикеткой, и разница в тридцать точек ничего не решает.
+    Считаем их отдельно: та же винодельня и не меньше половины инлаеров.
+    """
+    if not candidates:
+        return []
+    leader = candidates[0]
+    brand = (by_slug.get(leader.slug) or {}).get("manufacturer")
+    if not brand or leader.inliers <= 0:
+        return []
+    limit = leader.inliers * share
+    return [c for c in candidates[1:]
+            if c.inliers >= limit
+            and (by_slug.get(c.slug) or {}).get("manufacturer") == brand]
+
+
 def features(candidates: list[Candidate]) -> dict[str, float]:
     """Признаки уверенности для лидера — того кандидата, которого покажем.
 
@@ -171,26 +196,76 @@ def features(candidates: list[Candidate]) -> dict[str, float]:
     }
 
 
+def may_drop_caveat(candidates: list[Candidate], by_slug: dict,
+                   window: float = 0.80) -> bool:
+    """Можно ли показать карточку без оговорки «скорее всего».
+
+    Живёт здесь, а не в сервисе, потому что то же правило нужно калибровке:
+    порог «без оговорок» подбирается по той выдаче, которую увидит человек.
+    Раньше правило было только в сервисе, и подбор порога шёл по выдаче без
+    него — числа расходились с реальностью.
+    """
+    leader = candidates[0]
+    if leader.conflicts:
+        return False
+    crowded = (has_close_group(candidates, window)
+               or len(series_rivals(candidates, by_slug)) >= 2)
+    return bool(leader.confirmed) if crowded else True
+
+
 def check_leader(candidates: list[Candidate], crop: Image.Image, channel,
-                 read_words, min_conf: float) -> int:
-    """Ищет на этикетке улики против лидера. Возвращает их число.
+                 read_words, min_conf: float, window: float = 0.80,
+                 by_slug: dict | None = None) -> int:
+    """Улики против лидера и подтверждения за него. Возвращает число улик.
 
     Вызывается только когда ответ иначе был бы показан: OCR стоит около
     сотни миллисекунд, и тратить их на заведомо слабое совпадение незачем.
+
+    Кроме улик собираются подтверждения — слова, отличающие лидера от
+    соперников. Они нужны решению о выдаче: молчание текста согласием
+    не является.
     """
     if not candidates:
         return 0
     leader = candidates[0]
-    found = channel.conflicts_with(leader.slug, read_words(crop),
-                                   [c.slug for c in candidates[1:]], min_conf)
-    leader.conflicts = found
-    return len(found)
+    words = read_words(crop)
+    leader.conflicts = channel.conflicts_with(
+        leader.slug, words, [c.slug for c in candidates[1:]], min_conf)
+    # Подтверждения сверяются только с близкими соперниками. По всему
+    # шортлисту «brule» выглядит различителем — там есть вина других
+    # виноделен, — и имя серии засчитывалось за подтверждение лидера
+    # против его же однофамильцев.
+    limit = leader.inliers * window
+    close = {c.slug for c in candidates[1:] if c.inliers >= limit}
+    if by_slug is not None:
+        close |= {c.slug for c in series_rivals(candidates, by_slug)}
+    leader.confirmed = (channel.confirms(leader.slug, words, sorted(close), min_conf)
+                        if close else [])
+    return len(leader.conflicts)
 
 
 def probability(feats: dict[str, float], weights: dict[str, float]) -> float:
+    """Уверенность в лидере. Совместимость со старой двоичной моделью."""
     logit = weights.get("bias", 0.0) + sum(weights.get(name, 0.0) * feats[name]
                                            for name in FEATURE_ORDER)
     return 1.0 / (1.0 + math.exp(-max(min(logit, 30.0), -30.0)))
+
+
+def outcomes(feats: dict[str, float], weights: list[list[float]]) -> tuple[float, float]:
+    """Вероятности «лидер верен» и «верный ответ есть в пятёрке».
+
+    Модель одна на три взаимоисключающих исхода: первое место, места со
+    второго по пятое, вне пятёрки. Поэтому top-5 не бывает ниже top-1 —
+    это сумма первых двух вероятностей, а не отдельно обученное число.
+    """
+    row = [feats[name] for name in FEATURE_ORDER] + [1.0]
+    logits = [sum(value * column[i] for value, column in zip(row, weights))
+              for i in range(3)]
+    top = max(logits)
+    exponent = [math.exp(min(x - top, 30.0)) for x in logits]
+    total = sum(exponent) or 1.0
+    first, middle = exponent[0] / total, exponent[1] / total
+    return first, first + middle
 
 
 # Уверенность в пятёрке считается отдельной моделью на тех же признаках

@@ -2087,6 +2087,10 @@ dataset/uploads_root/prod-svoe-vino-strapi/prod-svoe-vino/strapi/uploads/chateau
 dataset/uploads_root/prod-svoe-vino-strapi/prod-svoe-vino/strapi/uploads/chateau_de_talu_yuzhnaya_vertikal_kaberne_fran_rezerv_krasnoe_suhoe_146_9ed8edf81c.webp,chateau-de-talu-yuzhnaya-vertikal-kaberne-fran-rezerv-krasnoe-suhoe-146,raw
 dataset/uploads_root/prod-svoe-vino-strapi/prod-svoe-vino/strapi/uploads/usadba_divnomorskoe_yuzhnyy_les_merlo_krasnoe_suhoe_137_89faa0325c.webp,usadba-divnomorskoe-yuzhnyy-les-merlo-krasnoe-suhoe-137,raw
 dataset/uploads_root/prod-svoe-vino-strapi/prod-svoe-vino/strapi/uploads/Risunok1_no_bg_preview_carve_photos_c618e10c44.webp,ya-jla-risling,raw
+data/refs/abrau_kupazh_decanter.jpg,abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13,raw
+data/refs/kokur_decanter.jpg,kokur-suhoe,raw
+data/refs/kokur_winemore.webp,kokur-suhoe,raw
+data/refs/kanon_proizvoditel.jpg,soyuz-vino-kanonicheskie-traditsii-krasnoe-sladkoe-kaberne-sovinon-115,raw
 dataset/uploads_root/prod-svoe-vino-strapi/prod-svoe-vino/strapi/uploads/PU_Sjv7dn_M_Nil_H25_TO_9_Bcb_FN_55l_Pr_Hs_K4e_S_Lja8tm9_Ur62n50_Pyxhl_RO_1_RU_4s3e_N_Zb1_Yq_GT_4_HJPD_77_Qg_W_Tf3_Ng_e4a467fffd.webp,avtohtonnoe-vino-kryma-beloe-suhoe,detect
 dataset/uploads_root/prod-svoe-vino-strapi/prod-svoe-vino/strapi/uploads/DSC_09173_4a9ff95cc2.webp,aligote-barrel-2024,detect
 dataset/uploads_root/prod-svoe-vino-strapi/prod-svoe-vino/strapi/uploads/fanagoriya_100_ottenkov_krasnogo_kaberne_kaberne_sovinon_krasnoe_suhoe_135_ad8495191f.webp,fanagoriya-100-ottenkov-krasnogo-kaberne-kaberne-sovinon-krasnoe-suhoe-135,detect
@@ -4175,3 +4179,7 @@ dataset/uploads_root/prod-svoe-vino-strapi/prod-svoe-vino/strapi/uploads/chateau
 dataset/uploads_root/prod-svoe-vino-strapi/prod-svoe-vino/strapi/uploads/chateau_de_talu_yuzhnaya_vertikal_kaberne_fran_rezerv_krasnoe_suhoe_146_9ed8edf81c.webp,chateau-de-talu-yuzhnaya-vertikal-kaberne-fran-rezerv-krasnoe-suhoe-146,detect
 dataset/uploads_root/prod-svoe-vino-strapi/prod-svoe-vino/strapi/uploads/usadba_divnomorskoe_yuzhnyy_les_merlo_krasnoe_suhoe_137_89faa0325c.webp,usadba-divnomorskoe-yuzhnyy-les-merlo-krasnoe-suhoe-137,detect
 dataset/uploads_root/prod-svoe-vino-strapi/prod-svoe-vino/strapi/uploads/Risunok1_no_bg_preview_carve_photos_c618e10c44.webp,ya-jla-risling,detect
+data/refs/abrau_kupazh_decanter.jpg,abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13,detect
+data/refs/kokur_decanter.jpg,kokur-suhoe,detect
+data/refs/kokur_winemore.webp,kokur-suhoe,detect
+data/refs/kanon_proizvoditel.jpg,soyuz-vino-kanonicheskie-traditsii-krasnoe-sladkoe-kaberne-sovinon-115,detect

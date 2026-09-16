@@ -37,9 +37,8 @@ def service_constants() -> dict:
     text = (ROOT / "service" / "main.py").read_text(encoding="utf-8")
     scope: dict = {}
     for line in text.splitlines():
-        if line.startswith(("CONF_WEIGHTS", "CONFIDENT_P", "SHOW_P", "CLOSE_WINDOW",
-                            "OCR_MIN_CONF", "CONFLICT_GATE", "RERANK_TOPK",
-                            "INDEX_VARIANT")):
+        if line.startswith(("CLOSE_WINDOW", "OCR_MIN_CONF", "CONFLICT_GATE",
+                            "RERANK_TOPK", "INDEX_VARIANT")):
             try:
                 exec(line, {"os": __import__("os"), "float": float, "int": int}, scope)
             except Exception:
@@ -55,18 +54,22 @@ def describe() -> dict:
     if path.exists():
         with path.open(encoding="utf-8") as fh:
             rows = sum(1 for _ in csv.DictReader(fh))
-    weights = constants.get("CONF_WEIGHTS", {})
+    # Веса и пороги читаются из того же файла, что и сервисом: печатать
+    # отпечаток одних чисел, а отвечать другими — худший вид отчёта.
+    artifact = json.loads(
+        (INDEX_DIR / "confidence.json").read_text(encoding="utf-8"))
     digest = hashlib.sha256(
-        json.dumps(weights, sort_keys=True).encode()).hexdigest()[:10]
+        json.dumps(artifact["outcome_weights"], sort_keys=True).encode()).hexdigest()[:10]
     sift = INDEX_DIR / "sift" / "desc.npy"
     return {
         "код": git_revision(),
         "индекс": f"{index}, строк {rows}",
         "признаки эталонов": (f"{sift.stat().st_size / 1e6:.0f} МБ"
                               if sift.exists() else "нет"),
-        "модель уверенности": f"{len(weights)} весов, отпечаток {digest}",
-        "порог показа": constants.get("SHOW_P"),
-        "порог без оговорок": constants.get("CONFIDENT_P"),
+        "модель уверенности": (f"три исхода, обучена на {artifact.get('trained_on', '?')}"
+                               f", отпечаток {digest}"),
+        "порог показа": artifact["thresholds"]["show_p"],
+        "порог без оговорок": artifact["thresholds"]["confident_p"],
         "шортлист": constants.get("RERANK_TOPK"),
     }
 

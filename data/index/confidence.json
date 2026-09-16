@@ -1,0 +1,163 @@
+{
+ "outcome_weights": [
+  [
+   1.570797409703193,
+   1.9057362153643547,
+   -3.476533625067555
+  ],
+  [
+   -0.06513294604854902,
+   0.06947653079607186,
+   -0.0043435847475240255
+  ],
+  [
+   14.779887090929781,
+   -21.20557654137883,
+   6.425689450449154
+  ],
+  [
+   0.5603297739682266,
+   12.166831176419253,
+   -12.727160950387447
+  ],
+  [
+   3.503115043989034,
+   -3.98121455826523,
+   0.4780995142761918
+  ],
+  [
+   1.0823125954187751,
+   -2.6463603833871554,
+   1.5640477879683827
+  ],
+  [
+   1.6311722056632203,
+   -5.9976483381680055,
+   4.366476132504757
+  ],
+  [
+   -1.6946885414495274,
+   -2.3398029508704496,
+   4.034491492319978
+  ]
+ ],
+ "features": [
+  "dominance",
+  "log_inliers",
+  "cv_margin",
+  "cv_lift",
+  "coverage",
+  "text_support",
+  "text_conflict"
+ ],
+ "thresholds": {
+  "show_p": 0.15,
+  "confident_p": 0.3
+ },
+ "trained_on": "sharp + полевая часть tune",
+ "n_cases": 864,
+ "n_field": 64,
+ "field_weight": 4,
+ "thresholds_note": "Подобраны по настроечной части полевого набора (30 кадров с вином из каталога, 34 без), тестовая часть не использовалась. Порог показа 0.15 против прежних 0.06: на 0.06 карточка показывалась для половины вин, которых в каталоге нет (ложное принятие 50%), на 0.15 — для 8.8%. Цена — охват падает с 70% до 43%, а доля верных среди показанных растёт с 62% до 85%. Порог без оговорок 0.30 оставлен прежним: на настроечной части все 4 таких ответа верны, но выборка мала, и доверять этим 100% как оценке точности нельзя.",
+ "grid_field": [
+  {
+   "precision": 0.4827586206896552,
+   "coverage": 0.9666666666666667,
+   "false_refusal": 0.0,
+   "false_accept": 0.9117647058823529,
+   "shown": 60,
+   "threshold": 0.02,
+   "confident": 21,
+   "confident_precision": 0.38095238095238093,
+   "confident_absent": 9
+  },
+  {
+   "precision": 0.52,
+   "coverage": 0.8333333333333334,
+   "false_refusal": 0.03333333333333333,
+   "false_accept": 0.7058823529411765,
+   "shown": 49,
+   "threshold": 0.04,
+   "confident": 18,
+   "confident_precision": 0.3888888888888889,
+   "confident_absent": 7
+  },
+  {
+   "precision": 0.6190476190476191,
+   "coverage": 0.7,
+   "false_refusal": 0.03333333333333333,
+   "false_accept": 0.5,
+   "shown": 38,
+   "threshold": 0.06,
+   "confident": 15,
+   "confident_precision": 0.4666666666666667,
+   "confident_absent": 5
+  },
+  {
+   "precision": 0.6875,
+   "coverage": 0.5333333333333333,
+   "false_refusal": 0.1,
+   "false_accept": 0.29411764705882354,
+   "shown": 26,
+   "threshold": 0.1,
+   "confident": 9,
+   "confident_precision": 0.6666666666666666,
+   "confident_absent": 2
+  },
+  {
+   "precision": 0.8461538461538461,
+   "coverage": 0.43333333333333335,
+   "false_refusal": 0.1,
+   "false_accept": 0.08823529411764706,
+   "shown": 16,
+   "threshold": 0.15,
+   "confident": 6,
+   "confident_precision": 1.0,
+   "confident_absent": 0
+  },
+  {
+   "precision": 0.8888888888888888,
+   "coverage": 0.3,
+   "false_refusal": 0.2,
+   "false_accept": 0.029411764705882353,
+   "shown": 10,
+   "threshold": 0.2,
+   "confident": 5,
+   "confident_precision": 1.0,
+   "confident_absent": 0
+  },
+  {
+   "precision": 1.0,
+   "coverage": 0.23333333333333334,
+   "false_refusal": 0.23333333333333334,
+   "false_accept": 0.0,
+   "shown": 7,
+   "threshold": 0.3,
+   "confident": 4,
+   "confident_precision": 1.0,
+   "confident_absent": 0
+  },
+  {
+   "precision": 1.0,
+   "coverage": 0.13333333333333333,
+   "false_refusal": 0.3333333333333333,
+   "false_accept": 0.0,
+   "shown": 4,
+   "threshold": 0.4,
+   "confident": 1,
+   "confident_precision": 1.0,
+   "confident_absent": 0
+  },
+  {
+   "precision": 0.0,
+   "coverage": 0.0,
+   "false_refusal": 0.4666666666666667,
+   "false_accept": 0.0,
+   "shown": 0,
+   "threshold": 0.6,
+   "confident": 0,
+   "confident_precision": 0.0,
+   "confident_absent": 0
+  }
+ ]
+}

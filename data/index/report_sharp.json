@@ -1,53 +1,53 @@
 {
  "subset": "sharp",
  "held_out": true,
- "show_threshold": 0.06,
+ "show_threshold": 0.15,
  "confident_threshold": 0.3,
- "answerable": 200,
+ "answerable": 214,
  "f1": {
   "по каталогу": {
    "top1": {
-    "precision": 0.9625668449197861,
-    "recall": 0.9,
-    "f1": 0.9302325581395349
+    "precision": 0.9513513513513514,
+    "recall": 0.822429906542056,
+    "f1": 0.8822055137844611
    },
    "top5": {
-    "precision": 0.9946524064171123,
-    "recall": 0.93,
-    "f1": 0.9612403100775193
+    "precision": 0.9783783783783784,
+    "recall": 0.8457943925233645,
+    "f1": 0.9072681704260652
    }
   },
   "со строгим отказом": {
    "top1": {
-    "precision": 0.5787781350482315,
-    "recall": 0.9,
-    "f1": 0.7045009784735813
+    "precision": 0.5886287625418061,
+    "recall": 0.822429906542056,
+    "f1": 0.6861598440545809
    },
    "top5": {
-    "precision": 0.5980707395498392,
-    "recall": 0.93,
-    "f1": 0.7279843444227007
+    "precision": 0.6053511705685619,
+    "recall": 0.8457943925233645,
+    "f1": 0.7056530214424952
    }
   }
  },
  "states": {
   "одна карточка без оговорок": {
-   "queries": 135,
-   "correct": 132
+   "queries": 105,
+   "correct": 103
   },
   "карточка с вариантами": {
-   "queries": 52,
-   "correct": 48
+   "queries": 80,
+   "correct": 73
   },
   "не удалось определить": {
-   "queries": 13,
-   "correct": 1
+   "queries": 29,
+   "correct": 4
   }
  },
  "absent": {
-  "queries": 200,
-  "shown": 124,
-  "confident": 49
+  "queries": 218,
+  "shown": 114,
+  "confident": 41
  },
  "latency_ms": {
   "n": 50,

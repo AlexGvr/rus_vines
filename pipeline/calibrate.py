@@ -56,6 +56,17 @@ class Case:
     in_top5: bool          # правильная позиция попала в показанную пятёрку
     inliers: int
     feats: dict
+    plain: bool = True     # можно ли снять оговорку по правилам выдачи
+    field: bool = False    # снято людьми, а не собрано из каталожного фото
+
+    @property
+    def outcome(self) -> int:
+        """Исход: 0 — лидер верен, 1 — верный во второй половине пятёрки,
+        2 — верного в пятёрке нет. Для вина не из каталога верного нет
+        по определению, и это тот же исход 2."""
+        if self.correct:
+            return 0
+        return 1 if self.in_top5 else 2
 
 
 def evaluate(cases: list[Case], shown: np.ndarray) -> dict:
@@ -72,8 +83,33 @@ def evaluate(cases: list[Case], shown: np.ndarray) -> dict:
     }
 
 
+def field_queries(split: str) -> tuple[list[str], dict[str, str]]:
+    """Реальные снимки настроечной части: путь и правильный slug.
+
+    Кадр без вина из каталога — это готовый отрицательный пример, причём
+    честный: там снято похожее вино, которого в каталоге нет. Синтетика
+    такие примеры подделывает вычёркиванием позиции из индекса, и соседи
+    по серии остаются на месте — задача выходит легче настоящей.
+    """
+    manifest = ROOT / "data" / "field" / "manifest.csv"
+    if not manifest.exists():
+        return [], {}
+    paths, gold = [], {}
+    for row in csv.DictReader(manifest.open(encoding="utf-8")):
+        if row["split"] != split or row["kind"] != "field":
+            continue
+        path = ROOT / "data" / "field" / row["image"]
+        if not path.exists():
+            path = ROOT / "dataset" / "eval" / "queries" / row["image"]
+        if path.exists():
+            paths.append(str(path))
+            gold[str(path)] = row["slug"]
+    return paths, gold
+
+
 def collect(subset: str, index: str, views: list[tuple[str, ...]], topk: int,
-            window: float, min_conf: float, limit: int) -> list[Case]:
+            window: float, min_conf: float, limit: int,
+            field_split: str = "") -> list[Case]:
     manifest = list(csv.DictReader(
         (QUERIES / f"manifest_{subset}.csv").open(encoding="utf-8")))
     if limit:
@@ -84,6 +120,12 @@ def collect(subset: str, index: str, views: list[tuple[str, ...]], topk: int,
         if path.exists():
             paths.append(str(path))
             gold[str(path)] = row["slug"]
+    real = set()
+    if field_split:
+        field_paths, field_gold = field_queries(field_split)
+        paths.extend(field_paths)
+        gold.update(field_gold)
+        real = set(field_paths)
 
     vectors = np.load(INDEX_DIR / f"{index}.npy")
     with (INDEX_DIR / f"{index}.csv").open(encoding="utf-8") as fh:
@@ -95,6 +137,8 @@ def collect(subset: str, index: str, views: list[tuple[str, ...]], topk: int,
     scores = np.maximum.reduce([qv @ vectors.T for qv, _ in per_view])
     reranker = PrecomputedReranker(INDEX_DIR / "sift")
     channel = TextChannel.from_catalog(CATALOG)
+    by_slug = {w["slug"]: w for w in json.loads(
+        CATALOG.read_text(encoding="utf-8"))["wines"]}
 
     cases: list[Case] = []
     for i, path in enumerate(kept):
@@ -102,7 +146,10 @@ def collect(subset: str, index: str, views: list[tuple[str, ...]], topk: int,
         with Image.open(path) as raw:
             crop = normalize_batch([raw.convert("RGB")], steps=("detect",))[0]
 
-        for present in (True, False):
+        # У полевого кадра без вина в каталоге правильного ответа нет вовсе,
+        # вычёркивать нечего — такой кадр даёт ровно один случай.
+        variants = (True, False) if truth else (False,)
+        for present in variants:
             row = scores[i].copy()
             if not present:
                 # Вычёркиваем правильную позицию: тот же снимок становится
@@ -116,17 +163,45 @@ def collect(subset: str, index: str, views: list[tuple[str, ...]], topk: int,
                 continue
             # Улики против лидера — часть конвейера, а не отдельный замер:
             # калибровать надо ту выдачу, которую увидит пользователь.
-            core.check_leader(candidates, crop, channel, read_words, min_conf)
+            core.check_leader(candidates, crop, channel, read_words, min_conf, window)
             slugs = [c.slug for c in candidates]
             cases.append(Case(
                 present=present,
-                correct=present and slugs[0] == truth,
-                in_top5=present and truth in slugs[:5],
+                correct=bool(present and slugs[0] == truth),
+                in_top5=bool(present and truth in slugs[:5]),
                 inliers=candidates[0].inliers,
-                feats=core.features(candidates)))
+                feats=core.features(candidates),
+                plain=core.may_drop_caveat(candidates, by_slug, window),
+                field=path in real))
         if (i + 1) % 100 == 0:
             print(f"  {i + 1}/{len(kept)}", flush=True)
     return cases
+
+
+def fit_softmax(rows: np.ndarray, classes: np.ndarray, steps: int = 6000,
+                rate: float = 0.5) -> np.ndarray:
+    """Модель трёх взаимоисключающих исходов, веса как матрица.
+
+    Исходы: правильное вино первое, правильное на местах со второго по
+    пятое, правильного в пятёрке нет. Так top-5 по построению не бывает
+    ниже top-1 — раньше это были две независимые модели, и ничто не мешало
+    им разойтись.
+    """
+    mean, std = rows.mean(axis=0), rows.std(axis=0) + 1e-6
+    scaled = np.hstack([(rows - mean) / std, np.ones((len(rows), 1))])
+    weights = np.zeros((scaled.shape[1], 3))
+    onehot = np.zeros((len(classes), 3))
+    onehot[np.arange(len(classes)), classes] = 1.0
+    for _ in range(steps):
+        logits = scaled @ weights
+        logits -= logits.max(axis=1, keepdims=True)
+        probability = np.exp(logits)
+        probability /= probability.sum(axis=1, keepdims=True)
+        weights -= rate * scaled.T @ (probability - onehot) / len(classes)
+    # Разворачиваем нормировку обратно в исходные единицы признаков.
+    raw = weights[:-1] / std[:, None]
+    bias = weights[-1] - (mean / std) @ weights[:-1]
+    return np.vstack([raw, bias])
 
 
 def fit_logistic(rows: np.ndarray, labels: np.ndarray, steps: int = 6000,
@@ -148,6 +223,24 @@ def fit_logistic(rows: np.ndarray, labels: np.ndarray, steps: int = 6000,
                            [weights[-1] - float(weights[:-1] @ (mean / std))]])
 
 
+def sweep(cases: list[Case], top1: np.ndarray, plain: np.ndarray,
+          thresholds) -> list[dict]:
+    """Что даёт каждый порог показа: точность, охват и обе ошибки."""
+    grid = []
+    for threshold in thresholds:
+        result = evaluate(cases, top1 >= threshold)
+        result["threshold"] = round(float(threshold), 3)
+        confident = (top1 >= threshold) & plain
+        present = np.array([c.present for c in cases])
+        correct = np.array([c.correct for c in cases])
+        result["confident"] = int(confident.sum())
+        result["confident_precision"] = (float(correct[confident].mean())
+                                         if confident.any() else 0.0)
+        result["confident_absent"] = int((confident & ~present).sum())
+        grid.append(result)
+    return grid
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--subset", default="sharp")
@@ -157,71 +250,120 @@ def main() -> None:
     ap.add_argument("--window", type=float, default=0.80)
     ap.add_argument("--min-conf", type=float, default=0.60)
     ap.add_argument("--limit", type=int, default=0)
+    ap.add_argument("--field-split", default="tune",
+                    help="какую часть полевого набора подмешать в обучение; "
+                         "test не указывать — он для итоговой проверки")
+    ap.add_argument("--write", action="store_true",
+                    help="записать веса и пороги в data/index/confidence.json")
     args = ap.parse_args()
+    if args.field_split == "test":
+        sys.exit("на тестовой части калибровать нельзя: она для итогового прогона")
     views = [tuple(s for s in spec.split("+") if s and s != "raw")
              for spec in args.views.split(",")]
 
     cases = collect(args.subset, args.index, views, args.topk,
-                    args.window, args.min_conf, args.limit)
+                    args.window, args.min_conf, args.limit, args.field_split)
     present = [c for c in cases if c.present]
-    absent = [c for c in cases if not c.present]
+    real = [c for c in cases if c.field]
     print(f"\nнабор {args.subset}: {len(present)} запросов с вином в каталоге, "
-          f"{len(absent)} с вычеркнутым")
+          f"{len(cases) - len(present)} без; из них реальных снимков {len(real)}")
 
     rows = np.array([[c.feats[name] for name in core.FEATURE_ORDER] for c in cases])
-    labels = np.array([float(c.correct) for c in cases])
-    half = len(cases) // 2
-    train = np.zeros(len(cases), dtype=bool)
-    train[:half] = True
+    classes = np.array([c.outcome for c in cases])
+    plain = np.array([c.plain for c in cases])
+
+    # Реальных снимков на два порядка меньше синтетических, и без веса
+    # модель их просто не заметит. Вес подобран так, чтобы полевая часть
+    # весила примерно четверть обучения: синтетика задаёт форму зависимости,
+    # реальные кадры — уровень.
+    synthetic = np.array([not c.field for c in cases])
+    share = max(len(real), 1)
+    repeat = max(1, int(round(0.33 * synthetic.sum() / share)))
+    print(f"реальные снимки входят в обучение с весом ×{repeat}")
+
     # Обучение на половине запросов, проверка на другой: иначе порог
-    # подгонится под те же данные, на которых его меряют.
-    raw_weights = fit_logistic(rows[train], labels[train])
-    weights = dict(zip(core.FEATURE_ORDER, raw_weights[:-1].tolist()))
-    weights["bias"] = float(raw_weights[-1])
-    probability = np.array([core.probability(c.feats, weights) for c in cases])
-    print("веса (лидер верен): " + ", ".join(f"{k} {v:+.3f}" for k, v in weights.items()))
+    # подгонится под те же данные, на которых его меряют. Полевые кадры
+    # делятся отдельно, чтобы они попали в обе половины.
+    train = np.zeros(len(cases), dtype=bool)
+    for mask in (synthetic, ~synthetic):
+        where = np.flatnonzero(mask)
+        train[where[:len(where) // 2]] = True
 
-    # Отдельная модель на тот же вопрос про пятёрку. Раньше уверенность
-    # top-5 считалась перемножением вероятностей по местам, будто они
-    # независимы, — а они сильно связаны: если верен первый, остальные
-    # неверны по определению. Метка in_top5 уже собрана, поэтому честнее
-    # обучить вторую модель, чем перемножать.
-    labels5 = np.array([float(c.in_top5) for c in cases])
-    raw5 = fit_logistic(rows[train], labels5[train])
-    weights5 = dict(zip(core.FEATURE_ORDER, raw5[:-1].tolist()))
-    weights5["bias"] = float(raw5[-1])
-    print("веса (верный в пятёрке): "
-          + ", ".join(f"{k} {v:+.3f}" for k, v in weights5.items()))
+    index = np.flatnonzero(train)
+    weight = np.concatenate([index] + [np.flatnonzero(train & ~synthetic)]
+                            * (repeat - 1))
+    raw = fit_softmax(rows[weight], classes[weight])
+    outcome_weights = raw.tolist()
+    probabilities = np.array([core.outcomes(c.feats, outcome_weights) for c in cases])
+    top1, top5 = probabilities[:, 0], probabilities[:, 1]
+    print("веса модели трёх исходов:")
+    for name, row in zip(list(core.FEATURE_ORDER) + ["bias"], raw):
+        print(f"  {name:14} лидер верен {row[0]:+8.3f}  "
+              f"верный 2-5 {row[1]:+8.3f}  вне пятёрки {row[2]:+8.3f}")
+    print(f"top-5 нигде не ниже top-1: {bool((top5 >= top1 - 1e-9).all())}")
 
-    held_cases = [c for c, keep in zip(cases, ~train) if keep]
     held = ~train
-    print(f"\nпроверка на отложенной половине ({len(held_cases)} замеров)")
+    held_cases = [c for c, keep in zip(cases, held) if keep]
+    grid_all = sweep(held_cases, top1[held], plain[held],
+                     (0.02, 0.04, 0.06, 0.10, 0.15, 0.20, 0.30, 0.40, 0.60))
+    print(f"\nотложенная половина, все замеры ({len(held_cases)})")
     print(f"{'порог':>7} {'точность':>10} {'охват':>8} {'ложный отказ':>14} "
-          f"{'ложное принятие':>17}")
-    grid = []
-    for threshold in (0.15, 0.20, 0.30, 0.40, 0.50, 0.60, 0.70, 0.80):
-        result = evaluate(held_cases, (probability >= threshold)[held])
-        result["threshold"] = threshold
-        grid.append(result)
-        print(f"{threshold:>7.2f} {result['precision'] * 100:>9.1f}% "
+          f"{'ложное принятие':>17} {'без оговорок':>14}")
+    for result in grid_all:
+        print(f"{result['threshold']:>7.2f} {result['precision'] * 100:>9.1f}% "
               f"{result['coverage'] * 100:>7.1f}% "
               f"{result['false_refusal'] * 100:>13.1f}% "
-              f"{result['false_accept'] * 100:>16.1f}%")
+              f"{result['false_accept'] * 100:>16.1f}% "
+              f"{result['confident']:>6} шт "
+              f"{result['confident_precision'] * 100:>4.0f}%")
+
+    # Пороги выбираются по реальным снимкам. Синтетика систематически проще:
+    # на ней любой порог выглядит лучше, чем окажется на съёмке.
+    field_cases = [c for c in cases if c.field]
+    grid_field = []
+    if field_cases:
+        mask = np.array([c.field for c in cases])
+        grid_field = sweep(field_cases, top1[mask], plain[mask],
+                           (0.02, 0.04, 0.06, 0.10, 0.15, 0.20, 0.30, 0.40, 0.60))
+        print(f"\nнастроечная часть полевого набора ({len(field_cases)} кадров)")
+        print(f"{'порог':>7} {'точность':>10} {'охват':>8} {'ложный отказ':>14} "
+              f"{'ложное принятие':>17} {'без оговорок':>14}")
+        for result in grid_field:
+            print(f"{result['threshold']:>7.2f} {result['precision'] * 100:>9.1f}% "
+                  f"{result['coverage'] * 100:>7.1f}% "
+                  f"{result['false_refusal'] * 100:>13.1f}% "
+                  f"{result['false_accept'] * 100:>16.1f}% "
+                  f"{result['confident']:>6} шт "
+                  f"{result['confident_precision'] * 100:>4.0f}%")
 
     out = INDEX_DIR / f"calibration_{args.subset}.json"
     out.write_text(json.dumps({
         "subset": args.subset, "index": args.index, "topk": args.topk,
         "window": args.window, "min_conf": args.min_conf,
-        "n_present": len(present), "n_absent": len(absent),
+        "n_present": len(present), "n_field": len(real), "field_weight": repeat,
         "features": list(core.FEATURE_ORDER),
-        "weights": weights,
-        "weights_top5": weights5,
-        "grid": grid,
-        "cases": [{"present": c.present, "correct": c.correct,
-                   "in_top5": c.in_top5, "inliers": c.inliers, **c.feats}
+        "outcome_weights": outcome_weights,
+        "grid": grid_all, "grid_field": grid_field,
+        "cases": [{"present": c.present, "correct": c.correct, "field": c.field,
+                   "in_top5": c.in_top5, "inliers": c.inliers, "plain": c.plain,
+                   **c.feats}
                   for c in cases],
     }, ensure_ascii=False, indent=1), encoding="utf-8")
-    print(f"\nрезультаты: {out}")
+    print(f"\nзамеры: {out}")
+
+    if args.write:
+        artifact = INDEX_DIR / "confidence.json"
+        previous = (json.loads(artifact.read_text(encoding="utf-8"))["thresholds"]
+                    if artifact.exists() else {"show_p": 0.06, "confident_p": 0.30})
+        artifact.write_text(json.dumps({
+            "outcome_weights": outcome_weights,
+            "features": list(core.FEATURE_ORDER),
+            "thresholds": previous,
+            "trained_on": f"{args.subset} + полевая часть {args.field_split}",
+            "n_cases": len(cases), "n_field": len(real), "field_weight": repeat,
+        }, ensure_ascii=False, indent=1), encoding="utf-8")
+        print(f"веса записаны: {artifact} (пороги пока прежние, "
+              f"выбрать по таблице выше)")
 
 
 if __name__ == "__main__":

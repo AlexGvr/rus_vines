@@ -33,6 +33,11 @@ OUT_DIR = Path(os.environ.get("SIFT_DIR", ROOT / "data" / "index" / "sift"))
 def main() -> None:
     wines = [w for w in json.loads(CATALOG.read_text(encoding="utf-8"))["wines"]
              if w.get("photo")]
+    # Дополнительные эталоны идут отдельными записями с тем же slug:
+    # реранкер берёт лучшее совпадение среди всех записей позиции.
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from build_index import extra_references
+    wines += [{"slug": slug, "photo": path} for path, slug in extra_references()]
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 
     all_desc, all_kpts, offsets, slugs = [], [], [0], []

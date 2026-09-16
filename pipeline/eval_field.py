@@ -109,7 +109,8 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--manifest", default=str(FIELD / "manifest.csv"))
     ap.add_argument("--index", default="clean_mv")
-    ap.add_argument("--weights", default=str(INDEX_DIR / "calibration_sharp.json"))
+    ap.add_argument("--weights", default=str(INDEX_DIR / "confidence.json"),
+                    help="веса и пороги; тот же файл читает сервис")
     ap.add_argument("--topk", type=int, default=20)
     ap.add_argument("--split", choices=["tune", "test", "all"], default="all",
                     help="часть выборки: tune — для подбора порогов, "
@@ -121,7 +122,9 @@ def main() -> None:
         rows = [r for r in rows if r.get("split") == args.split]
     if not rows:
         sys.exit(f"в манифесте нет кадров части {args.split}")
-    weights = json.loads(Path(args.weights).read_text(encoding="utf-8"))["weights"]
+    artifact = json.loads(Path(args.weights).read_text(encoding="utf-8"))
+    weights = artifact["outcome_weights"]
+    show_p = artifact["thresholds"]["show_p"]
     wines = json.loads(CATALOG.read_text(encoding="utf-8"))["wines"]
     by_slug = {w["slug"]: w for w in wines}
 
@@ -149,18 +152,34 @@ def main() -> None:
         query = embed_images(list(views.values()))
         scores = (vectors @ query.T).max(axis=1)
         candidates = core.shortlist(scores, index_slugs, args.topk)
+
+        # Позиция правильного ответа после каждой ступени: без этого промах
+        # нельзя приписать к этапу, а лечатся этапы по-разному.
+        def place(gold: str) -> int:
+            order = [c.slug for c in candidates]
+            return order.index(gold) if gold in order else -1
+
+        rank_shortlist = place(row["slug"]) if row["slug"] else -1
         core.rerank(views[("detect",)], candidates, reranker)
+        rank_geometry = place(row["slug"]) if row["slug"] else -1
         core.resolve(candidates, views[("detect",)], channel, read_words,
                      window=0.80, min_conf=0.60)
-        core.check_leader(candidates, views[("detect",)], channel, read_words, 0.60)
+        rank_text = place(row["slug"]) if row["slug"] else -1
+        core.check_leader(candidates, views[("detect",)], channel, read_words,
+                          0.60, 0.80, by_slug)
         feats = core.features(candidates)
         results.append({
             "image": row["image"],
             "gold": row["slug"],
             "kind": row.get("kind", "field"),
+            "rank_shortlist": rank_shortlist,
+            "rank_geometry": rank_geometry,
+            "rank_text": rank_text,
             "top1": candidates[0].slug if candidates else "",
             "inliers": candidates[0].inliers if candidates else 0,
-            "probability": core.probability(feats, weights),
+            "probability": core.outcomes(feats, weights)[0],
+            "probability_top5": core.outcomes(feats, weights)[1],
+            "plain": core.may_drop_caveat(candidates, by_slug, 0.80) if candidates else False,
             "conflicts": list(candidates[0].conflicts) if candidates else [],
             "findable": bool(row["slug"]) and bool(by_slug.get(row["slug"], {}).get("photo")),
             "duplicate": bool(row["slug"]) and bool(candidates)
@@ -243,6 +262,30 @@ def main() -> None:
             title = by_slug.get(gold, {}).get("title", gold)[:42]
             print(f"{title:44} {sum(r['correct'] for r in group):>7} {len(group):>7}")
 
+    # Где именно теряется правильный ответ. Этапы не пересекаются: промах
+    # приписывается первому, на котором ответ ушёл с первого места.
+    losses = [r for r in results if r["gold"] and r["findable"] and not r["correct"]]
+    if losses:
+        def stage(r):
+            if r["rank_shortlist"] < 0:
+                return "не попал в шортлист"
+            if r["rank_geometry"] != 0:
+                return "проиграл геометрии"
+            if r["rank_text"] != 0:
+                return "потерян перестановкой по тексту"
+            return "первый, но карточка не показана"
+        counts: dict[str, int] = {}
+        for r in losses:
+            counts[stage(r)] = counts.get(stage(r), 0) + 1
+        hidden = sum(1 for r in results
+                     if r["gold"] and r["findable"] and r["correct"]
+                     and r["probability"] < show_p)
+        print(f"\nгде теряется правильный ответ ({len(losses)} промахов):")
+        for name, count in sorted(counts.items(), key=lambda kv: -kv[1]):
+            print(f"  {name:36} {count:>4}")
+        if hidden:
+            print(f"  {'верен, но ниже порога показа':36} {hidden:>4}")
+
     for kind in ("field", "studio"):
         part = [r for r in results if r["kind"] == kind]
         if not part:
@@ -255,10 +298,48 @@ def main() -> None:
             line += (f", лидер верен в {sum(1 for r in good if r['correct'])}"
                      f" из {len(good)}")
         if bad:
-            shown = sum(1 for r in bad if r["probability"] >= 0.06)
+            shown = sum(1 for r in bad if r["probability"] >= show_p)
             line += (f", карточка для отсутствующего вина в {shown}"
                      f" из {len(bad)}")
         print(line)
+
+    # Три состояния выдачи — ровно те, что видит пользователь. Считаем их
+    # здесь же: отдельная таблица по синтетике ничего не говорит о съёмке.
+    confident_p = artifact["thresholds"]["confident_p"]
+    findable = [r for r in results if r["gold"] and r["findable"]]
+    absent = [r for r in results if not r["gold"]]
+    states = {
+        "одна карточка без оговорок":
+            [r for r in findable if r["probability"] >= confident_p and r["plain"]],
+        "карточка с вариантами":
+            [r for r in findable if r["probability"] >= show_p
+             and not (r["probability"] >= confident_p and r["plain"])],
+        "не удалось определить":
+            [r for r in findable if r["probability"] < show_p],
+    }
+    print(f"\n{'состояние выдачи':30} {'кадров':>8} {'верных':>8} {'ошибок':>8}")
+    for name, group in states.items():
+        right = sum(1 for r in group if r["correct"])
+        print(f"{name:30} {len(group):>8} {right:>8} {len(group) - right:>8}")
+    wrong_confident = [r for r in states["одна карточка без оговорок"]
+                       if not r["correct"]]
+    for r in wrong_confident:
+        print(f"  уверенная ошибка: {r['image']} -> {r['top1']} "
+              f"(правильно {r['gold']}, p={r['probability']:.3f})")
+    shown = states["одна карточка без оговорок"] + states["карточка с вариантами"]
+    shown_absent = [r for r in absent if r["probability"] >= show_p]
+    right = sum(1 for r in shown if r["correct"])
+    right5 = sum(1 for r in shown if r["in_top5"])
+    total_shown = len(shown) + len(shown_absent)
+    if total_shown and findable:
+        for name, hits in (("top-1", right), ("top-5", right5)):
+            precision = hits / total_shown
+            recall = hits / len(findable)
+            score = 2 * precision * recall / max(precision + recall, 1e-9)
+            print(f"{name}: точность {precision * 100:.1f}%, "
+                  f"полнота {recall * 100:.1f}%, F1 {score * 100:.1f}% "
+                  f"(показов {total_shown}, из них для вин вне каталога "
+                  f"{len(shown_absent)})")
 
     out = INDEX_DIR / "field_report.json"
     out.write_text(json.dumps({

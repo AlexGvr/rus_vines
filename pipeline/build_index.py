@@ -68,6 +68,34 @@ def collect(variant: str) -> tuple[list[str], list[str | None]]:
     return paths, [file2slug.get(p.name) for p in names]
 
 
+EXTRA_REFS = ROOT / "data" / "catalog" / "extra_refs.csv"
+REFS_DIR = ROOT / "data" / "refs"
+
+
+def extra_references() -> list[tuple[str, str]]:
+    """Дополнительные эталоны: (путь, slug).
+
+    Одна студийная фотография даёт один ракурс и один свет. Если снимок
+    покупателя на них не похож, совпавших точек не хватает, и правильный
+    ответ проигрывает соседу по линейке, хотя в шортлист попал. Независимый
+    снимок того же вина даёт второй шанс.
+    """
+    if not EXTRA_REFS.exists():
+        return []
+    out = []
+    with EXTRA_REFS.open(encoding="utf-8") as fh:
+        for row in csv.DictReader(line for line in fh if not line.startswith("#")):
+            path = REFS_DIR / (row.get("file") or "")
+            if not row.get("slug"):
+                continue
+            # Пропустить молча нельзя: индекс соберётся, метрика просядет,
+            # и причину будут искать в алгоритме, а не в отсутствующем файле.
+            if not path.exists():
+                sys.exit(f"{EXTRA_REFS}: нет файла {path}")
+            out.append((str(path), row["slug"]))
+    return out
+
+
 def embed_view(paths: list[str], slugs: list[str | None], steps: tuple[str, ...],
                batch_size: int) -> tuple[np.ndarray, list[tuple[str, str | None]]]:
     """Один вид индекса: вектор на каждую строку и её (путь, slug)."""
@@ -104,6 +132,13 @@ def main() -> None:
     name = args.name or args.variant
 
     paths, slugs = collect(args.variant)
+    if args.variant == "clean":
+        extra = extra_references()
+        if extra:
+            print(f"дополнительных эталонов: {len(extra)} "
+                  f"для {len({s for _, s in extra})} позиций")
+            paths += [p for p, _ in extra]
+            slugs += [s for _, s in extra]
     garbage = sum(1 for s in slugs if s is None)
     print(f"индекс {name}: видов {len(views)}, строк на вид {len(paths)}, "
           f"из них без привязки к каталогу (мусор): {garbage}")

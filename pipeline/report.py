@@ -62,8 +62,11 @@ def f1(true_positive: int, shown: int, answerable: int) -> tuple[float, float, f
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--subset", default="sharp")
-    ap.add_argument("--confident", type=float, default=0.30)
-    ap.add_argument("--show", type=float, default=0.06)
+    # По умолчанию пороги берутся из того же файла, что читает сервис.
+    thresholds = json.loads((INDEX_DIR / "confidence.json")
+                            .read_text(encoding="utf-8"))["thresholds"]
+    ap.add_argument("--confident", type=float, default=thresholds["confident_p"])
+    ap.add_argument("--show", type=float, default=thresholds["show_p"])
     ap.add_argument("--held-out", action="store_true",
                     help="считать только по отложенной половине, на которой "
                          "пороги не подбирались")
@@ -73,10 +76,11 @@ def main() -> None:
     if not source.exists():
         sys.exit(f"нет {source} — сначала pipeline/calibrate.py --subset {args.subset}")
     data = json.loads(source.read_text(encoding="utf-8"))
-    weights, cases = data["weights"], data["cases"]
+    weights, cases = data["outcome_weights"], data["cases"]
 
-    probability = np.array([core.probability({k: c[k] for k in core.FEATURE_ORDER},
-                                             weights) for c in cases])
+    pairs = np.array([core.outcomes({k: c[k] for k in core.FEATURE_ORDER}, weights)
+                      for c in cases])
+    probability, probability5 = pairs[:, 0], pairs[:, 1]
     present = np.array([c["present"] for c in cases])
     correct = np.array([c["correct"] for c in cases])
     in_top5 = np.array([c["in_top5"] for c in cases])
@@ -88,8 +92,8 @@ def main() -> None:
     shown = (probability >= args.show) & mask
     # Уверенное состояние требует ещё и отсутствия улик против лидера —
     # то же жёсткое правило, что в сервисе.
-    no_conflict = np.array([c["text_conflict"] == 0 for c in cases])
-    confident = (probability >= args.confident) & no_conflict & mask
+    plain = np.array([c.get("plain", c["text_conflict"] == 0) for c in cases])
+    confident = (probability >= args.confident) & plain & mask
     answerable = int((present & mask).sum())
 
     scores = {}
@@ -126,6 +130,21 @@ def main() -> None:
         total = int(selector.sum())
         right = int((selector & correct).sum())
         print(f"{name:30} {total:>9} {right:>14} {total - right:>8}")
+    # Пункт 8: заявленная вероятность против фактической частоты. Числу
+    # «уверенность 0.4» грош цена, если из таких ответов верны 90% или 10%.
+    print(f"\n{'корзина':>16} {'замеров':>9} {'заявлено top-1':>16} "
+          f"{'верных top-1':>14} {'заявлено top-5':>16} {'верных top-5':>14}")
+    edges = [0.0, 0.05, 0.15, 0.30, 0.50, 1.01]
+    for low, high in zip(edges, edges[1:]):
+        bucket = (probability >= low) & (probability < high) & mask
+        if not bucket.any():
+            continue
+        print(f"{low:>7.2f}-{high if high <= 1 else 1.0:<8.2f} {int(bucket.sum()):>9} "
+              f"{probability[bucket].mean() * 100:>15.0f}% "
+              f"{correct[bucket].mean() * 100:>13.0f}% "
+              f"{probability5[bucket].mean() * 100:>15.0f}% "
+              f"{in_top5[bucket].mean() * 100:>13.0f}%")
+
     missed = int((~shown & live & correct).sum())
     print(f"\nиз отказов правильный лидер был в {missed} случаях — это цена порога")
     print(f"верная карточка дошла до пользователя: "

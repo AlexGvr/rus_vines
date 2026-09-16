@@ -102,22 +102,18 @@ RERANK_TOPK = 20         # потолок точности = recall@20, даль
 # поднимаются выше — оба это варианты упаковки, которых в каталоге нет
 # (BRÛLÉ Cuvée Rosé Demi-Sec против Brut, ZB MY ROSE против MY SAUVIGNON).
 #
-# Порог «без оговорок» — 0.30, и он подобран по полевому набору, а не по
-# синтетике. Прежние 0.70 на реальных снимках не давали ни одного верного
-# уверенного ответа: уверенность верных ответов там лежит в 0.01-0.55
-# с медианой 0.105, и выше 0.4 остаются почти только ошибки.
+# Веса и пороги лежат одним файлом — его пишет pipeline/calibrate.py.
+# Раньше веса были вписаны сюда числами, а пороги жили в окружении, и отчёт
+# мог считаться с одними, а сервис отвечать с другими. Теперь источник один:
+# и сервис, и замеры читают data/index/confidence.json, а pipeline/stamp.py
+# печатает его отпечаток рядом с числами.
 #
-# Честно о цене: даже на 0.30 точность этого состояния на полевом наборе
-# около 67% — пять верных карточек из шести показанных плюс одно вино,
-# которого в каталоге нет. Убирать по ТЗ экран с вариантами при такой
-# точности рано, и состояние «скорее всего» остаётся основным.
-CONF_WEIGHTS = {"dominance": 4.0596, "log_inliers": 0.6059, "cv_margin": 8.2168, "cv_lift": 14.7718, "coverage": 4.6718, "text_support": -0.5638, "text_conflict": -1.9099, "bias": -9.4791}
-# Пороги вынесены в окружение: они откалиброваны на синтетическом наборе,
-# а он систематически проще съёмки — у реального кадра и совпавших точек
-# меньше, и покрывают они этикетку хуже. Поднять или опустить порог после
-# сбора полевых фотографий должно быть можно без пересборки образа.
-CONFIDENT_P = float(os.environ.get("CONFIDENT_P", "0.30"))   # карточка без оговорок
-SHOW_P = float(os.environ.get("SHOW_P", "0.06"))             # ниже — не показываем
+# Переменные окружения оставлены, чтобы подвинуть порог без пересборки
+# образа, но по умолчанию действует то, что записано в артефакте.
+CONFIDENCE = json.loads((INDEX_DIR / "confidence.json").read_text(encoding="utf-8"))
+OUTCOME_WEIGHTS = CONFIDENCE["outcome_weights"]
+CONFIDENT_P = float(os.environ.get("CONFIDENT_P", CONFIDENCE["thresholds"]["confident_p"]))
+SHOW_P = float(os.environ.get("SHOW_P", CONFIDENCE["thresholds"]["show_p"]))
 
 # Разрешение противоречий текстом. Запускается только когда геометрия не
 # развела кандидатов: инлаеров у соседа не меньше CLOSE_WINDOW от лидера.
@@ -128,13 +124,6 @@ SHOW_P = float(os.environ.get("SHOW_P", "0.06"))             # ниже — не
 CLOSE_WINDOW = 0.80
 OCR_MIN_CONF = 0.60
 CONFLICT_GATE = 0.05     # ниже этой уверенности проверять лидера незачем
-
-# Отдельная модель на вопрос «есть ли верный ответ в пятёрке». Раньше это
-# число получалось перемножением вероятностей по местам, будто они
-# независимы, — а они связаны жёстко: если верен первый, остальные неверны
-# по определению. Метка уже собиралась при калибровке, поэтому честнее
-# обучить вторую модель на тех же признаках, чем перемножать.
-CONF_WEIGHTS_TOP5 = {"dominance": 3.5312, "log_inliers": 0.6117, "cv_margin": 4.1223, "cv_lift": 17.2693, "coverage": 3.9461, "text_support": -0.6050, "text_conflict": -2.0377, "bias": -8.6532}
 
 state: dict = {}
 
@@ -208,9 +197,9 @@ def search_candidates(image: Image.Image,
     # там, где перестановка не помогает — когда нужного вина в каталоге нет
     # и сосед по серии побеждает без конкурента. Запускается только если
     # ответ иначе был бы показан, иначе OCR тратится впустую.
-    if core.probability(core.features(candidates), CONF_WEIGHTS) >= CONFLICT_GATE:
+    if core.outcomes(core.features(candidates), OUTCOME_WEIGHTS)[0] >= CONFLICT_GATE:
         core.check_leader(candidates, prepared, state["text"], read_words,
-                          OCR_MIN_CONF)
+                          OCR_MIN_CONF, CLOSE_WINDOW, state["by_slug"])
     t_text = (time.perf_counter() - t2) * 1000
 
     # Уверенность считается по всему шортлисту, а не по видимой пятёрке:
@@ -230,16 +219,20 @@ def confidence(candidates: list) -> dict:
     от неё зависит, нужен ли пользователю экран вариантов вообще.
     """
     feats = core.features(candidates)
+    top1, top5 = core.outcomes(feats, OUTCOME_WEIGHTS)
     leader = candidates[0] if candidates else None
     rival = max((c.inliers for c in candidates[1:]), default=0) if candidates else 0
     return {
-        "probability": round(core.probability(feats, CONF_WEIGHTS), 4),
-        "probability_top5": round(core.probability(feats, CONF_WEIGHTS_TOP5), 4),
+        "probability": round(top1, 4),
+        "probability_top5": round(top5, 4),
         "dominance": round(feats["dominance"], 4),
         "inliers": leader.inliers if leader else 0,
         "gap": (leader.inliers - rival) if leader else 0,
         "cv_margin": round(feats["cv_margin"], 4),
         "conflicts": list(leader.conflicts) if leader else [],
+        "confirmed": list(leader.confirmed) if leader else [],
+        "may_drop_caveat": core.may_drop_caveat(candidates, state["by_slug"],
+                                               CLOSE_WINDOW),
     }
 
 
@@ -357,11 +350,7 @@ async def search(image: UploadFile = File(...)) -> JSONResponse:
     # тоже показываем, но с признанием сомнения и ближайшими вариантами.
     if not found:
         status = "unsure"
-    elif conf["probability"] >= CONFIDENT_P and not conf["conflicts"]:
-        # Жёсткое правило поверх порога: если на этикетке уверенно прочитано
-        # слово, противоречащее лидеру, оговорку не убираем никогда. Модель
-        # этот признак учитывает, но веса не хватает — «ZB Wine MY ROSE»
-        # выдавался за «Sauvignon Blanc» с уверенностью 0.65.
+    elif conf["probability"] >= CONFIDENT_P and conf["may_drop_caveat"]:
         status = "confident"
     else:
         status = "uncertain"

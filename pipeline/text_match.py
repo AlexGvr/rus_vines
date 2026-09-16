@@ -205,6 +205,29 @@ class TextChannel:
                     break
         return out
 
+    def confirms(self, slug: str, words, rivals: list[str],
+                 min_conf: float = 0.60) -> list[str]:
+        """Слова этикетки, которые подтверждают лидера против соперников.
+
+        Нужно ровно для одного решения: убирать ли оговорку с карточки.
+        Когда геометрия не развела кандидатов, молчание текста — это не
+        согласие, а отсутствие проверки. На «BRÛLÉ Rosé Demi-Sec» OCR читает
+        только имя серии, общее для всех десяти её вин, и карточка «Cuvée
+        Brut» уходила пользователю без оговорок. Подтверждением считается
+        лишь слово, которое отличает лидера от соперников.
+        """
+        marks = discriminating([slug] + [r for r in rivals if r != slug], self)
+        mine = marks.get(slug, set())
+        if not mine:
+            return []
+        out = []
+        for word in central_words(words, min_conf):
+            need = SURE_MATCH if word.conf >= SURE_CONF else VAGUE_MATCH
+            for token in clean(word.text).split():
+                if len(token) >= 3 and best_match(token, mine, need):
+                    out.append(token)
+        return out
+
     def contradictions(self, slug: str, attrs: Attributes) -> list[str]:
         """Прочитанные атрибуты, которым карточка прямо противоречит.
 
@@ -303,20 +326,61 @@ def central_words(words, min_conf: float = 0.60, band: float = 0.72):
     return [w for w in picked if abs(w.center_x - center) <= span * band / 2]
 
 
+@dataclass
+class CardFeatures:
+    """Слова карточки, разложенные по признакам.
+
+    Разложение нужно, чтобы не путать разные вещи. Имя винодельни внутри
+    одной винодельни ничего не различает: у «Кокур сухое» в названии нет
+    слова «Массандра», а у «Массандра Кокур» есть, и прочитанное с этикетки
+    «МАССАНДРА» превращалось в улику против первого — притом что на бутылке
+    написана как раз она. Между разными винодельнями то же слово, наоборот,
+    различает отлично.
+
+    Сорт, цвет, сладость и год — признаки со значением: для них важно не
+    отсутствие слова у кандидата, а несовместимость. Прочитанное «розовое»
+    противоречит белому вину, а прочитанное «мерло» — вину из другого сорта.
+    """
+    producer: set[str]
+    name: set[str]
+    grapes: set[str]
+    color: str | None
+    sweetness: str | None
+    years: set[str]
+
+
+def card_features(slug: str, channel: "TextChannel") -> CardFeatures:
+    wine = channel.by_slug.get(slug) or {}
+    producer = {t for t in clean(wine.get("manufacturer") or "").split() if len(t) >= 4}
+    grapes = {t for t in clean(" ".join(wine.get("grapes") or [])).split() if len(t) >= 3}
+    title = clean(wine.get("title") or "")
+    attrs = channel.attributes_of.get(slug)
+    return CardFeatures(
+        producer=producer,
+        name={t for t in title.split() if len(t) >= 3} - producer - grapes - STOPWORDS,
+        grapes=grapes,
+        color=(attrs.color if attrs else None),
+        sweetness=(attrs.sweetness if attrs else None),
+        years=set(re.findall(r"\b(19[89]\d|20[0-3]\d)\b", title)),
+    )
+
+
 def discriminating(candidates: list[str], channel: "TextChannel") -> dict[str, set[str]]:
     """Токены, которыми кандидаты различаются между собой.
 
-    Общие слова серии («Велвет Сизон», «Фанагория») стоят у всех и решают
-    ничего не могут. Различает ровно то, что есть у одних и нет у других:
-    сорт винограда, год, категория. Их и ищем в прочитанном.
+    Общие слова серии («Велвет Сизон», «Фанагория») стоят у всех и решить
+    ничего не могут. Различает то, что есть у одних и нет у других.
+
+    Имя винодельни в расчёт идёт только если кандидаты из разных виноделен.
+    Внутри одной оно попадало в различители из-за того, что у части позиций
+    продублировано в названии, и работало наоборот — против правильного
+    ответа.
     """
-    own = {}
-    for slug in candidates:
-        wine = channel.by_slug.get(slug) or {}
-        words = set()
-        for field_value in (wine.get("title") or "", " ".join(wine.get("grapes") or [])):
-            words |= {t for t in clean(field_value).split() if len(t) >= 3}
-        own[slug] = words - STOPWORDS
+    features = {slug: card_features(slug, channel) for slug in candidates}
+    one_producer = len({frozenset(f.producer) for f in features.values()}) <= 1
+    own = {slug: (f.name | f.grapes | f.years
+                  | (set() if one_producer else f.producer))
+           for slug, f in features.items()}
     shared = set.intersection(*own.values()) if own else set()
     return {slug: words - shared for slug, words in own.items()}
 

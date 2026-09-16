@@ -203,20 +203,26 @@ class PrecomputedReranker:
         self.desc = np.load(index_dir / "desc.npy", mmap_mode="r")
         self.kpts = np.load(index_dir / "kpts.npy", mmap_mode="r")
         self.offsets = np.load(index_dir / "offsets.npy")
+        # У позиции может быть несколько эталонов — основной из каталога
+        # и независимые снимки из data/catalog/extra_refs.csv. Храним все
+        # и берём лучший по числу совпавших точек.
+        self.positions: dict[str, list[int]] = {}
         with (index_dir / "slugs.csv").open(encoding="utf-8") as fh:
-            self.position = {row["slug"]: i
-                             for i, row in enumerate(_csv.DictReader(fh))}
+            for i, row in enumerate(_csv.DictReader(fh)):
+                self.positions.setdefault(row["slug"], []).append(i)
 
-    def reference(self, slug: str):
-        idx = self.position.get(slug)
-        if idx is None:
-            return None, None
+    def entry(self, idx: int):
         start, end = int(self.offsets[idx]), int(self.offsets[idx + 1])
         if end <= start:
             return None, None
         desc = np.asarray(self.desc[start:end], dtype=np.float32)
         points = [Point(float(x), float(y)) for x, y in self.kpts[start:end]]
         return points, desc
+
+    def reference(self, slug: str):
+        """Первый эталон позиции. Для совместимости со старым вызовом."""
+        entries = self.positions.get(slug) or []
+        return self.entry(entries[0]) if entries else (None, None)
 
     def scores(self, query: Image.Image, slugs: list[str]) -> dict[str, int]:
         return {slug: stats.inliers
@@ -229,5 +235,12 @@ class PrecomputedReranker:
         винодельни, и сто точек по всей этикетке — разная уверенность.
         """
         query_kp, query_desc = descriptors(query)
-        return {slug: match_stats(query_kp, query_desc, *self.reference(slug))
-                for slug in slugs}
+        out = {}
+        for slug in slugs:
+            best = MatchStats(0, 0, 0.0, 0.0)
+            for idx in self.positions.get(slug, []):
+                stats = match_stats(query_kp, query_desc, *self.entry(idx))
+                if stats.inliers > best.inliers:
+                    best = stats
+            out[slug] = best
+        return out
