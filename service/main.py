@@ -106,7 +106,7 @@ RERANK_TOPK = 20         # потолок точности = recall@20, даль
 # кадров три, их уверенность 0.07-0.32, и подбирать по ним порог значило бы
 # подгонять решение под три снимка. Следствие названо честно: на реальной
 # съёмке состояние «одна карточка без оговорок» почти не срабатывает.
-CONF_WEIGHTS = {"dominance": 4.4068, "log_inliers": 0.5282, "cv_margin": 8.1869, "cv_lift": 14.4323, "coverage": 4.5929, "text_support": -0.4506, "bias": -9.5306}
+CONF_WEIGHTS = {"dominance": 4.3243, "log_inliers": 0.5834, "cv_margin": 6.9415, "cv_lift": 15.4300, "coverage": 4.6360, "text_support": -0.3869, "text_conflict": -1.8955, "bias": -9.5672}
 # Пороги вынесены в окружение: они откалиброваны на синтетическом наборе,
 # а он систематически проще съёмки — у реального кадра и совпавших точек
 # меньше, и покрывают они этикетку хуже. Поднять или опустить порог после
@@ -122,6 +122,14 @@ SHOW_P = float(os.environ.get("SHOW_P", "0.06"))             # ниже — не
 # OCR при этом считается для 15% запросов (data/index/tiebreak_sharp.json).
 CLOSE_WINDOW = 0.80
 OCR_MIN_CONF = 0.60
+CONFLICT_GATE = 0.05     # ниже этой уверенности проверять лидера незачем
+
+# Отдельная модель на вопрос «есть ли верный ответ в пятёрке». Раньше это
+# число получалось перемножением вероятностей по местам, будто они
+# независимы, — а они связаны жёстко: если верен первый, остальные неверны
+# по определению. Метка уже собиралась при калибровке, поэтому честнее
+# обучить вторую модель на тех же признаках, чем перемножать.
+CONF_WEIGHTS_TOP5 = {"dominance": 3.7873, "log_inliers": 0.5955, "cv_margin": 2.8090, "cv_lift": 18.0156, "coverage": 3.8786, "text_support": -0.3797, "text_conflict": -2.0356, "bias": -8.7509}
 
 state: dict = {}
 
@@ -191,6 +199,13 @@ def search_candidates(image: Image.Image,
     t2 = time.perf_counter()
     core.resolve(candidates, prepared, state["text"], read_words,
                  window=CLOSE_WINDOW, min_conf=OCR_MIN_CONF)
+    # Вторая работа текста: проверить лидера на противоречия. Она нужна
+    # там, где перестановка не помогает — когда нужного вина в каталоге нет
+    # и сосед по серии побеждает без конкурента. Запускается только если
+    # ответ иначе был бы показан, иначе OCR тратится впустую.
+    if core.probability(core.features(candidates), CONF_WEIGHTS) >= CONFLICT_GATE:
+        core.check_leader(candidates, prepared, state["text"], read_words,
+                          OCR_MIN_CONF)
     t_text = (time.perf_counter() - t2) * 1000
 
     # Уверенность считается по всему шортлисту, а не по видимой пятёрке:
@@ -214,7 +229,7 @@ def confidence(candidates: list) -> dict:
     rival = max((c.inliers for c in candidates[1:]), default=0) if candidates else 0
     return {
         "probability": round(core.probability(feats, CONF_WEIGHTS), 4),
-        "probability_top5": round(core.top5_probability(candidates, CONF_WEIGHTS), 4),
+        "probability_top5": round(core.probability(feats, CONF_WEIGHTS_TOP5), 4),
         "dominance": round(feats["dominance"], 4),
         "inliers": leader.inliers if leader else 0,
         "gap": (leader.inliers - rival) if leader else 0,

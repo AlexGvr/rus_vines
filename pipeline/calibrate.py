@@ -114,6 +114,9 @@ def collect(subset: str, index: str, views: list[tuple[str, ...]], topk: int,
                          window=window, min_conf=min_conf)
             if not candidates:
                 continue
+            # Улики против лидера — часть конвейера, а не отдельный замер:
+            # калибровать надо ту выдачу, которую увидит пользователь.
+            core.check_leader(candidates, crop, channel, read_words, min_conf)
             slugs = [c.slug for c in candidates]
             cases.append(Case(
                 present=present,
@@ -176,7 +179,19 @@ def main() -> None:
     weights = dict(zip(core.FEATURE_ORDER, raw_weights[:-1].tolist()))
     weights["bias"] = float(raw_weights[-1])
     probability = np.array([core.probability(c.feats, weights) for c in cases])
-    print("веса: " + ", ".join(f"{k} {v:+.3f}" for k, v in weights.items()))
+    print("веса (лидер верен): " + ", ".join(f"{k} {v:+.3f}" for k, v in weights.items()))
+
+    # Отдельная модель на тот же вопрос про пятёрку. Раньше уверенность
+    # top-5 считалась перемножением вероятностей по местам, будто они
+    # независимы, — а они сильно связаны: если верен первый, остальные
+    # неверны по определению. Метка in_top5 уже собрана, поэтому честнее
+    # обучить вторую модель, чем перемножать.
+    labels5 = np.array([float(c.in_top5) for c in cases])
+    raw5 = fit_logistic(rows[train], labels5[train])
+    weights5 = dict(zip(core.FEATURE_ORDER, raw5[:-1].tolist()))
+    weights5["bias"] = float(raw5[-1])
+    print("веса (верный в пятёрке): "
+          + ", ".join(f"{k} {v:+.3f}" for k, v in weights5.items()))
 
     held_cases = [c for c, keep in zip(cases, ~train) if keep]
     held = ~train
@@ -200,6 +215,7 @@ def main() -> None:
         "n_present": len(present), "n_absent": len(absent),
         "features": list(core.FEATURE_ORDER),
         "weights": weights,
+        "weights_top5": weights5,
         "grid": grid,
         "cases": [{"present": c.present, "correct": c.correct,
                    "in_top5": c.in_top5, "inliers": c.inliers, **c.feats}

@@ -49,6 +49,26 @@ def locate(name: str) -> Path | None:
     return None
 
 
+def resolve_all(rows: list[dict]) -> list[tuple[dict, Path]]:
+    """Все кадры манифеста или отказ считать.
+
+    Фотографии в репозиторий не коммитятся, поэтому на чужой машине их
+    может не быть. Молча пропускать такие строки нельзя: отчёт получится
+    по огрызку набора, а выглядеть будет как полноценный замер. Лучше
+    остановиться и сказать, чего не хватает.
+    """
+    found, missing = [], []
+    for row in rows:
+        path = locate(row["image"])
+        (found.append((row, path)) if path else missing.append(row["image"]))
+    if missing:
+        print(f"нет {len(missing)} кадров из {len(rows)}, например: "
+              f"{', '.join(missing[:5])}")
+        sys.exit("полевой набор неполон — соберите его pipeline/collect_field.py "
+                 "или укажите другой манифест")
+    return found
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--manifest", default=str(FIELD / "manifest.csv"))
@@ -69,10 +89,7 @@ def main() -> None:
     channel = TextChannel(wines)
 
     results = []
-    for row in rows:
-        path = locate(row["image"])
-        if path is None:
-            continue
+    for row, path in resolve_all(rows):
         image = Image.open(path).convert("RGB")
         views = {steps: normalize_batch([image], steps=steps)[0]
                  for steps in ((), ("detect",))}
@@ -82,13 +99,16 @@ def main() -> None:
         core.rerank(views[("detect",)], candidates, reranker)
         core.resolve(candidates, views[("detect",)], channel, read_words,
                      window=0.80, min_conf=0.60)
+        core.check_leader(candidates, views[("detect",)], channel, read_words, 0.60)
         feats = core.features(candidates)
         results.append({
             "image": row["image"],
             "gold": row["slug"],
+            "kind": row.get("kind", "field"),
             "top1": candidates[0].slug if candidates else "",
             "inliers": candidates[0].inliers if candidates else 0,
             "probability": core.probability(feats, weights),
+            "conflicts": list(candidates[0].conflicts) if candidates else [],
             "correct": bool(row["slug"]) and bool(candidates)
                        and candidates[0].slug == row["slug"],
             "in_top5": bool(row["slug"])
@@ -100,8 +120,10 @@ def main() -> None:
 
     positives = [r for r in results if r["gold"]]
     negatives = [r for r in results if not r["gold"]]
+    shot = [r for r in results if r["kind"] == "field"]
     print(f"\nполевой набор: {len(results)} кадров — "
-          f"{len(positives)} с вином из каталога, {len(negatives)} без")
+          f"{len(positives)} с вином из каталога, {len(negatives)} без; "
+          f"съёмка {len(shot)}, предметная карточка {len(results) - len(shot)}")
 
     if negatives:
         probability = np.array([r["probability"] for r in negatives])
@@ -119,12 +141,32 @@ def main() -> None:
             print(f"{threshold:>7.2f} {share * 100:>18.1f}%")
 
     if positives:
-        print(f"\nвино есть в каталоге ({len(positives)} кадров):")
+        right = sum(1 for r in positives if r["correct"])
+        print(f"\nвино есть в каталоге ({len(positives)} кадров): "
+              f"лидер верен в {right}, top-5 содержит верный в "
+              f"{sum(1 for r in positives if r['in_top5'])}")
         for r in positives:
             title = by_slug.get(r["top1"], {}).get("title", "—")
-            print(f"  {r['image'][:42]:42} p={r['probability']:.3f} "
+            print(f"  {r['image'][:42]:42} {r['kind']:6} p={r['probability']:.3f} "
                   f"инл {r['inliers']:>4} "
                   f"{'верно' if r['correct'] else 'ошибка: ' + title[:30]}")
+
+    for kind in ("field", "studio"):
+        part = [r for r in results if r["kind"] == kind]
+        if not part:
+            continue
+        good = [r for r in part if r["gold"]]
+        bad = [r for r in part if not r["gold"]]
+        name = "съёмка" if kind == "field" else "предметная карточка"
+        line = (f"\n{name}: {len(part)} кадров")
+        if good:
+            line += (f", лидер верен в {sum(1 for r in good if r['correct'])}"
+                     f" из {len(good)}")
+        if bad:
+            shown = sum(1 for r in bad if r["probability"] >= 0.06)
+            line += (f", карточка для отсутствующего вина в {shown}"
+                     f" из {len(bad)}")
+        print(line)
 
     out = INDEX_DIR / "field_report.json"
     out.write_text(json.dumps({

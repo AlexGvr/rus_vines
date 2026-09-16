@@ -23,7 +23,7 @@ from PIL import Image
 # Порядок признаков уверенности. Совпадает с порядком весов в артефакте
 # калибровки, поэтому менять его без пересчёта весов нельзя.
 FEATURE_ORDER = ("dominance", "log_inliers", "cv_margin", "cv_lift",
-                 "coverage", "text_support")
+                 "coverage", "text_support", "text_conflict")
 
 # Хвост шортлиста — кандидаты ниже пятого места по косинусу. Это уровень
 # «просто похожих бутылок», от которого отсчитывается превышение лидера.
@@ -37,12 +37,15 @@ class Candidate:
     inliers: int = 0
     coverage: float = 0.0
     contradictions: list[str] = field(default_factory=list)
+    conflicts: list[str] = field(default_factory=list)
 
     def as_dict(self) -> dict:
         row = {"slug": self.slug, "cv_score": round(self.cv, 4),
                "inliers": self.inliers, "coverage": round(self.coverage, 4)}
         if self.contradictions:
             row["contradictions"] = self.contradictions
+        if self.conflicts:
+            row["conflicts"] = self.conflicts
         return row
 
 
@@ -153,6 +156,10 @@ def features(candidates: list[Candidate]) -> dict[str, float]:
     tail = by_cv[TAIL_FROM:] or by_cv
     supported = (not leader.contradictions
                  and any(c.contradictions for c in others))
+    # Улики против лидера считаются отдельно от перестановки: они работают
+    # там, где перестановка бессильна — когда нужного вина в каталоге нет
+    # и сосед по серии побеждает без конкурента.
+    conflict = min(len(leader.conflicts), 3) / 3.0
     return {
         "dominance": leader.inliers / total if total else 0.0,
         "log_inliers": math.log1p(leader.inliers),
@@ -160,7 +167,24 @@ def features(candidates: list[Candidate]) -> dict[str, float]:
         "cv_lift": leader.cv - sum(tail) / len(tail),
         "coverage": leader.coverage,
         "text_support": 1.0 if supported else 0.0,
+        "text_conflict": conflict,
     }
+
+
+def check_leader(candidates: list[Candidate], crop: Image.Image, channel,
+                 read_words, min_conf: float) -> int:
+    """Ищет на этикетке улики против лидера. Возвращает их число.
+
+    Вызывается только когда ответ иначе был бы показан: OCR стоит около
+    сотни миллисекунд, и тратить их на заведомо слабое совпадение незачем.
+    """
+    if not candidates:
+        return 0
+    leader = candidates[0]
+    found = channel.conflicts_with(leader.slug, read_words(crop),
+                                   [c.slug for c in candidates[1:]], min_conf)
+    leader.conflicts = found
+    return len(found)
 
 
 def probability(feats: dict[str, float], weights: dict[str, float]) -> float:
@@ -169,22 +193,11 @@ def probability(feats: dict[str, float], weights: dict[str, float]) -> float:
     return 1.0 / (1.0 + math.exp(-max(min(logit, 30.0), -30.0)))
 
 
-def top5_probability(candidates: list[Candidate], weights: dict[str, float],
-                     top: int = 5) -> float:
-    """Вероятность, что нужное вино есть в показанной пятёрке.
-
-    Считается как вероятность хотя бы одного попадания: для каждого из
-    первых мест берётся уверенность, посчитанная так, как если бы лидером
-    был он. Величины не независимы, поэтому это оценка сверху; она и нужна
-    — вопрос «стоит ли вообще смотреть варианты» требует верхней границы.
-    """
-    if not candidates:
-        return 0.0
-    miss = 1.0
-    for i in range(min(top, len(candidates))):
-        reordered = [candidates[i]] + candidates[:i] + candidates[i + 1:]
-        miss *= 1.0 - probability(features(reordered), weights)
-    return 1.0 - miss
+# Уверенность в пятёрке считается отдельной моделью на тех же признаках
+# (веса CONF_WEIGHTS_TOP5, обучение в pipeline/calibrate.py). Прежний
+# вариант перемножал вероятности по местам, будто они независимы, — а они
+# связаны жёстко: если верен первый, остальные неверны по определению,
+# и произведение давало не вероятность, а произвольное число.
 
 
 def states(probability_top1: float, confident_p: float, show_p: float) -> str:

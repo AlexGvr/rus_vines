@@ -9,7 +9,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 
 ENDPOINT="${ENDPOINT:-http://127.0.0.1:8080/v1/eval/predict}"
-SUBSET="${SUBSET:-hard}"
+SUBSET="${SUBSET:-sharp}"
 PY=.venv/bin/python
 
 if ! curl -sf "${ENDPOINT%/v1/eval/predict}/health" >/dev/null; then
@@ -34,6 +34,19 @@ for r in rows:
 PY
 
 echo
-echo "=== 2. Валидационный набор (${SUBSET}) ==="
-$PY pipeline/eval_index.py --variants clean dirty --subset "$SUBSET" 2>&1 \
+echo "=== 2. Метрики ТЗ на валидационном наборе (${SUBSET}) ==="
+# Считаем по артефакту калибровки: он получен прогоном того же конвейера,
+# что работает в сервисе. Отдельный прогон eval_index здесь только сбивал бы
+# с толку — он меряет старые одновидовые индексы clean/dirty, которых в
+# работе давно нет.
+$PY pipeline/report.py --subset "$SUBSET" --held-out 2>&1 \
   | grep -v -e '^Loading weights' -e 'token_id'
+
+echo
+echo "=== 3. Полевой набор ==="
+if [ -f data/field/manifest.csv ]; then
+  $PY pipeline/eval_field.py 2>&1 \
+    | grep -v -e '^Loading weights' -e 'token_id' -e '^  ' || true
+else
+  echo "полевой набор не собран, см. pipeline/collect_field.py"
+fi

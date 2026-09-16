@@ -1,56 +1,69 @@
-# Разметка полевого набора. Решения приняты по листам data/field/sheets.
-# slug — вино и этикетка есть в каталоге; «-» — вина в каталоге нет; «x» — кадр не годится.
+# Разметка полевого набора. По строке на кадр:
+#     <файл> <slug каталога | -> <field|studio>   # комментарий
+#
+# Второе поле — правильный ответ. Прочерк означает, что позиции нет
+# в каталоге. Важно: другое поколение упаковки отсутствием позиции НЕ
+# является. У «Абрау Купаж тёмный» в каталоге эталон с рисунком машинки,
+# покупатели снимают бутылки с пейзажем, но позиция та же самая — значит
+# это положительные примеры, и ненайденный ответ здесь ложный отказ,
+# а не правильное молчание.
+#
+# Третье поле отделяет съёмку от предметной карточки товара. Предметные
+# снимки на белом фоне попали в набор вместе с пользовательскими и
+# устойчивость к съёмке телефоном не проверяют, поэтому считаются отдельно.
 
-# Абрау «Купаж»: в каталоге этикетка другого поколения (рисунок машинки),
-# на снимках покупателей — пейзаж. Найти нельзя, это отрицательные примеры.
-11164638_0.jpg -
-11164638_1.jpg x   # рельеф стекла, этикетки не видно
-11164638_2.jpg x   # акцизная марка
-13153768_0.jpg -
-13153768_1.jpg -
-13153768_2.jpg x   # контрэтикетка
-13409943_0.jpg -
-13409943_1.jpg -
-13409943_2.jpg x   # контрэтикетка
-14029896_0.jpg -
-14029896_1.jpg x   # контрэтикетка
-14029896_2.jpg -
-5784977_0.jpg  -
-5784977_1.jpg  -
-5784977_2.jpg  x   # контрэтикетка
-9417887_0.jpg  -
-9417887_1.jpg  x   # контрэтикетка
-9417887_2.jpg  x   # пробка
+# Абрау-Дюрсо «Абрау Купаж тёмный сухое» — позиция в каталоге есть,
+# эталон другого поколения.
+11164638_0.jpg abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13 field
+11164638_1.jpg x     # рельеф стекла, этикетки не видно
+11164638_2.jpg x     # акцизная марка
+13153768_0.jpg abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13 field
+13153768_1.jpg abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13 field
+13153768_2.jpg x     # контрэтикетка
+13409943_0.jpg abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13 field
+13409943_1.jpg abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13 field
+13409943_2.jpg x     # контрэтикетка
+14029896_0.jpg abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13 field
+14029896_1.jpg x     # контрэтикетка
+14029896_2.jpg abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13 field
+5784977_0.jpg  abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13 field
+5784977_1.jpg  abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13 field
+5784977_2.jpg  x     # контрэтикетка
+9417887_0.jpg  abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13 field
+9417887_1.jpg  x     # контрэтикетка
+9417887_2.jpg  x     # пробка
 
-# «Золотая Балка» MY ROSE — в каталоге нет (есть соседи по серии)
-ir_etiketka-zashla-vot-vino-net-tot-sluchai_1.jpg -
-ir_etiketka-zashla-vot-vino-net-tot-sluchai_2.jpg -
+# Золотая Балка, серия ZB Wine «MY ROSE» — в каталоге нет (есть соседи
+# по серии: ZB Wine Sauvignon Blanc, ZB Moscato Rose и другие)
+ir_etiketka-zashla-vot-vino-net-tot-sluchai_1.jpg - studio
+ir_etiketka-zashla-vot-vino-net-tot-sluchai_2.jpg - field
 
-# Фанагория «Авторский стиль», «Номерной резерв», QORTIS — в каталоге нет
-ir_luchshee-iz-dostupnykh-vin-na-segodnya-m_0.jpg -
-ir_luchshee-iz-dostupnykh-vin-na-segodnya-m_2.jpg -
-ir_mozhet-li-deshevoe-vino-byt-khoroshim-ya_1.jpg -
-ir_mozhet-li-deshevoe-vino-byt-khoroshim-ya_2.jpg -
-ir_myagkoe-s-priyatnym-agodnym-vkusom-i-per_0.jpg -
-ir_myagkoe-s-priyatnym-agodnym-vkusom-i-per_1.jpg -
-ir_myagkoe-s-priyatnym-agodnym-vkusom-i-per_2.jpg -
-ir_podderzhivaem-otechestvennykh-proizvodit_0.jpg -
-ir_podderzhivaem-otechestvennykh-proizvodit_1.jpg -
-ir_podderzhivaem-otechestvennykh-proizvodit_2.jpg -
-ir_prekrasnyi-aperitiv-na-leto-interesnaya-_0.jpg -
-ir_prekrasnyi-aperitiv-na-leto-interesnaya-_1.jpg -
-ir_prekrasnyi-aperitiv-na-leto-interesnaya-_2.jpg -
-ir_pei-da-raduisya_0.jpg -
-ir_pei-da-raduisya_2.jpg -
+# Фанагория «Авторский стиль», «Номерной резерв», «Авторское», QORTIS —
+# таких позиций в каталоге нет
+ir_luchshee-iz-dostupnykh-vin-na-segodnya-m_0.jpg - studio
+ir_luchshee-iz-dostupnykh-vin-na-segodnya-m_2.jpg - studio
+ir_mozhet-li-deshevoe-vino-byt-khoroshim-ya_1.jpg - studio
+ir_mozhet-li-deshevoe-vino-byt-khoroshim-ya_2.jpg - studio
+ir_myagkoe-s-priyatnym-agodnym-vkusom-i-per_0.jpg - studio
+ir_myagkoe-s-priyatnym-agodnym-vkusom-i-per_1.jpg - studio
+ir_myagkoe-s-priyatnym-agodnym-vkusom-i-per_2.jpg - studio
+ir_podderzhivaem-otechestvennykh-proizvodit_0.jpg - studio
+ir_podderzhivaem-otechestvennykh-proizvodit_1.jpg - field
+ir_podderzhivaem-otechestvennykh-proizvodit_2.jpg - field
+ir_prekrasnyi-aperitiv-na-leto-interesnaya-_0.jpg - studio
+ir_prekrasnyi-aperitiv-na-leto-interesnaya-_1.jpg - studio
+ir_prekrasnyi-aperitiv-na-leto-interesnaya-_2.jpg - studio
+ir_pei-da-raduisya_0.jpg - studio
+ir_pei-da-raduisya_2.jpg - studio
 
-# Положительные: вино и этикетка совпадают с каталогом
-ir_ochen-vkusnoe-legkoe-vino-dlya-semeinogo_0.jpg fanagoriya-brule-muscat-ottonel-brut-muskat-ottonel-beloe-polusladkoe-12
-ir_pei-da-raduisya_1.jpg soyuz-vino-kanonicheskie-traditsii-krasnoe-sladkoe-kaberne-sovinon-115
+# BRÛLÉ Cuvée Rosé Demi-Sec — в каталоге только Cuvée Brut Розовое
+ir_ochen-vkusnoe-legkoe-vino-dlya-semeinogo_1.jpg - studio
 
-# BRÛLÉ Cuvée Rosé Demi-Sec — в каталоге только Brut, это другое вино
-ir_ochen-vkusnoe-legkoe-vino-dlya-semeinogo_1.jpg -
+# Положительные: позиция и этикетка совпадают с каталогом
+ir_ochen-vkusnoe-legkoe-vino-dlya-semeinogo_0.jpg fanagoriya-brule-muscat-ottonel-brut-muskat-ottonel-beloe-polusladkoe-12 studio
+ir_pei-da-raduisya_1.jpg soyuz-vino-kanonicheskie-traditsii-krasnoe-sladkoe-kaberne-sovinon-115 field
 
 # Публичный набор кейса
-02eef911.webp massandra-muskatel-belyy-belye-sorta-vinograda-beloe-sladkoe-16
-019c68d0.jpg -   # Табия Пино Нуар, в каталоге нет
-096ca74e.jpg -   # ARISTOV DONUM, в каталоге нет
+02eef911.webp massandra-muskatel-belyy-belye-sorta-vinograda-beloe-sladkoe-16 field
+019c68d0.jpg - field   # Табия Пино Нуар, в каталоге нет
+096ca74e.jpg - field   # ARISTOV DONUM, в каталоге нет

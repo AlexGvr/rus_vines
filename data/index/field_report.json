@@ -1,302 +1,385 @@
 {
  "n": 33,
- "positives": 3,
- "negatives": 30,
+ "positives": 13,
+ "negatives": 20,
  "results": [
   {
    "image": "11164638_0.jpg",
-   "gold": "",
+   "gold": "abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13",
+   "kind": "field",
    "top1": "abrau-dyurso-abrau-kupazh-svetlyy-suhoe-shardone-beloe-125",
    "inliers": 9,
-   "probability": 0.0018046359287068156,
+   "probability": 0.002045979047355059,
+   "conflicts": [],
    "correct": false,
    "in_top5": false
   },
   {
    "image": "13153768_0.jpg",
-   "gold": "",
+   "gold": "abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13",
+   "kind": "field",
    "top1": "artvin-kaberne-sovinon-grand-rezerv-krasnoe-suhoe-13",
    "inliers": 9,
-   "probability": 0.003956889681276885,
+   "probability": 0.0044348074360134266,
+   "conflicts": [],
    "correct": false,
    "in_top5": false
   },
   {
    "image": "13153768_1.jpg",
-   "gold": "",
+   "gold": "abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13",
+   "kind": "field",
    "top1": "abrau-dyurso-abrau-kupazh-svetlyy-suhoe-shardone-beloe-125",
    "inliers": 10,
-   "probability": 0.006378486376398605,
+   "probability": 0.007254182663260878,
+   "conflicts": [],
    "correct": false,
    "in_top5": false
   },
   {
    "image": "13409943_0.jpg",
-   "gold": "",
+   "gold": "abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13",
+   "kind": "field",
    "top1": "abrau-dyurso-abrau-kupazh-svetlyy-suhoe-shardone-beloe-125",
    "inliers": 7,
-   "probability": 0.0014458030081900284,
+   "probability": 0.0016225586574383553,
+   "conflicts": [],
    "correct": false,
    "in_top5": false
   },
   {
    "image": "13409943_1.jpg",
-   "gold": "",
+   "gold": "abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13",
+   "kind": "field",
    "top1": "abrau-dyurso-abrau-kupazh-svetlyy-suhoe-shardone-beloe-125",
    "inliers": 14,
-   "probability": 0.00765734356592365,
+   "probability": 0.00820531229196944,
+   "conflicts": [],
    "correct": false,
    "in_top5": false
   },
   {
    "image": "14029896_0.jpg",
-   "gold": "",
+   "gold": "abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13",
+   "kind": "field",
    "top1": "vinodelnya-uzunov-nrav-krasnostop-zolotovskiy-krasnoe-suhoe-132",
    "inliers": 13,
-   "probability": 0.0043710942149576965,
+   "probability": 0.0025179675505450083,
+   "conflicts": [
+    "на этикетке «абрау», это abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13"
+   ],
    "correct": false,
-   "in_top5": false
+   "in_top5": true
   },
   {
    "image": "14029896_2.jpg",
-   "gold": "",
+   "gold": "abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13",
+   "kind": "field",
    "top1": "abrau-dyurso-abrau-kupazh-svetlyy-suhoe-shardone-beloe-125",
    "inliers": 10,
-   "probability": 0.00419293240267235,
+   "probability": 0.004728316820751221,
+   "conflicts": [],
    "correct": false,
    "in_top5": false
   },
   {
    "image": "5784977_0.jpg",
-   "gold": "",
+   "gold": "abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13",
+   "kind": "field",
    "top1": "abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13",
    "inliers": 7,
-   "probability": 0.0073754691780128405,
-   "correct": false,
-   "in_top5": false
+   "probability": 0.007772367358783384,
+   "conflicts": [],
+   "correct": true,
+   "in_top5": true
   },
   {
    "image": "5784977_1.jpg",
-   "gold": "",
+   "gold": "abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13",
+   "kind": "field",
    "top1": "olymp-winery-adagum-merlot-merlo-rozovoe-suhoe-10",
    "inliers": 14,
-   "probability": 0.01132880277907188,
+   "probability": 0.012189342516321873,
+   "conflicts": [],
    "correct": false,
-   "in_top5": false
+   "in_top5": true
   },
   {
    "image": "9417887_0.jpg",
-   "gold": "",
+   "gold": "abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13",
+   "kind": "field",
    "top1": "abrau-dyurso-abrau-kupazh-svetlyy-suhoe-shardone-beloe-125",
    "inliers": 7,
-   "probability": 0.0027204223090904634,
+   "probability": 0.002958602599513272,
+   "conflicts": [],
    "correct": false,
-   "in_top5": false
+   "in_top5": true
   },
   {
    "image": "ir_etiketka-zashla-vot-vino-net-tot-sluchai_1.jpg",
    "gold": "",
+   "kind": "studio",
    "top1": "zolotaya-balka-zb-wine-sauvignon-blanc-sovinon-blan-beloe-suhoe-125",
    "inliers": 76,
-   "probability": 0.7432109970931364,
+   "probability": 0.6502128491409753,
+   "conflicts": [
+    "на этикетке «розовый», это vinodelnya-vedernikov-tsimlyanskiy-chernyy-rozovyy-rozovoe-suhoe-125"
+   ],
    "correct": false,
    "in_top5": false
   },
   {
    "image": "ir_etiketka-zashla-vot-vino-net-tot-sluchai_2.jpg",
    "gold": "",
+   "kind": "field",
    "top1": "b-yu-rne-l-yu-bl-yu-suhoe-rozovoe",
    "inliers": 10,
-   "probability": 0.00693066340973689,
+   "probability": 0.007334734621810461,
+   "conflicts": [],
    "correct": false,
    "in_top5": false
   },
   {
    "image": "ir_luchshee-iz-dostupnykh-vin-na-segodnya-m_0.jpg",
    "gold": "",
+   "kind": "studio",
    "top1": "fanagoriya-dekanter-chardonnay-2020-shardone-beloe-suhoe-135",
    "inliers": 13,
-   "probability": 0.016599143968514495,
+   "probability": 0.01874621042552632,
+   "conflicts": [],
    "correct": false,
    "in_top5": false
   },
   {
    "image": "ir_luchshee-iz-dostupnykh-vin-na-segodnya-m_2.jpg",
    "gold": "",
+   "kind": "studio",
    "top1": "fanagoriya-100-ottenkov-krasnogo-kaberne-kaberne-sovinon-krasnoe-suhoe-135",
    "inliers": 12,
-   "probability": 0.004365354367308761,
+   "probability": 0.0025242473629494533,
+   "conflicts": [
+    "на этикетке «красностоп», это tsimlyanskie-vina-krepost-sarkel-krasnostop-zolotovskiy-krasnoe-suhoe-145"
+   ],
    "correct": false,
    "in_top5": false
   },
   {
    "image": "ir_mozhet-li-deshevoe-vino-byt-khoroshim-ya_1.jpg",
    "gold": "",
+   "kind": "studio",
    "top1": "fanagoriya-beloe-polusladkoe",
    "inliers": 16,
-   "probability": 0.012636937044342269,
+   "probability": 0.0074640531043047515,
+   "conflicts": [
+    "на этикетке «saperavi», это fanagoriya-cru-lermont-saperavi-saperavi-krasnoe-suhoe-135"
+   ],
    "correct": false,
    "in_top5": false
   },
   {
    "image": "ir_mozhet-li-deshevoe-vino-byt-khoroshim-ya_2.jpg",
    "gold": "",
+   "kind": "studio",
    "top1": "fanagoriya-velvet-season-risling-beloe-sladkoe-12",
    "inliers": 7,
-   "probability": 0.004779199445619349,
+   "probability": 0.004966559502829679,
+   "conflicts": [],
    "correct": false,
    "in_top5": false
   },
   {
    "image": "ir_myagkoe-s-priyatnym-agodnym-vkusom-i-per_0.jpg",
    "gold": "",
+   "kind": "studio",
    "top1": "rozovoe-polusladkoe",
    "inliers": 16,
-   "probability": 0.007111009535132601,
+   "probability": 0.007735417575901486,
+   "conflicts": [],
    "correct": false,
    "in_top5": false
   },
   {
    "image": "ir_myagkoe-s-priyatnym-agodnym-vkusom-i-per_1.jpg",
    "gold": "",
+   "kind": "studio",
    "top1": "abrau-dyurso-pino-nuar-krasnoe-suhoe-12",
    "inliers": 7,
-   "probability": 0.003046586514031527,
+   "probability": 0.0031844988640167154,
+   "conflicts": [],
    "correct": false,
    "in_top5": false
   },
   {
    "image": "ir_myagkoe-s-priyatnym-agodnym-vkusom-i-per_2.jpg",
    "gold": "",
+   "kind": "studio",
    "top1": "fanagoriya-100-ottenkov-krasnogo-saperavi-krasnoe-suhoe-14",
    "inliers": 8,
-   "probability": 0.0034818934794336003,
+   "probability": 0.003798347221738439,
+   "conflicts": [],
    "correct": false,
    "in_top5": false
   },
   {
    "image": "ir_podderzhivaem-otechestvennykh-proizvodit_0.jpg",
    "gold": "",
+   "kind": "studio",
    "top1": "tsimlyanskie-vina-krepost-sarkel-krasnostop-zolotovskiy-krasnoe-suhoe-145",
    "inliers": 8,
-   "probability": 0.0069541882441612225,
+   "probability": 0.0039146427669212655,
+   "conflicts": [
+    "на этикетке «шардоне», это fanagoriya-dekanter-chardonnay-2020-shardone-beloe-suhoe-135"
+   ],
    "correct": false,
    "in_top5": false
   },
   {
    "image": "ir_podderzhivaem-otechestvennykh-proizvodit_1.jpg",
    "gold": "",
+   "kind": "field",
    "top1": "fanagoriya-zelyonoe-vino-risling-tsitronnyy-magaracha-merlo-rozovoe-polusuhoe-11",
    "inliers": 6,
-   "probability": 0.002196611598386245,
+   "probability": 0.0022477165513277815,
+   "conflicts": [],
    "correct": false,
    "in_top5": false
   },
   {
    "image": "ir_podderzhivaem-otechestvennykh-proizvodit_2.jpg",
    "gold": "",
+   "kind": "field",
    "top1": "fanagoriya-beloe-polusladkoe",
    "inliers": 13,
-   "probability": 0.02309649573254102,
+   "probability": 0.025767407135648276,
+   "conflicts": [],
    "correct": false,
    "in_top5": false
   },
   {
    "image": "ir_prekrasnyi-aperitiv-na-leto-interesnaya-_0.jpg",
    "gold": "",
+   "kind": "studio",
    "top1": "fanagoriya-q-bordeaux-blend-kaberne-sovinon-krasnoe-suhoe-135",
    "inliers": 20,
-   "probability": 0.011608535848766022,
+   "probability": 0.007401348984149657,
+   "conflicts": [
+    "сладость полусухое против сухое"
+   ],
    "correct": false,
    "in_top5": false
   },
   {
    "image": "ir_prekrasnyi-aperitiv-na-leto-interesnaya-_1.jpg",
    "gold": "",
+   "kind": "studio",
    "top1": "fanagoriya-zelyonoe-vino-risling-tsitronnyy-magaracha-beloe-polusuhoe-11",
    "inliers": 19,
-   "probability": 0.05703586240769267,
+   "probability": 0.03829706833991309,
+   "conflicts": [
+    "сладость сухое против полусухое"
+   ],
    "correct": false,
    "in_top5": false
   },
   {
    "image": "ir_prekrasnyi-aperitiv-na-leto-interesnaya-_2.jpg",
    "gold": "",
+   "kind": "studio",
    "top1": "fanagoriya-cru-lermont-cabernet-franc-kaberne-fran-krasnoe-suhoe-13",
    "inliers": 7,
-   "probability": 0.0024407841934691895,
+   "probability": 0.0025050506937232242,
+   "conflicts": [],
    "correct": false,
    "in_top5": false
   },
   {
    "image": "ir_pei-da-raduisya_0.jpg",
    "gold": "",
+   "kind": "studio",
    "top1": "fanagoriya-dekanter-kaberne-fran-2019-krasnoe-suhoe-13",
    "inliers": 11,
-   "probability": 0.017087923566180305,
+   "probability": 0.018747008829551503,
+   "conflicts": [],
    "correct": false,
    "in_top5": false
   },
   {
    "image": "ir_pei-da-raduisya_2.jpg",
    "gold": "",
+   "kind": "studio",
    "top1": "fanagoriya-velvet-season-risling-beloe-sladkoe-12",
    "inliers": 24,
-   "probability": 0.059019439192012815,
+   "probability": 0.07919569856333228,
+   "conflicts": [],
+   "correct": false,
+   "in_top5": false
+  },
+  {
+   "image": "ir_ochen-vkusnoe-legkoe-vino-dlya-semeinogo_1.jpg",
+   "gold": "",
+   "kind": "studio",
+   "top1": "fanagoriya-brule-cuve-brut-rozovoe-merlo-igristoe-bryut-rozovoe-12",
+   "inliers": 94,
+   "probability": 0.876659237736504,
+   "conflicts": [],
    "correct": false,
    "in_top5": false
   },
   {
    "image": "ir_ochen-vkusnoe-legkoe-vino-dlya-semeinogo_0.jpg",
    "gold": "fanagoriya-brule-muscat-ottonel-brut-muskat-ottonel-beloe-polusladkoe-12",
+   "kind": "studio",
    "top1": "fanagoriya-brule-muscat-ottonel-brut-muskat-ottonel-beloe-polusladkoe-12",
    "inliers": 48,
-   "probability": 0.31897986167879694,
+   "probability": 0.36482273135181637,
+   "conflicts": [],
    "correct": true,
    "in_top5": true
   },
   {
    "image": "ir_pei-da-raduisya_1.jpg",
    "gold": "soyuz-vino-kanonicheskie-traditsii-krasnoe-sladkoe-kaberne-sovinon-115",
+   "kind": "field",
    "top1": "soyuz-vino-kanonicheskie-traditsii-krasnoe-sladkoe-kaberne-sovinon-115",
    "inliers": 115,
-   "probability": 0.27331465160314505,
+   "probability": 0.3372337068205618,
+   "conflicts": [],
    "correct": true,
    "in_top5": true
   },
   {
-   "image": "ir_ochen-vkusnoe-legkoe-vino-dlya-semeinogo_1.jpg",
-   "gold": "",
-   "top1": "fanagoriya-brule-cuve-brut-rozovoe-merlo-igristoe-bryut-rozovoe-12",
-   "inliers": 94,
-   "probability": 0.8466970896133784,
-   "correct": false,
-   "in_top5": false
-  },
-  {
    "image": "02eef911.webp",
    "gold": "massandra-muskatel-belyy-belye-sorta-vinograda-beloe-sladkoe-16",
+   "kind": "field",
    "top1": "massandra-muskatel-belyy-belye-sorta-vinograda-beloe-sladkoe-16",
    "inliers": 61,
-   "probability": 0.06791905001413549,
+   "probability": 0.08406658072645691,
+   "conflicts": [],
    "correct": true,
    "in_top5": true
   },
   {
    "image": "019c68d0.jpg",
    "gold": "",
+   "kind": "field",
    "top1": "pino-nuar-dzhavaga",
    "inliers": 14,
-   "probability": 0.02896716071229326,
+   "probability": 0.031650148679515634,
+   "conflicts": [],
    "correct": false,
    "in_top5": false
   },
   {
    "image": "096ca74e.jpg",
    "gold": "",
+   "kind": "field",
    "top1": "dva-brata-pet-nat-kokur-2024",
    "inliers": 57,
-   "probability": 0.019488830017408386,
+   "probability": 0.006506448583062264,
+   "conflicts": [
+    "год ['2023'] против ['2024']",
+    "на этикетке «брют», это aristov-anima-millesimato-beloe-bryut"
+   ],
    "correct": false,
    "in_top5": false
   }

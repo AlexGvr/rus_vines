@@ -191,16 +191,21 @@ def triage(out_dir: Path, per_sheet: int = 8) -> None:
 def build(decisions_path: Path, out_path: Path) -> None:
     """Манифест по решениям, принятым глазами. Строка на кадр:
 
-        <файл> <slug каталога | - | x>   # комментарий
+        <файл> <slug каталога | - | x> [field|studio]   # комментарий
 
-    slug — вино из каталога, и этикетка та же (положительный пример);
-    «-»  — такого вина в каталоге нет, любая карточка для него ошибка;
+    slug — позиция каталога, изображённая на кадре (положительный пример);
+    «-»  — такой позиции в каталоге нет, любая карточка для неё ошибка;
     «x»  — кадр не годится: контрэтикетка, пробка, лицевой этикетки не видно.
 
-    Отдельная причина для «-» — та же марка, но другое поколение упаковки.
-    У «Абрау Купаж» в каталоге этикетка с рисунком машинки, а покупатели
-    фотографируют бутылки с пейзажем: названия совпадают, изображения нет,
-    и найти такую позицию нельзя ни при каких порогах.
+    Правильный ответ определяется позицией, а не дизайном этикетки. Другое
+    поколение упаковки отсутствием позиции не является: у «Абрау Купаж
+    тёмный» в каталоге эталон с рисунком машинки, покупатели снимают
+    бутылки с пейзажем, но вино то же самое. Если засчитать такой кадр
+    как отсутствующее вино, ненайденная существующая позиция превратится
+    в «правильный отказ», и метрика отказов станет ложью.
+
+    Третье поле отделяет съёмку от предметной карточки товара: снимок
+    на белом фоне устойчивость к съёмке телефоном не проверяет.
     """
     catalog = json.loads(CATALOG.read_text(encoding="utf-8"))["wines"]
     known = {w["slug"] for w in catalog}
@@ -211,7 +216,9 @@ def build(decisions_path: Path, out_path: Path) -> None:
         line = line.split("#")[0].strip()
         if not line:
             continue
-        name, label = line.split()[:2]
+        parts = line.split()
+        name, label = parts[0], parts[1]
+        kind = parts[2] if len(parts) > 2 else "field"
         if not (FIELD / name).exists() and not (ROOT / "dataset" / "eval" / "queries" / name).exists():
             sys.exit(f"нет такого кадра: {name}")
         if label == "x":
@@ -219,18 +226,23 @@ def build(decisions_path: Path, out_path: Path) -> None:
             continue
         if label != "-" and label not in known:
             sys.exit(f"нет такого slug в каталоге: {label}")
+        if kind not in ("field", "studio"):
+            sys.exit(f"{name}: третье поле должно быть field или studio, не «{kind}»")
         rows.append({"image": name, "slug": "" if label == "-" else label,
+                     "kind": kind,
                      "source": sources.get(name, {}).get("review", "публичный набор кейса"),
                      "title": sources.get(name, {}).get("listing_title", "")})
 
     with out_path.open("w", newline="", encoding="utf-8") as fh:
-        writer = csv.DictWriter(fh, fieldnames=["image", "slug", "source", "title"])
+        writer = csv.DictWriter(fh, fieldnames=["image", "slug", "kind", "source", "title"])
         writer.writeheader()
         writer.writerows(rows)
     positive = sum(1 for r in rows if r["slug"])
+    shot = sum(1 for r in rows if r["kind"] == "field")
     print(f"манифест: {out_path}")
     print(f"кадров {len(rows)}: вино есть в каталоге {positive}, "
           f"вина в каталоге нет {len(rows) - positive}; отброшено кадров {dropped}")
+    print(f"из них съёмка: {shot}, предметная карточка товара: {len(rows) - shot}")
 
 
 def main() -> None:
