@@ -1,0 +1,85 @@
+{
+ "checked": 10,
+ "results": [
+  {
+   "slug": "abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13",
+   "title": "Абрау Купаж тёмный сухое",
+   "source": "decanter",
+   "url": "https://static.decanter.ru/image/270502-vino-abrau-blend-noir-0-75-l-f.jpg",
+   "inliers": 4,
+   "cosine": 0.7102
+  },
+  {
+   "slug": "abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13",
+   "title": "Абрау Купаж тёмный сухое",
+   "source": "winestyle",
+   "url": "https://s2.wine.style/images_gen/874/87411/0_0_1390x1200.webp",
+   "inliers": 16,
+   "cosine": 0.7735
+  },
+  {
+   "slug": "soyuz-vino-kanonicheskie-traditsii-krasnoe-sladkoe-kaberne-sovinon-115",
+   "title": "Канонические Традиции Красное Сладкое",
+   "source": "proizvoditel",
+   "url": "https://thb.tildacdn.com/tild6666-6538-4936-a561-643337396362/-/resize/504x/_full.jpg",
+   "inliers": 75,
+   "cosine": 0.7646
+  },
+  {
+   "slug": "fanagoriya-100-ottenkov-krasnogo-kaberne-kaberne-sovinon-krasnoe-suhoe-135",
+   "title": "100 оттенков красного. Каберне",
+   "source": "amwine",
+   "url": "https://cdn.amwine.ru/upload/resize_cache/iblock/668/620_620_1/668563e226d637a13c90362b1",
+   "inliers": 38,
+   "cosine": 0.9368
+  },
+  {
+   "slug": "chateau-tamagne-nature-vert",
+   "title": "Chateau Tamagne Nature. Vert",
+   "source": "proizvoditel",
+   "url": "https://chateautamagne.ru/files/images/wine/image/27/53/275368529ff456729c2a7932d1846549",
+   "inliers": 7,
+   "cosine": 0.6617
+  },
+  {
+   "slug": "chateau-tamagne-nature-vert",
+   "title": "Chateau Tamagne Nature. Vert",
+   "source": "winestyle",
+   "url": "https://s2.wine.style/images_gen/239/239847/0_0_1982x1200.webp",
+   "inliers": 259,
+   "cosine": 0.9193
+  },
+  {
+   "slug": "inkermanskiy-zmv-inkerman-bryut-shardone-beloe-135",
+   "title": "Inkerman брют",
+   "source": "winemore",
+   "url": "https://winemore.ru/upload/dev2fun.imagecompress/webp/iblock/ebc/1xi6f3368y8w1iamnnubf03",
+   "inliers": 43,
+   "cosine": 0.9248
+  },
+  {
+   "slug": "cary-pandas-avtorskoe-vino",
+   "title": "Cары Пандас. Авторское вино",
+   "source": "proizvoditel",
+   "url": "https://massandra.ru/upload/iblock/ce7/djea2yq0r29v0h7g139wniq8sqmqs923.png",
+   "inliers": 50,
+   "cosine": 0.8949
+  },
+  {
+   "slug": "vinodelnya-myshako-flute-bryut-beloe-shardone-11",
+   "title": "Flute брют белое",
+   "source": "vliga",
+   "url": "https://vliga.com/upload/iblock/1ff/r0q2kevg6xgvn5yu9jyww7j5if46pkgp.jpg",
+   "inliers": 96,
+   "cosine": 0.8728
+  },
+  {
+   "slug": "novyy-svet-dom-shampanskih-vin-igristoe-vino-vyderzhannoe-bryut-krasnoe-novyy-svet-kaberne-sovinon-135",
+   "title": "Игристое вино выдержанное брют красное «Новый Свет. Каберне Совиньон»",
+   "source": "ast",
+   "url": "https://static.ast.wine/iblock/5f5/5f523ea6fc9de4a196eeac6baac89d76/fc90ba88c42cc6dc602f",
+   "inliers": 10,
+   "cosine": 0.8592
+  }
+ ]
+}

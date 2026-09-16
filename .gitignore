@@ -20,3 +20,6 @@ web/node_modules/
 data/field/*.jpg
 data/field/sheets/
 data/field/candidates.json
+# Проверка эталонов на устаревание: чужие фотографии витрин не храним,
+# адреса и отчёт лежат в data/freshness.csv и data/index/freshness.json
+data/freshness/
