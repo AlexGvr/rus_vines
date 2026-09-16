@@ -195,12 +195,11 @@ class TextChannel:
                 # и наказывать можно только когда слово явно не лидера и явно
                 # чьё-то ещё. С одинаковыми порогами «МУСКАТЕАЬ» не признавался
                 # за «мускатель» лидера, но признавался за «мускат» соседа.
-                if any(tokens_match(token, m) >= SURE_MATCH for m in mine):
+                if best_match(token, mine, SURE_MATCH):
                     continue
                 owners = [rival for rival in rivals
                           if rival != slug
-                          and any(tokens_match(token, m) >= 1.0
-                                  for m in marks.get(rival, set()))]
+                          and best_match(token, marks.get(rival, set()), 1.0)]
                 if owners:
                     out.append(f"на этикетке «{token}», это {owners[0]}")
                     break
@@ -258,6 +257,33 @@ SURE_CONF = 0.85
 SURE_MATCH = 0.70
 VAGUE_MATCH = 0.85
 
+# Гомоглифы: буквы, которые в кириллице и латинице выглядят одинаково.
+# EasyOCR с двумя моделями свободно смешивает алфавиты внутри слова —
+# «КРАСНОЕ» на этикетке «Русского Игристого» вернулось как «KPACHOЕ»,
+# где шесть букв латинские. Для человека это то же слово, для сравнения
+# строк — другое, и различитель пропадал.
+HOMOGLYPHS = str.maketrans({
+    "a": "а", "b": "ь", "c": "с", "e": "е", "h": "н", "k": "к", "m": "м",
+    "o": "о", "p": "р", "t": "т", "u": "и", "x": "х", "y": "у",
+})
+
+
+def alphabet_variants(token: str) -> tuple[str, ...]:
+    """Токен как есть и он же, переложенный в кириллицу.
+
+    Обе формы нужны потому, что смешение бывает в любую сторону: русское
+    слово читается латиницей, латинский бренд — кириллицей. Сравнивать
+    по максимуму дешевле, чем угадывать алфавит.
+    """
+    cyrillic = token.translate(HOMOGLYPHS)
+    return (token,) if cyrillic == token else (token, cyrillic)
+
+
+def best_match(token: str, marked: set[str], need: float) -> bool:
+    """Совпал ли прочитанный токен хоть с одним каталожным, с учётом алфавита."""
+    return any(tokens_match(variant, m) >= need
+               for variant in alphabet_variants(token) for m in marked)
+
 
 def central_words(words, min_conf: float = 0.60, band: float = 0.72):
     """Уверенные строки из центральной части кропа.
@@ -306,10 +332,15 @@ def resolve_close(candidates: list[tuple[str, float]], words,
     туда текстом незачем. Работа текста — там, где геометрия сомневается:
     позиции одной серии с близким числом инлаеров, различающиеся словом.
 
-    Правило одностороннее. Если уверенно прочитанное слово совпало с
-    различающим токеном ровно одного кандидата, остальные получают
-    противоречие. Совпадение никого не поднимает: слово могло попасть
-    в кадр случайно, а вот его отсутствие у кандидата — это факт о нём.
+    Правило одностороннее. Уверенно прочитанное слово, которое есть у части
+    кандидатов группы и нет у остальных, добавляет остальным противоречие.
+    Совпадение никого не поднимает: слово могло попасть в кадр случайно,
+    а вот его отсутствие у кандидата — это факт о нём.
+
+    Требовать ровно одного владельца нельзя, хотя так было сначала. Внутри
+    линейки Абрау-Дюрсо в группу попадают сразу два красных игристых, и
+    прочитанное «КРАСНОЕ» принадлежит обоим. По строгому правилу оно не
+    различало ничего, хотя отсекало четырёх кандидатов из шести.
     """
     if len(candidates) < 2:
         return candidates, {}
@@ -327,14 +358,14 @@ def resolve_close(candidates: list[tuple[str, float]], words,
     found: dict[str, list[str]] = {slug: [] for slug, _ in group}
     for token, conf in read:
         need = SURE_MATCH if conf >= SURE_CONF else VAGUE_MATCH
-        owners = [slug for slug, marked in marks.items()
-                  if any(tokens_match(token, m) >= need for m in marked)]
+        owners = {slug for slug, marked in marks.items()
+                  if best_match(token, marked, need)}
         # Слово, подходящее всем или никому, ничего не различает.
-        if len(owners) != 1:
+        if not owners or len(owners) == len(found):
             continue
         for slug in found:
-            if slug != owners[0]:
-                found[slug].append(f"на этикетке «{token}» — это {owners[0]}")
+            if slug not in owners:
+                found[slug].append(f"на этикетке «{token}», а у него нет")
     if not any(found.values()):
         return candidates, found
     reordered = sorted(group, key=lambda c: (len(found[c[0]]), -c[1]))

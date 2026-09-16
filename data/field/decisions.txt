@@ -83,8 +83,8 @@ ir_pei-da-raduisya_1.jpg soyuz-vino-kanonicheskie-traditsii-krasnoe-sladkoe-kabe
 11813420_1.jpg kokur-suhoe field
 11813420_2.jpg kokur-suhoe field
 12161711_0.jpg kokur-suhoe field
-12161711_1.jpg kokur-suhoe field
-12161711_2.jpg kokur-suhoe field
+12161711_1.jpg x   # контрэтикетка, ошибка первой разметки
+12161711_2.jpg x   # коллаж, лицевой этикетки толком не видно
 14095313_0.jpg x
 14095313_1.jpg x
 14095313_2.jpg x

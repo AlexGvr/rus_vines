@@ -1,6 +1,6 @@
 {
- "n": 74,
- "positives": 54,
+ "n": 72,
+ "positives": 52,
  "negatives": 20,
  "results": [
   {
@@ -12,6 +12,7 @@
    "probability": 0.002045979047355059,
    "conflicts": [],
    "findable": true,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -24,6 +25,7 @@
    "probability": 0.0044348074360134266,
    "conflicts": [],
    "findable": true,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -36,6 +38,7 @@
    "probability": 0.007254182663260878,
    "conflicts": [],
    "findable": true,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -48,6 +51,7 @@
    "probability": 0.0016225586574383553,
    "conflicts": [],
    "findable": true,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -60,6 +64,7 @@
    "probability": 0.00820531229196944,
    "conflicts": [],
    "findable": true,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -74,6 +79,7 @@
     "на этикетке «абрау», это abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13"
    ],
    "findable": true,
+   "duplicate": false,
    "correct": false,
    "in_top5": true
   },
@@ -86,6 +92,7 @@
    "probability": 0.004728316820751221,
    "conflicts": [],
    "findable": true,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -95,9 +102,10 @@
    "kind": "field",
    "top1": "abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13",
    "inliers": 7,
-   "probability": 0.007772367358783384,
+   "probability": 0.005499645916149853,
    "conflicts": [],
    "findable": true,
+   "duplicate": false,
    "correct": true,
    "in_top5": true
   },
@@ -110,6 +118,7 @@
    "probability": 0.012189342516321873,
    "conflicts": [],
    "findable": true,
+   "duplicate": false,
    "correct": false,
    "in_top5": true
   },
@@ -119,9 +128,10 @@
    "kind": "field",
    "top1": "abrau-dyurso-abrau-kupazh-svetlyy-suhoe-shardone-beloe-125",
    "inliers": 7,
-   "probability": 0.002958602599513272,
+   "probability": 0.002011280514578325,
    "conflicts": [],
    "findable": true,
+   "duplicate": false,
    "correct": false,
    "in_top5": true
   },
@@ -136,6 +146,7 @@
     "на этикетке «розовый», это vinodelnya-vedernikov-tsimlyanskiy-chernyy-rozovyy-rozovoe-suhoe-125"
    ],
    "findable": false,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -148,6 +159,7 @@
    "probability": 0.007334734621810461,
    "conflicts": [],
    "findable": false,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -160,6 +172,7 @@
    "probability": 0.01874621042552632,
    "conflicts": [],
    "findable": false,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -174,6 +187,7 @@
     "на этикетке «красностоп», это tsimlyanskie-vina-krepost-sarkel-krasnostop-zolotovskiy-krasnoe-suhoe-145"
    ],
    "findable": false,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -188,6 +202,7 @@
     "на этикетке «saperavi», это fanagoriya-cru-lermont-saperavi-saperavi-krasnoe-suhoe-135"
    ],
    "findable": false,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -200,6 +215,7 @@
    "probability": 0.004966559502829679,
    "conflicts": [],
    "findable": false,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -212,6 +228,7 @@
    "probability": 0.007735417575901486,
    "conflicts": [],
    "findable": false,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -224,6 +241,7 @@
    "probability": 0.0031844988640167154,
    "conflicts": [],
    "findable": false,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -236,6 +254,7 @@
    "probability": 0.003798347221738439,
    "conflicts": [],
    "findable": false,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -243,13 +262,14 @@
    "image": "ir_podderzhivaem-otechestvennykh-proizvodit_0.jpg",
    "gold": "",
    "kind": "studio",
-   "top1": "tsimlyanskie-vina-krepost-sarkel-krasnostop-zolotovskiy-krasnoe-suhoe-145",
+   "top1": "aligote-avtorskoe-vino",
    "inliers": 8,
-   "probability": 0.0039146427669212655,
+   "probability": 0.0034530624760060833,
    "conflicts": [
     "на этикетке «шардоне», это fanagoriya-dekanter-chardonnay-2020-shardone-beloe-suhoe-135"
    ],
    "findable": false,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -262,6 +282,7 @@
    "probability": 0.0022477165513277815,
    "conflicts": [],
    "findable": false,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -274,6 +295,7 @@
    "probability": 0.025767407135648276,
    "conflicts": [],
    "findable": false,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -288,6 +310,7 @@
     "сладость полусухое против сухое"
    ],
    "findable": false,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -302,6 +325,7 @@
     "сладость сухое против полусухое"
    ],
    "findable": false,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -314,6 +338,7 @@
    "probability": 0.0025050506937232242,
    "conflicts": [],
    "findable": false,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -323,9 +348,12 @@
    "kind": "studio",
    "top1": "fanagoriya-dekanter-kaberne-fran-2019-krasnoe-suhoe-13",
    "inliers": 11,
-   "probability": 0.018747008829551503,
-   "conflicts": [],
+   "probability": 0.010054548668605754,
+   "conflicts": [
+    "на этикетке «kpachoe», это soyuz-vino-kanonicheskie-traditsii-krasnoe-polusladkoe-kaberne-sovinon-115"
+   ],
    "findable": false,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -338,6 +366,7 @@
    "probability": 0.07919569856333228,
    "conflicts": [],
    "findable": false,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -350,6 +379,7 @@
    "probability": 0.876659237736504,
    "conflicts": [],
    "findable": false,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -362,6 +392,7 @@
    "probability": 0.36482273135181637,
    "conflicts": [],
    "findable": true,
+   "duplicate": false,
    "correct": true,
    "in_top5": true
   },
@@ -374,6 +405,7 @@
    "probability": 0.3372337068205618,
    "conflicts": [],
    "findable": true,
+   "duplicate": false,
    "correct": true,
    "in_top5": true
   },
@@ -386,6 +418,7 @@
    "probability": 0.08406658072645691,
    "conflicts": [],
    "findable": true,
+   "duplicate": false,
    "correct": true,
    "in_top5": true
   },
@@ -398,6 +431,7 @@
    "probability": 0.031650148679515634,
    "conflicts": [],
    "findable": false,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -413,6 +447,7 @@
     "на этикетке «брют», это aristov-anima-millesimato-beloe-bryut"
    ],
    "findable": false,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -422,9 +457,10 @@
    "kind": "field",
    "top1": "kokur-suhoe",
    "inliers": 67,
-   "probability": 0.36132463901086975,
+   "probability": 0.2775765714684916,
    "conflicts": [],
    "findable": true,
+   "duplicate": false,
    "correct": true,
    "in_top5": true
   },
@@ -437,6 +473,7 @@
    "probability": 0.5519056173070545,
    "conflicts": [],
    "findable": true,
+   "duplicate": false,
    "correct": true,
    "in_top5": true
   },
@@ -444,13 +481,12 @@
    "image": "11813420_0.jpg",
    "gold": "kokur-suhoe",
    "kind": "field",
-   "top1": "massandra-kagor-gurzuf-saperavi-krasnoe-sladkoe-16",
-   "inliers": 52,
-   "probability": 0.012469115296493218,
-   "conflicts": [
-    "на этикетке «кокур», это massandra-kokur"
-   ],
+   "top1": "massandra-kokur",
+   "inliers": 51,
+   "probability": 0.2101099890262564,
+   "conflicts": [],
    "findable": true,
+   "duplicate": true,
    "correct": false,
    "in_top5": true
   },
@@ -460,9 +496,10 @@
    "kind": "field",
    "top1": "massandra-kokur",
    "inliers": 86,
-   "probability": 0.6048460211152245,
+   "probability": 0.5096995962728746,
    "conflicts": [],
    "findable": true,
+   "duplicate": true,
    "correct": false,
    "in_top5": true
   },
@@ -475,6 +512,7 @@
    "probability": 0.012435057045341568,
    "conflicts": [],
    "findable": true,
+   "duplicate": false,
    "correct": false,
    "in_top5": true
   },
@@ -487,30 +525,7 @@
    "probability": 0.1999399433437104,
    "conflicts": [],
    "findable": true,
-   "correct": false,
-   "in_top5": true
-  },
-  {
-   "image": "12161711_1.jpg",
-   "gold": "kokur-suhoe",
-   "kind": "field",
-   "top1": "kokur-suhoe",
-   "inliers": 15,
-   "probability": 0.06098961863135303,
-   "conflicts": [],
-   "findable": true,
-   "correct": true,
-   "in_top5": true
-  },
-  {
-   "image": "12161711_2.jpg",
-   "gold": "kokur-suhoe",
-   "kind": "field",
-   "top1": "portvejn-surozh",
-   "inliers": 16,
-   "probability": 0.021816371074962638,
-   "conflicts": [],
-   "findable": true,
+   "duplicate": true,
    "correct": false,
    "in_top5": true
   },
@@ -520,9 +535,10 @@
    "kind": "field",
    "top1": "massandra-kokur",
    "inliers": 38,
-   "probability": 0.01256579365952737,
+   "probability": 0.00893724023857194,
    "conflicts": [],
    "findable": false,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -535,6 +551,7 @@
    "probability": 0.020494745377981252,
    "conflicts": [],
    "findable": false,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -547,6 +564,7 @@
    "probability": 0.029439564564216383,
    "conflicts": [],
    "findable": false,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -559,6 +577,7 @@
    "probability": 0.022579144836489092,
    "conflicts": [],
    "findable": false,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -571,6 +590,7 @@
    "probability": 0.043288716611388306,
    "conflicts": [],
    "findable": false,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -583,6 +603,7 @@
    "probability": 0.07690149478394859,
    "conflicts": [],
    "findable": true,
+   "duplicate": false,
    "correct": true,
    "in_top5": true
   },
@@ -595,6 +616,7 @@
    "probability": 0.14809642177444937,
    "conflicts": [],
    "findable": true,
+   "duplicate": false,
    "correct": true,
    "in_top5": true
   },
@@ -607,6 +629,7 @@
    "probability": 0.02184008544662056,
    "conflicts": [],
    "findable": true,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -619,6 +642,7 @@
    "probability": 0.01040551533623526,
    "conflicts": [],
    "findable": true,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -631,6 +655,7 @@
    "probability": 0.1357162172154732,
    "conflicts": [],
    "findable": true,
+   "duplicate": false,
    "correct": true,
    "in_top5": true
   },
@@ -643,6 +668,7 @@
    "probability": 0.00653714830205595,
    "conflicts": [],
    "findable": true,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -655,6 +681,7 @@
    "probability": 0.10524078316952246,
    "conflicts": [],
    "findable": true,
+   "duplicate": false,
    "correct": true,
    "in_top5": true
   },
@@ -669,6 +696,7 @@
     "на этикетке «2021», это kuban-vino-shato-tamane-rezerv-myuller-turgau-limited-edishn-2021-beloe-suhoe-12"
    ],
    "findable": true,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -684,6 +712,7 @@
     "на этикетке «tamagne», это chateau-tamagne-select-blanc"
    ],
    "findable": true,
+   "duplicate": false,
    "correct": false,
    "in_top5": true
   },
@@ -693,12 +722,13 @@
    "kind": "field",
    "top1": "shato-taman-kaberne",
    "inliers": 59,
-   "probability": 0.0415094535208815,
+   "probability": 0.01798153349020783,
    "conflicts": [
     "на этикетке «chateau», это chateau-tamagne-signature-kaberne",
     "на этикетке «tamagne», это chateau-tamagne-signature-kaberne"
    ],
    "findable": true,
+   "duplicate": true,
    "correct": false,
    "in_top5": false
   },
@@ -708,12 +738,13 @@
    "kind": "field",
    "top1": "shato-taman-kaberne",
    "inliers": 66,
-   "probability": 0.034910621238444114,
+   "probability": 0.023978553013581226,
    "conflicts": [
     "на этикетке «chateau», это chateau-tamagne-signature-kaberne",
     "на этикетке «tamagne», это chateau-tamagne-signature-kaberne"
    ],
    "findable": true,
+   "duplicate": true,
    "correct": false,
    "in_top5": false
   },
@@ -726,6 +757,7 @@
    "probability": 0.061901309124641236,
    "conflicts": [],
    "findable": true,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -733,14 +765,14 @@
    "image": "14907980_2.jpg",
    "gold": "shato-taman-kaberne-sovinon",
    "kind": "field",
-   "top1": "shato-taman-saperavi",
-   "inliers": 30,
-   "probability": 0.003503720705402429,
+   "top1": "kuban-vino-kaberne-de-tamane-kaberne-sovinon-krasnoe-suhoe-125",
+   "inliers": 26,
+   "probability": 0.012984885755438711,
    "conflicts": [
-    "на этикетке «совиньон», это kuban-vino-kaberne-de-tamane-kaberne-sovinon-krasnoe-suhoe-125",
     "на этикетке «chateau», это chateau-tamagne-signature-kaberne"
    ],
    "findable": true,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -756,6 +788,7 @@
     "на этикетке «tamagne», это chateau-tamagne-signature-kaberne"
    ],
    "findable": true,
+   "duplicate": false,
    "correct": true,
    "in_top5": true
   },
@@ -768,6 +801,7 @@
    "probability": 0.005503394880041455,
    "conflicts": [],
    "findable": true,
+   "duplicate": false,
    "correct": true,
    "in_top5": true
   },
@@ -780,6 +814,7 @@
    "probability": 0.00647742183843849,
    "conflicts": [],
    "findable": true,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -792,6 +827,7 @@
    "probability": 0.004974077759882177,
    "conflicts": [],
    "findable": true,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -804,6 +840,7 @@
    "probability": 0.03920085211536077,
    "conflicts": [],
    "findable": true,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -816,6 +853,7 @@
    "probability": 0.018423965034935187,
    "conflicts": [],
    "findable": true,
+   "duplicate": false,
    "correct": true,
    "in_top5": true
   },
@@ -828,6 +866,7 @@
    "probability": 0.03657141197965115,
    "conflicts": [],
    "findable": true,
+   "duplicate": false,
    "correct": true,
    "in_top5": true
   },
@@ -840,6 +879,7 @@
    "probability": 0.20377074150864347,
    "conflicts": [],
    "findable": true,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -852,6 +892,7 @@
    "probability": 0.0317214677063789,
    "conflicts": [],
    "findable": true,
+   "duplicate": false,
    "correct": false,
    "in_top5": true
   },
@@ -864,6 +905,7 @@
    "probability": 0.0331257241183021,
    "conflicts": [],
    "findable": true,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -876,6 +918,7 @@
    "probability": 0.011935188614590055,
    "conflicts": [],
    "findable": true,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -888,6 +931,7 @@
    "probability": 0.0514648649961558,
    "conflicts": [],
    "findable": true,
+   "duplicate": false,
    "correct": false,
    "in_top5": true
   },
@@ -900,6 +944,7 @@
    "probability": 0.021341037869843985,
    "conflicts": [],
    "findable": true,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -912,6 +957,7 @@
    "probability": 0.006670374713459802,
    "conflicts": [],
    "findable": true,
+   "duplicate": false,
    "correct": false,
    "in_top5": false
   },
@@ -919,13 +965,14 @@
    "image": "5881591_0.jpg",
    "gold": "abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12",
    "kind": "field",
-   "top1": "abrau-dyurso-russkoe-igristoe-koshernoe-polusladkoe-shardone-beloe-12",
-   "inliers": 63,
-   "probability": 0.09447372759290476,
+   "top1": "abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12",
+   "inliers": 54,
+   "probability": 0.09197669799208844,
    "conflicts": [],
    "findable": true,
-   "correct": false,
-   "in_top5": false
+   "duplicate": false,
+   "correct": true,
+   "in_top5": true
   }
  ]
 }

@@ -49,6 +49,29 @@ def locate(name: str) -> Path | None:
     return None
 
 
+def same_wine(left: dict, right: dict) -> bool:
+    """Две записи каталога об одном и том же вине.
+
+    Каталог местами содержит дубли: «Кокур сухое» и «Массандра Кокур» —
+    одна бутылка с одной этикеткой, снятая дважды. Ответ дублем не является
+    ошибкой распознавания: пользователь получает ту же карточку. Считать
+    такие случаи промахом значит занижать метрику по дефекту данных.
+
+    Признак дубля узкий: та же винодельня и слова короткого названия
+    целиком входят в длинное, если убрать из обоих имя винодельни.
+    """
+    if not left or not right or left["manufacturer"] != right["manufacturer"]:
+        return False
+    brand = {w for w in left["manufacturer"].lower().split() if len(w) >= 4}
+    def words(wine):
+        return {w for w in wine["title"].lower().replace(",", " ").split()
+                if len(w) >= 3} - brand
+    first, second = words(left), words(right)
+    if not first or not second:
+        return False
+    return first <= second or second <= first
+
+
 def resolve_all(rows: list[dict]) -> list[tuple[dict, Path]]:
     """Все кадры манифеста или отказ считать.
 
@@ -110,6 +133,10 @@ def main() -> None:
             "probability": core.probability(feats, weights),
             "conflicts": list(candidates[0].conflicts) if candidates else [],
             "findable": bool(row["slug"]) and bool(by_slug.get(row["slug"], {}).get("photo")),
+            "duplicate": bool(row["slug"]) and bool(candidates)
+                         and candidates[0].slug != row["slug"]
+                         and same_wine(by_slug.get(row["slug"]),
+                                       by_slug.get(candidates[0].slug)),
             "correct": bool(row["slug"]) and bool(candidates)
                        and candidates[0].slug == row["slug"],
             "in_top5": bool(row["slug"])
@@ -148,11 +175,16 @@ def main() -> None:
         findable = [r for r in positives if r["findable"]]
         blind = [r for r in positives if not r["findable"]]
         right = sum(1 for r in findable if r["correct"])
+        twins = sum(1 for r in findable if r["duplicate"])
         print(f"\nвино есть в каталоге: {len(positives)} кадров, из них с эталонным "
               f"фото {len(findable)}")
         print(f"  лидер верен в {right} из {len(findable)} "
               f"({right / max(len(findable), 1) * 100:.0f}%), "
               f"верный в пятёрке — {sum(1 for r in findable if r['in_top5'])}")
+        if twins:
+            print(f"  ещё в {twins} случаях выдан дубль той же позиции каталога — "
+                  f"карточка та же, с ними {right + twins} из {len(findable)} "
+                  f"({(right + twins) / len(findable) * 100:.0f}%)")
         if blind:
             print(f"  ещё {len(blind)} кадров у позиции без эталонного фото — "
                   f"найти нельзя, в счёт не идут")
