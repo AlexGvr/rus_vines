@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import csv
 import json
+import os
 import sys
 import time
 from pathlib import Path
@@ -26,7 +27,7 @@ from rerank import descriptors  # noqa: E402
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 ROOT = Path(__file__).resolve().parent.parent
 CATALOG = ROOT / "data" / "catalog" / "catalog.json"
-OUT_DIR = ROOT / "data" / "index" / "sift"
+OUT_DIR = Path(os.environ.get("SIFT_DIR", ROOT / "data" / "index" / "sift"))
 
 
 def main() -> None:

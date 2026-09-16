@@ -19,7 +19,19 @@ import cv2
 import numpy as np
 from PIL import Image
 
-MAX_SIDE = 700          # выше — дороже, а прирост инлаеров уже незаметен
+import os
+
+# Масштаб, к которому приводится кадр перед поиском точек.
+#
+# Удвоение проверялось (data/index/zones_*.json): на 1400 точек вдвое
+# больше, синтетика подрастает — 90.2% -> 91.5% на общем наборе и
+# 96.8% -> 97.9% на почти-дублях, — но на полевом наборе top-1 наоборот
+# падает, 15 верных из 47 против 12, зато top-5 растёт, 25 против 31.
+# Ни одна из этих разниц не выходит за шум выборки, а сопоставление
+# дорожает со 129 до 361 мс на запрос и индекс признаков удваивается.
+# Поэтому оставлен дешёвый вариант; переключается переменной окружения,
+# и вместе с ней нужно пересобрать признаки эталонов.
+MAX_SIDE = int(os.environ.get("SIFT_MAX_SIDE", "700"))
 RATIO = 0.75            # тест Лоу: отсечь неоднозначные соответствия
 MIN_MATCHES = 8
 _sift: dict = {}
@@ -73,6 +85,7 @@ class MatchStats:
     good: int            # прошедшие тест Лоу, до проверки гомографией
     coverage: float      # доля ячеек сетки эталона, где есть инлаеры
     spread: float        # площадь охвата инлаеров к площади всех точек эталона
+    points: tuple = ()   # координаты инлаеров на эталоне, 0..1 по обеим осям
 
     @property
     def precision(self) -> float:
@@ -80,24 +93,31 @@ class MatchStats:
         return self.inliers / self.good if self.good else 0.0
 
 
-def _layout(points, mask, ref_kp, grid: int = 4) -> tuple[float, float]:
-    """Как инлаеры разложены по эталону: занятость сетки и охват."""
+def _layout(points, mask, ref_kp, grid: int = 4):
+    """Как инлаеры разложены по эталону: занятость сетки, охват, координаты.
+
+    Координаты нормируются по облаку точек эталона, а не по кадру: рамка
+    кадра зависит от того, как сработал детектор, а облако точек — это
+    сама бутылка с этикеткой. Ноль по вертикали — верх, единица — низ.
+    """
     if mask is None or not len(points):
-        return 0.0, 0.0
+        return 0.0, 0.0, ()
     chosen = [p for p, keep in zip(points, mask.ravel()) if keep]
     if len(chosen) < 3:
-        return 0.0, 0.0
+        return 0.0, 0.0, ()
     all_x = [kp.pt[0] for kp in ref_kp]
     all_y = [kp.pt[1] for kp in ref_kp]
-    width = (max(all_x) - min(all_x)) or 1.0
-    height = (max(all_y) - min(all_y)) or 1.0
-    cells = {(min(int((x - min(all_x)) / width * grid), grid - 1),
-              min(int((y - min(all_y)) / height * grid), grid - 1))
+    left, top = min(all_x), min(all_y)
+    width = (max(all_x) - left) or 1.0
+    height = (max(all_y) - top) or 1.0
+    cells = {(min(int((x - left) / width * grid), grid - 1),
+              min(int((y - top) / height * grid), grid - 1))
              for x, y in chosen}
     xs = [x for x, _ in chosen]
     ys = [y for _, y in chosen]
     spread = ((max(xs) - min(xs)) * (max(ys) - min(ys))) / (width * height)
-    return len(cells) / (grid * grid), min(spread, 1.0)
+    normalized = tuple(((x - left) / width, (y - top) / height) for x, y in chosen)
+    return len(cells) / (grid * grid), min(spread, 1.0), normalized
 
 
 def match_stats(query_kp, query_desc, ref_kp, ref_desc) -> MatchStats:
@@ -119,8 +139,8 @@ def match_stats(query_kp, query_desc, ref_kp, ref_desc) -> MatchStats:
     if mask is None:
         return MatchStats(0, len(good), 0.0, 0.0)
     ref_points = [ref_kp[m.trainIdx].pt for m in good]
-    coverage, spread = _layout(ref_points, mask, ref_kp)
-    return MatchStats(int(mask.sum()), len(good), coverage, spread)
+    coverage, spread, normalized = _layout(ref_points, mask, ref_kp)
+    return MatchStats(int(mask.sum()), len(good), coverage, spread, normalized)
 
 
 class Reranker:
