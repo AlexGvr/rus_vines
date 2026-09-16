@@ -46,6 +46,36 @@ CATALOG = ROOT / "data" / "catalog" / "catalog.json"
 FONT = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
 
 
+def series_of(name: str) -> str:
+    """Идентификатор фотосерии — все кадры одного отзыва.
+
+    Кадры одного отзыва снимает один человек, одну бутылку, за один раз.
+    Держать их в разных частях выборки нельзя: настройка увидит ту же
+    бутылку, что и финальный тест, и качество окажется завышенным.
+    """
+    stem = Path(name).stem
+    if stem.startswith("ir_"):
+        return stem[3:].rsplit("_", 1)[0]
+    head = stem.rsplit("_", 1)[0]
+    return head or stem
+
+
+def split_of(wine_or_series: str, wines: list[str], series: list[str]) -> str:
+    """Часть выборки: настройка или финальный тест.
+
+    Деление идёт по позициям каталога, а не по кадрам: иначе одно вино
+    попадёт в обе части, и тест перестанет отвечать на вопрос о переносе
+    на другие вина. Отрицательные кадры делятся по фотосерии — позиции
+    у них нет.
+
+    Обучающей части у полевого набора нет намеренно: сорока семи кадров
+    не хватит, чтобы обучать на них веса, и они обучаются на синтетике.
+    Здесь выбираются только пороги, и для этого нужны две части.
+    """
+    pool = wines if wine_or_series in wines else series
+    return "tune" if pool.index(wine_or_series) % 2 == 0 else "test"
+
+
 def key_of(title: str) -> str:
     """Короткий ключ товара из его названия — по нему идёт разметка."""
     slug = re.sub(r"[^a-zа-яё0-9]+", "-", title.lower()).strip("-")
@@ -229,12 +259,26 @@ def build(decisions_path: Path, out_path: Path) -> None:
         if kind not in ("field", "studio"):
             sys.exit(f"{name}: третье поле должно быть field или studio, не «{kind}»")
         rows.append({"image": name, "slug": "" if label == "-" else label,
-                     "kind": kind,
+                     "kind": kind, "series": series_of(name),
                      "source": sources.get(name, {}).get("review", "публичный набор кейса"),
                      "title": sources.get(name, {}).get("listing_title", "")})
 
+    # Деление на части: по вину для положительных, по фотосерии для
+    # отрицательных. Порядок фиксирован сортировкой, поэтому повторный
+    # сбор манифеста даёт то же самое.
+    wines_order = sorted({r["slug"] for r in rows if r["slug"]})
+    series_order = sorted({r["series"] for r in rows if not r["slug"]})
+    for row in rows:
+        row["split"] = split_of(row["slug"] or row["series"], wines_order, series_order)
+
+    crossing = {s for s in {r["series"] for r in rows}
+                if len({r["split"] for r in rows if r["series"] == s}) > 1}
+    if crossing:
+        sys.exit(f"фотосерии попали в разные части: {sorted(crossing)[:5]}")
+
     with out_path.open("w", newline="", encoding="utf-8") as fh:
-        writer = csv.DictWriter(fh, fieldnames=["image", "slug", "kind", "source", "title"])
+        writer = csv.DictWriter(fh, fieldnames=["image", "slug", "kind", "split",
+                                                "series", "source", "title"])
         writer.writeheader()
         writer.writerows(rows)
     positive = sum(1 for r in rows if r["slug"])
@@ -243,6 +287,11 @@ def build(decisions_path: Path, out_path: Path) -> None:
     print(f"кадров {len(rows)}: вино есть в каталоге {positive}, "
           f"вина в каталоге нет {len(rows) - positive}; отброшено кадров {dropped}")
     print(f"из них съёмка: {shot}, предметная карточка товара: {len(rows) - shot}")
+    for part in ("tune", "test"):
+        chunk = [r for r in rows if r["split"] == part]
+        print(f"  {part}: кадров {len(chunk)}, позиций "
+              f"{len({r['slug'] for r in chunk if r['slug']})}, "
+              f"без вина в каталоге {sum(1 for r in chunk if not r['slug'])}")
 
 
 def main() -> None:

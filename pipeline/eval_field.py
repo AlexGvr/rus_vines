@@ -49,27 +49,40 @@ def locate(name: str) -> Path | None:
     return None
 
 
-def same_wine(left: dict, right: dict) -> bool:
-    """Две записи каталога об одном и том же вине.
+EQUIVALENTS = ROOT / "data" / "catalog" / "equivalents.csv"
 
-    Каталог местами содержит дубли: «Кокур сухое» и «Массандра Кокур» —
-    одна бутылка с одной этикеткой, снятая дважды. Ответ дублем не является
-    ошибкой распознавания: пользователь получает ту же карточку. Считать
-    такие случаи промахом значит занижать метрику по дефекту данных.
 
-    Признак дубля узкий: та же винодельня и слова короткого названия
-    целиком входят в длинное, если убрать из обоих имя винодельни.
+def load_equivalents(wines: dict) -> set[frozenset]:
+    """Пары записей каталога об одном и том же вине — из явного списка.
+
+    Автоматическому признаку тут не место. Похожесть названий склеивала
+    «Шато Тамань. Каберне Совиньон» (розовое) с «Шато Тамань. Каберне»
+    (красное) — совпадают винодельня, линейка и сорт, расходится цвет,
+    и метрика от этого завышалась. Пара попадает в список только после
+    ручной сверки шести признаков; если хоть один определить нельзя,
+    эквивалентность считается неподтверждённой.
+
+    Файл проверяется при загрузке: пара с разной винодельней или разной
+    категорией — ошибка списка, а не повод для тихого исключения.
     """
-    if not left or not right or left["manufacturer"] != right["manufacturer"]:
-        return False
-    brand = {w for w in left["manufacturer"].lower().split() if len(w) >= 4}
-    def words(wine):
-        return {w for w in wine["title"].lower().replace(",", " ").split()
-                if len(w) >= 3} - brand
-    first, second = words(left), words(right)
-    if not first or not second:
-        return False
-    return first <= second or second <= first
+    if not EQUIVALENTS.exists():
+        return set()
+    out: set[frozenset] = set()
+    with EQUIVALENTS.open(encoding="utf-8") as fh:
+        for row in csv.DictReader(line for line in fh if not line.startswith("#")):
+            first, second = (row.get("slug_a") or "").strip(), (row.get("slug_b") or "").strip()
+            if not first or not second:
+                continue
+            for slug in (first, second):
+                if slug not in wines:
+                    sys.exit(f"{EQUIVALENTS.name}: нет такой позиции — {slug}")
+            left, right = wines[first], wines[second]
+            if left["manufacturer"] != right["manufacturer"]:
+                sys.exit(f"{EQUIVALENTS.name}: разные винодельни у {first} и {second}")
+            if left["category"].strip().lower() != right["category"].strip().lower():
+                sys.exit(f"{EQUIVALENTS.name}: разные категории у {first} и {second}")
+            out.add(frozenset((first, second)))
+    return out
 
 
 def resolve_all(rows: list[dict]) -> list[tuple[dict, Path]]:
@@ -98,9 +111,16 @@ def main() -> None:
     ap.add_argument("--index", default="clean_mv")
     ap.add_argument("--weights", default=str(INDEX_DIR / "calibration_sharp.json"))
     ap.add_argument("--topk", type=int, default=20)
+    ap.add_argument("--split", choices=["tune", "test", "all"], default="all",
+                    help="часть выборки: tune — для подбора порогов, "
+                         "test — финальная проверка, её для настройки не трогаем")
     args = ap.parse_args()
 
     rows = list(csv.DictReader(Path(args.manifest).open(encoding="utf-8")))
+    if args.split != "all":
+        rows = [r for r in rows if r.get("split") == args.split]
+    if not rows:
+        sys.exit(f"в манифесте нет кадров части {args.split}")
     weights = json.loads(Path(args.weights).read_text(encoding="utf-8"))["weights"]
     wines = json.loads(CATALOG.read_text(encoding="utf-8"))["wines"]
     by_slug = {w["slug"]: w for w in wines}
@@ -110,6 +130,16 @@ def main() -> None:
         index_slugs = [row["slug"] or None for row in csv.DictReader(fh)]
     reranker = PrecomputedReranker(INDEX_DIR / "sift")
     channel = TextChannel(wines)
+    equivalents = load_equivalents(by_slug)
+
+    # Полевой кадр не должен оказаться среди эталонов: тогда запрос искал бы
+    # сам себя. Индекс собирается только из фотографий каталога, но проверка
+    # стоит копейки, а молчаливое пересечение обесценило бы весь замер.
+    with (INDEX_DIR / f"{args.index}.csv").open(encoding="utf-8") as fh:
+        indexed = {Path(row["path"]).name for row in csv.DictReader(fh)}
+    leaked = {row["image"] for row in rows} & indexed
+    if leaked:
+        sys.exit(f"полевые кадры попали в индекс эталонов: {sorted(leaked)[:5]}")
 
     results = []
     for row, path in resolve_all(rows):
@@ -135,8 +165,7 @@ def main() -> None:
             "findable": bool(row["slug"]) and bool(by_slug.get(row["slug"], {}).get("photo")),
             "duplicate": bool(row["slug"]) and bool(candidates)
                          and candidates[0].slug != row["slug"]
-                         and same_wine(by_slug.get(row["slug"]),
-                                       by_slug.get(candidates[0].slug)),
+                         and frozenset((row["slug"], candidates[0].slug)) in equivalents,
             "correct": bool(row["slug"]) and bool(candidates)
                        and candidates[0].slug == row["slug"],
             "in_top5": bool(row["slug"])
@@ -149,9 +178,24 @@ def main() -> None:
     positives = [r for r in results if r["gold"]]
     negatives = [r for r in results if not r["gold"]]
     shot = [r for r in results if r["kind"] == "field"]
-    print(f"\nполевой набор: {len(results)} кадров — "
+    part = args.split if args.split != "all" else "весь набор"
+    print(f"\nполевой набор, часть {part}: {len(results)} кадров — "
           f"{len(positives)} с вином из каталога, {len(negatives)} без; "
           f"съёмка {len(shot)}, предметная карточка {len(results) - len(shot)}")
+    print(f"{'категория кадров':34} {'кадров':>7} {'лидер верен':>12}")
+    groups = [
+        ("съёмка, вино с эталоном", lambda r: r["kind"] == "field" and r["findable"]),
+        ("предметная, вино с эталоном", lambda r: r["kind"] == "studio" and r["findable"]),
+        ("вино в каталоге без эталона", lambda r: bool(r["gold"]) and not r["findable"]),
+        ("вина нет в каталоге", lambda r: not r["gold"]),
+    ]
+    for name, keep in groups:
+        chunk = [r for r in results if keep(r)]
+        if not chunk:
+            continue
+        right = sum(1 for r in chunk if r["correct"])
+        mark = f"{right}" if any(r["gold"] for r in chunk) else "—"
+        print(f"{name:34} {len(chunk):>7} {mark:>12}")
 
     if negatives:
         probability = np.array([r["probability"] for r in negatives])
@@ -182,9 +226,11 @@ def main() -> None:
               f"({right / max(len(findable), 1) * 100:.0f}%), "
               f"верный в пятёрке — {sum(1 for r in findable if r['in_top5'])}")
         if twins:
-            print(f"  ещё в {twins} случаях выдан дубль той же позиции каталога — "
-                  f"карточка та же, с ними {right + twins} из {len(findable)} "
-                  f"({(right + twins) / len(findable) * 100:.0f}%)")
+            print(f"  ещё в {twins} случаях выдана запись, признанная тем же вином "
+                  f"(data/catalog/equivalents.csv) — с ними {right + twins} "
+                  f"из {len(findable)} ({(right + twins) / len(findable) * 100:.0f}%)")
+        elif not equivalents:
+            print("  подтверждённых дублей каталога нет, метрика строгая по slug")
         if blind:
             print(f"  ещё {len(blind)} кадров у позиции без эталонного фото — "
                   f"найти нельзя, в счёт не идут")
