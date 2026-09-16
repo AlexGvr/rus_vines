@@ -62,7 +62,7 @@ def f1(true_positive: int, shown: int, answerable: int) -> tuple[float, float, f
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--subset", default="sharp")
-    ap.add_argument("--confident", type=float, default=0.70)
+    ap.add_argument("--confident", type=float, default=0.30)
     ap.add_argument("--show", type=float, default=0.06)
     ap.add_argument("--held-out", action="store_true",
                     help="считать только по отложенной половине, на которой "
@@ -86,7 +86,10 @@ def main() -> None:
         mask[:len(cases) // 2] = False
 
     shown = (probability >= args.show) & mask
-    confident = (probability >= args.confident) & mask
+    # Уверенное состояние требует ещё и отсутствия улик против лидера —
+    # то же жёсткое правило, что в сервисе.
+    no_conflict = np.array([c["text_conflict"] == 0 for c in cases])
+    confident = (probability >= args.confident) & no_conflict & mask
     answerable = int((present & mask).sum())
 
     scores = {}

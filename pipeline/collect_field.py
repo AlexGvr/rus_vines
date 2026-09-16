@@ -127,6 +127,30 @@ def download(url: str, path: Path, timeout: int = 25) -> bool:
     return True
 
 
+def catalog_guess(title: str, matcher, by_slug, floor: float):
+    """Позиция каталога, на которую похож товар, либо None.
+
+    Проверяется не только сходство названия, но и совпадение винодельни:
+    без этого «Российское шампанское Абрау-Дюрсо» уходит в позицию «Нового
+    Света» — общие слова «российское шампанское выдержанное» перевешивают,
+    а производителя матчер не взвешивает вовсе.
+
+    Догадка нужна только чтобы не тратить обращения к площадке на вина
+    не из каталога. Настоящая привязка делается глазами в verify_field.py.
+    """
+    from normalize import clean as normalize_clean
+
+    found = matcher.search(title, top=1)
+    if not found or found[0]["confidence"] < floor:
+        return None
+    wine = by_slug[found[0]["slug"]]
+    words = [w for w in normalize_clean(wine["manufacturer"]).split() if len(w) >= 4]
+    low = normalize_clean(title)
+    if words and not any(w in low for w in words):
+        return None
+    return wine
+
+
 def clean_title(html: str) -> str:
     match = TITLE_RE.search(html)
     if not match:
@@ -144,7 +168,18 @@ def main() -> None:
     ap.add_argument("--photos-per-review", type=int, default=3)
     ap.add_argument("--pause", type=float, default=7.0, help="пауза между запросами, с")
     ap.add_argument("--source", choices=["otzovik", "irecommend"], default="otzovik")
+    ap.add_argument("--require-catalog", type=float, default=0.0,
+                    help="пропускать товары, не похожие ни на одну позицию "
+                         "каталога с такой уверенностью (0 — не проверять)")
     args = ap.parse_args()
+
+    matcher = by_slug = None
+    if args.require_catalog:
+        sys.path.insert(0, str(ROOT / "core"))
+        from matcher import Matcher
+        wines = json.loads((ROOT / "data" / "catalog" / "catalog.json")
+                           .read_text(encoding="utf-8"))["wines"]
+        matcher, by_slug = Matcher(wines), {w["slug"]: w for w in wines}
 
     listings = [line.strip() for line in Path(args.listings).read_text().splitlines()
                 if line.strip() and not line.startswith("#")]
@@ -165,6 +200,13 @@ def main() -> None:
             print(f"[{number}/{len(listings)}] не открылось: {listing} ({error})")
             continue
         title = clean_title(html)
+        if matcher is not None:
+            wine = catalog_guess(title, matcher, by_slug, args.require_catalog)
+            if wine is None:
+                print(f"[{number}/{len(listings)}] {title[:60]:60} нет в каталоге, "
+                      f"пропуск", flush=True)
+                time.sleep(args.pause)
+                continue
         reviews = list(dict.fromkeys(REVIEW_RE.findall(html)))[:args.reviews_per_wine]
         print(f"[{number}/{len(listings)}] {title[:60]:60} отзывов: {len(reviews)}",
               flush=True)

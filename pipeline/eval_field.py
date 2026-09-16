@@ -109,6 +109,7 @@ def main() -> None:
             "inliers": candidates[0].inliers if candidates else 0,
             "probability": core.probability(feats, weights),
             "conflicts": list(candidates[0].conflicts) if candidates else [],
+            "findable": bool(row["slug"]) and bool(by_slug.get(row["slug"], {}).get("photo")),
             "correct": bool(row["slug"]) and bool(candidates)
                        and candidates[0].slug == row["slug"],
             "in_top5": bool(row["slug"])
@@ -141,15 +142,28 @@ def main() -> None:
             print(f"{threshold:>7.2f} {share * 100:>18.1f}%")
 
     if positives:
-        right = sum(1 for r in positives if r["correct"])
-        print(f"\nвино есть в каталоге ({len(positives)} кадров): "
-              f"лидер верен в {right}, top-5 содержит верный в "
-              f"{sum(1 for r in positives if r['in_top5'])}")
-        for r in positives:
-            title = by_slug.get(r["top1"], {}).get("title", "—")
-            print(f"  {r['image'][:42]:42} {r['kind']:6} p={r['probability']:.3f} "
-                  f"инл {r['inliers']:>4} "
-                  f"{'верно' if r['correct'] else 'ошибка: ' + title[:30]}")
+        # Позиция может быть в каталоге, но без эталонного фото — таких
+        # пятнадцать из 2103. Найти их нельзя ни при каких порогах, и мерить
+        # по ним качество поиска бессмысленно: это дыра в данных.
+        findable = [r for r in positives if r["findable"]]
+        blind = [r for r in positives if not r["findable"]]
+        right = sum(1 for r in findable if r["correct"])
+        print(f"\nвино есть в каталоге: {len(positives)} кадров, из них с эталонным "
+              f"фото {len(findable)}")
+        print(f"  лидер верен в {right} из {len(findable)} "
+              f"({right / max(len(findable), 1) * 100:.0f}%), "
+              f"верный в пятёрке — {sum(1 for r in findable if r['in_top5'])}")
+        if blind:
+            print(f"  ещё {len(blind)} кадров у позиции без эталонного фото — "
+                  f"найти нельзя, в счёт не идут")
+        by_wine: dict[str, list] = {}
+        for r in findable:
+            by_wine.setdefault(r["gold"], []).append(r)
+        print(f"\n{'вино':44} {'верно':>7} {'кадров':>7}")
+        for gold, group in sorted(by_wine.items(),
+                                  key=lambda kv: -sum(x["correct"] for x in kv[1])):
+            title = by_slug.get(gold, {}).get("title", gold)[:42]
+            print(f"{title:44} {sum(r['correct'] for r in group):>7} {len(group):>7}")
 
     for kind in ("field", "studio"):
         part = [r for r in results if r["kind"] == kind]

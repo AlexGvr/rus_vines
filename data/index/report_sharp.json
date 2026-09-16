@@ -2,7 +2,7 @@
  "subset": "sharp",
  "held_out": true,
  "show_threshold": 0.06,
- "confident_threshold": 0.7,
+ "confident_threshold": 0.3,
  "answerable": 200,
  "f1": {
   "по каталогу": {
@@ -32,12 +32,12 @@
  },
  "states": {
   "одна карточка без оговорок": {
-   "queries": 117,
-   "correct": 115
+   "queries": 134,
+   "correct": 131
   },
   "карточка с вариантами": {
-   "queries": 70,
-   "correct": 65
+   "queries": 53,
+   "correct": 49
   },
   "не удалось определить": {
    "queries": 13,
@@ -47,15 +47,15 @@
  "absent": {
   "queries": 200,
   "shown": 122,
-  "confident": 25
+  "confident": 48
  },
  "latency_ms": {
   "n": 50,
   "failures": 0,
-  "median_ms": 192.2675019595772,
-  "p95_ms": 349.74553480278695,
-  "p99_ms": 387.30049064150074,
-  "max_ms": 398.176833987236,
+  "median_ms": 267.41843298077583,
+  "p95_ms": 478.54544647270814,
+  "p99_ms": 508.7855329969898,
+  "max_ms": 514.929129043594,
   "within_sla": 1.0
  }
 }

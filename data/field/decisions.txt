@@ -67,3 +67,153 @@ ir_pei-da-raduisya_1.jpg soyuz-vino-kanonicheskie-traditsii-krasnoe-sladkoe-kabe
 02eef911.webp massandra-muskatel-belyy-belye-sorta-vinograda-beloe-sladkoe-16 field
 019c68d0.jpg - field   # Табия Пино Нуар, в каталоге нет
 096ca74e.jpg - field   # ARISTOV DONUM, в каталоге нет
+
+# --- вторая партия: вина, отобранные по совпадению с каталогом ---
+# Привязка подтверждена глазами по листам data/field/sheets: совпадает
+# и название, и оформление этикетки. Кадры без лицевой этикетки в браке.
+
+# вино-массандра-кокур-сухое  ->  kokur-suhoe
+10777167_0.jpg kokur-suhoe field
+10777167_1.jpg x
+10777167_2.jpg x
+11122332_0.jpg kokur-suhoe field
+11122332_1.jpg x
+11122332_2.jpg x
+11813420_0.jpg kokur-suhoe field
+11813420_1.jpg kokur-suhoe field
+11813420_2.jpg kokur-suhoe field
+12161711_0.jpg kokur-suhoe field
+12161711_1.jpg kokur-suhoe field
+12161711_2.jpg kokur-suhoe field
+14095313_0.jpg x
+14095313_1.jpg x
+14095313_2.jpg x
+
+# вино-массандра-полусладкое-белое  ->  beloe-polusladkoe
+11865288_0.jpg beloe-polusladkoe field
+11865288_1.jpg x
+12271541_0.jpg beloe-polusladkoe field
+12271541_1.jpg x
+12271541_2.jpg x
+12980895_0.jpg beloe-polusladkoe field
+12980895_1.jpg x
+12980895_2.jpg beloe-polusladkoe field
+15839246_0.jpg x
+15839246_1.jpg x
+15839246_2.jpg beloe-polusladkoe field
+16409233_0.jpg x
+16409233_1.jpg x
+16409233_2.jpg x
+
+# вино-белое-сухое-кубань-вино-шато-тамань-ркаците  ->  kuban-vino-shato-tamane-rkatsiteli-myuller-turgau-shardone-2025-beloe-suhoe-12
+10314919_0.jpg kuban-vino-shato-tamane-rkatsiteli-myuller-turgau-shardone-2025-beloe-suhoe-12 field
+10314919_1.jpg x
+11406313_0.jpg kuban-vino-shato-tamane-rkatsiteli-myuller-turgau-shardone-2025-beloe-suhoe-12 field
+11406313_1.jpg kuban-vino-shato-tamane-rkatsiteli-myuller-turgau-shardone-2025-beloe-suhoe-12 field
+11406313_2.jpg x
+11751350_0.jpg kuban-vino-shato-tamane-rkatsiteli-myuller-turgau-shardone-2025-beloe-suhoe-12 field
+11751350_1.jpg kuban-vino-shato-tamane-rkatsiteli-myuller-turgau-shardone-2025-beloe-suhoe-12 field
+11751350_2.jpg kuban-vino-shato-tamane-rkatsiteli-myuller-turgau-shardone-2025-beloe-suhoe-12 field
+12101221_0.jpg kuban-vino-shato-tamane-rkatsiteli-myuller-turgau-shardone-2025-beloe-suhoe-12 field
+12101221_1.jpg x
+12101221_2.jpg kuban-vino-shato-tamane-rkatsiteli-myuller-turgau-shardone-2025-beloe-suhoe-12 field
+
+# вино-сухое-розовое-кубань-вино-шато-тамань-кабер  ->  shato-taman-kaberne-sovinon
+13918721_0.jpg shato-taman-kaberne-sovinon field
+13918721_1.jpg x
+13918721_2.jpg x
+14692624_0.jpg shato-taman-kaberne-sovinon field
+14692624_1.jpg x
+14692624_2.jpg shato-taman-kaberne-sovinon field
+14907980_0.jpg shato-taman-kaberne-sovinon field
+14907980_1.jpg x
+14907980_2.jpg shato-taman-kaberne-sovinon field
+17031076_0.jpg shato-taman-kaberne-sovinon field
+17031076_1.jpg x
+17031076_2.jpg x
+17760897_0.jpg x
+17760897_1.jpg x
+
+# шампанское-абрау-дюрсо-victor-dravigny-виктор-др  ->  abrau-dyurso-victor-dravigny-bryut
+12876444_0.jpg abrau-dyurso-victor-dravigny-bryut field
+12876444_1.jpg x
+12876444_2.jpg x
+16117580_0.jpg abrau-dyurso-victor-dravigny-bryut field
+16117580_1.jpg abrau-dyurso-victor-dravigny-bryut field
+16117580_2.jpg x
+17368513_0.jpg abrau-dyurso-victor-dravigny-bryut field
+17368513_1.jpg abrau-dyurso-victor-dravigny-bryut field
+17368513_2.jpg x
+5921004_0.jpg abrau-dyurso-victor-dravigny-bryut field
+5921004_1.jpg x
+5921004_2.jpg x
+7555709_0.jpg x
+7555709_1.jpg x
+7555709_2.jpg x
+
+# русское-шампанское-полусладкое-красное-абрау-дюр  ->  abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12
+10390039_0.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12 field
+10390039_1.jpg x
+13978352_0.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12 field
+13978352_1.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12 field
+13978352_2.jpg x
+15501518_0.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12 field
+15501518_1.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12 field
+15501518_2.jpg x
+3284063_0.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12 field
+3284063_1.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12 field
+3284063_2.jpg x
+5881591_0.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12 field
+5881591_1.jpg x
+5881591_2.jpg x
+
+# Товары, привязку которых подтвердить не удалось: либо в каталоге
+# нет такой позиции, либо на снимках оформление другого поколения.
+12083971_0.jpg x
+12109290_0.jpg x
+12109290_1.jpg x
+12109290_2.jpg x
+12397439_0.jpg x
+12397439_1.jpg x
+12873011_0.jpg x
+12873011_1.jpg x
+12873011_2.jpg x
+12968049_0.jpg x
+12968049_1.jpg x
+14366341_0.jpg x
+14366341_1.jpg x
+14366341_2.jpg x
+15636042_0.jpg x
+15636042_1.jpg x
+15636042_2.jpg x
+15658041_0.jpg x
+15658041_1.jpg x
+15658041_2.jpg x
+16903203_0.jpg x
+16903203_1.jpg x
+16903203_2.jpg x
+17303290_0.jpg x
+17303290_1.jpg x
+17303290_2.jpg x
+17734712_0.jpg x
+17734712_1.jpg x
+5175323_0.jpg x
+5608099_0.jpg x
+6173590_0.jpg x
+6173590_1.jpg x
+6173590_2.jpg x
+6607009_0.jpg x
+6607009_1.jpg x
+6607009_2.jpg x
+7512060_0.jpg x
+7512060_1.jpg x
+7512060_2.jpg x
+9243219_0.jpg x
+9243219_1.jpg x
+9243219_2.jpg x
+9338548_0.jpg x
+9338548_1.jpg x
+9338548_2.jpg x
+9867668_0.jpg x
+9867668_1.jpg x
+9867668_2.jpg x
