@@ -14,75 +14,75 @@
 
 # Абрау-Дюрсо «Абрау Купаж тёмный сухое» — позиция в каталоге есть,
 # эталон другого поколения.
-11164638_0.jpg abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13 field
+11164638_0.jpg abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13 field front
 11164638_1.jpg x     # рельеф стекла, этикетки не видно
 11164638_2.jpg x     # акцизная марка
-13153768_0.jpg abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13 field
-13153768_1.jpg abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13 field
+13153768_0.jpg abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13 field collage
+13153768_1.jpg abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13 field front
 13153768_2.jpg x     # контрэтикетка
-13409943_0.jpg abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13 field
-13409943_1.jpg abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13 field
+13409943_0.jpg abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13 field front
+13409943_1.jpg abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13 field front
 13409943_2.jpg x     # контрэтикетка
-14029896_0.jpg abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13 field
+14029896_0.jpg abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13 field front
 14029896_1.jpg x     # контрэтикетка
-14029896_2.jpg abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13 field
-5784977_0.jpg  abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13 field
-5784977_1.jpg  abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13 field
+14029896_2.jpg abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13 field front
+5784977_0.jpg abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13 field front
+5784977_1.jpg abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13 field front
 5784977_2.jpg  x     # контрэтикетка
-9417887_0.jpg  abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13 field
+9417887_0.jpg abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13 field front
 9417887_1.jpg  x     # контрэтикетка
 9417887_2.jpg  x     # пробка
 
 # Золотая Балка, серия ZB Wine «MY ROSE» — в каталоге нет (есть соседи
 # по серии: ZB Wine Sauvignon Blanc, ZB Moscato Rose и другие)
-ir_etiketka-zashla-vot-vino-net-tot-sluchai_1.jpg - studio
-ir_etiketka-zashla-vot-vino-net-tot-sluchai_2.jpg - field
+ir_etiketka-zashla-vot-vino-net-tot-sluchai_1.jpg - studio front
+ir_etiketka-zashla-vot-vino-net-tot-sluchai_2.jpg - field front
 
 # Фанагория «Авторский стиль», «Номерной резерв», «Авторское», QORTIS —
 # таких позиций в каталоге нет
-ir_luchshee-iz-dostupnykh-vin-na-segodnya-m_0.jpg - studio
-ir_luchshee-iz-dostupnykh-vin-na-segodnya-m_2.jpg - studio
-ir_mozhet-li-deshevoe-vino-byt-khoroshim-ya_1.jpg - studio
-ir_mozhet-li-deshevoe-vino-byt-khoroshim-ya_2.jpg - studio
-ir_myagkoe-s-priyatnym-agodnym-vkusom-i-per_0.jpg - studio
-ir_myagkoe-s-priyatnym-agodnym-vkusom-i-per_1.jpg - studio
-ir_myagkoe-s-priyatnym-agodnym-vkusom-i-per_2.jpg - studio
-ir_podderzhivaem-otechestvennykh-proizvodit_0.jpg - studio
-ir_podderzhivaem-otechestvennykh-proizvodit_1.jpg - field
-ir_podderzhivaem-otechestvennykh-proizvodit_2.jpg - field
-ir_prekrasnyi-aperitiv-na-leto-interesnaya-_0.jpg - studio
-ir_prekrasnyi-aperitiv-na-leto-interesnaya-_1.jpg - studio
-ir_prekrasnyi-aperitiv-na-leto-interesnaya-_2.jpg - studio
-ir_pei-da-raduisya_0.jpg - studio
-ir_pei-da-raduisya_2.jpg - studio
+ir_luchshee-iz-dostupnykh-vin-na-segodnya-m_0.jpg - studio front
+ir_luchshee-iz-dostupnykh-vin-na-segodnya-m_2.jpg - studio front
+ir_mozhet-li-deshevoe-vino-byt-khoroshim-ya_1.jpg - studio front
+ir_mozhet-li-deshevoe-vino-byt-khoroshim-ya_2.jpg - studio front
+ir_myagkoe-s-priyatnym-agodnym-vkusom-i-per_0.jpg - studio front
+ir_myagkoe-s-priyatnym-agodnym-vkusom-i-per_1.jpg - studio front
+ir_myagkoe-s-priyatnym-agodnym-vkusom-i-per_2.jpg - studio front
+ir_podderzhivaem-otechestvennykh-proizvodit_0.jpg - studio front
+ir_podderzhivaem-otechestvennykh-proizvodit_1.jpg - field front
+ir_podderzhivaem-otechestvennykh-proizvodit_2.jpg - field multi
+ir_prekrasnyi-aperitiv-na-leto-interesnaya-_0.jpg - studio front
+ir_prekrasnyi-aperitiv-na-leto-interesnaya-_1.jpg fanagoriya-zelyonoe-vino-risling-tsitronnyy-magaracha-beloe-polusuhoe-11 studio front   # в отзыве о Qortis выложено другое вино той же винодельни
+ir_prekrasnyi-aperitiv-na-leto-interesnaya-_2.jpg - studio front
+ir_pei-da-raduisya_0.jpg - studio front
+ir_pei-da-raduisya_2.jpg - studio front
 
 # BRÛLÉ Cuvée Rosé Demi-Sec — в каталоге только Cuvée Brut Розовое
-ir_ochen-vkusnoe-legkoe-vino-dlya-semeinogo_1.jpg - studio
+ir_ochen-vkusnoe-legkoe-vino-dlya-semeinogo_1.jpg - studio front
 
 # Положительные: позиция и этикетка совпадают с каталогом
-ir_ochen-vkusnoe-legkoe-vino-dlya-semeinogo_0.jpg fanagoriya-brule-muscat-ottonel-brut-muskat-ottonel-beloe-polusladkoe-12 studio
-ir_pei-da-raduisya_1.jpg soyuz-vino-kanonicheskie-traditsii-krasnoe-sladkoe-kaberne-sovinon-115 field
+ir_ochen-vkusnoe-legkoe-vino-dlya-semeinogo_0.jpg fanagoriya-brule-muscat-ottonel-brut-muskat-ottonel-beloe-polusladkoe-12 studio front
+ir_pei-da-raduisya_1.jpg soyuz-vino-kanonicheskie-traditsii-krasnoe-sladkoe-kaberne-sovinon-115 field front
 
 # Публичный набор кейса
-02eef911.webp massandra-muskatel-belyy-belye-sorta-vinograda-beloe-sladkoe-16 field
-019c68d0.jpg - field   # Табия Пино Нуар, в каталоге нет
-096ca74e.jpg - field   # ARISTOV DONUM, в каталоге нет
+02eef911.webp massandra-muskatel-belyy-belye-sorta-vinograda-beloe-sladkoe-16 field multi
+019c68d0.jpg - field multi   # Табия Пино Нуар, в каталоге нет
+096ca74e.jpg - field front   # ARISTOV DONUM, в каталоге нет
 
 # --- вторая партия: вина, отобранные по совпадению с каталогом ---
 # Привязка подтверждена глазами по листам data/field/sheets: совпадает
 # и название, и оформление этикетки. Кадры без лицевой этикетки в браке.
 
 # вино-массандра-кокур-сухое  ->  kokur-suhoe
-10777167_0.jpg kokur-suhoe field
+10777167_0.jpg kokur-suhoe field front
 10777167_1.jpg x
 10777167_2.jpg x
-11122332_0.jpg kokur-suhoe field
+11122332_0.jpg kokur-suhoe field front
 11122332_1.jpg x
 11122332_2.jpg x
-11813420_0.jpg kokur-suhoe field
-11813420_1.jpg kokur-suhoe field
-11813420_2.jpg kokur-suhoe field
-12161711_0.jpg kokur-suhoe field
+11813420_0.jpg kokur-suhoe field front
+11813420_1.jpg kokur-suhoe field front
+11813420_2.jpg kokur-suhoe field back
+12161711_0.jpg kokur-suhoe field multi
 12161711_1.jpg x   # контрэтикетка, ошибка первой разметки
 12161711_2.jpg x   # коллаж, лицевой этикетки толком не видно
 14095313_0.jpg x
@@ -90,61 +90,61 @@ ir_pei-da-raduisya_1.jpg soyuz-vino-kanonicheskie-traditsii-krasnoe-sladkoe-kabe
 14095313_2.jpg x
 
 # вино-массандра-полусладкое-белое  ->  beloe-polusladkoe
-11865288_0.jpg beloe-polusladkoe field
+11865288_0.jpg beloe-polusladkoe field front
 11865288_1.jpg x
-12271541_0.jpg beloe-polusladkoe field
+12271541_0.jpg beloe-polusladkoe field front
 12271541_1.jpg x
 12271541_2.jpg x
-12980895_0.jpg beloe-polusladkoe field
+12980895_0.jpg beloe-polusladkoe field front
 12980895_1.jpg x
-12980895_2.jpg beloe-polusladkoe field
+12980895_2.jpg beloe-polusladkoe field front
 15839246_0.jpg x
 15839246_1.jpg x
-15839246_2.jpg beloe-polusladkoe field
+15839246_2.jpg beloe-polusladkoe field front
 16409233_0.jpg x
 16409233_1.jpg x
 16409233_2.jpg x
 
 # вино-белое-сухое-кубань-вино-шато-тамань-ркаците  ->  kuban-vino-shato-tamane-rkatsiteli-myuller-turgau-shardone-2025-beloe-suhoe-12
-10314919_0.jpg kuban-vino-shato-tamane-rkatsiteli-myuller-turgau-shardone-2025-beloe-suhoe-12 field
+10314919_0.jpg kuban-vino-shato-tamane-rkatsiteli-myuller-turgau-shardone-2025-beloe-suhoe-12 field front
 10314919_1.jpg x
-11406313_0.jpg kuban-vino-shato-tamane-rkatsiteli-myuller-turgau-shardone-2025-beloe-suhoe-12 field
-11406313_1.jpg kuban-vino-shato-tamane-rkatsiteli-myuller-turgau-shardone-2025-beloe-suhoe-12 field
+11406313_0.jpg kuban-vino-shato-tamane-rkatsiteli-myuller-turgau-shardone-2025-beloe-suhoe-12 field front
+11406313_1.jpg kuban-vino-shato-tamane-rkatsiteli-myuller-turgau-shardone-2025-beloe-suhoe-12 field front
 11406313_2.jpg x
-11751350_0.jpg kuban-vino-shato-tamane-rkatsiteli-myuller-turgau-shardone-2025-beloe-suhoe-12 field
-11751350_1.jpg kuban-vino-shato-tamane-rkatsiteli-myuller-turgau-shardone-2025-beloe-suhoe-12 field
-11751350_2.jpg kuban-vino-shato-tamane-rkatsiteli-myuller-turgau-shardone-2025-beloe-suhoe-12 field
-12101221_0.jpg kuban-vino-shato-tamane-rkatsiteli-myuller-turgau-shardone-2025-beloe-suhoe-12 field
+11751350_0.jpg kuban-vino-shato-tamane-rkatsiteli-myuller-turgau-shardone-2025-beloe-suhoe-12 field multi
+11751350_1.jpg kuban-vino-shato-tamane-rkatsiteli-myuller-turgau-shardone-2025-beloe-suhoe-12 field front
+11751350_2.jpg - field front   # в отзыве о Шато Тамань выложена бутылка Torre Tallada
+12101221_0.jpg kuban-vino-shato-tamane-rkatsiteli-myuller-turgau-shardone-2025-beloe-suhoe-12 field front
 12101221_1.jpg x
-12101221_2.jpg kuban-vino-shato-tamane-rkatsiteli-myuller-turgau-shardone-2025-beloe-suhoe-12 field
+12101221_2.jpg kuban-vino-shato-tamane-rkatsiteli-myuller-turgau-shardone-2025-beloe-suhoe-12 field back
 
 # вино-сухое-розовое-кубань-вино-шато-тамань-кабер  ->  shato-taman-kaberne-sovinon
-13918721_0.jpg shato-taman-kaberne-sovinon field
+13918721_0.jpg shato-taman-kaberne-sovinon field front
 13918721_1.jpg x
 13918721_2.jpg x
-14692624_0.jpg shato-taman-kaberne-sovinon field
+14692624_0.jpg shato-taman-kaberne-sovinon field front
 14692624_1.jpg x
-14692624_2.jpg shato-taman-kaberne-sovinon field
-14907980_0.jpg shato-taman-kaberne-sovinon field
+14692624_2.jpg shato-taman-kaberne-sovinon field front
+14907980_0.jpg shato-taman-kaberne-sovinon field front
 14907980_1.jpg x
-14907980_2.jpg shato-taman-kaberne-sovinon field
-17031076_0.jpg shato-taman-kaberne-sovinon field
+14907980_2.jpg shato-taman-kaberne-sovinon field front
+17031076_0.jpg shato-taman-kaberne-sovinon field front
 17031076_1.jpg x
 17031076_2.jpg x
 17760897_0.jpg x
 17760897_1.jpg x
 
 # шампанское-абрау-дюрсо-victor-dravigny-виктор-др  ->  abrau-dyurso-victor-dravigny-bryut
-12876444_0.jpg abrau-dyurso-victor-dravigny-bryut field
+12876444_0.jpg abrau-dyurso-victor-dravigny-bryut field front
 12876444_1.jpg x
 12876444_2.jpg x
-16117580_0.jpg abrau-dyurso-victor-dravigny-bryut field
-16117580_1.jpg abrau-dyurso-victor-dravigny-bryut field
+16117580_0.jpg abrau-dyurso-victor-dravigny-bryut field neck
+16117580_1.jpg abrau-dyurso-victor-dravigny-bryut field neck
 16117580_2.jpg x
-17368513_0.jpg abrau-dyurso-victor-dravigny-bryut field
-17368513_1.jpg abrau-dyurso-victor-dravigny-bryut field
+17368513_0.jpg abrau-dyurso-victor-dravigny-bryut field front
+17368513_1.jpg abrau-dyurso-victor-dravigny-bryut field front
 17368513_2.jpg x
-5921004_0.jpg abrau-dyurso-victor-dravigny-bryut field
+5921004_0.jpg abrau-dyurso-victor-dravigny-bryut field front
 5921004_1.jpg x
 5921004_2.jpg x
 7555709_0.jpg x
@@ -152,18 +152,18 @@ ir_pei-da-raduisya_1.jpg soyuz-vino-kanonicheskie-traditsii-krasnoe-sladkoe-kabe
 7555709_2.jpg x
 
 # русское-шампанское-полусладкое-красное-абрау-дюр  ->  abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12
-10390039_0.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12 field
+10390039_0.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12 field front   # старое оформление: на этикетке «Русское шампанское»
 10390039_1.jpg x
-13978352_0.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12 field
-13978352_1.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12 field
+13978352_0.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12 field front
+13978352_1.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12 field back
 13978352_2.jpg x
-15501518_0.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12 field
-15501518_1.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12 field
+15501518_0.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12 field front
+15501518_1.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12 field front
 15501518_2.jpg x
-3284063_0.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12 field
-3284063_1.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12 field
+3284063_0.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12 field front   # старое оформление: на этикетке «Русское шампанское»
+3284063_1.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12 field front   # старое оформление: на этикетке «Русское шампанское»
 3284063_2.jpg x
-5881591_0.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12 field
+5881591_0.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12 field front   # старое оформление: на этикетке «Русское шампанское»
 5881591_1.jpg x
 5881591_2.jpg x
 
@@ -217,3 +217,106 @@ ir_pei-da-raduisya_1.jpg soyuz-vino-kanonicheskie-traditsii-krasnoe-sladkoe-kabe
 9867668_0.jpg x
 9867668_1.jpg x
 9867668_2.jpg x
+
+# Соседи по линейке: вина, которые система путает с набором.
+10615250_0.jpg abrau-dyurso-russkoe-igristoe-polusuhoe-shardone-beloe-12 field front   # сосед по линейке, Российское шампанское Абрау-Дюрсо полусухое
+10615250_1.jpg abrau-dyurso-russkoe-igristoe-polusuhoe-shardone-beloe-12 field back   # сосед по линейке, Российское шампанское Абрау-Дюрсо полусухое
+10729273_0.jpg massandra-muskat field front   # сосед по линейке, Вино белое сухое Массандра "Мускат"
+10729273_1.jpg massandra-muskat field back   # сосед по линейке, Вино белое сухое Массандра "Мускат"
+10806701_0.jpg massandra-muskat field back   # сосед по линейке, Вино белое сухое Массандра "Мускат"
+10806701_1.jpg massandra-muskat field multi   # сосед по линейке, Вино белое сухое Массандра "Мускат"
+11064469_0.jpg muskat-avtorskoe-vino field front   # сосед по линейке, Вино белое сухое Массандра "Мускат"
+11064469_1.jpg muskat-avtorskoe-vino field front   # сосед по линейке, Вино белое сухое Массандра "Мускат"
+11246121_0.jpg x field front   # этикетки не видно
+11246121_1.jpg x field front   # этикетки не видно
+11313721_0.jpg abrau-dyurso-russkoe-igristoe-polusuhoe-shardone-beloe-12 field front   # сосед по линейке, Российское шампанское Абрау-Дюрсо полусухое
+11313721_1.jpg x field front   # этикетки не видно
+11585211_0.jpg abrau-dyurso-russkoe-igristoe-polusuhoe-rozovoe-pino-nuar-12 field front   # сосед по линейке, Российское шампанское "Абрау-Дюрсо" полусухое ро
+11585211_1.jpg x field front   # этикетки не видно
+11977525_0.jpg x field front   # этикетки не видно
+11977525_1.jpg abrau-dyurso-russkoe-igristoe-polusuhoe-rozovoe-pino-nuar-12 field back   # сосед по линейке, Российское шампанское "Абрау-Дюрсо" полусухое ро
+12176352_0.jpg massandra-muskat field front   # сосед по линейке, Вино белое сухое Массандра "Мускат"
+12176352_1.jpg x field front   # этикетки не видно
+13168313_0.jpg massandra-portveyn-belyy-krymskiy-kokur-beloe-sladkoe-18 field front   # сосед по линейке, Вино Массандра "Портвейн белый Крымский"
+13168313_1.jpg massandra-portveyn-belyy-krymskiy-kokur-beloe-sladkoe-18 field front   # сосед по линейке, Вино Массандра "Портвейн белый Крымский"
+13795944_0.jpg massandra-portveyn-belyy-krymskiy-kokur-beloe-sladkoe-18 field front   # сосед по линейке, Вино Массандра "Портвейн белый Крымский"
+13795944_1.jpg massandra-portveyn-belyy-krymskiy-kokur-beloe-sladkoe-18 field back   # сосед по линейке, Вино Массандра "Портвейн белый Крымский"
+13918558_0.jpg massandra-portveyn-belyy-krymskiy-kokur-beloe-sladkoe-18 field front   # сосед по линейке, Вино Массандра "Портвейн белый Крымский"
+13918558_1.jpg massandra-portveyn-belyy-krymskiy-kokur-beloe-sladkoe-18 field front   # сосед по линейке, Вино Массандра "Портвейн белый Крымский"
+14098525_0.jpg massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13 field front   # сосед по линейке, Вино Массандра "Мускат белый Красного камня" бел
+14098525_1.jpg massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13 field front   # сосед по линейке, Вино Массандра "Мускат белый Красного камня" бел
+14544567_0.jpg x field front   # этикетки не видно
+14544567_1.jpg - field front   # сосед по линейке, Портвейн белый Массандра "Поручик Голицын"
+14555232_0.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-shardone-beloe-12 field front   # сосед по линейке, Российское шампанское Абрау-Дюрсо полусладкое
+14555232_1.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-shardone-beloe-12 field back   # сосед по линейке, Российское шампанское Абрау-Дюрсо полусладкое
+14583333_0.jpg massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13 field front   # сосед по линейке, Вино Массандра "Мускат белый Красного камня" бел
+14583333_1.jpg massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13 field back   # сосед по линейке, Вино Массандра "Мускат белый Красного камня" бел
+14635986_0.jpg x field front   # этикетки не видно
+14635986_1.jpg massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13 field front   # сосед по линейке, Вино Массандра "Мускат белый Красного камня"
+14732673_0.jpg massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13 field front   # сосед по линейке, Вино Массандра "Мускат белый Красного камня" бел
+14732673_1.jpg massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13 field front   # сосед по линейке, Вино Массандра "Мускат белый Красного камня" бел
+14842757_0.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-shardone-beloe-12 field front   # сосед по линейке, Российское шампанское Абрау-Дюрсо полусладкое
+14842757_1.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-shardone-beloe-12 field back   # сосед по линейке, Российское шампанское Абрау-Дюрсо полусладкое
+15517452_0.jpg fanagoriya-beloe-polusladkoe field front   # сосед по линейке, Игристое белое полусладкое вино "Фанагория"
+15517452_1.jpg fanagoriya-beloe-polusladkoe field back   # сосед по линейке, Игристое белое полусладкое вино "Фанагория"
+15536279_0.jpg fanagoriya-fanagoriya-bryut-beloe-sovinon-blan-igristoe-bryut-beloe-11-13 field front   # сосед по линейке, Вино игристое Фанагория брют белое
+15536279_1.jpg fanagoriya-fanagoriya-bryut-beloe-sovinon-blan-igristoe-bryut-beloe-11-13 field front   # сосед по линейке, Вино игристое Фанагория брют белое
+15557112_0.jpg fanagoriya-beloe-polusladkoe field front   # сосед по линейке, Игристое белое полусладкое вино "Фанагория"
+15557112_1.jpg x field front   # этикетки не видно
+15586449_0.jpg fanagoriya-beloe-polusladkoe field front   # сосед по линейке, Игристое белое полусладкое вино "Фанагория"
+15586449_1.jpg fanagoriya-beloe-polusladkoe field back   # сосед по линейке, Игристое белое полусладкое вино "Фанагория"
+15598335_0.jpg massandra-portveyn-belyy-krymskiy-kokur-beloe-sladkoe-18 field front   # сосед по линейке, Вино Массандра "Портвейн белый Крымский"
+15598335_1.jpg massandra-portveyn-belyy-krymskiy-kokur-beloe-sladkoe-18 field back   # сосед по линейке, Вино Массандра "Портвейн белый Крымский"
+15619693_0.jpg fanagoriya-fanagoriya-bryut-beloe-sovinon-blan-igristoe-bryut-beloe-11-13 field front   # сосед по линейке, Вино игристое Фанагория брют белое
+15619693_1.jpg x field front   # этикетки не видно
+15678756_0.jpg - field front   # сосед по линейке, Портвейн Массандра Гурзуф
+15763089_0.jpg - field front   # сосед по линейке, Портвейн Массандра Гурзуф
+15881383_0.jpg - field front   # сосед по линейке, Портвейн Массандра Гурзуф
+15881383_1.jpg - field back   # сосед по линейке, Портвейн Массандра Гурзуф
+16151511_0.jpg abrau-dyurso-russkoe-igristoe-polusuhoe-rozovoe-pino-nuar-12 field front   # сосед по линейке, Российское шампанское "Абрау-Дюрсо" полусухое ро
+16151511_1.jpg abrau-dyurso-russkoe-igristoe-polusuhoe-rozovoe-pino-nuar-12 field front   # сосед по линейке, Российское шампанское "Абрау-Дюрсо" полусухое ро
+1642455_0.jpg abrau-dyurso-russkoe-igristoe-polusuhoe-shardone-beloe-12 field front   # сосед по линейке, Российское шампанское Абрау-Дюрсо полусухое
+1642455_1.jpg x field front   # этикетки не видно
+16729787_0.jpg massandra-muskat field front   # сосед по линейке, Вино белое сухое Массандра "Мускат"
+16729787_1.jpg massandra-muskat field front   # сосед по линейке, Вино белое сухое Массандра "Мускат"
+16787831_0.jpg - field back   # сосед по линейке, Портвейн Массандра Гурзуф
+16813195_0.jpg fanagoriya-fanagoriya-bryut-beloe-sovinon-blan-igristoe-bryut-beloe-11-13 field front   # сосед по линейке, Вино игристое Фанагория брют белое
+16813195_1.jpg fanagoriya-fanagoriya-bryut-beloe-sovinon-blan-igristoe-bryut-beloe-11-13 field front   # сосед по линейке, Вино игристое Фанагория брют белое
+16831661_0.jpg massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13 field front   # сосед по линейке, Вино Массандра "Мускат белый Красного камня" бел
+16831661_1.jpg massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13 field front   # сосед по линейке, Вино Массандра "Мускат белый Красного камня" бел
+16890541_0.jpg - field back   # сосед по линейке, Русское игристое Абрау-Дюрсо брют
+16952274_0.jpg fanagoriya-beloe-polusladkoe field front   # сосед по линейке, Игристое белое полусладкое вино "Фанагория"
+17125435_0.jpg - field front   # сосед по линейке, Портвейн белый Массандра "Поручик Голицын"
+17125435_1.jpg x field front   # этикетки не видно
+17164427_0.jpg fanagoriya-beloe-polusladkoe field front   # сосед по линейке, Игристое белое полусладкое вино "Фанагория"
+17164427_1.jpg fanagoriya-beloe-polusladkoe field back   # сосед по линейке, Игристое белое полусладкое вино "Фанагория"
+17397266_0.jpg massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13 field front   # сосед по линейке, Вино Массандра "Мускат белый Красного камня"
+17397266_1.jpg x field front   # этикетки не видно
+2663600_0.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-shardone-beloe-12 field front   # сосед по линейке, Российское шампанское Абрау-Дюрсо полусладкое
+2663600_1.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-shardone-beloe-12 field back   # сосед по линейке, Российское шампанское Абрау-Дюрсо полусладкое
+4303475_0.jpg massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13 field front   # сосед по линейке, Вино Массандра "Мускат белый Красного камня"
+4303475_1.jpg x field front   # этикетки не видно
+5401549_0.jpg massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13 field front   # сосед по линейке, Вино Массандра "Мускат белый Красного камня"
+5401549_1.jpg massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13 field front   # сосед по линейке, Вино Массандра "Мускат белый Красного камня"
+5464419_0.jpg - field front   # сосед по линейке, Портвейн белый Массандра "Поручик Голицын"
+5464419_1.jpg x field front   # этикетки не видно
+5861895_0.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-shardone-beloe-12 field front   # сосед по линейке, Российское шампанское Абрау-Дюрсо полусладкое
+5861895_1.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-shardone-beloe-12 field back   # сосед по линейке, Российское шампанское Абрау-Дюрсо полусладкое
+6182553_0.jpg abrau-dyurso-russkoe-igristoe-polusuhoe-rozovoe-pino-nuar-12 field front   # сосед по линейке, Российское шампанское "Абрау-Дюрсо" полусухое ро
+6182553_1.jpg x field front   # этикетки не видно
+6321068_0.jpg abrau-dyurso-russkoe-igristoe-polusuhoe-shardone-beloe-12 field front   # сосед по линейке, Российское шампанское Абрау-Дюрсо полусухое
+6321068_1.jpg abrau-dyurso-russkoe-igristoe-polusuhoe-shardone-beloe-12 field back   # сосед по линейке, Российское шампанское Абрау-Дюрсо полусухое
+6522615_0.jpg fanagoriya-fanagoriya-bryut-beloe-sovinon-blan-igristoe-bryut-beloe-11-13 field front   # сосед по линейке, Вино игристое Фанагория брют белое
+6522615_1.jpg fanagoriya-fanagoriya-bryut-beloe-sovinon-blan-igristoe-bryut-beloe-11-13 field back   # сосед по линейке, Вино игристое Фанагория брют белое
+6531253_0.jpg abrau-dyurso-russkoe-igristoe-polusuhoe-shardone-beloe-12 field multi   # сосед по линейке, Российское шампанское Абрау-Дюрсо полусухое
+6531253_1.jpg x field front   # этикетки не видно
+6682735_0.jpg massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13 field front   # сосед по линейке, Вино Массандра "Мускат белый Красного камня"
+6682735_1.jpg x field front   # этикетки не видно
+7193178_0.jpg massandra-portveyn-belyy-krymskiy-kokur-beloe-sladkoe-18 field front   # сосед по линейке, Вино Массандра "Портвейн белый Крымский"
+7193178_1.jpg massandra-portveyn-belyy-krymskiy-kokur-beloe-sladkoe-18 field back   # сосед по линейке, Вино Массандра "Портвейн белый Крымский"
+7579301_0.jpg rozovoe-polusladkoe-2 field front   # сосед по линейке, Российское шампанское Абрау-Дюрсо полусладкое
+7579301_1.jpg rozovoe-polusladkoe-2 field back   # сосед по линейке, Российское шампанское Абрау-Дюрсо полусладкое
+9448391_0.jpg fanagoriya-fanagoriya-bryut-beloe-sovinon-blan-igristoe-bryut-beloe-11-13 field front   # сосед по линейке, Вино игристое Фанагория брют белое
+9448391_1.jpg x field front   # этикетки не видно
+9465984_0.jpg - field front   # сосед по линейке, Портвейн белый Массандра "Поручик Голицын"
+9465984_1.jpg - field front   # сосед по линейке, Портвейн белый Массандра "Поручик Голицын"

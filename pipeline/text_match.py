@@ -86,12 +86,23 @@ def read_sweetness(low: str) -> str | None:
 
 def extract_attributes(text: str) -> Attributes:
     low = clean(text)
+    # Второй проход по строке, где латиница свёрнута в кириллицу. OCR
+    # сплошь и рядом отдаёт «KPACHOЕ» вместо «КРАСНОЕ» — буквы K, P, A, C, H
+    # в двух алфавитах выглядят одинаково. Без свёртки цвет просто не
+    # извлекался, и улика против белого кандидата не возникала: на
+    # 5881591_0.jpg лидером оставалось белое брют при «красном» на этикетке.
+    # Сначала исходная строка: в ней настоящая латиница — brut, demi sec,
+    # rose, — которую свёртка бы испортила.
+    folded = low.translate(HOMOGLYPHS)
     attrs = Attributes()
     attrs.years = set(re.findall(r"\b(19[89]\d|20[0-3]\d)\b", low))
-    attrs.sweetness = read_sweetness(low)
-    for word, value in COLORS.items():
-        if re.search(rf"\b{word}\b", low):
-            attrs.color = value
+    attrs.sweetness = read_sweetness(low) or read_sweetness(folded)
+    for source in (low, folded):
+        for word, value in COLORS.items():
+            if re.search(rf"\b{word}\b", source):
+                attrs.color = value
+                break
+        if attrs.color:
             break
 
     alc = re.search(r"\b(\d{1,2})[.,](\d)\s*%", text) or re.search(r"\b(\d{1,2})\s*%", text)
@@ -204,11 +215,18 @@ class TextChannel:
         picked = central_words(words, min_conf, band=0.5)
         if not picked:
             return []
-        out = self.contradictions(slug, extract_attributes(
+        hard = self.contradictions(slug, extract_attributes(
             " ".join(w.text for w in picked)))
+        out = list(hard)
 
         marks = discriminating([slug] + [r for r in rivals if r != slug], self)
-        mine = marks.get(slug, set())
+        # Сверяться надо со всеми словами карточки лидера, а не только с
+        # различающими. discriminating вычёркивает общие слова, и «chateau»
+        # с «tamagne» выпадали из набора лидера «Шато Тамань. Каберне
+        # Совиньон» — после чего засчитывались уликой против него же,
+        # хотя написаны на его собственной этикетке.
+        own = card_features(slug, self)
+        mine = marks.get(slug, set()) | own.name | own.grapes | own.producer
         for word in picked:
             for token in clean(word.text).split():
                 if len(token) < 3:
@@ -220,13 +238,47 @@ class TextChannel:
                 # за «мускатель» лидера, но признавался за «мускат» соседа.
                 if best_match(token, mine, SURE_MATCH):
                     continue
+                # Владелец слова должен быть чужой винодельни. Внутри
+                # одной слово серии принадлежит всем её винам сразу, и
+                # засчитывать его уликой нельзя: «chateau» и «tamagne»
+                # приписывались «Chateau Tamagne Signature» против лидера
+                # «Шато Тамань. Каберне Совиньон» — та же винодельня, та же
+                # надпись на этикетке, только в карточке лидера она
+                # кириллицей. Разводить соседей по линейке — работа
+                # resolve_close, у неё для этого своя группа близких.
+                brand = (self.by_slug.get(slug) or {}).get("manufacturer")
                 owners = [rival for rival in rivals
                           if rival != slug
+                          and (self.by_slug.get(rival) or {}).get("manufacturer") != brand
                           and best_match(token, marks.get(rival, set()), 1.0)]
-                if owners:
+                # Владелец должен быть ровно один. Слово, на которое
+                # претендуют несколько кандидатов, — общее, а не чьё-то:
+                # «chateau» стоит на карточках «Chateau André», «Chateau
+                # de Talu» и «Шато Тамань» сразу, и уликой против любого
+                # из них быть не может.
+                if len(owners) == 1:
                     out.append(f"на этикетке «{token}», это {owners[0]}")
                     break
         return out
+
+    def hard_conflicts(self, slug: str, words, min_conf: float = 0.60) -> list[str]:
+        """Только противоречия по структурным полям карточки.
+
+        Отделено от conflicts_with намеренно. Улика «на этикетке слово,
+        которое принадлежит другому кандидату» бывает ложной: на снимке
+        с двумя бутылками читается название соседней, и на 11751350_0.jpg
+        так прочиталось «красностоп» рядом с верным ответом. Такая улика
+        имеет право снизить уверенность, но не имеет права менять ответ.
+
+        Прочитанный цвет или сладость, прямо противоречащие карточке, —
+        другое дело: «красное» на этикетке при белом вине в карточке
+        означает, что это не оно, и лидера надо менять.
+        """
+        picked = central_words(words, min_conf, band=0.5)
+        if not picked:
+            return []
+        return self.contradictions(slug, extract_attributes(
+            " ".join(w.text for w in picked)))
 
     def confirms(self, slug: str, words, rivals: list[str],
                  min_conf: float = 0.60) -> list[str]:

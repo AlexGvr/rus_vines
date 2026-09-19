@@ -40,6 +40,7 @@ class Candidate:
     contradictions: list[str] = field(default_factory=list)
     conflicts: list[str] = field(default_factory=list)
     confirmed: list[str] = field(default_factory=list)
+    hard: list[str] = field(default_factory=list)
 
     def as_dict(self) -> dict:
         row = {"slug": self.slug, "cv_score": round(self.cv, 4),
@@ -265,6 +266,37 @@ def may_drop_caveat(candidates: list[Candidate], by_slug: dict,
     return bool(leader.confirmed) if crowded else True
 
 
+def demote_contradicted(candidates: list[Candidate], channel, words,
+                        min_conf: float, depth: int = 4) -> None:
+    """Лидер, которому этикетка прямо противоречит, уступает место.
+
+    До этой правки проверка лидера только понижала уверенность, а ответ
+    оставляла прежним. На 5881591_0.jpg OCR читал «КРАСНОЕ», карточка
+    лидера была белым брютом, противоречие фиксировалось — и лидер всё
+    равно уходил пользователю и в оценочное API, которое берёт первого
+    кандидата и порогов не знает. Проверка, не меняющая ответа, ничего
+    не проверяет.
+
+    Понижение идёт только по структурным полям карточки — цвет, сладость,
+    год. Улика вида «на этикетке слово другого кандидата» ответ не меняет:
+    на снимке с двумя бутылками читается название соседней.
+
+    Глубина ограничена: если противоречат подряд несколько кандидатов,
+    скорее ошибается чтение, а не каталог, и лучше оставить порядок
+    зрению.
+    """
+    for _ in range(depth):
+        leader = candidates[0]
+        leader.hard = channel.hard_conflicts(leader.slug, words, min_conf)
+        if not leader.hard:
+            return
+        nxt = next((i for i, c in enumerate(candidates[1:], 1)
+                    if not channel.hard_conflicts(c.slug, words, min_conf)), None)
+        if nxt is None:
+            return
+        candidates.insert(nxt, candidates.pop(0))
+
+
 def check_leader(candidates: list[Candidate], crop: Image.Image, channel,
                  read_words, min_conf: float, window: float = 0.80,
                  by_slug: dict | None = None) -> int:
@@ -279,8 +311,9 @@ def check_leader(candidates: list[Candidate], crop: Image.Image, channel,
     """
     if not candidates:
         return 0
-    leader = candidates[0]
     words = read_words(crop)
+    demote_contradicted(candidates, channel, words, min_conf)
+    leader = candidates[0]
     leader.conflicts = channel.conflicts_with(
         leader.slug, words, [c.slug for c in candidates[1:]], min_conf)
     # Подтверждения сверяются только с близкими соперниками. По всему

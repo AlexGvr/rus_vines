@@ -60,20 +60,48 @@ def series_of(name: str) -> str:
     return head or stem
 
 
-def split_of(wine_or_series: str, wines: list[str], series: list[str]) -> str:
-    """Часть выборки: настройка или финальный тест.
+def assign_splits(rows: list[dict]) -> dict[str, str]:
+    """Часть выборки для каждой связной группы «вино — фотосерия».
 
-    Деление идёт по позициям каталога, а не по кадрам: иначе одно вино
-    попадёт в обе части, и тест перестанет отвечать на вопрос о переносе
-    на другие вина. Отрицательные кадры делятся по фотосерии — позиции
-    у них нет.
+    Делить по позициям каталога нужно затем, чтобы тест отвечал на вопрос
+    о переносе на другие вина. Делить по фотосерии — затем, чтобы кадры
+    одной бутылки из одного отзыва не разъехались по частям. Порознь эти
+    два правила противоречат друг другу: в отзыве о «Шато Тамань» одна
+    фотография оказалась бутылкой Torre Tallada, и серия сразу попала
+    и в положительные (вино решает часть), и в отрицательные (серия
+    решает часть).
 
-    Обучающей части у полевого набора нет намеренно: сорока семи кадров
-    не хватит, чтобы обучать на них веса, и они обучаются на синтетике.
-    Здесь выбираются только пороги, и для этого нужны две части.
+    Поэтому вино и серия связываются в один граф, а часть назначается
+    связной группе целиком. Группы упорядочены по имени, распределение
+    чередуется — повторная сборка даёт то же самое.
+
+    Обучающей части у полевого набора нет намеренно: семидесяти кадров
+    не хватит, чтобы обучать на них веса. Здесь выбираются только пороги
+    и правила, и для этого нужны две части.
     """
-    pool = wines if wine_or_series in wines else series
-    return "tune" if pool.index(wine_or_series) % 2 == 0 else "test"
+    parent: dict[str, str] = {}
+
+    def find(node: str) -> str:
+        parent.setdefault(node, node)
+        while parent[node] != node:
+            parent[node] = parent[parent[node]]
+            node = parent[node]
+        return node
+
+    def union(left: str, right: str) -> None:
+        a, b = find(left), find(right)
+        if a != b:
+            parent[max(a, b)] = min(a, b)
+
+    for row in rows:
+        series = f"серия:{row['series']}"
+        find(series)
+        if row["slug"]:
+            union(series, f"вино:{row['slug']}")
+
+    groups = sorted({find(f"серия:{row['series']}") for row in rows})
+    return {group: ("tune" if i % 2 == 0 else "test")
+            for i, group in enumerate(groups)}, find
 
 
 def key_of(title: str) -> str:
@@ -221,7 +249,7 @@ def triage(out_dir: Path, per_sheet: int = 8) -> None:
 def build(decisions_path: Path, out_path: Path) -> None:
     """Манифест по решениям, принятым глазами. Строка на кадр:
 
-        <файл> <slug каталога | - | x> [field|studio]   # комментарий
+        <файл> <slug каталога | - | x> [field|studio] [что в кадре]  # заметка
 
     slug — позиция каталога, изображённая на кадре (положительный пример);
     «-»  — такой позиции в каталоге нет, любая карточка для неё ошибка;
@@ -236,19 +264,36 @@ def build(decisions_path: Path, out_path: Path) -> None:
 
     Третье поле отделяет съёмку от предметной карточки товара: снимок
     на белом фоне устойчивость к съёмке телефоном не проверяет.
+
+    Четвёртое — что попало в кадр: front (лицевая этикетка), back
+    (контрэтикетка), collage, multi (несколько бутылок), neck (горлышко,
+    этикетки не видно). Без него метрика смешивает разные задачи: оборот
+    и горлышко не найдёт никакой поиск.
+
+    Заметка после решётки едет в манифест столбцом note и в отчёты. Это
+    не украшение: две ошибки разметки — «Зелёное вино» в отзыве о Qortis
+    и Torre Tallada в отзыве о Шато Тамань — были исправлены прямо
+    в манифесте, и пересборка их возвращала. Источник правды один, этот
+    файл.
     """
+    frames = {"front", "back", "collage", "multi", "neck"}
     catalog = json.loads(CATALOG.read_text(encoding="utf-8"))["wines"]
     known = {w["slug"] for w in catalog}
     sources = json.loads((FIELD / "sources.json").read_text(encoding="utf-8"))
 
     rows, dropped = [], 0
-    for line in decisions_path.read_text(encoding="utf-8").splitlines():
-        line = line.split("#")[0].strip()
+    for raw in decisions_path.read_text(encoding="utf-8").splitlines():
+        line, _, note = raw.partition("#")
+        line, note = line.strip(), note.strip()
         if not line:
             continue
         parts = line.split()
         name, label = parts[0], parts[1]
         kind = parts[2] if len(parts) > 2 else "field"
+        frame = parts[3] if len(parts) > 3 else "front"
+        if frame not in frames:
+            sys.exit(f"{name}: четвёртое поле должно быть одним из "
+                     f"{sorted(frames)}, не «{frame}»")
         if not (FIELD / name).exists() and not (ROOT / "dataset" / "eval" / "queries" / name).exists():
             sys.exit(f"нет такого кадра: {name}")
         if label == "x":
@@ -259,26 +304,27 @@ def build(decisions_path: Path, out_path: Path) -> None:
         if kind not in ("field", "studio"):
             sys.exit(f"{name}: третье поле должно быть field или studio, не «{kind}»")
         rows.append({"image": name, "slug": "" if label == "-" else label,
-                     "kind": kind, "series": series_of(name),
+                     "kind": kind, "frame": frame, "note": note,
+                     "series": series_of(name),
                      "source": sources.get(name, {}).get("review", "публичный набор кейса"),
                      "title": sources.get(name, {}).get("listing_title", "")})
 
-    # Деление на части: по вину для положительных, по фотосерии для
-    # отрицательных. Порядок фиксирован сортировкой, поэтому повторный
-    # сбор манифеста даёт то же самое.
-    wines_order = sorted({r["slug"] for r in rows if r["slug"]})
-    series_order = sorted({r["series"] for r in rows if not r["slug"]})
+    splits, find = assign_splits(rows)
     for row in rows:
-        row["split"] = split_of(row["slug"] or row["series"], wines_order, series_order)
+        row["split"] = splits[find(f"серия:{row['series']}")]
 
-    crossing = {s for s in {r["series"] for r in rows}
-                if len({r["split"] for r in rows if r["series"] == s}) > 1}
-    if crossing:
-        sys.exit(f"фотосерии попали в разные части: {sorted(crossing)[:5]}")
+    # Проверки остаются: правило деления можно сломать правкой, а молчаливая
+    # утечка между частями обесценивает весь замер.
+    for field_name in ("series", "slug"):
+        crossing = {value for value in {r[field_name] for r in rows} if value
+                    and len({r["split"] for r in rows if r[field_name] == value}) > 1}
+        if crossing:
+            sys.exit(f"{field_name} попал в разные части: {sorted(crossing)[:5]}")
 
     with out_path.open("w", newline="", encoding="utf-8") as fh:
         writer = csv.DictWriter(fh, fieldnames=["image", "slug", "kind", "split",
-                                                "series", "source", "title"])
+                                                "series", "source", "title",
+                                                "frame", "note"])
         writer.writeheader()
         writer.writerows(rows)
     positive = sum(1 for r in rows if r["slug"])
@@ -287,6 +333,10 @@ def build(decisions_path: Path, out_path: Path) -> None:
     print(f"кадров {len(rows)}: вино есть в каталоге {positive}, "
           f"вина в каталоге нет {len(rows) - positive}; отброшено кадров {dropped}")
     print(f"из них съёмка: {shot}, предметная карточка товара: {len(rows) - shot}")
+    counts: dict[str, int] = {}
+    for row in rows:
+        counts[row["frame"]] = counts.get(row["frame"], 0) + 1
+    print("что в кадре: " + ", ".join(f"{k} {v}" for k, v in sorted(counts.items())))
     for part in ("tune", "test"):
         chunk = [r for r in rows if r["split"] == part]
         print(f"  {part}: кадров {len(chunk)}, позиций "

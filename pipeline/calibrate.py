@@ -349,10 +349,14 @@ def main() -> None:
         "features": list(core.FEATURE_ORDER),
         "outcome_weights": outcome_weights,
         "grid": grid_all, "grid_field": grid_field,
+        # Маска обучения пишется рядом с замерами. Без неё отчёт делит
+        # выборку пополам по порядку и попадает мимо: полевые кадры лежат
+        # в конце списка, и «отложенная половина» включала 31 пример,
+        # на котором модель обучалась.
         "cases": [{"present": c.present, "correct": c.correct, "field": c.field,
                    "in_top5": c.in_top5, "inliers": c.inliers, "plain": c.plain,
-                   **c.feats}
-                  for c in cases],
+                   "train": bool(flag), **c.feats}
+                  for c, flag in zip(cases, train)],
     }, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"\nзамеры: {out}")
 
