@@ -50,7 +50,9 @@ import searchcore as core  # noqa: E402
 from build_index import extra_references  # noqa: E402
 from embed import embed_paths  # noqa: E402
 from imageprep import normalize_batch  # noqa: E402
+from ocr import read_words  # noqa: E402
 from rerank import PrecomputedReranker  # noqa: E402
+from text_match import TextChannel  # noqa: E402
 
 INDEX_DIR = ROOT / "data" / "index"
 QUERIES = ROOT / "data" / "queries"
@@ -63,13 +65,55 @@ FEATURES = (
     "inliers", "inliers_to_best", "inliers_to_second", "geometry_rank",
     "coverage", "spread", "same_brand_as_cv_leader", "contradicted",
     "group_size", "geometry_decisive",
+    # Текст этикетки против полей карточки. Правила конвейера берут отсюда
+    # только уверенно прочитанное: неуверенное слово не двигает ничего.
+    # Модели можно отдать и слабые улики — пусть сама решает, чего они
+    # стоят. Именно текст и различает соседей по линейке, если читается.
+    "text_title", "text_name_found", "text_grapes_found",
+    "text_color", "text_sweetness", "text_year", "text_words",
 )
+
+
+def text_rows(candidates: list, words, channel) -> np.ndarray:
+    """Согласие прочитанного текста с карточкой каждого кандидата.
+
+    Порог уверенности здесь не применяется намеренно: правила конвейера
+    отбрасывают слабое чтение, чтобы не испортить ответ, а модель может
+    взвесить его сама. Цвет и сладость трёхзначны: совпало, противоречит,
+    не прочитано — «не прочитано» и «противоречит» это разные вещи,
+    и сводить их к нулю нельзя.
+    """
+    from normalize import clean
+    from text_match import best_match, card_features, extract_attributes
+
+    text = " ".join(w.text for w in words)
+    tokens = {t for t in clean(text).split() if len(t) >= 3}
+    attrs = extract_attributes(text)
+    out = []
+    for candidate in candidates:
+        card = card_features(candidate.slug, channel)
+        wanted = card.name | card.grapes
+        found = sum(1 for t in wanted if best_match(t, tokens, 0.85))
+        mine = sum(1 for t in tokens if best_match(t, wanted | card.producer, 0.85))
+        color = 0.0 if not attrs.color or not card.color else (
+            1.0 if attrs.color in card.color else -1.0)
+        sweet = 0.0 if not attrs.sweetness or not card.sweetness else (
+            1.0 if attrs.sweetness == card.sweetness else -1.0)
+        year = 0.0 if not attrs.years or not card.years else (
+            1.0 if attrs.years & card.years else -1.0)
+        out.append([
+            float(found / max(len(wanted), 1)),
+            float(found),
+            float(len(card.grapes & tokens)),
+            color, sweet, year, float(len(tokens)),
+        ])
+    return np.array(out, dtype=np.float32)
 
 
 def rows_for(candidates: list, by_slug: dict) -> np.ndarray:
     """Признаки каждого кандидата относительно остальных в шортлисте."""
     if not candidates:
-        return np.zeros((0, len(FEATURES)))
+        return np.zeros((0, len(FEATURES) - 7))
     cvs = np.array([c.cv for c in candidates])
     inl = np.array([float(c.inliers) for c in candidates])
     best_cv = cvs.max() or 1e-9
@@ -140,6 +184,7 @@ def collect(subset: str, split: str, index: str, topk: int, limit: int):
     with (INDEX_DIR / f"{index}.csv").open(encoding="utf-8") as fh:
         index_slugs = [row["slug"] or None for row in csv.DictReader(fh)]
     reranker = PrecomputedReranker(INDEX_DIR / "sift")
+    channel = TextChannel(wines)
 
     paths = [str(p) for p, _ in pairs]
     per_view = [embed_paths(paths, batch_size=32, progress_every=0, steps=steps)
@@ -161,7 +206,11 @@ def collect(subset: str, split: str, index: str, topk: int, limit: int):
         shot = shots[core.pick_view(shots, similarity)]
         candidates = core.shortlist(similarity.max(axis=1), index_slugs, topk)
         core.rerank(shot, candidates, reranker)
-        groups.append((rows_for(candidates, by_slug),
+        core.resolve(candidates, shot, channel, read_words,
+                     window=0.80, min_conf=0.60)
+        features = np.hstack([rows_for(candidates, by_slug),
+                              text_rows(candidates, read_words(shot), channel)])
+        groups.append((features,
                        np.array([c.slug == gold for c in candidates], dtype=int),
                        [c.slug for c in candidates], gold, str(path)))
         if len(groups) % 100 == 0:

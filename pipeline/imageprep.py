@@ -16,6 +16,7 @@
 """
 from __future__ import annotations
 
+import math
 import os
 from dataclasses import dataclass
 
@@ -216,6 +217,47 @@ def dewarp_cylinder(im: Image.Image, theta: float = 1.05) -> Image.Image:
         np.tile(np.arange(height).reshape(-1, 1), (1, width)), dtype=np.float32)
     warped = cv2.remap(arr, map_x, map_y, cv2.INTER_LINEAR, borderMode=cv2.BORDER_REPLICATE)
     return Image.fromarray(warped)
+
+
+def label_band_view(im: Image.Image, scale: int = 2, theta: float = 1.05):
+    """Полоса этикетки, развёрнутая с цилиндра и увеличенная — и как вернуть
+    координаты обратно в кроп.
+
+    Нужно для чтения. Строка, которая отличает вино от соседа по линейке,
+    идёт по дуге тонкими разрядёнными буквами, и на кропе целиком
+    распознаватель отдаёт из неё кашу: «РОЗОВОЕ ПОАУСУХОЕ» вместо
+    «РОЗОВОЕ ПОЛУСУХОЕ», «ИГРИстов» вместо «ИГРИСТОЕ». После развёртки
+    те же строки читаются целиком и с уверенностью 0.9 и выше.
+
+    Возвращает картинку и функцию обратного отображения: слова из полосы
+    должны попасть в ту же систему координат, что слова кропа, иначе
+    отбор по месту на кадре сравнивает несравнимое.
+    """
+    band = find_label_band(im)
+    top = 0
+    if band.height < im.height:
+        # find_label_band режет только по высоте, ширина сохраняется.
+        arr_im = np.array(im.convert("L")).mean(axis=1)
+        arr_bd = np.array(band.convert("L")).mean(axis=1)
+        for offset in range(im.height - band.height + 1):
+            if np.allclose(arr_im[offset:offset + band.height], arr_bd, atol=1e-3):
+                top = offset
+                break
+    flat = dewarp_cylinder(band, theta)
+    big = flat.resize((max(flat.width * scale, 1), max(flat.height * scale, 1)),
+                      Image.LANCZOS)
+
+    def to_crop(box):
+        """Прямоугольник полосы обратно в координаты кропа."""
+        out = []
+        for x in (box[0], box[2]):
+            u = x / scale / max(flat.width - 1, 1) * 2.0 - 1.0
+            # Прямое отображение было x = sin(u·θ)/sin(θ); обращаем его.
+            back = math.asin(max(-1.0, min(1.0, u * math.sin(theta)))) / theta
+            out.append((back + 1.0) * 0.5 * (im.width - 1))
+        return (out[0], box[1] / scale + top, out[1], box[3] / scale + top)
+
+    return big, to_crop
 
 
 def suppress_glare(im: Image.Image) -> Image.Image:
