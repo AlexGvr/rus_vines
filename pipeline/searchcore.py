@@ -36,6 +36,7 @@ class Candidate:
     cv: float
     inliers: int = 0
     coverage: float = 0.0
+    color: float = 1.0
     contradictions: list[str] = field(default_factory=list)
     conflicts: list[str] = field(default_factory=list)
     confirmed: list[str] = field(default_factory=list)
@@ -73,6 +74,20 @@ def shortlist(scores: np.ndarray, index_slugs: list[str | None],
     return out
 
 
+def pick_view(views: list, similarity) -> int:
+    """Каким кропом кормить геометрию: тем, который лучше узнал каталог.
+
+    Раньше геометрии всегда доставался кроп по бутылке. На части кадров
+    он хуже целого: лежащая бутылка даёт рамку, на три четверти состоящую
+    из стола, а на снимке полки детектор не находит ничего и кроп равен
+    кадру. Выбор по косинусу ничего не стоит — оба вида уже посчитаны для
+    шортлиста, — и на настроечной части полевого набора даёт top-1 20 из 30
+    против 18 и top-5 23 против 22.
+    """
+    best = similarity.max(axis=0)
+    return int(best.argmax()) if len(best) else 0
+
+
 GEOMETRY_MARGIN = 0.25
 
 
@@ -103,6 +118,7 @@ def rerank(crop: Image.Image, candidates: list[Candidate], reranker,
         if match is not None:
             candidate.inliers = int(match.inliers)
             candidate.coverage = float(match.coverage)
+            candidate.color = float(match.color)
     by_geometry = sorted(candidates, key=lambda c: (-c.inliers, -c.cv))
     decisive = (len(by_geometry) < 2
                 or by_geometry[0].inliers >= by_geometry[1].inliers * (1.0 + margin))

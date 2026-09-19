@@ -62,7 +62,6 @@ ImageFile.LOAD_TRUNCATED_IMAGES = True
 # recall@20 91.2% → 96.8% при нуле потерянных (data/index/multiview_sharp.json).
 # Остальные шаги конвейера на замере не оправдались и отключены.
 QUERY_VIEWS: tuple[tuple[str, ...], ...] = ((), ("detect",))
-GEOMETRY_VIEW = ("detect",)     # SIFT работает по плотному кропу, не по кадру
 INDEX_VARIANT = "clean_mv"
 CATALOG_PATH = ROOT / "data" / "catalog" / "catalog.json"
 INDEX_DIR = ROOT / "data" / "index"
@@ -181,8 +180,9 @@ def search_candidates(image: Image.Image,
     queries = embed_images(list(views.values()))
     # Строка индекса получает лучший косинус по видам запроса: видам не нужно
     # совпасть всем сразу, достаточно одной пары «вид запроса — вид эталона».
-    scores = (state["vectors"] @ queries.T).max(axis=1)
-    prepared = views[GEOMETRY_VIEW]
+    similarity = state["vectors"] @ queries.T
+    scores = similarity.max(axis=1)
+    prepared = list(views.values())[core.pick_view(list(views.values()), similarity)]
     candidates = core.shortlist(scores, state["slugs"], RERANK_TOPK)
     t_cv = (time.perf_counter() - t0) * 1000
 

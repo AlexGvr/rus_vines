@@ -95,6 +95,69 @@ def detect_bottles(images: list[Image.Image], conf: float | None = None,
     return out
 
 
+def rank_boxes(im: Image.Image, boxes, scores) -> list[tuple[Box, float]]:
+    """Найденные бутылки по убыванию «похоже, что снимали именно её»."""
+    width, height = im.size
+    ranked = []
+    for box, score in zip(boxes, scores):
+        x1, y1, x2, y2 = (int(v) for v in box)
+        candidate = Box(x1, y1, x2, y2)
+        rel_area = candidate.area / max(width * height, 1)
+        cx = (x1 + x2) / 2 / max(width, 1)
+        centrality = 1.0 - min(abs(cx - 0.5) * 2, 1.0)
+        ranked.append((candidate, score * (rel_area ** 0.5)
+                       * (0.35 + 0.65 * centrality)))
+    ranked.sort(key=lambda pair: -pair[1])
+    return ranked
+
+
+def detect_all_bottles(images: list[Image.Image], conf: float | None = None,
+                       batch_size: int = 16) -> list[list[Box]]:
+    """Все бутылки кадра по убыванию ранга, а не одна лучшая."""
+    model = load_detector()
+    out: list[list[Box]] = []
+    for i in range(0, len(images), batch_size):
+        chunk = [np.array(im.convert("RGB"))[:, :, ::-1]
+                 for im in images[i:i + batch_size]]
+        results = model.predict(chunk, classes=[BOTTLE_CLASS],
+                                conf=CONF if conf is None else conf,
+                                imgsz=IMGSZ, verbose=False, device=_device())
+        for im, res in zip(images[i:i + batch_size], results):
+            ranked = rank_boxes(im, res.boxes.xyxy.tolist(), res.boxes.conf.tolist())
+            out.append([box for box, _ in ranked])
+    return out
+
+
+def query_crops(image: Image.Image, limit: int = 3) -> list[Image.Image]:
+    """Несколько кандидатов кадрирования на один снимок.
+
+    Одна коробка детектора покрывает не все случаи, и оба провала видны
+    на полевых кадрах. Лежащая бутылка (15501518_0.jpg) даёт коробку,
+    на 78% состоящую из стола и пакетов: рамка YOLO выровнена по осям,
+    а бутылка идёт по диагонали. Снимок полки (02eef911.webp) не даёт
+    ни одной коробки — бутылки срезаны краями и стоят вплотную, — и в
+    запрос уходит весь кадр с тремя чужими этикетками.
+
+    Поэтому кандидатов несколько: целый кадр, лучшая бутылка, следующие
+    по рангу и повёрнутый вариант, когда коробка шире, чем выше. Дальше
+    побеждает тот кроп, у которого выше косинус, — выбор делает поиск,
+    а не эвристика кадрирования.
+    """
+    crops = [image]
+    boxes = detect_all_bottles([image])[0]
+    if not boxes:
+        # Полка: бутылки стоят вплотную и срезаны краями, на пороге 0.20
+        # детектор не находит ни одной, и в запрос уходит весь кадр
+        # с тремя чужими этикетками. Второй заход порогом пониже.
+        boxes = detect_all_bottles([image], conf=0.08)[0]
+    for box in boxes[:limit]:
+        crop = crop_box(image, box)
+        crops.append(crop)
+        if crop.width > crop.height:
+            crops.append(crop.rotate(90, expand=True))
+    return crops
+
+
 def crop_box(im: Image.Image, box: Box, pad: float = 0.04) -> Image.Image:
     width, height = im.size
     dx, dy = int((box.x2 - box.x1) * pad), int((box.y2 - box.y1) * pad)

@@ -56,6 +56,60 @@ def descriptors(image: Image.Image):
     return keypoints, desc
 
 
+def keypoint_colors(image: Image.Image, keypoints, patch: int = 3) -> np.ndarray:
+    """Средний цвет вокруг каждой точки, в координатах descriptors().
+
+    SIFT работает по яркости и про цвет не знает ничего. Внутри линейки
+    одной винодельни это стоит ответов: у «Русского Игристого» и у его
+    кошерного собрата одинаковый ромб, одинаковый вензель и одинаковый
+    шрифт, а обёртка синяя против золотой. Точки совпадают, число их
+    близко, и разводит вина только цвет в тех же самых точках.
+
+    Цвет берётся в Lab: канал L отбрасывается при сравнении, потому что
+    съёмка с полки темнее студийного эталона, а оттенок от освещения
+    страдает меньше яркости.
+    """
+    arr = np.array(image.convert("RGB"))
+    height, width = arr.shape[:2]
+    scale = MAX_SIDE / max(height, width)
+    if scale < 1.0:
+        arr = cv2.resize(arr, (int(width * scale), int(height * scale)),
+                         interpolation=cv2.INTER_AREA)
+    lab = cv2.cvtColor(arr, cv2.COLOR_RGB2LAB)
+    height, width = lab.shape[:2]
+    out = np.zeros((len(keypoints), 3), dtype=np.uint8)
+    for i, kp in enumerate(keypoints):
+        x, y = int(kp.pt[0]), int(kp.pt[1])
+        x0, x1 = max(x - patch, 0), min(x + patch + 1, width)
+        y0, y1 = max(y - patch, 0), min(y + patch + 1, height)
+        if x1 > x0 and y1 > y0:
+            out[i] = lab[y0:y1, x0:x1].reshape(-1, 3).mean(axis=0)
+    return out
+
+
+COLOR_TOLERANCE = 18.0    # расстояние в плоскости a*b*, дальше — другой цвет
+
+
+def color_agreement(query_colors, ref_colors, pairs) -> float:
+    """Доля совпавших точек, где сошёлся ещё и цвет.
+
+    Единица — цвет согласен везде, ноль — нигде. Считается по парам,
+    уже прошедшим гомографию: это те же точки, по которым начислены
+    инлаеры, только спрошено про них другое.
+    """
+    if query_colors is None or ref_colors is None or not pairs:
+        return 1.0
+    close = 0
+    for qi, ri in pairs:
+        if qi >= len(query_colors) or ri >= len(ref_colors):
+            continue
+        a = query_colors[qi].astype(np.float32)
+        b = ref_colors[ri].astype(np.float32)
+        if float(np.hypot(a[1] - b[1], a[2] - b[2])) <= COLOR_TOLERANCE:
+            close += 1
+    return close / len(pairs)
+
+
 def inlier_count(query_kp, query_desc, ref_kp, ref_desc) -> int:
     """Число соответствий, переживших тест Лоу и проверку гомографией."""
     if query_desc is None or ref_desc is None:
@@ -86,6 +140,7 @@ class MatchStats:
     coverage: float      # доля ячеек сетки эталона, где есть инлаеры
     spread: float        # площадь охвата инлаеров к площади всех точек эталона
     points: tuple = ()   # координаты инлаеров на эталоне, 0..1 по обеим осям
+    color: float = 1.0   # доля инлаеров, где сошёлся и цвет
 
     @property
     def precision(self) -> float:
@@ -120,8 +175,9 @@ def _layout(points, mask, ref_kp, grid: int = 4):
     return len(cells) / (grid * grid), min(spread, 1.0), normalized
 
 
-def match_stats(query_kp, query_desc, ref_kp, ref_desc) -> MatchStats:
-    """inlier_count плюс геометрия совпадения. Стоит столько же."""
+def match_stats(query_kp, query_desc, ref_kp, ref_desc,
+                query_colors=None, ref_colors=None) -> MatchStats:
+    """inlier_count плюс геометрия и цвет совпадения. Стоит столько же."""
     empty = MatchStats(0, 0, 0.0, 0.0)
     if query_desc is None or ref_desc is None:
         return empty
@@ -140,7 +196,10 @@ def match_stats(query_kp, query_desc, ref_kp, ref_desc) -> MatchStats:
         return MatchStats(0, len(good), 0.0, 0.0)
     ref_points = [ref_kp[m.trainIdx].pt for m in good]
     coverage, spread, normalized = _layout(ref_points, mask, ref_kp)
-    return MatchStats(int(mask.sum()), len(good), coverage, spread, normalized)
+    kept = [(m.queryIdx, m.trainIdx)
+            for m, keep in zip(good, mask.ravel()) if keep]
+    return MatchStats(int(mask.sum()), len(good), coverage, spread, normalized,
+                      color_agreement(query_colors, ref_colors, kept))
 
 
 def inlier_pairs(query_kp, query_desc, ref_kp, ref_desc):
@@ -221,7 +280,7 @@ class PrecomputedReranker:
     мегабайт, держать его целиком в памяти процесса ни к чему.
     """
 
-    def __init__(self, index_dir) -> None:
+    def __init__(self, index_dir, with_color: bool = False) -> None:
         import csv as _csv
         from pathlib import Path as _Path
 
@@ -229,6 +288,14 @@ class PrecomputedReranker:
         self.desc = np.load(index_dir / "desc.npy", mmap_mode="r")
         self.kpts = np.load(index_dir / "kpts.npy", mmap_mode="r")
         self.offsets = np.load(index_dir / "offsets.npy")
+        # Цвет вокруг совпавших точек считается только по запросу: в порядок
+        # кандидатов он не идёт. Замер показал, что мешает, а не помогает
+        # (pipeline/eval_rank.py, ARCHITECTURE.md). Оставлен для разбора:
+        # «Victor Dravigny. Красное» он отводит уверенно, а соседей по
+        # «Русскому Игристому» — нет, и видно почему.
+        colors = index_dir / "colors.npy"
+        self.colors = (np.load(colors, mmap_mode="r")
+                       if with_color and colors.exists() else None)
         # У позиции может быть несколько эталонов — основной из каталога
         # и независимые снимки из data/catalog/extra_refs.csv. Храним все
         # и берём лучший по числу совпавших точек.
@@ -240,15 +307,17 @@ class PrecomputedReranker:
     def entry(self, idx: int):
         start, end = int(self.offsets[idx]), int(self.offsets[idx + 1])
         if end <= start:
-            return None, None
+            return None, None, None
         desc = np.asarray(self.desc[start:end], dtype=np.float32)
         points = [Point(float(x), float(y)) for x, y in self.kpts[start:end]]
-        return points, desc
+        colors = (np.asarray(self.colors[start:end])
+                  if self.colors is not None else None)
+        return points, desc, colors
 
     def reference(self, slug: str):
         """Первый эталон позиции. Для совместимости со старым вызовом."""
         entries = self.positions.get(slug) or []
-        return self.entry(entries[0]) if entries else (None, None)
+        return self.entry(entries[0])[:2] if entries else (None, None)
 
     def scores(self, query: Image.Image, slugs: list[str]) -> dict[str, int]:
         return {slug: stats.inliers
@@ -261,11 +330,15 @@ class PrecomputedReranker:
         винодельни, и сто точек по всей этикетке — разная уверенность.
         """
         query_kp, query_desc = descriptors(query)
+        query_colors = (keypoint_colors(query, query_kp)
+                        if self.colors is not None else None)
         out = {}
         for slug in slugs:
             best = MatchStats(0, 0, 0.0, 0.0)
             for idx in self.positions.get(slug, []):
-                stats = match_stats(query_kp, query_desc, *self.entry(idx))
+                ref_kp, ref_desc, ref_colors = self.entry(idx)
+                stats = match_stats(query_kp, query_desc, ref_kp, ref_desc,
+                                    query_colors, ref_colors)
                 if stats.inliers > best.inliers:
                     best = stats
             out[slug] = best

@@ -94,6 +94,28 @@ def order_inside_five(cands, depth: int = 5):
     return order_inliers(ranked[:depth]) + ranked[depth:]
 
 
+def order_color(cands, margin: float, veto: float = 0.5):
+    """То же правило отрыва, но число точек взвешено согласием цвета.
+
+    SIFT смотрит только яркость. Цвет вокруг совпавших точек — отдельное
+    свидетельство: если геометрия сложила ромб с ромбом, а вокруг точек
+    у запроса тёмно-красное, у эталона золотое, совпадение формальное.
+    """
+    scored = sorted(cands, key=lambda c: (-(c.inliers * c.color), -c.cv))
+    if len(scored) < 2:
+        return scored
+    best, second = (scored[0].inliers * scored[0].color,
+                    scored[1].inliers * scored[1].color)
+    return scored if best >= second * (1.0 + margin) else order_cosine(cands)
+
+
+def order_color_veto(cands, margin: float, veto: float = 0.5):
+    """Цвет только отводит кандидата, порядок остальных не трогает."""
+    ranked = order_geometry_if_clear(cands, margin)
+    return ([c for c in ranked if c.color >= veto]
+            + [c for c in ranked if c.color < veto])
+
+
 def schemes(window: float, margin: float) -> dict:
     return {
         "косинус": order_cosine,
@@ -103,6 +125,9 @@ def schemes(window: float, margin: float) -> dict:
         **{f"геометрия при отрыве {m:.0%}":
            (lambda m: lambda c: order_geometry_if_clear(c, m))(m)
            for m in (0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.50, 0.75)},
+        "инлаеры × цвет, отрыв 25%": lambda c: order_color(c, 0.25),
+        "цветовое вето 0.5": lambda c: order_color_veto(c, 0.25, 0.5),
+        "цветовое вето 0.3": lambda c: order_color_veto(c, 0.25, 0.3),
         "геометрия внутри пятёрки": order_inside_five,
         "геометрия внутри тройки": lambda c: order_inside_five(c, 3),
         "геометрия внутри десятки": lambda c: order_inside_five(c, 10),
@@ -162,7 +187,7 @@ def main() -> None:
     vectors = np.load(INDEX_DIR / f"{args.index}.npy")
     with (INDEX_DIR / f"{args.index}.csv").open(encoding="utf-8") as fh:
         index_slugs = [row["slug"] or None for row in csv.DictReader(fh)]
-    reranker = PrecomputedReranker(INDEX_DIR / "sift")
+    reranker = PrecomputedReranker(INDEX_DIR / "sift", with_color=True)
 
     paths = [str(p) for p, _ in queries]
     per_view = [embed_paths(paths, batch_size=32, progress_every=0, steps=steps)

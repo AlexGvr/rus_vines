@@ -134,7 +134,8 @@ def collect(subset: str, index: str, views: list[tuple[str, ...]], topk: int,
     per_view = [embed_paths(paths, batch_size=32, progress_every=0, steps=steps)
                 for steps in views]
     kept = per_view[0][1]
-    scores = np.maximum.reduce([qv @ vectors.T for qv, _ in per_view])
+    per_view_scores = [qv @ vectors.T for qv, _ in per_view]
+    scores = np.maximum.reduce(per_view_scores)
     reranker = PrecomputedReranker(INDEX_DIR / "sift")
     channel = TextChannel.from_catalog(CATALOG)
     by_slug = {w["slug"]: w for w in json.loads(
@@ -144,7 +145,8 @@ def collect(subset: str, index: str, views: list[tuple[str, ...]], topk: int,
     for i, path in enumerate(kept):
         truth = gold[path]
         with Image.open(path) as raw:
-            crop = normalize_batch([raw.convert("RGB")], steps=("detect",))[0]
+            source = raw.convert("RGB")
+        shots = [normalize_batch([source], steps=steps)[0] for steps in views]
 
         # У полевого кадра без вина в каталоге правильного ответа нет вовсе,
         # вычёркивать нечего — такой кадр даёт ровно один случай.
@@ -156,6 +158,9 @@ def collect(subset: str, index: str, views: list[tuple[str, ...]], topk: int,
                 # запросом к вину, которого в каталоге нет.
                 row[[j for j, slug in enumerate(index_slugs) if slug == truth]] = -1.0
             candidates = core.shortlist(row, index_slugs, topk)
+            # Тот же выбор кропа для геометрии, что в сервисе.
+            similarity = np.stack([block[i] for block in per_view_scores], axis=1)
+            crop = shots[core.pick_view(shots, similarity)]
             core.rerank(crop, candidates, reranker)
             core.resolve(candidates, crop, channel, read_words,
                          window=window, min_conf=min_conf)

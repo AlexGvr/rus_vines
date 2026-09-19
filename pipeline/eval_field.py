@@ -157,8 +157,12 @@ def main() -> None:
         views = {steps: normalize_batch([image], steps=steps)[0]
                  for steps in ((), ("detect",))}
         query = embed_images(list(views.values()))
-        scores = (vectors @ query.T).max(axis=1)
+        similarity = vectors @ query.T
+        scores = similarity.max(axis=1)
         candidates = core.shortlist(scores, index_slugs, args.topk)
+        # Тот же выбор кропа, что в сервисе: иначе замер описывает не тот
+        # конвейер, который отвечает пользователю.
+        shot = list(views.values())[core.pick_view(list(views.values()), similarity)]
 
         # Позиция правильного ответа после каждой ступени: без этого промах
         # нельзя приписать к этапу, а лечатся этапы по-разному.
@@ -167,12 +171,12 @@ def main() -> None:
             return order.index(gold) if gold in order else -1
 
         rank_shortlist = place(row["slug"]) if row["slug"] else -1
-        core.rerank(views[("detect",)], candidates, reranker)
+        core.rerank(shot, candidates, reranker)
         rank_geometry = place(row["slug"]) if row["slug"] else -1
-        core.resolve(candidates, views[("detect",)], channel, read_words,
+        core.resolve(candidates, shot, channel, read_words,
                      window=0.80, min_conf=0.60)
         rank_text = place(row["slug"]) if row["slug"] else -1
-        core.check_leader(candidates, views[("detect",)], channel, read_words,
+        core.check_leader(candidates, shot, channel, read_words,
                           0.60, 0.80, by_slug)
         feats = core.features(candidates)
         results.append({
@@ -340,10 +344,22 @@ def main() -> None:
         "не удалось определить":
             [r for r in findable if r["probability"] < show_p],
     }
-    print(f"\n{'состояние выдачи':30} {'кадров':>8} {'верных':>8} {'ошибок':>8}")
+    print(f"\n{'состояние выдачи':30} {'кадров':>8} {'доля':>7} {'верных':>8} "
+          f"{'ошибок':>8} {'точность':>9}")
     for name, group in states.items():
         right = sum(1 for r in group if r["correct"])
-        print(f"{name:30} {len(group):>8} {right:>8} {len(group) - right:>8}")
+        share = len(group) / max(len(findable), 1) * 100
+        precision = right / len(group) * 100 if group else 0.0
+        print(f"{name:30} {len(group):>8} {share:>6.0f}% {right:>8} "
+              f"{len(group) - right:>8} {precision:>8.0f}%")
+    # Почему уверенных ответов может не быть вовсе: порог по вероятности —
+    # только половина условия, вторая половина это правило снятия оговорки.
+    over = [r for r in findable if r["probability"] >= confident_p]
+    if over and not states["одна карточка без оговорок"]:
+        right = sum(1 for r in over if r["correct"])
+        print(f"  порог {confident_p} прошли {len(over)} кадров "
+              f"(верных {right}), но правило снятия оговорки не сработало "
+              f"ни на одном: различающего слова на этикетке не прочитано")
     wrong_confident = [r for r in states["одна карточка без оговорок"]
                        if not r["correct"]]
     for r in wrong_confident:
