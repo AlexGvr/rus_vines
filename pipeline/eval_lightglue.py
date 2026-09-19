@@ -121,21 +121,46 @@ def main() -> None:
     ap.add_argument("--views", default="raw,detect")
     ap.add_argument("--topk", type=int, default=20)
     ap.add_argument("--limit", type=int, default=0)
+    ap.add_argument("--split", default="tune",
+                    help="часть полевого набора при --subset field")
     args = ap.parse_args()
     views = [tuple(s for s in spec.split("+") if s and s != "raw")
              for spec in args.views.split(",")]
 
     wines = {w["slug"]: w for w in json.loads(CATALOG.read_text())["wines"]}
-    manifest = list(csv.DictReader(
-        (QUERIES / f"manifest_{args.subset}.csv").open(encoding="utf-8")))
-    if args.limit:
-        manifest = manifest[:args.limit]
     paths, gold = [], {}
-    for row in manifest:
-        path = QUERIES / args.subset / row["image"]
-        if path.exists():
-            paths.append(str(path))
-            gold[str(path)] = row["slug"]
+    if args.subset == "field":
+        # Реальные снимки: только те, где видна лицевая этикетка и позиция
+        # вообще есть в индексе — иначе меряется охват каталога, а не
+        # сопоставление признаков.
+        sys.path.insert(0, str(ROOT / "pipeline"))
+        from build_index import extra_references
+        findable = ({s for s, w in wines.items() if w.get("photo")}
+                    | {s for _, s in extra_references()})
+        field = ROOT / "data" / "field"
+        for row in csv.DictReader((field / "manifest.csv").open(encoding="utf-8")):
+            if row["split"] != args.split or not row["slug"]:
+                continue
+            if row["slug"] not in findable or row["frame"] not in ("front", "collage", "multi"):
+                continue
+            path = field / row["image"]
+            if not path.exists():
+                path = ROOT / "dataset" / "eval" / "queries" / row["image"]
+            if path.exists():
+                paths.append(str(path))
+                gold[str(path)] = row["slug"]
+    else:
+        manifest = list(csv.DictReader(
+            (QUERIES / f"manifest_{args.subset}.csv").open(encoding="utf-8")))
+        if args.limit:
+            manifest = manifest[:args.limit]
+        for row in manifest:
+            path = QUERIES / args.subset / row["image"]
+            if path.exists():
+                paths.append(str(path))
+                gold[str(path)] = row["slug"]
+    if args.limit:
+        paths = paths[:args.limit]
 
     vectors = np.load(INDEX_DIR / f"{args.index}.npy")
     with (INDEX_DIR / f"{args.index}.csv").open(encoding="utf-8") as fh:

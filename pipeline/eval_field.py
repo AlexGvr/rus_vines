@@ -21,6 +21,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -121,11 +122,15 @@ def main() -> None:
     ap.add_argument("--weights", default=str(INDEX_DIR / "confidence.json"),
                     help="веса и пороги; тот же файл читает сервис")
     ap.add_argument("--topk", type=int, default=20)
+    ap.add_argument("--views", default="raw,detect",
+                    help="виды запроса через запятую, шаги внутри вида через '+'")
     ap.add_argument("--split", choices=["tune", "test", "all"], default="all",
                     help="часть выборки: tune — для подбора порогов, "
                          "test — финальная проверка, её для настройки не трогаем")
     args = ap.parse_args()
 
+    query_views = [tuple(x for x in spec.split("+") if x and x != "raw")
+                   for spec in args.views.split(",")]
     rows = list(csv.DictReader(Path(args.manifest).open(encoding="utf-8")))
     if args.split != "all":
         rows = [r for r in rows if r.get("split") == args.split]
@@ -140,7 +145,10 @@ def main() -> None:
     vectors = np.load(INDEX_DIR / f"{args.index}.npy")
     with (INDEX_DIR / f"{args.index}.csv").open(encoding="utf-8") as fh:
         index_slugs = [row["slug"] or None for row in csv.DictReader(fh)]
-    reranker = PrecomputedReranker(INDEX_DIR / "sift")
+    # Папка признаков задаётся снаружи: масштаб признаков эталонов должен
+    # совпадать с SIFT_MAX_SIDE запроса, иначе сравниваются разные вещи.
+    reranker = PrecomputedReranker(
+        os.environ.get("SIFT_DIR", str(INDEX_DIR / "sift")))
     channel = TextChannel(wines)
     equivalents = load_equivalents(by_slug)
     # Позиция «находима», если её эталон попал в индекс. Одного поля photo
@@ -164,7 +172,7 @@ def main() -> None:
     for row, path in resolve_all(rows):
         image = Image.open(path).convert("RGB")
         views = {steps: normalize_batch([image], steps=steps)[0]
-                 for steps in ((), ("detect",))}
+                 for steps in query_views}
         query = embed_images(list(views.values()))
         similarity = vectors @ query.T
         scores = similarity.max(axis=1)
