@@ -143,6 +143,32 @@ def match_stats(query_kp, query_desc, ref_kp, ref_desc) -> MatchStats:
     return MatchStats(int(mask.sum()), len(good), coverage, spread, normalized)
 
 
+def inlier_pairs(query_kp, query_desc, ref_kp, ref_desc):
+    """Пары точек, выживших после RANSAC, в координатах обоих изображений.
+
+    Нужно только для разбора глазами: число инлаеров говорит, кто выиграл,
+    а картинка — чем именно он выиграл. На соседях по линейке это решающая
+    разница: точки на общей гравюре или точки на названии сорта.
+    """
+    if query_desc is None or ref_desc is None:
+        return []
+    if len(query_desc) < 2 or len(ref_desc) < 2:
+        return []
+    _, bf = detector()
+    pairs = bf.knnMatch(query_desc, ref_desc, k=2)
+    good = [m for m, n in (p for p in pairs if len(p) == 2)
+            if m.distance < RATIO * n.distance]
+    if len(good) < MIN_MATCHES:
+        return []
+    src = np.float32([query_kp[m.queryIdx].pt for m in good]).reshape(-1, 1, 2)
+    dst = np.float32([ref_kp[m.trainIdx].pt for m in good]).reshape(-1, 1, 2)
+    _, mask = cv2.findHomography(src, dst, cv2.RANSAC, 5.0)
+    if mask is None:
+        return []
+    return [(query_kp[m.queryIdx].pt, ref_kp[m.trainIdx].pt)
+            for m, keep in zip(good, mask.ravel()) if keep]
+
+
 class Reranker:
     """Кэширует признаки эталонов: они не меняются между запросами.
 

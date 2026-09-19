@@ -26,12 +26,70 @@ import searchcore as core  # noqa: E402
 from embed import embed_images  # noqa: E402
 from imageprep import normalize_batch  # noqa: E402
 from ocr import read_words  # noqa: E402
-from rerank import PrecomputedReranker  # noqa: E402
+from rerank import MAX_SIDE, PrecomputedReranker  # noqa: E402
 from text_match import (TextChannel, card_features, central_words,  # noqa: E402
                         discriminating, extract_attributes)
 
 INDEX_DIR = ROOT / "data" / "index"
 CATALOG = ROOT / "data" / "catalog" / "catalog.json"
+
+
+def reference_image(slug: str, by_slug: dict) -> Image.Image | None:
+    """Эталонное фото позиции: из дампа или из дополнительных эталонов."""
+    from build_index import extra_references
+    photo = (by_slug.get(slug) or {}).get("photo")
+    if photo:
+        path = next((ROOT / "dataset" / "uploads_root").rglob("uploads")) / Path(photo).name
+        if path.exists():
+            return Image.open(path).convert("RGB")
+    for extra_path, extra_slug in extra_references():
+        if extra_slug == slug:
+            return Image.open(extra_path).convert("RGB")
+    return None
+
+
+def pair_picture(crop: Image.Image, slugs: list[str], by_slug: dict,
+                 out: Path) -> None:
+    """Совпавшие точки запроса и эталона, по строке на кандидата.
+
+    Нужно, чтобы увидеть глазами, чем именно набраны инлаеры. Проценты
+    говорят, что лидер выиграл по числу точек, но не говорят, что точки
+    эти легли на общую для всей линейки гравюру дворца, а не на название
+    сорта.
+    """
+    from rerank import descriptors, inlier_pairs
+
+    query_kp, query_desc = descriptors(crop)
+    rows = []
+    for slug in dict.fromkeys(slugs):
+        ref = reference_image(slug, by_slug)
+        if ref is None:
+            continue
+        ref_kp, ref_desc = descriptors(ref)
+        # descriptors масштабирует картинку; для рисования нужен тот же размер.
+        scaled = ref.copy()
+        scaled.thumbnail((MAX_SIDE, MAX_SIDE))
+        rows.append((slug, scaled, inlier_pairs(query_kp, query_desc,
+                                                ref_kp, ref_desc)))
+    if not rows:
+        return
+    width = max(crop.width + ref.width for _, ref, _ in rows)
+    height = sum(max(crop.height, ref.height) + 26 for _, ref, _ in rows)
+    sheet = Image.new("RGB", (width, height), "white")
+    draw = ImageDraw.Draw(sheet)
+    y = 0
+    for slug, ref, pairs in rows:
+        sheet.paste(crop, (0, y + 26))
+        sheet.paste(ref, (crop.width, y + 26))
+        draw.text((4, y + 6), f"{by_slug[slug]['title'][:60]} — точек {len(pairs)}",
+                  fill="black")
+        for (qx, qy), (rx, ry) in pairs:
+            draw.line((qx, y + 26 + qy, crop.width + rx, y + 26 + ry),
+                      fill="#c02020", width=1)
+            draw.ellipse((qx - 2, y + 24 + qy, qx + 2, y + 28 + qy), outline="#1060c0")
+        y += max(crop.height, ref.height) + 26
+    out.parent.mkdir(parents=True, exist_ok=True)
+    sheet.save(out)
 
 
 def main() -> None:
@@ -41,6 +99,9 @@ def main() -> None:
     ap.add_argument("--index", default="clean_mv")
     ap.add_argument("--topk", type=int, default=20)
     ap.add_argument("--picture", default="", help="куда сохранить кроп с разметкой OCR")
+    ap.add_argument("--matches", default="",
+                    help="куда сохранить картинку совпавших точек: лидер против "
+                         "правильного кандидата, точка к точке")
     args = ap.parse_args()
 
     wines = json.loads(CATALOG.read_text(encoding="utf-8"))["wines"]
@@ -106,6 +167,12 @@ def main() -> None:
     print(f"7. решение: лидер {by_slug[candidates[0].slug]['title'][:40]}, "
           f"уверенность {probability:.3f} (в пятёрке {probability5:.3f}), "
           f"признаки { {k: round(v, 3) for k, v in feats.items()} }")
+
+    if args.matches and args.gold:
+        pair_picture(crop, [candidates[0].slug, args.gold], by_slug,
+                     Path(args.matches))
+        print(f"\nсовпавшие точки: {args.matches} "
+              f"(слева запрос, справа эталон; линия — пара точек)")
 
     if args.picture:
         marked = crop.copy()

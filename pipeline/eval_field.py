@@ -134,6 +134,13 @@ def main() -> None:
     reranker = PrecomputedReranker(INDEX_DIR / "sift")
     channel = TextChannel(wines)
     equivalents = load_equivalents(by_slug)
+    # Позиция «находима», если её эталон попал в индекс. Одного поля photo
+    # для этого мало: у части позиций фото в дампе нет вовсе, и эталон для
+    # них приходит из data/catalog/extra_refs.csv.
+    sys.path.insert(0, str(ROOT / "pipeline"))
+    from build_index import extra_references
+    findable_slugs = {slug for slug, wine in by_slug.items() if wine.get("photo")}
+    findable_slugs |= {slug for _, slug in extra_references()}
 
     # Полевой кадр не должен оказаться среди эталонов: тогда запрос искал бы
     # сам себя. Индекс собирается только из фотографий каталога, но проверка
@@ -172,6 +179,7 @@ def main() -> None:
             "image": row["image"],
             "gold": row["slug"],
             "kind": row.get("kind", "field"),
+            "frame": row.get("frame", "front"),
             "rank_shortlist": rank_shortlist,
             "rank_geometry": rank_geometry,
             "rank_text": rank_text,
@@ -181,7 +189,7 @@ def main() -> None:
             "probability_top5": core.outcomes(feats, weights)[1],
             "plain": core.may_drop_caveat(candidates, by_slug, 0.80) if candidates else False,
             "conflicts": list(candidates[0].conflicts) if candidates else [],
-            "findable": bool(row["slug"]) and bool(by_slug.get(row["slug"], {}).get("photo")),
+            "findable": bool(row["slug"]) and row["slug"] in findable_slugs,
             "duplicate": bool(row["slug"]) and bool(candidates)
                          and candidates[0].slug != row["slug"]
                          and frozenset((row["slug"], candidates[0].slug)) in equivalents,
@@ -285,6 +293,21 @@ def main() -> None:
             print(f"  {name:36} {count:>4}")
         if hidden:
             print(f"  {'верен, но ниже порога показа':36} {hidden:>4}")
+
+    # Разбивка по тому, что вообще попало в кадр. Лицевая этикетка, оборот,
+    # коллаж и горлышко без этикетки — разные задачи, и смешивать их
+    # в одном проценте значит прятать, что оборот не ищется в принципе.
+    names = {"front": "лицевая этикетка", "back": "контрэтикетка",
+             "collage": "коллаж лицевой и оборота", "multi": "несколько бутылок",
+             "neck": "горлышко, этикетки не видно"}
+    print(f"\n{'что в кадре':32} {'кадров':>8} {'верных':>8} {'в пятёрке':>11}")
+    for key, name in names.items():
+        part = [r for r in results if r["frame"] == key and r["gold"] and r["findable"]]
+        if not part:
+            continue
+        print(f"{name:32} {len(part):>8} "
+              f"{sum(1 for r in part if r['correct']):>8} "
+              f"{sum(1 for r in part if r['in_top5']):>11}")
 
     for kind in ("field", "studio"):
         part = [r for r in results if r["kind"] == kind]

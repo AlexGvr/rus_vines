@@ -56,16 +56,39 @@ class Attributes:
     alcohol: float | None = None
 
 
+def read_sweetness(low: str) -> str | None:
+    """Категория сладости из строки OCR — или ничего, если чтение спорное.
+
+    Подстрокой это искать нельзя, и проверено на живых кадрах. OCR теряет
+    первую букву («ОЛУСУХОЕ»), путает П с латинской N («NOЛУСЛАДКОЕ»)
+    и разрывает слово пробелом («ПОЛУ СЛАДКОЕ»). Поиск подстрокой давал
+    на всех трёх «сухое» и «сладкое» — противоположность написанному,
+    и дальше это шло в улику против правильной карточки.
+
+    Правила три. Пробел после «полу» склеивается. Составные варианты
+    («экстра брют», «demi sec») ищутся по границам слов, длинные раньше
+    коротких. Однословные засчитываются, только если токен равен слову
+    целиком: токен, который на «сладкое» лишь заканчивается, — это
+    обрезанное «полусладкое», и читать его как «сладкое» хуже, чем
+    не читать вовсе.
+    """
+    glued = re.sub(r"\bполу\s+", "полу", low)
+    phrases = sorted(SWEETNESS.items(), key=lambda kv: -len(kv[0]))
+    for phrase, value in phrases:
+        if " " in phrase and re.search(rf"\b{re.escape(phrase)}\b", glued):
+            return value
+    tokens = set(glued.split())
+    for phrase, value in phrases:
+        if " " not in phrase and phrase in tokens:
+            return value
+    return None
+
+
 def extract_attributes(text: str) -> Attributes:
     low = clean(text)
     attrs = Attributes()
     attrs.years = set(re.findall(r"\b(19[89]\d|20[0-3]\d)\b", low))
-
-    # Длинные варианты идут первыми: «экстра брют» не должен схлопнуться в «брют»
-    for phrase, value in SWEETNESS.items():
-        if phrase in low:
-            attrs.sweetness = value
-            break
+    attrs.sweetness = read_sweetness(low)
     for word, value in COLORS.items():
         if re.search(rf"\b{word}\b", low):
             attrs.color = value
@@ -216,8 +239,7 @@ class TextChannel:
         Brut» уходила пользователю без оговорок. Подтверждением считается
         лишь слово, которое отличает лидера от соперников.
         """
-        marks = discriminating([slug] + [r for r in rivals if r != slug], self)
-        mine = marks.get(slug, set())
+        mine = distinguishing(slug, [r for r in rivals if r != slug], self)
         if not mine:
             return []
         out = []
@@ -385,6 +407,30 @@ def discriminating(candidates: list[str], channel: "TextChannel") -> dict[str, s
     return {slug: words - shared for slug, words in own.items()}
 
 
+def distinguishing(leader: str, rivals: list[str],
+                   channel: "TextChannel") -> set[str]:
+    """Слова, которые есть у лидера и нет ни у одного из соперников.
+
+    Отличие от discriminating существенное. Там общими считаются слова,
+    стоящие у всех кандидатов сразу, и «кокур» пережил отсев: он есть
+    у «Массандра Кокур», у «Кокур сухое» и у «Портвейн Белый Гурзуф»
+    (сорт), но нет у «Массандра Мускат». Пересечение по всему шортлисту
+    его не убрало, и слово пошло в подтверждение выбора между двумя
+    карточками, на каждой из которых оно написано.
+
+    Для снятия оговорки нужна не разница со всем шортлистом, а разница
+    с теми, кого лидер обошёл: слово подтверждает, только если ни у одного
+    близкого соперника его нет.
+    """
+    features = {slug: card_features(slug, channel) for slug in [leader] + rivals}
+    one_producer = len({frozenset(f.producer) for f in features.values()}) <= 1
+    own = {slug: (f.name | f.grapes | f.years
+                  | (set() if one_producer else f.producer))
+           for slug, f in features.items()}
+    return own[leader] - set().union(*(own[r] for r in rivals if r != leader)) \
+        if len(rivals) else own[leader]
+
+
 def resolve_close(candidates: list[tuple[str, float]], words,
                   channel: "TextChannel", window: float = 0.80,
                   min_conf: float = 0.60,
@@ -408,7 +454,9 @@ def resolve_close(candidates: list[tuple[str, float]], words,
     """
     if len(candidates) < 2:
         return candidates, {}
-    best = candidates[0][1]
+    # Группа считается от максимума совпавших точек, а не от первого
+    # в списке: порядок приходит уже не обязательно геометрический.
+    best = max(score for _, score in candidates)
     if best <= 0:
         return candidates, {}
     group = [c for c in candidates if c[1] >= best * window]
@@ -432,8 +480,13 @@ def resolve_close(candidates: list[tuple[str, float]], words,
                 found[slug].append(f"на этикетке «{token}», а у него нет")
     if not any(found.values()):
         return candidates, found
-    reordered = sorted(group, key=lambda c: (len(found[c[0]]), -c[1]))
-    return reordered + candidates[len(group):], found
+    # Улика опускает кандидата, всё остальное сохраняет входящий порядок.
+    # Раньше группа считалась началом списка и возвращалась отдельным
+    # куском; теперь она может быть разбросана по списку, и склейка
+    # «группа + хвост» перемешала бы порядок тем, кого улика не касается.
+    place = {slug: i for i, (slug, _) in enumerate(candidates)}
+    return sorted(candidates,
+                  key=lambda c: (len(found.get(c[0], [])), place[c[0]])), found
 
 
 def fuse(cv_candidates: list[tuple[str, float]], text_scores: dict[str, float],

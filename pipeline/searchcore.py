@@ -73,24 +73,57 @@ def shortlist(scores: np.ndarray, index_slugs: list[str | None],
     return out
 
 
-def rerank(crop: Image.Image, candidates: list[Candidate], reranker) -> list[Candidate]:
-    """Геометрическая проверка: сколько точек этикетки совпало и где."""
+GEOMETRY_MARGIN = 0.25
+
+
+def rerank(crop: Image.Image, candidates: list[Candidate], reranker,
+           margin: float = GEOMETRY_MARGIN) -> list[Candidate]:
+    """Геометрическая проверка: сколько точек этикетки совпало и где.
+
+    Порядок меняется, только если геометрия ответила уверенно — у лидера
+    по совпавшим точкам отрыв от второго не меньше margin. Иначе остаётся
+    порядок по косинусу.
+
+    Правило появилось из разбора полевых промахов. У линейки одной
+    винодельни общая часть этикетки больше различающей: гравюра дворца
+    и зелёная лента «Массандры» совпадают у всех её вин, название сорта
+    занимает три слова мелким шрифтом. Инлаеров тогда выходит 46-52
+    у пяти кандидатов подряд — разница внутри шума, а порядок она задавала
+    целиком, и правильный ответ, стоявший первым по косинусу, уезжал
+    на третье место.
+
+    Замерено на обоих наборах (pipeline/eval_rank.py). Полевая настроечная
+    часть: top-1 46.7% -> 60.0%, top-5 60.0% -> 70.0%. Синтетика, 400
+    запросов: 90.2% -> 91.2% и 94.2% -> 95.2%. Отключать геометрию совсем
+    нельзя — на синтетике один косинус даёт 80.8%.
+    """
     stats = reranker.stats(crop, [c.slug for c in candidates])
     for candidate in candidates:
         match = stats.get(candidate.slug)
         if match is not None:
             candidate.inliers = int(match.inliers)
             candidate.coverage = float(match.coverage)
-    candidates.sort(key=lambda c: (-c.inliers, -c.cv))
+    by_geometry = sorted(candidates, key=lambda c: (-c.inliers, -c.cv))
+    decisive = (len(by_geometry) < 2
+                or by_geometry[0].inliers >= by_geometry[1].inliers * (1.0 + margin))
+    candidates.sort(key=(lambda c: (-c.inliers, -c.cv)) if decisive
+                    else (lambda c: -c.cv))
     return candidates
 
 
 def has_close_group(candidates: list[Candidate], window: float) -> bool:
-    """Развела ли геометрия лидеров. Если нет — есть смысл читать этикетку."""
-    if len(candidates) < 2 or candidates[0].inliers <= 0:
+    """Развела ли геометрия лидеров. Если нет — есть смысл читать этикетку.
+
+    Считается от максимума инлаеров, а не от первого в списке: с тех пор
+    как геометрия переупорядочивает только при уверенном отрыве, первым
+    может стоять кандидат с меньшим числом совпавших точек.
+    """
+    if len(candidates) < 2:
         return False
-    limit = candidates[0].inliers * window
-    return sum(1 for c in candidates if c.inliers >= limit) >= 2
+    best = max(c.inliers for c in candidates)
+    if best <= 0:
+        return False
+    return sum(1 for c in candidates if c.inliers >= best * window) >= 2
 
 
 def resolve(candidates: list[Candidate], crop: Image.Image, channel,
@@ -131,9 +164,10 @@ def series_rivals(candidates: list[Candidate], by_slug: dict,
         return []
     leader = candidates[0]
     brand = (by_slug.get(leader.slug) or {}).get("manufacturer")
-    if not brand or leader.inliers <= 0:
+    best = max(c.inliers for c in candidates)
+    if not brand or best <= 0:
         return []
-    limit = leader.inliers * share
+    limit = best * share
     return [c for c in candidates[1:]
             if c.inliers >= limit
             and (by_slug.get(c.slug) or {}).get("manufacturer") == brand]
@@ -171,9 +205,11 @@ def features(candidates: list[Candidate]) -> dict[str, float]:
         return {name: 0.0 for name in FEATURE_ORDER}
     leader, others = candidates[0], candidates[1:]
     rivals = [c for c in others if not c.contradictions] or others
-    # Прямой соперник — лучший из оставшихся по геометрии: именно он занял бы
-    # место лидера, если бы того не было.
-    rival = max(rivals, key=lambda c: (c.inliers, c.cv), default=None)
+    # Прямой соперник — тот, кого показали бы вместо лидера, то есть
+    # следующий в том же порядке. Брать максимум по инлаерам больше нельзя:
+    # порядок задаёт геометрия не всегда, и «следующий» может стоять выше
+    # кандидата с большим числом совпавших точек.
+    rival = rivals[0] if rivals else None
     rival_inliers = rival.inliers if rival else 0
     total = leader.inliers + rival_inliers
     rival_cv = rival.cv if rival else leader.cv
