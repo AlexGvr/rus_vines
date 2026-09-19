@@ -105,6 +105,15 @@ def resolve_all(rows: list[dict]) -> list[tuple[dict, Path]]:
     return found
 
 
+# Кадры, по которым метрику считать осмысленно: в кадре видна та сторона
+# бутылки, которая есть в индексе. Индекс собран из лицевых фотографий
+# каталога, поэтому контрэтикетка и горлышко без этикетки не находятся
+# ни при каком качестве поиска — это дефект охвата каталога, а не поиска.
+# Коллаж и кадр с несколькими бутылками остаются: лицевая этикетка нужного
+# вина в них есть.
+SCORABLE = {"front", "collage", "multi"}
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--manifest", default=str(FIELD / "manifest.csv"))
@@ -194,7 +203,8 @@ def main() -> None:
             "probability_top5": core.outcomes(feats, weights)[1],
             "plain": core.may_drop_caveat(candidates, by_slug, 0.80) if candidates else False,
             "conflicts": list(candidates[0].conflicts) if candidates else [],
-            "findable": bool(row["slug"]) and row["slug"] in findable_slugs,
+            "findable": bool(row["slug"]) and row["slug"] in findable_slugs
+                        and row.get("frame", "front") in SCORABLE,
             "duplicate": bool(row["slug"]) and bool(candidates)
                          and candidates[0].slug != row["slug"]
                          and frozenset((row["slug"], candidates[0].slug)) in equivalents,
@@ -305,6 +315,18 @@ def main() -> None:
     names = {"front": "лицевая этикетка", "back": "контрэтикетка",
              "collage": "коллаж лицевой и оборота", "multi": "несколько бутылок",
              "neck": "горлышко, этикетки не видно"}
+    skipped = [r for r in results if r["frame"] not in SCORABLE]
+    if skipped:
+        with_wine = [r for r in skipped if r["gold"]]
+        right = sum(1 for r in with_wine if r["correct"])
+        print(f"\nне учтено в метрике: {len(skipped)} кадров — в кадре нет той "
+              f"стороны бутылки, что лежит в индексе")
+        for key in sorted({r["frame"] for r in skipped}):
+            part = [r for r in skipped if r["frame"] == key]
+            print(f"  {names.get(key, key):32} {len(part):>4}")
+        print(f"  из них с вином каталога {len(with_wine)}, и поиск угадал "
+              f"{right} — засчитывать это как отказ поиска нечестно в обе стороны")
+
     print(f"\n{'что в кадре':32} {'кадров':>8} {'верных':>8} {'в пятёрке':>11}")
     for key, name in names.items():
         part = [r for r in results if r["frame"] == key and r["gold"] and r["findable"]]
@@ -335,7 +357,8 @@ def main() -> None:
     # здесь же: отдельная таблица по синтетике ничего не говорит о съёмке.
     confident_p = artifact["thresholds"]["confident_p"]
     findable = [r for r in results if r["gold"] and r["findable"]]
-    absent = [r for r in results if not r["gold"]]
+    absent = [r for r in results if not r["gold"]
+              and r["frame"] in SCORABLE]
     states = {
         "одна карточка без оговорок":
             [r for r in findable if r["probability"] >= confident_p and r["plain"]],

@@ -342,7 +342,9 @@ async def search(image: UploadFile = File(...)) -> JSONResponse:
     if img is None:
         return JSONResponse({"error": "не удалось прочитать изображение"}, status_code=400)
 
-    candidates, conf, timings = search_candidates(img, top=5)
+    # Десять, а не пять: кейсодержатель просил при неуверенности показывать
+    # ближайших кандидатов «как текущая выдача до 10 вин».
+    candidates, conf, timings = search_candidates(img, top=10)
     found = bool(candidates) and conf["probability"] >= SHOW_P
 
     # Три состояния вместо «нашли или нет». Бинарное решение по одному порогу

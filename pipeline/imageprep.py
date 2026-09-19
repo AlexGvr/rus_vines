@@ -70,35 +70,24 @@ def detect_bottles(images: list[Image.Image], conf: float | None = None,
     """Целевая бутылка на каждом кадре.
 
     Пользователь наводит камеру на нужную бутылку, поэтому из нескольких
-    найденных выбираем ту, что крупнее и ближе к центру кадра: соседи по полке
-    обычно срезаны краем и смещены.
+    найденных выбирается центральная, крупная и целиком попавшая в кадр:
+    соседи по полке обычно срезаны краем и смещены. Порядок считает
+    rank_boxes — тот же, что и для нескольких кропов.
     """
-    model = load_detector()
-    out: list[Box | None] = []
-    for i in range(0, len(images), batch_size):
-        chunk = [np.array(im.convert("RGB"))[:, :, ::-1] for im in images[i:i + batch_size]]
-        results = model.predict(chunk, classes=[BOTTLE_CLASS],
-                                conf=CONF if conf is None else conf,
-                                imgsz=IMGSZ, verbose=False, device=_device())
-        for im, res in zip(images[i:i + batch_size], results):
-            width, height = im.size
-            best, best_score = None, 0.0
-            for box, score in zip(res.boxes.xyxy.tolist(), res.boxes.conf.tolist()):
-                x1, y1, x2, y2 = (int(v) for v in box)
-                candidate = Box(x1, y1, x2, y2)
-                rel_area = candidate.area / max(width * height, 1)
-                cx = (x1 + x2) / 2 / max(width, 1)
-                centrality = 1.0 - min(abs(cx - 0.5) * 2, 1.0)
-                rank = score * (rel_area ** 0.5) * (0.35 + 0.65 * centrality)
-                if rank > best_score:
-                    best, best_score = candidate, rank
-            out.append(best)
-    return out
+    return [boxes[0] if boxes else None
+            for boxes in detect_all_bottles(images, conf, batch_size)]
 
 
 def rank_boxes(im: Image.Image, boxes, scores) -> list[tuple[Box, float]]:
-    """Найденные бутылки по убыванию «похоже, что снимали именно её»."""
+    """Найденные бутылки по убыванию «похоже, что снимали именно её».
+
+    Правило кейсодержателя: распознавать центральную и целиком видимую
+    бутылку, части соседних в кадре допустимы. Поэтому кроме размера и
+    близости к центру учитывается, не срезана ли бутылка краем кадра:
+    соседи по полке обычно как раз обрезаны.
+    """
     width, height = im.size
+    edge = max(2, int(min(width, height) * 0.01))
     ranked = []
     for box, score in zip(boxes, scores):
         x1, y1, x2, y2 = (int(v) for v in box)
@@ -106,8 +95,11 @@ def rank_boxes(im: Image.Image, boxes, scores) -> list[tuple[Box, float]]:
         rel_area = candidate.area / max(width * height, 1)
         cx = (x1 + x2) / 2 / max(width, 1)
         centrality = 1.0 - min(abs(cx - 0.5) * 2, 1.0)
+        cut = sum((x1 <= edge, y1 <= edge,
+                   x2 >= width - edge, y2 >= height - edge))
+        whole = 0.55 ** cut
         ranked.append((candidate, score * (rel_area ** 0.5)
-                       * (0.35 + 0.65 * centrality)))
+                       * (0.35 + 0.65 * centrality) * whole))
     ranked.sort(key=lambda pair: -pair[1])
     return ranked
 

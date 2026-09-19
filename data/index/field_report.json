@@ -226,7 +226,7 @@
    "probability_top5": 0.20160456968756219,
    "plain": false,
    "conflicts": [],
-   "findable": true,
+   "findable": false,
    "duplicate": false,
    "correct": false,
    "in_top5": true
@@ -337,9 +337,9 @@
    "rank_geometry": 0,
    "rank_text": 0,
    "top1": "shato-taman-kaberne-sovinon",
-   "inliers": 12,
-   "probability": 0.21156160524091852,
-   "probability_top5": 0.21181766038015085,
+   "inliers": 14,
+   "probability": 0.13391107125030188,
+   "probability_top5": 0.14497265707677953,
    "plain": false,
    "conflicts": [],
    "findable": true,
@@ -399,7 +399,7 @@
    "probability_top5": 0.08468125132194243,
    "plain": false,
    "conflicts": [],
-   "findable": true,
+   "findable": false,
    "duplicate": false,
    "correct": false,
    "in_top5": false
@@ -418,7 +418,7 @@
    "probability_top5": 0.05105786284120055,
    "plain": false,
    "conflicts": [],
-   "findable": true,
+   "findable": false,
    "duplicate": false,
    "correct": false,
    "in_top5": false
@@ -532,7 +532,7 @@
    "probability_top5": 0.07961196850234759,
    "plain": false,
    "conflicts": [],
-   "findable": true,
+   "findable": false,
    "duplicate": false,
    "correct": false,
    "in_top5": false
@@ -665,7 +665,7 @@
    "probability_top5": 0.12537949129235965,
    "plain": false,
    "conflicts": [],
-   "findable": true,
+   "findable": false,
    "duplicate": false,
    "correct": false,
    "in_top5": false
@@ -684,7 +684,7 @@
    "probability_top5": 0.14202200037537813,
    "plain": false,
    "conflicts": [],
-   "findable": true,
+   "findable": false,
    "duplicate": false,
    "correct": false,
    "in_top5": false
@@ -779,7 +779,7 @@
    "probability_top5": 0.04896935950471993,
    "plain": false,
    "conflicts": [],
-   "findable": true,
+   "findable": false,
    "duplicate": false,
    "correct": false,
    "in_top5": false
@@ -855,7 +855,7 @@
    "probability_top5": 0.1459449735169288,
    "plain": true,
    "conflicts": [],
-   "findable": true,
+   "findable": false,
    "duplicate": false,
    "correct": false,
    "in_top5": false
@@ -952,7 +952,7 @@
    "probability_top5": 0.0707092321115746,
    "plain": false,
    "conflicts": [],
-   "findable": true,
+   "findable": false,
    "duplicate": false,
    "correct": false,
    "in_top5": false
@@ -1201,7 +1201,7 @@
    "probability_top5": 0.20113895066684565,
    "plain": true,
    "conflicts": [],
-   "findable": true,
+   "findable": false,
    "duplicate": false,
    "correct": false,
    "in_top5": true
@@ -1258,7 +1258,7 @@
    "probability_top5": 0.06018358412027566,
    "plain": false,
    "conflicts": [],
-   "findable": true,
+   "findable": false,
    "duplicate": false,
    "correct": false,
    "in_top5": false
