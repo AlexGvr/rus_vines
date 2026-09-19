@@ -122,7 +122,10 @@ SHOW_P = float(os.environ.get("SHOW_P", CONFIDENCE["thresholds"]["show_p"]))
 # OCR при этом считается для 15% запросов (data/index/tiebreak_sharp.json).
 CLOSE_WINDOW = 0.80
 OCR_MIN_CONF = 0.60
-CONFLICT_GATE = 0.05     # ниже этой уверенности проверять лидера незачем
+# Ниже этой уверенности незачем собирать улики и подтверждения: они меняют
+# только оформление выдачи, а такой ответ всё равно не будет показан.
+# Сам выбор вина порогом не управляется — он завершается в core.settle.
+CONFLICT_GATE = 0.05
 
 state: dict = {}
 
@@ -192,12 +195,12 @@ def search_candidates(image: Image.Image,
 
     t2 = time.perf_counter()
     label = core.LabelText(prepared, read_words)
-    core.resolve(candidates, prepared, state["text"], label,
-                 window=CLOSE_WINDOW, min_conf=OCR_MIN_CONF)
-    # Вторая работа текста: проверить лидера на противоречия. Она нужна
-    # там, где перестановка не помогает — когда нужного вина в каталоге нет
-    # и сосед по серии побеждает без конкурента. Запускается только если
-    # ответ иначе был бы показан, иначе OCR тратится впустую.
+    core.settle(candidates, prepared, state["text"], label,
+                window=CLOSE_WINDOW, min_conf=OCR_MIN_CONF)
+    # Улики и подтверждения собираются только если ответ иначе был бы
+    # показан: они меняют оформление выдачи, а не сам ответ, и на заведомо
+    # слабом совпадении не нужны. Слова к этому моменту уже прочитаны
+    # в settle, так что проверка почти бесплатна.
     if core.outcomes(core.features(candidates), OUTCOME_WEIGHTS)[0] >= CONFLICT_GATE:
         core.check_leader(candidates, prepared, state["text"], label,
                           OCR_MIN_CONF, CLOSE_WINDOW, state["by_slug"])

@@ -163,13 +163,17 @@ def collect(subset: str, index: str, views: list[tuple[str, ...]], topk: int,
             crop = shots[core.pick_view(shots, similarity)]
             core.rerank(crop, candidates, reranker)
             label = core.LabelText(crop, read_words)
-            core.resolve(candidates, crop, channel, label,
-                         window=window, min_conf=min_conf)
+            core.settle(candidates, crop, channel, label,
+                        window=window, min_conf=min_conf)
             if not candidates:
                 continue
             # Улики против лидера — часть конвейера, а не отдельный замер:
             # калибровать надо ту выдачу, которую увидит пользователь.
-            core.check_leader(candidates, crop, channel, label, min_conf, window)
+            # Аргументы те же, что в сервисе: без by_slug правило снятия
+            # оговорки считает иначе, и модель обучалась бы на признаках,
+            # которых в выдаче не бывает.
+            core.check_leader(candidates, crop, channel, label, min_conf,
+                              window, by_slug)
             slugs = [c.slug for c in candidates]
             cases.append(Case(
                 present=present,

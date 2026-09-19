@@ -229,7 +229,7 @@ class TextChannel:
         mine = marks.get(slug, set()) | own.name | own.grapes | own.producer
         for word in picked:
             for token in clean(word.text).split():
-                if len(token) < 3:
+                if len(token) < 3 or token in CATEGORY_WORDS:
                     continue
                 # Пороги намеренно разные. Слово засчитывается лидеру
                 # снисходительно, а сопернику — строго: правило одностороннее,
@@ -423,6 +423,18 @@ class CardFeatures:
     years: set[str]
 
 
+# Слова категории и цвета в любом алфавите. Из различителей названия они
+# вычёркиваются: категорию сравнивает отдельный путь, где BRUT и «брют»
+# сводятся к одному значению. Пока они считались произвольными токенами,
+# правильная «Фанагория. Брют белое» получала улику «на этикетке brut,
+# а у него нет» — потому что в её карточке слово написано кириллицей,
+# а в карточке соперника «Extra Brut Rose» латиницей.
+CATEGORY_WORDS = {token
+                  for phrase in list(SWEETNESS) + list(SWEETNESS.values())
+                  + list(COLORS) + list(COLORS.values())
+                  for token in re.split(r"[\s-]+", phrase) if token}
+
+
 def card_features(slug: str, channel: "TextChannel") -> CardFeatures:
     wine = channel.by_slug.get(slug) or {}
     producer = {t for t in clean(wine.get("manufacturer") or "").split() if len(t) >= 4}
@@ -431,7 +443,8 @@ def card_features(slug: str, channel: "TextChannel") -> CardFeatures:
     attrs = channel.attributes_of.get(slug)
     return CardFeatures(
         producer=producer,
-        name={t for t in title.split() if len(t) >= 3} - producer - grapes - STOPWORDS,
+        name=({t for t in title.split() if len(t) >= 3}
+              - producer - grapes - STOPWORDS - CATEGORY_WORDS),
         grapes=grapes,
         color=(attrs.color if attrs else None),
         sweetness=(attrs.sweetness if attrs else None),
@@ -517,7 +530,8 @@ def resolve_close(candidates: list[tuple[str, float]], words,
 
     marks = discriminating([slug for slug, _ in group], channel)
     read = [(t, w.conf) for w in central_words(words, min_conf)
-            for t in clean(w.text).split() if len(t) >= 3]
+            for t in clean(w.text).split()
+            if len(t) >= 3 and t not in CATEGORY_WORDS]
 
     found: dict[str, list[str]] = {slug: [] for slug, _ in group}
     for token, conf in read:

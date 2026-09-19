@@ -191,8 +191,8 @@ def main() -> None:
         core.rerank(shot, candidates, reranker)
         rank_geometry = place(row["slug"]) if row["slug"] else -1
         label = core.LabelText(shot, read_words)
-        core.resolve(candidates, shot, channel, label,
-                     window=0.80, min_conf=0.60)
+        core.settle(candidates, shot, channel, label,
+                    window=0.80, min_conf=0.60)
         rank_text = place(row["slug"]) if row["slug"] else -1
         core.check_leader(candidates, shot, channel, label,
                           0.60, 0.80, by_slug)

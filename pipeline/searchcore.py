@@ -364,13 +364,35 @@ def demote_contradicted(candidates: list[Candidate], channel, words,
         candidates.insert(nxt, candidates.pop(0))
 
 
+def settle(candidates: list[Candidate], crop: Image.Image, channel,
+           read_words, window: float, min_conf: float) -> list[Candidate]:
+    """Окончательный выбор вина: перестановка по тексту и отвод лидера.
+
+    Отделено от check_leader намеренно. Раньше отвод лидера по прочитанному
+    противоречию жил внутри проверки, а проверка звалась только если
+    предварительная уверенность выше CONFLICT_GATE. На 5881591_0.jpg
+    уверенность была 0.036, проверка пропускалась, и в оценочное API
+    уходило белое брют при «КРАСНОЕ» на этикетке — хотя сама проверка,
+    если её выполнить, отвечает правильно.
+
+    Порог уверенности решает, показывать ли ответ, и не должен решать,
+    какой это ответ. Поэтому здесь — всё, что меняет ответ, без порогов;
+    в check_leader — всё, что меняет только оформление выдачи.
+    """
+    resolve(candidates, crop, channel, read_words, window, min_conf)
+    if candidates:
+        demote_contradicted(candidates, channel, read_words(crop), min_conf)
+    return candidates
+
+
 def check_leader(candidates: list[Candidate], crop: Image.Image, channel,
                  read_words, min_conf: float, window: float = 0.80,
                  by_slug: dict | None = None) -> int:
     """Улики против лидера и подтверждения за него. Возвращает число улик.
 
-    Вызывается только когда ответ иначе был бы показан: OCR стоит около
-    сотни миллисекунд, и тратить их на заведомо слабое совпадение незачем.
+    Меняет только оформление выдачи: улика снижает уверенность и запрещает
+    снять оговорку, подтверждение разрешает. Сам ответ к этому моменту уже
+    выбран в settle.
 
     Кроме улик собираются подтверждения — слова, отличающие лидера от
     соперников. Они нужны решению о выдаче: молчание текста согласием
@@ -379,7 +401,6 @@ def check_leader(candidates: list[Candidate], crop: Image.Image, channel,
     if not candidates:
         return 0
     words = read_words(crop)
-    demote_contradicted(candidates, channel, words, min_conf)
     leader = candidates[0]
     leader.conflicts = channel.conflicts_with(
         leader.slug, words, [c.slug for c in candidates[1:]], min_conf)
