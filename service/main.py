@@ -191,14 +191,15 @@ def search_candidates(image: Image.Image,
     t_rerank = (time.perf_counter() - t1) * 1000
 
     t2 = time.perf_counter()
-    core.resolve(candidates, prepared, state["text"], read_words,
+    label = core.LabelText(prepared, read_words)
+    core.resolve(candidates, prepared, state["text"], label,
                  window=CLOSE_WINDOW, min_conf=OCR_MIN_CONF)
     # Вторая работа текста: проверить лидера на противоречия. Она нужна
     # там, где перестановка не помогает — когда нужного вина в каталоге нет
     # и сосед по серии побеждает без конкурента. Запускается только если
     # ответ иначе был бы показан, иначе OCR тратится впустую.
     if core.outcomes(core.features(candidates), OUTCOME_WEIGHTS)[0] >= CONFLICT_GATE:
-        core.check_leader(candidates, prepared, state["text"], read_words,
+        core.check_leader(candidates, prepared, state["text"], label,
                           OCR_MIN_CONF, CLOSE_WINDOW, state["by_slug"])
     t_text = (time.perf_counter() - t2) * 1000
 

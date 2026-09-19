@@ -144,38 +144,61 @@ def has_close_group(candidates: list[Candidate], window: float) -> bool:
     return sum(1 for c in candidates if c.inliers >= best * window) >= 2
 
 
-def read_label(crop: Image.Image, read_words) -> list:
-    """Строки этикетки: с кропа и отдельно с развёрнутой полосы.
+class LabelText:
+    """Строки этикетки, прочитанные один раз на запрос.
 
-    Одного прохода по кропу мало. Строка, которая отличает вино от соседа
-    по линейке, идёт по дуге тонкими разрядёнными буквами, и распознаватель
-    отдаёт из неё кашу: «РОЗОВОЕ ПОАУСУХОЕ» вместо «РОЗОВОЕ ПОЛУСУХОЕ»,
-    «ИГРИстов» вместо «ИГРИСТОЕ». После развёртки с цилиндра и увеличения
-    вдвое те же строки читаются целиком.
+    До этого OCR вызывался дважды: сначала перестановкой близких
+    кандидатов, потом проверкой лидера, — и каждый раз заново по тому же
+    кропу. С развёрткой полосы проходов становилось четыре, и время
+    ответа выходило за SLA. Кроп за запрос один, значит и чтение одно.
+    """
+
+    def __init__(self, crop: Image.Image, read_words) -> None:
+        self.crop = crop
+        self.read_words = read_words
+        self.words: list | None = None
+
+    def __call__(self, _crop=None) -> list:
+        if self.words is None:
+            self.words = read_label(self.crop, self.read_words)
+        return self.words
+
+
+def read_label(crop: Image.Image, read_words) -> list:
+    """Строки этикетки: с кропа, а при нужде ещё и с развёрнутой полосы.
+
+    Одного прохода по кропу не всегда хватает. Строка, которая отличает
+    вино от соседа по линейке, идёт по дуге тонкими разрядёнными буквами,
+    и распознаватель отдаёт из неё кашу: «РОЗОВОЕ ПОАУСУХОЕ» вместо
+    «РОЗОВОЕ ПОЛУСУХОЕ», «ИГРИстов» вместо «ИГРИСТОЕ». После развёртки
+    с цилиндра и увеличения вдвое те же строки читаются целиком.
+
+    Второй проход зовётся выборочно — только когда первый не дал ни цвета,
+    ни сладости: если различающий признак уже прочитан, читать заново
+    нечего. Выигрыша по времени это почти не дало, и вот почему: цвет
+    читается на 4 кадрах из 33, сладость на 6, то есть условие почти
+    всегда выполняется и проход всё равно нужен.
+
+    По умолчанию выключено. С развёрткой медиана ответа на публичных фото
+    кейса 1888 мс против 615 без неё. Качество при этом внутри шума:
+    на настроечной части top-1 34 из 64 против 33 и уверенных ответов
+    10 против 7 (все верны в обоих случаях), на тестовой top-1 тот же
+    19 из 57, а F1 top-1 34.9% против 38.6%. Включается LABEL_BAND=1.
 
     Координаты строк полосы переводятся обратно в кроп: отбор по месту
     на кадре отсеивает надписи с соседней бутылки, и сравнивать он должен
     в одной системе координат.
-
-    По умолчанию выключено, и вот почему. Второй проход OCR удваивает
-    время ответа: на трёх публичных фото кейса медиана выросла с 843 до
-    1929 мс, максимум с 1615 до 3193 — то есть вышел за SLA в 3000 мс.
-    Прирост качества этого не оправдывает: на настроечной части top-1
-    33 из 64 против 34, уверенных ответов 7 против 10 (все верны в обоих
-    случаях), а на тестовой части наоборот на один уверенный ответ меньше
-    и F1 top-1 38.6% против 34.9%. Разница в один-два кадра в обе стороны,
-    цена — нарушение требования по времени.
-
-    Включается переменной LABEL_BAND=1. Осмысленно станет, если научиться
-    звать второй проход выборочно — только когда первый не прочитал
-    ни цвета, ни сладости, а группа близких кандидатов есть.
     """
     from dataclasses import replace
 
     from imageprep import label_band_view
+    from text_match import extract_attributes
 
     words = list(read_words(crop))
     if os.environ.get("LABEL_BAND", "0") != "1":
+        return words
+    attrs = extract_attributes(" ".join(w.text for w in words))
+    if attrs.color and attrs.sweetness:
         return words
     try:
         band, to_crop = label_band_view(crop)
@@ -200,7 +223,7 @@ def resolve(candidates: list[Candidate], crop: Image.Image, channel,
     if not has_close_group(candidates, window):
         return candidates
     pairs = [(c.slug, float(c.inliers)) for c in candidates]
-    ranked, reasons = resolve_close(pairs, read_label(crop, read_words), channel,
+    ranked, reasons = resolve_close(pairs, read_words(crop), channel,
                                     window=window, min_conf=min_conf)
     if not any(reasons.values()):
         return candidates
@@ -355,7 +378,7 @@ def check_leader(candidates: list[Candidate], crop: Image.Image, channel,
     """
     if not candidates:
         return 0
-    words = read_label(crop, read_words)
+    words = read_words(crop)
     demote_contradicted(candidates, channel, words, min_conf)
     leader = candidates[0]
     leader.conflicts = channel.conflicts_with(

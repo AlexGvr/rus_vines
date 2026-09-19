@@ -55,9 +55,38 @@ def load_index(name: str):
     return vectors, rows
 
 
-def build_pairs(subsets: list[str], batch_size: int):
-    """Векторы синтетических запросов и slug правильной позиции."""
-    paths, gold = [], {}
+def field_pairs(splits: set[str]) -> list[tuple[str, str]]:
+    """Реальные снимки указанных частей: путь и правильный slug.
+
+    Тестовая часть сюда не попадает никогда — на ней только итоговая
+    проверка, иначе число перестаёт что-либо значить.
+    """
+    manifest = ROOT / "data" / "field" / "manifest.csv"
+    if not manifest.exists():
+        return []
+    out = []
+    for row in csv.DictReader(manifest.open(encoding="utf-8")):
+        if row["split"] not in splits or not row["slug"]:
+            continue
+        path = ROOT / "data" / "field" / row["image"]
+        if not path.exists():
+            path = ROOT / "dataset" / "eval" / "queries" / row["image"]
+        if path.exists():
+            out.append((str(path), row["slug"]))
+    return out
+
+
+def build_pairs(subsets: list[str], batch_size: int,
+                field_splits: set[str] | None = None):
+    """Векторы запросов и slug правильной позиции.
+
+    Кроме синтетики берутся реальные снимки — ровно те части полевого
+    набора, которые разрешены. Синтетический запрос сделан из того же
+    файла, что эталон, и голова, обученная только на нём, выучивает
+    устойчивость к аугментации, а не к съёмке: первая версия давала
+    99.5% на обучающей задаче и ноль разницы на полевых кадрах.
+    """
+    paths, gold, real = [], {}, set()
     for subset in subsets:
         manifest = QUERIES / f"manifest_{subset}.csv"
         if not manifest.exists():
@@ -67,10 +96,14 @@ def build_pairs(subsets: list[str], batch_size: int):
             if path.exists():
                 paths.append(str(path))
                 gold[str(path)] = row["slug"]
+    for path, slug in field_pairs(field_splits or set()):
+        paths.append(path)
+        gold[path] = slug
+        real.add(path)
     # Тот же вид, что в запросе сервиса: кроп по бутылке.
     vectors, kept = embed_paths(paths, batch_size=batch_size, progress_every=0,
                                 steps=("detect",))
-    return vectors, [gold[p] for p in kept]
+    return vectors, [gold[p] for p in kept], np.array([p in real for p in kept])
 
 
 def normalize(matrix: np.ndarray) -> np.ndarray:
@@ -138,6 +171,14 @@ def main() -> None:
     ap.add_argument("--temperature", type=float, default=0.05)
     ap.add_argument("--randoms", type=int, default=6)
     ap.add_argument("--batch-size", type=int, default=16)
+    ap.add_argument("--field-splits", default="tune",
+                    help="какие части полевого набора подмешать в обучение; "
+                         "test запрещён")
+    ap.add_argument("--field-weight", type=int, default=8,
+                    help="во сколько раз реальный снимок весит больше "
+                         "синтетического")
+    ap.add_argument("--holdout-wines", type=float, default=0.5,
+                    help="доля вин полевой части, отложенных для проверки")
     ap.add_argument("--out", default=str(INDEX_DIR / "head.npy"))
     args = ap.parse_args()
 
@@ -152,8 +193,13 @@ def main() -> None:
         if wine["slug"] in whole:
             groups[series_key(wine)].append(wine["slug"])
 
-    queries, gold = build_pairs(args.subsets.split(","), args.batch_size)
-    print(f"обучающих запросов {len(queries)}, позиций в индексе {len(whole)}")
+    splits = {s for s in args.field_splits.split(",") if s}
+    if "test" in splits:
+        sys.exit("на тестовой части обучать нельзя")
+    queries, gold, is_real = build_pairs(args.subsets.split(","),
+                                         args.batch_size, splits)
+    print(f"запросов {len(queries)}, из них реальных снимков {int(is_real.sum())}; "
+          f"позиций в индексе {len(whole)}")
 
     rng = np.random.default_rng(17)
     pool = list(whole)
@@ -173,16 +219,58 @@ def main() -> None:
         negatives.append([vectors[whole[s]] for s in chosen[:slots]])
 
     queries = queries[keep]
+    kept_gold = [gold[i] for i in keep]
+    real = is_real[keep]
     targets = np.array(targets)
     negatives = np.array(negatives)
-    with_siblings = sum(
-        1 for slug in (gold[i] for i in keep)
-        if len(groups.get(series_key(by_slug[slug]), [])) > 1)
-    print(f"пар для обучения {len(queries)}, из них с соседом по линейке "
-          f"{with_siblings}; отрицательных на пару {negatives.shape[1]}")
+    with_siblings = sum(1 for slug in kept_gold
+                        if len(groups.get(series_key(by_slug[slug]), [])) > 1)
+    print(f"пар для обучения {len(queries)}, реальных {int(real.sum())}, "
+          f"из них с соседом по линейке {with_siblings}; "
+          f"отрицательных на пару {negatives.shape[1]}")
 
-    update = train(queries, targets, negatives, args.steps, args.rate,
-                   args.decay, args.temperature, args.rank)
+    # Проверочные вина берутся из полевой части и целиком: делить кадры
+    # одного вина между обучением и проверкой значит мерить запоминание.
+    field_wines = sorted({slug for slug, flag in zip(kept_gold, real) if flag})
+    holdout = set(field_wines[::2]) if args.holdout_wines else set()
+    check = np.array([flag and slug in holdout
+                      for slug, flag in zip(kept_gold, real)])
+    print(f"полевых вин {len(field_wines)}, отложено на проверку "
+          f"{len(holdout)} ({int(check.sum())} кадров)")
+
+    rows = np.flatnonzero(~check)
+    # Реальных снимков на порядок меньше синтетических: без веса модель
+    # их не заметит.
+    extra = np.flatnonzero(~check & real)
+    order = np.concatenate([rows] + [extra] * (args.field_weight - 1))
+    update = train(queries[order], targets[order], negatives[order], args.steps,
+                   args.rate, args.decay, args.temperature, args.rank)
+
+    def rank_of(matrix, update_matrix=None):
+        q = matrix
+        if update_matrix is not None:
+            q = q + q @ update_matrix
+            q = q / (np.linalg.norm(q, axis=-1, keepdims=True) + 1e-9)
+        return q
+
+    if check.any():
+        index = np.stack([vectors[whole[s]] for s in pool])
+        place = {s: i for i, s in enumerate(pool)}
+        print("\nотложенные полевые вина (кадров "
+              f"{int(check.sum())}):")
+        for name, matrix in (("без головы", None), ("с головой", update)):
+            q = rank_of(queries[check], matrix)
+            base = rank_of(index, matrix)
+            scores = q @ base.T
+            hits1 = hits5 = 0
+            for row, slug in zip(scores, (s for s, f in zip(kept_gold, check) if f)):
+                order_idx = np.argsort(-row)[:5]
+                hits1 += pool[order_idx[0]] == slug
+                hits5 += place[slug] in order_idx
+            total = int(check.sum())
+            print(f"  {name:12} top-1 {hits1}/{total} ({hits1/total*100:.0f}%), "
+                  f"top-5 {hits5}/{total} ({hits5/total*100:.0f}%)")
+
     np.save(args.out, update.astype(np.float32))
     print(f"\nголова сохранена: {args.out} (ранг {args.rank}, "
           f"норма обновления {np.linalg.norm(update):.3f})")

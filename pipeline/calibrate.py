@@ -162,13 +162,14 @@ def collect(subset: str, index: str, views: list[tuple[str, ...]], topk: int,
             similarity = np.stack([block[i] for block in per_view_scores], axis=1)
             crop = shots[core.pick_view(shots, similarity)]
             core.rerank(crop, candidates, reranker)
-            core.resolve(candidates, crop, channel, read_words,
+            label = core.LabelText(crop, read_words)
+            core.resolve(candidates, crop, channel, label,
                          window=window, min_conf=min_conf)
             if not candidates:
                 continue
             # Улики против лидера — часть конвейера, а не отдельный замер:
             # калибровать надо ту выдачу, которую увидит пользователь.
-            core.check_leader(candidates, crop, channel, read_words, min_conf, window)
+            core.check_leader(candidates, crop, channel, label, min_conf, window)
             slugs = [c.slug for c in candidates]
             cases.append(Case(
                 present=present,

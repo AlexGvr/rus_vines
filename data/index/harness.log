@@ -1,11 +1,11 @@
-  код                    6d12c01 + несохранённые правки
+  код                    b7a69fc + несохранённые правки
   индекс                 clean_mv, строк 4186
   признаки эталонов      98 МБ
   модель уверенности     три исхода, обучена на sharp + полевая часть tune, отпечаток a74637b0c8
   порог показа           0.15
   порог без оговорок     0.3
   шортлист               20
-запросов 3, без ответа 0, латентность med 863 мс, max 1632 мс
+запросов 3, без ответа 0, латентность med 918 мс, max 1273 мс
   019c68d0.jpg       -> pino-nuar-dzhavaga
   02eef911.webp      -> massandra-muskat-belyy-yuzhnoberezhnyy-beloe-sladkoe-16
   096ca74e.jpg       -> abrau-dyurso-brut-dor-riesling-risling-beloe-bryut-12
@@ -41,7 +41,7 @@
 результаты: /home/alex/projects/rus_vines/data/index/report_sharp.json
 [transformers] Model config: bos_token_id must be `None` or an integer within the vocabulary (between 0 and 31999), got 49406. This may result in unexpected behavior.
 [transformers] Model config: eos_token_id must be `None` or an integer within the vocabulary (between 0 and 31999), got 49407. This may result in unexpected behavior.
-Loading weights:   0%|          | 0/888 [00:00<?, ?it/s]Loading weights:  42%|████▏     | 373/888 [00:00<00:00, 3728.69it/s]Loading weights:  84%|████████▍ | 748/888 [00:00<00:00, 3741.13it/s]Loading weights: 100%|██████████| 888/888 [00:00<00:00, 3730.02it/s]
+Loading weights:   0%|          | 0/888 [00:00<?, ?it/s]Loading weights:  42%|████▏     | 372/888 [00:00<00:00, 3683.86it/s]Loading weights:  83%|████████▎ | 741/888 [00:00<00:00, 3617.07it/s]Loading weights: 100%|██████████| 888/888 [00:00<00:00, 3617.11it/s]
   ir_luchshee-iz-dostupnykh-vin-na-segodnya-m_ p=0.149 инл   13 
   ir_luchshee-iz-dostupnykh-vin-na-segodnya-m_ p=0.101 инл    6 
   ir_myagkoe-s-priyatnym-agodnym-vkusom-i-per_ p=0.039 инл    6 
