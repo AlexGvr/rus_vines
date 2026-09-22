@@ -202,6 +202,33 @@ def match_stats(query_kp, query_desc, ref_kp, ref_desc,
                       color_agreement(query_colors, ref_colors, kept))
 
 
+def match_points(query_kp, query_desc, ref_kp, ref_desc):
+    """Инлаеры как множество номеров точек запроса плюс раскладка.
+
+    То же сопоставление, что в match_stats (тест Лоу, гомография RANSAC,
+    те же пороги), но с сохранением, какие именно точки запроса выжили.
+    Нужно взвешиванию по уникальности: точка, совпавшая с несколькими
+    разными винами, лежит на общей эмблеме и вино не различает.
+    """
+    if query_desc is None or ref_desc is None or len(query_desc) < 2 or len(ref_desc) < 2:
+        return frozenset(), 0, 0.0
+    _, bf = detector()
+    pairs = bf.knnMatch(query_desc, ref_desc, k=2)
+    good = [m for m, n in (p for p in pairs if len(p) == 2)
+            if m.distance < RATIO * n.distance]
+    if len(good) < MIN_MATCHES:
+        return frozenset(), len(good), 0.0
+    src = np.float32([query_kp[m.queryIdx].pt for m in good]).reshape(-1, 1, 2)
+    dst = np.float32([ref_kp[m.trainIdx].pt for m in good]).reshape(-1, 1, 2)
+    _, mask = cv2.findHomography(src, dst, cv2.RANSAC, 5.0)
+    if mask is None:
+        return frozenset(), len(good), 0.0
+    ref_points = [ref_kp[m.trainIdx].pt for m in good]
+    coverage, _, _ = _layout(ref_points, mask, ref_kp)
+    kept = frozenset(m.queryIdx for m, keep in zip(good, mask.ravel()) if keep)
+    return kept, len(good), coverage
+
+
 def inlier_pairs(query_kp, query_desc, ref_kp, ref_desc):
     """Пары точек, выживших после RANSAC, в координатах обоих изображений.
 
@@ -322,6 +349,33 @@ class PrecomputedReranker:
     def scores(self, query: Image.Image, slugs: list[str]) -> dict[str, int]:
         return {slug: stats.inliers
                 for slug, stats in self.stats(query, slugs).items()}
+
+    def stats_points(self, query: Image.Image, slugs: list[str]) -> dict[str, dict]:
+        """Инлаеры по эталонам позиции с номерами точек запроса.
+
+        Для каждой позиции: лучший эталон (наибольшее число инлаеров) — его
+        множество точек `points`, инлаеры и покрытие; и объединение точек по
+        всем эталонам позиции `union` — только чтобы считать, со сколькими
+        разными винами совпала точка. Повторные эталоны одного вина
+        распространённость точки не увеличивают.
+        """
+        query_kp, query_desc = descriptors(query)
+        out: dict[str, dict] = {}
+        for slug in slugs:
+            best = {"points": frozenset(), "inliers": 0, "coverage": 0.0, "entry": None}
+            union: set[int] = set()
+            entries = []
+            for idx in self.positions.get(slug, []):
+                ref_kp, ref_desc, _ = self.entry(idx)
+                kept, good, coverage = match_points(query_kp, query_desc, ref_kp, ref_desc)
+                entries.append({"entry": idx, "inliers": len(kept), "good": good, "coverage": coverage})
+                union |= kept
+                if len(kept) > best["inliers"]:
+                    best = {"points": kept, "inliers": len(kept), "coverage": coverage, "entry": idx}
+            out[slug] = {**best, "union": frozenset(union), "entries": entries}
+        out["__query__"] = {"keypoints": [(float(k.pt[0]), float(k.pt[1])) for k in query_kp],
+                            "n": len(query_kp)}
+        return out
 
     def stats(self, query: Image.Image, slugs: list[str]) -> dict[str, MatchStats]:
         """Инлаеры вместе с раскладкой совпадений — цена та же.

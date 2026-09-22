@@ -245,7 +245,7 @@ def main() -> None:
                                      'box': list(w.box)} for w in words]
             results[-1]['candidates'] = [{
                 'slug': c.slug, 'cv': c.cv, 'inliers': c.inliers,
-                'coverage': c.coverage,
+                'coverage': c.coverage, 'weighted': round(c.weighted, 3),
                 'hard_conflicts': len(channel.hard_conflicts(c.slug, words)),
                 'text_conflicts': len(channel.conflicts_with(c.slug, words, rivals)),
                 'text_support': len(channel.confirms(c.slug, words, rivals)),
@@ -470,7 +470,8 @@ def main() -> None:
                                   else str(p): digest(p) for p in tracked_inputs},
                        "environment": {key: os.environ.get(key) for key in
                            ("LABEL_BAND", "KIN_GROUP", "BRAND_FIRST", "SIFT_DIR",
-                            "SIFT_MAX_SIDE", "TEXT_ALIASES", "OCR_JOIN", "NAME_FIRST")},
+                            "SIFT_MAX_SIDE", "TEXT_ALIASES", "OCR_JOIN", "NAME_FIRST",
+                            "GEOM_WEIGHT", "GEOM_WEIGHT_ALPHA")},
                        "ocr_failures": len(ocr_module.FAILURES),
                        "independent_holdout": False},
         "metrics": metrics,

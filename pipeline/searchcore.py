@@ -42,6 +42,7 @@ class Candidate:
     conflicts: list[str] = field(default_factory=list)
     confirmed: list[str] = field(default_factory=list)
     hard: list[str] = field(default_factory=list)
+    weighted: float = 0.0     # взвешенные инлаеры, только при GEOM_WEIGHT
 
     def as_dict(self) -> dict:
         row = {"slug": self.slug, "cv_score": round(self.cv, 4),
@@ -122,6 +123,8 @@ def rerank(crop: Image.Image, candidates: list[Candidate], reranker,
     видна целиком, и косинус сам справляется, а перестановка по точкам
     чаще мешает. Отсюда 0.50.
     """
+    if os.environ.get("GEOM_WEIGHT", "0") != "0" and hasattr(reranker, "stats_points"):
+        return rerank_weighted(crop, candidates, reranker, margin)
     stats = reranker.stats(crop, [c.slug for c in candidates])
     for candidate in candidates:
         match = stats.get(candidate.slug)
@@ -133,6 +136,56 @@ def rerank(crop: Image.Image, candidates: list[Candidate], reranker,
     decisive = (len(by_geometry) < 2
                 or by_geometry[0].inliers >= by_geometry[1].inliers * (1.0 + margin))
     candidates.sort(key=(lambda c: (-c.inliers, -c.cv)) if decisive
+                    else (lambda c: -c.cv))
+    return candidates
+
+
+def weighted_scores(stats: dict[str, dict], slugs: list[str],
+                    alpha: float) -> tuple[dict[str, float], dict[int, int]]:
+    """Взвешенные инлаеры: вес точки запроса убывает с числом разных вин.
+
+    Формула. Для точки запроса p множество S(p) — позиции шортлиста, у
+    которых p оказалась инлаером хотя бы одного эталона (повторные эталоны
+    одной позиции считаются один раз). Вес w(p) = |S(p)|^(-alpha). Оценка
+    позиции — сумма весов по инлаерам её лучшего эталона (того, у которого
+    инлаеров больше); каждая точка запроса входит в сумму позиции один раз.
+    Геометрическая проверка (тест Лоу, RANSAC) остаётся прежней —
+    взвешиваются только точки, её прошедшие.
+    """
+    multiplicity: dict[int, int] = {}
+    for slug in slugs:
+        for point in stats.get(slug, {}).get("union", ()):
+            multiplicity[point] = multiplicity.get(point, 0) + 1
+    scores = {}
+    for slug in slugs:
+        points = stats.get(slug, {}).get("points", ())
+        scores[slug] = float(sum(multiplicity.get(p, 1) ** (-alpha) for p in points))
+    return scores, multiplicity
+
+
+def rerank_weighted(crop: Image.Image, candidates: list[Candidate], reranker,
+                    margin: float) -> list[Candidate]:
+    """Экспериментальный порядок по взвешенным инлаерам (GEOM_WEIGHT=1).
+
+    Порядок и решающий отрыв считаются по взвешенной оценке, а число
+    инлаеров и покрытие остаются сырыми — их читают признаки уверенности,
+    и менять их смысл в этом эксперименте нельзя. Показатель степени —
+    GEOM_WEIGHT_ALPHA (по умолчанию 1.0).
+    """
+    alpha = float(os.environ.get("GEOM_WEIGHT_ALPHA", "1.0"))
+    slugs = [c.slug for c in candidates]
+    stats = reranker.stats_points(crop, slugs)
+    scores, _ = weighted_scores(stats, slugs, alpha)
+    for candidate in candidates:
+        match = stats.get(candidate.slug)
+        if match is not None:
+            candidate.inliers = int(match["inliers"])
+            candidate.coverage = float(match["coverage"])
+            candidate.weighted = scores.get(candidate.slug, 0.0)
+    by_geometry = sorted(candidates, key=lambda c: (-c.weighted, -c.cv))
+    decisive = (len(by_geometry) < 2
+                or by_geometry[0].weighted >= by_geometry[1].weighted * (1.0 + margin))
+    candidates.sort(key=(lambda c: (-c.weighted, -c.cv)) if decisive
                     else (lambda c: -c.cv))
     return candidates
 

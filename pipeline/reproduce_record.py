@@ -32,7 +32,8 @@ FILES = ["data/field/manifest.csv", "data/field/manifest.splits.json", "data/fie
 SWITCH_DEFAULTS = {"TEXT_ALIASES": "1", "OCR_JOIN": "1", "NAME_FIRST": "1", "LINE_BAND": "1",
                    "PLATFORM_SWEETNESS": "1", "NAME_STRONG": "1", "NAME_TRANSLIT": "1",
                    "GROUP_LEADER": "0", "DEMOTE_GEOMETRY": "0", "DEMOTE_DEPTH": "0",
-                   "LABEL_BAND": "0", "KIN_GROUP": "0", "BRAND_FIRST": "1", "SIFT_MAX_SIDE": "700"}
+                   "LABEL_BAND": "0", "KIN_GROUP": "0", "BRAND_FIRST": "1", "SIFT_MAX_SIDE": "700",
+                   "GEOM_WEIGHT": "0", "GEOM_WEIGHT_ALPHA": "1.0"}
 
 
 def sha(path: str) -> str | None:
