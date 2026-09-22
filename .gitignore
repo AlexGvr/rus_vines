@@ -9,7 +9,7 @@ dataset/
 *.rar
 *.npy
 data/queries/
-data/catalog/
+data/catalog/*
 data/index/ocr_*.json
 yolo11*.pt
 web/.nuxt/
@@ -23,3 +23,5 @@ data/field/candidates.json
 # Проверка эталонов на устаревание: чужие фотографии витрин не храним,
 # адреса и отчёт лежат в data/freshness.csv и data/index/freshness.json
 data/freshness/
+!data/catalog/extra_refs.csv
+!data/catalog/equivalents.csv

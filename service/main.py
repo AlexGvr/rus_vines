@@ -196,7 +196,8 @@ def search_candidates(image: Image.Image,
     t2 = time.perf_counter()
     label = core.LabelText(prepared, read_words)
     core.settle(candidates, prepared, state["text"], label,
-                window=CLOSE_WINDOW, min_conf=OCR_MIN_CONF)
+                window=CLOSE_WINDOW, min_conf=OCR_MIN_CONF,
+                by_slug=state["by_slug"])
     # Улики и подтверждения собираются только если ответ иначе был бы
     # показан: они меняют оформление выдачи, а не сам ответ, и на заведомо
     # слабом совпадении не нужны. Слова к этому моменту уже прочитаны
@@ -255,16 +256,55 @@ def card(candidate: dict) -> dict:
     return wine
 
 
+FIELD_QUALITY = INDEX_DIR / "field_quality.json"
+
+
 def quality_block() -> dict:
-    """Измеренное качество конвейера: F1 топ-1 и топ-5 на валидационном наборе."""
+    """Измеренное качество конвейера.
+
+    Числа F1 берутся из report_sharp.json — это синтетический набор: запросы
+    сделаны из эталонных фотографий каталога преобразованиями, и абсолютные
+    значения он завышает. Чтобы их не приняли за качество на реальной
+    съёмке, источник назван явно, а рядом отдаётся последний замер на
+    полевом наборе из data/index/field_quality.json, если он есть, — со
+    своей пометкой, что это регрессионная часть, а не независимая приёмка.
+    """
     measured = (state.get("quality") or {}).get("f1", {}).get("по каталогу", {})
     if not measured:
         return {}
-    return {
+    block = {
         "f1_top1": round(measured["top1"]["f1"], 4),
         "f1_top5": round(measured["top5"]["f1"], 4),
         "subset": (state.get("quality") or {}).get("subset"),
         "n": (state.get("quality") or {}).get("answerable"),
+        "source": "synthetic",
+        "source_note": "синтетические запросы из эталонных фото каталога (report_sharp.json); "
+                       "не качество на реальной съёмке",
+    }
+    if FIELD_QUALITY.exists():
+        try:
+            block["field"] = json.loads(FIELD_QUALITY.read_text(encoding="utf-8"))
+        except Exception:
+            pass
+    return block
+
+
+def settings_block() -> dict:
+    """Фактические настройки процесса: пороги и переключатели правил.
+
+    Отчёты считаются с параметрами из своих аргументов и окружения, сервис —
+    из своего. Без этого блока нельзя проверить, что запущенный сервис и
+    последний замер — один и тот же конвейер.
+    """
+    switches = ("TEXT_ALIASES", "OCR_JOIN", "NAME_FIRST", "LINE_BAND", "PLATFORM_SWEETNESS",
+                "GROUP_LEADER", "NAME_STRONG", "DEMOTE_GEOMETRY", "DEMOTE_DEPTH",
+                "LABEL_BAND", "KIN_GROUP", "BRAND_FIRST", "SIFT_MAX_SIDE", "SIFT_DIR")
+    return {
+        "show_p": SHOW_P, "confident_p": CONFIDENT_P,
+        "thresholds_from_env": {k: os.environ.get(k) for k in ("SHOW_P", "CONFIDENT_P")
+                                if os.environ.get(k) is not None},
+        "rules_env": {k: os.environ.get(k) for k in switches},
+        "rerank_topk": RERANK_TOPK, "close_window": CLOSE_WINDOW, "ocr_min_conf": OCR_MIN_CONF,
     }
 
 
@@ -277,6 +317,7 @@ def health() -> dict:
         "catalog": len(state.get("by_slug", {})),
         "quality": quality_block(),
         "rerank_topk": RERANK_TOPK,
+        "settings": settings_block(),
     }
 
 

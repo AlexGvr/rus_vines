@@ -1,0 +1,2602 @@
+{
+ "provenance": {
+  "args": {
+   "split": "tune",
+   "index": "clean_mv",
+   "topk": 20,
+   "views": "raw,detect",
+   "window": 0.8,
+   "min_conf": 0.6,
+   "transcripts": "",
+   "output": ""
+  },
+  "sha256": {
+   "data/field/transcripts_tune.json": "7be1abce416506ac621e88f68f469e551c9c47f33016343b2522c0b9bee27f73",
+   "data/field/manifest.csv": "4dc1997fe3fd719a100c5a1ad282ab5d4806e8e8b94e3d2517be693b19aac9b8",
+   "data/catalog/catalog.json": "813be144725fdecea240b69d9439bafc719f18eb0f4d8950505ea9a4ffbcb616",
+   "data/index/clean_mv.csv": "cedac926cff34bd0b7daea0a5de8c40df0fc8d9c275e2d8506ccd8ebae819b07",
+   "pipeline/searchcore.py": "d05b2f9c2a61329d078162d29245044b58600e2e0abe08643a21b2a9c634a47e",
+   "pipeline/text_match.py": "88ddf1119dfb0c543b1d5e333269617a91546fb9c304ae5a7b2aec0f7b263276",
+   "pipeline/eval_transcript.py": "1c08a32c65a77e1814c953f9af4468ea965a05cd8db47ebb2c25c4b4be8ebc6d"
+  },
+  "environment": {
+   "TEXT_ALIASES": null,
+   "OCR_JOIN": null,
+   "NAME_FIRST": null,
+   "LINE_BAND": null,
+   "PLATFORM_SWEETNESS": null,
+   "KIN_GROUP": null,
+   "BRAND_FIRST": null,
+   "LABEL_BAND": null,
+   "SIFT_MAX_SIDE": null
+  },
+  "diagnostic_only": true
+ },
+ "summary": {
+  "n": 23,
+  "scored": 23,
+  "correct_ocr": 0,
+  "correct_typed": 6,
+  "fixed": [
+   "10390039_0.jpg",
+   "13978352_0.jpg",
+   "15501518_1.jpg",
+   "3284063_0.jpg",
+   "3284063_1.jpg",
+   "6522615_0.jpg"
+  ],
+  "broken": [],
+  "stayed": {
+   "ir_ochen-vkusnoe-legkoe-vino-dlya-semeinogo_0.jpg": "текстовое сравнение (различие: сладость, цвет, имя, сорт)",
+   "11406313_1.jpg": "кандидат не в шортлисте",
+   "15501518_0.jpg": "текст не переставил (различие: цвет, имя, сорт)",
+   "12083971_0.jpg": "текстовое сравнение (различие: цвет, сорт)",
+   "10806701_1.jpg": "кандидат не в шортлисте",
+   "13168313_0.jpg": "текстовое сравнение (различие: имя, сорт)",
+   "13795944_0.jpg": "текстовое сравнение (различие: имя, сорт)",
+   "13918558_1.jpg": "текст не переставил (различие: имя, сорт)",
+   "15536279_1.jpg": "текст не переставил (различие: имя, сорт)",
+   "15598335_0.jpg": "текстовое сравнение (различие: имя, сорт)",
+   "15619693_0.jpg": "текстовое сравнение (различие: имя, сорт)",
+   "6182553_0.jpg": "текстовое сравнение (различие: сладость, цвет, имя, сорт)",
+   "9448391_0.jpg": "текстовое сравнение (различие: имя, сорт)",
+   "17762210_0.jpg": "текст не переставил (различие: имя, сорт)",
+   "6310320_0.jpg": "текст не переставил (различие: имя, сорт)",
+   "7445929_1.jpg": "текст не переставил (различие: цвет, имя, сорт)",
+   "org091_0.jpg": "текст не переставил (различие: цвет, имя, сорт)"
+  }
+ },
+ "records": [
+  {
+   "image": "ir_ochen-vkusnoe-legkoe-vino-dlya-semeinogo_0.jpg",
+   "gold": "fanagoriya-brule-muscat-ottonel-brut-muskat-ottonel-beloe-polusladkoe-12",
+   "frame": "front",
+   "findable": true,
+   "top1_ocr": "fanagoriya-brule-muscat-ottonel-polusladkoe-muskat-ottonel-beloe-115",
+   "top1_typed": "fanagoriya-brule-cuve-brut-rozovoe-merlo-igristoe-bryut-rozovoe-12",
+   "top5_ocr": true,
+   "top5_typed": true,
+   "rank_geometry": 1,
+   "inliers_gold": 48,
+   "inliers_top1": 42,
+   "ocr_words": [
+    {
+     "text": "BRULЁ",
+     "conf": 1.0,
+     "box": [
+      142,
+      364,
+      233,
+      400
+     ]
+    }
+   ],
+   "typed_words": [
+    {
+     "text": "BRÛLÉ",
+     "conf": 1.0,
+     "box": [
+      93,
+      352,
+      281,
+      368
+     ]
+    },
+    {
+     "text": "MUSCAT OTTONEL",
+     "conf": 1.0,
+     "box": [
+      112,
+      392,
+      262,
+      408
+     ]
+    },
+    {
+     "text": "БРЮТ",
+     "conf": 1.0,
+     "box": [
+      150,
+      412,
+      225,
+      428
+     ]
+    }
+   ],
+   "unreadable": [],
+   "reasons_typed": {},
+   "hard_typed": {
+    "fanagoriya-brule-muscat-ottonel-brut-muskat-ottonel-beloe-polusladkoe-12": [
+     "сладость брют против полусладкое"
+    ],
+    "fanagoriya-brule-muscat-ottonel-polusladkoe-muskat-ottonel-beloe-115": [
+     "сладость брют против полусладкое"
+    ]
+   },
+   "diagnosis": "текстовое сравнение (различие: сладость, цвет, имя, сорт)"
+  },
+  {
+   "image": "11406313_1.jpg",
+   "gold": "kuban-vino-shato-tamane-rkatsiteli-myuller-turgau-shardone-2025-beloe-suhoe-12",
+   "frame": "front",
+   "findable": true,
+   "top1_ocr": "caucasian-dzharag",
+   "top1_typed": "vinodelnya-78-muskat-otbornyy-muskat-yantarnyy-beloe-suhoe-125",
+   "top5_ocr": false,
+   "top5_typed": false,
+   "rank_geometry": -1,
+   "inliers_gold": null,
+   "inliers_top1": 16,
+   "ocr_words": [
+    {
+     "text": "Il",
+     "conf": 0.74,
+     "box": [
+      126,
+      540,
+      162,
+      619
+     ]
+    },
+    {
+     "text": "3",
+     "conf": 0.96,
+     "box": [
+      169,
+      511,
+      237,
+      619
+     ]
+    },
+    {
+     "text": "[",
+     "conf": 0.91,
+     "box": [
+      129,
+      593,
+      149,
+      639
+     ]
+    },
+    {
+     "text": "&",
+     "conf": 1.0,
+     "box": [
+      101,
+      649,
+      117,
+      677
+     ]
+    },
+    {
+     "text": "5",
+     "conf": 0.36,
+     "box": [
+      159,
+      649,
+      171,
+      685
+     ]
+    }
+   ],
+   "typed_words": [
+    {
+     "text": "РКАЦИТЕЛИ",
+     "conf": 1.0,
+     "box": [
+      76,
+      425,
+      173,
+      441
+     ]
+    },
+    {
+     "text": "МЮЛЛЕР-ТУРГАУ",
+     "conf": 1.0,
+     "box": [
+      76,
+      449,
+      173,
+      465
+     ]
+    },
+    {
+     "text": "ШАТО ТАМАНЬ",
+     "conf": 1.0,
+     "box": [
+      83,
+      472,
+      166,
+      488
+     ]
+    },
+    {
+     "text": "ГОД УРОЖАЯ 2019",
+     "conf": 1.0,
+     "box": [
+      69,
+      496,
+      180,
+      512
+     ]
+    },
+    {
+     "text": "СУХОЕ БЕЛОЕ",
+     "conf": 1.0,
+     "box": [
+      83,
+      519,
+      166,
+      535
+     ]
+    },
+    {
+     "text": "BL",
+     "conf": 1.0,
+     "box": [
+      200,
+      543,
+      242,
+      559
+     ]
+    }
+   ],
+   "unreadable": [],
+   "reasons_typed": {},
+   "hard_typed": {
+    "derbent-vino-endemy-risling-beloe-bryut-105-125": [
+     "сладость сухое против брют"
+    ],
+    "caucasian-dzharag": [
+     "сладость сухое против полусладкое"
+    ]
+   },
+   "diagnosis": "кандидат не в шортлисте"
+  },
+  {
+   "image": "10390039_0.jpg",
+   "gold": "abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12",
+   "frame": "front",
+   "findable": true,
+   "top1_ocr": "abrau-dyurso-russkoe-igristoe-koshernoe-bryut-shardone-beloe-13",
+   "top1_typed": "abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12",
+   "top5_ocr": true,
+   "top5_typed": true,
+   "rank_geometry": 2,
+   "inliers_gold": 53,
+   "inliers_top1": 58,
+   "ocr_words": [
+    {
+     "text": "?",
+     "conf": 0.59,
+     "box": [
+      85,
+      121,
+      123,
+      219
+     ]
+    },
+    {
+     "text": "1870",
+     "conf": 0.8,
+     "box": [
+      72,
+      570,
+      142,
+      600
+     ]
+    },
+    {
+     "text": "ШАМПАНСКОЕ",
+     "conf": 0.91,
+     "box": [
+      79,
+      527,
+      198,
+      596
+     ]
+    }
+   ],
+   "typed_words": [
+    {
+     "text": "РУССКОЕ ШАМПАНСКОЕ",
+     "conf": 1.0,
+     "box": [
+      47,
+      540,
+      189,
+      556
+     ]
+    },
+    {
+     "text": "1870",
+     "conf": 1.0,
+     "box": [
+      94,
+      572,
+      142,
+      588
+     ]
+    },
+    {
+     "text": "АБРАУ-ДЮРСО",
+     "conf": 1.0,
+     "box": [
+      47,
+      611,
+      189,
+      627
+     ]
+    },
+    {
+     "text": "КРАСНОЕ",
+     "conf": 1.0,
+     "box": [
+      82,
+      642,
+      154,
+      658
+     ]
+    },
+    {
+     "text": "ПОЛУСЛАДКОЕ",
+     "conf": 1.0,
+     "box": [
+      82,
+      662,
+      154,
+      678
+     ]
+    }
+   ],
+   "unreadable": [],
+   "reasons_typed": {},
+   "hard_typed": {
+    "abrau-dyurso-russkoe-igristoe-koshernoe-polusladkoe-shardone-beloe-12": [
+     "цвет красное против «белое»"
+    ],
+    "abrau-dyurso-russkoe-igristoe-koshernoe-bryut-shardone-beloe-13": [
+     "сладость полусладкое против брют",
+     "цвет красное против «белое»"
+    ]
+   },
+   "diagnosis": "исправлено чтением"
+  },
+  {
+   "image": "13978352_0.jpg",
+   "gold": "abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12",
+   "frame": "front",
+   "findable": true,
+   "top1_ocr": "abrau-dyurso-russkoe-igristoe-polusladkoe-shardone-beloe-12",
+   "top1_typed": "abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12",
+   "top5_ocr": true,
+   "top5_typed": true,
+   "rank_geometry": 1,
+   "inliers_gold": 41,
+   "inliers_top1": 41,
+   "ocr_words": [
+    {
+     "text": "Iil",
+     "conf": 0.82,
+     "box": [
+      106,
+      258,
+      136,
+      296
+     ]
+    },
+    {
+     "text": "'1870",
+     "conf": 0.38,
+     "box": [
+      92,
+      562,
+      150,
+      586
+     ]
+    },
+    {
+     "text": "АВРА9-ДЮРОМ",
+     "conf": 0.76,
+     "box": [
+      32,
+      572,
+      210,
+      632
+     ]
+    }
+   ],
+   "typed_words": [
+    {
+     "text": "РУССКОЕ ИГРИСТОЕ",
+     "conf": 1.0,
+     "box": [
+      47,
+      544,
+      190,
+      560
+     ]
+    },
+    {
+     "text": "1870",
+     "conf": 1.0,
+     "box": [
+      95,
+      575,
+      142,
+      591
+     ]
+    },
+    {
+     "text": "АБРАУ-ДЮРСО",
+     "conf": 1.0,
+     "box": [
+      47,
+      607,
+      190,
+      623
+     ]
+    },
+    {
+     "text": "КРАСНОЕ ПОЛУСЛАДКОЕ",
+     "conf": 1.0,
+     "box": [
+      53,
+      638,
+      184,
+      654
+     ]
+    }
+   ],
+   "unreadable": [],
+   "reasons_typed": {},
+   "hard_typed": {
+    "abrau-dyurso-russkoe-igristoe-polusladkoe-shardone-beloe-12": [
+     "цвет красное против «белое»"
+    ]
+   },
+   "diagnosis": "исправлено чтением"
+  },
+  {
+   "image": "15501518_0.jpg",
+   "gold": "abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12",
+   "frame": "front",
+   "findable": true,
+   "top1_ocr": "abrau-dyurso-russkoe-igristoe-koshernoe-polusladkoe-shardone-beloe-12",
+   "top1_typed": "abrau-dyurso-russkoe-igristoe-koshernoe-polusladkoe-shardone-beloe-12",
+   "top5_ocr": true,
+   "top5_typed": true,
+   "rank_geometry": 1,
+   "inliers_gold": 20,
+   "inliers_top1": 22,
+   "ocr_words": [
+    {
+     "text": "отзовик",
+     "conf": 0.99,
+     "box": [
+      483,
+      393,
+      593,
+      413
+     ]
+    },
+    {
+     "text": "=",
+     "conf": 0.62,
+     "box": [
+      191,
+      190,
+      274,
+      288
+     ]
+    }
+   ],
+   "typed_words": [
+    {
+     "text": "РУССКОЕ ИГРИСТОЕ",
+     "conf": 1.0,
+     "box": [
+      90,
+      185,
+      330,
+      201
+     ]
+    },
+    {
+     "text": "1870",
+     "conf": 1.0,
+     "box": [
+      165,
+      206,
+      255,
+      222
+     ]
+    },
+    {
+     "text": "АБРАУ-ДЮРСО",
+     "conf": 1.0,
+     "box": [
+      90,
+      227,
+      330,
+      243
+     ]
+    },
+    {
+     "text": "ПОЛУСЛАДКОЕ",
+     "conf": 1.0,
+     "box": [
+      177,
+      249,
+      327,
+      265
+     ]
+    }
+   ],
+   "unreadable": [
+    {
+     "text": "",
+     "x": 0.3,
+     "y": 0.6,
+     "w": 0.4,
+     "unreadable": true,
+     "note": "слово перед ПОЛУСЛАДКОЕ закрыто бликом"
+    }
+   ],
+   "reasons_typed": {},
+   "hard_typed": {},
+   "diagnosis": "текст не переставил (различие: цвет, имя, сорт)"
+  },
+  {
+   "image": "15501518_1.jpg",
+   "gold": "abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12",
+   "frame": "front",
+   "findable": true,
+   "top1_ocr": "abrau-dyurso-russkoe-igristoe-koshernoe-bryut-shardone-beloe-13",
+   "top1_typed": "abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12",
+   "top5_ocr": true,
+   "top5_typed": true,
+   "rank_geometry": 1,
+   "inliers_gold": 50,
+   "inliers_top1": 37,
+   "ocr_words": [
+    {
+     "text": "ИГРИстов",
+     "conf": 0.45,
+     "box": [
+      203,
+      300,
+      285,
+      328
+     ]
+    },
+    {
+     "text": "Отзовик",
+     "conf": 0.46,
+     "box": [
+      320,
+      580,
+      436,
+      604
+     ]
+    },
+    {
+     "text": "'1870 ,",
+     "conf": 0.51,
+     "box": [
+      179,
+      313,
+      257,
+      369
+     ]
+    },
+    {
+     "text": "АБРАЧ -ДЮРВ",
+     "conf": 0.54,
+     "box": [
+      136,
+      319,
+      334,
+      443
+     ]
+    }
+   ],
+   "typed_words": [
+    {
+     "text": "РУССКОЕ ИГРИСТОЕ",
+     "conf": 1.0,
+     "box": [
+      88,
+      331,
+      352,
+      347
+     ]
+    },
+    {
+     "text": "1870",
+     "conf": 1.0,
+     "box": [
+      176,
+      362,
+      264,
+      378
+     ]
+    },
+    {
+     "text": "АБРАУ-ДЮРСО",
+     "conf": 1.0,
+     "box": [
+      88,
+      399,
+      352,
+      415
+     ]
+    },
+    {
+     "text": "КРАСНОЕ ПОЛУСЛАДКОЕ",
+     "conf": 1.0,
+     "box": [
+      98,
+      430,
+      341,
+      446
+     ]
+    }
+   ],
+   "unreadable": [],
+   "reasons_typed": {},
+   "hard_typed": {
+    "abrau-dyurso-russkoe-igristoe-koshernoe-bryut-shardone-beloe-13": [
+     "сладость полусладкое против брют",
+     "цвет красное против «белое»"
+    ]
+   },
+   "diagnosis": "исправлено чтением"
+  },
+  {
+   "image": "3284063_0.jpg",
+   "gold": "abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12",
+   "frame": "front",
+   "findable": true,
+   "top1_ocr": "abrau-dyurso-russkoe-igristoe-koshernoe-bryut-shardone-beloe-13",
+   "top1_typed": "abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12",
+   "top5_ocr": true,
+   "top5_typed": true,
+   "rank_geometry": 4,
+   "inliers_gold": 36,
+   "inliers_top1": 25,
+   "ocr_words": [
+    {
+     "text": "<",
+     "conf": 0.64,
+     "box": [
+      177,
+      127,
+      384,
+      584
+     ]
+    },
+    {
+     "text": "АБРАН ДЮРВ",
+     "conf": 0.51,
+     "box": [
+      204,
+      749,
+      353,
+      780
+     ]
+    },
+    {
+     "text": "1870",
+     "conf": 1.0,
+     "box": [
+      213,
+      1426,
+      331,
+      1485
+     ]
+    },
+    {
+     "text": "Шампанский",
+     "conf": 0.6,
+     "box": [
+      168,
+      1472,
+      321,
+      1513
+     ]
+    },
+    {
+     "text": "АВРД9-ДЮРВЙ",
+     "conf": 0.34,
+     "box": [
+      52,
+      1461,
+      487,
+      1602
+     ]
+    },
+    {
+     "text": "Птвпвик",
+     "conf": 0.3,
+     "box": [
+      481,
+      1959,
+      593,
+      1980
+     ]
+    },
+    {
+     "text": "[ININIINI",
+     "conf": 0.3,
+     "box": [
+      98,
+      1568,
+      319,
+      1661
+     ]
+    }
+   ],
+   "typed_words": [
+    {
+     "text": "РУССКОЕ ШАМПАНСКОЕ",
+     "conf": 1.0,
+     "box": [
+      120,
+      1348,
+      480,
+      1364
+     ]
+    },
+    {
+     "text": "1870",
+     "conf": 1.0,
+     "box": [
+      240,
+      1408,
+      360,
+      1424
+     ]
+    },
+    {
+     "text": "Шампанский Дом",
+     "conf": 1.0,
+     "box": [
+      180,
+      1458,
+      420,
+      1474
+     ]
+    },
+    {
+     "text": "АБРАУ-ДЮРСО",
+     "conf": 1.0,
+     "box": [
+      120,
+      1528,
+      480,
+      1544
+     ]
+    },
+    {
+     "text": "ПОЛУСЛАДКОЕ КРАСНОЕ",
+     "conf": 1.0,
+     "box": [
+      135,
+      1588,
+      465,
+      1604
+     ]
+    }
+   ],
+   "unreadable": [],
+   "reasons_typed": {},
+   "hard_typed": {
+    "abrau-dyurso-udelnoe-vedomstvo-imperatorskoe-beloe-polusladkoe": [
+     "цвет красное против «белое»"
+    ],
+    "abrau-dyurso-russkoe-igristoe-polusladkoe-shardone-beloe-12": [
+     "цвет красное против «белое»"
+    ],
+    "abrau-dyurso-russkoe-igristoe-koshernoe-polusladkoe-shardone-beloe-12": [
+     "цвет красное против «белое»"
+    ],
+    "abrau-dyurso-russkoe-igristoe-koshernoe-bryut-shardone-beloe-13": [
+     "сладость полусладкое против брют",
+     "цвет красное против «белое»"
+    ]
+   },
+   "diagnosis": "исправлено чтением"
+  },
+  {
+   "image": "3284063_1.jpg",
+   "gold": "abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12",
+   "frame": "front",
+   "findable": true,
+   "top1_ocr": "abrau-dyurso-russkoe-igristoe-koshernoe-polusladkoe-shardone-beloe-12",
+   "top1_typed": "abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12",
+   "top5_ocr": true,
+   "top5_typed": true,
+   "rank_geometry": 3,
+   "inliers_gold": 39,
+   "inliers_top1": 45,
+   "ocr_words": [
+    {
+     "text": "1870",
+     "conf": 1.0,
+     "box": [
+      246,
+      356,
+      394,
+      430
+     ]
+    },
+    {
+     "text": "Шампанский Дом",
+     "conf": 1.0,
+     "box": [
+      189,
+      428,
+      439,
+      465
+     ]
+    },
+    {
+     "text": "[Ш(ДINI",
+     "conf": 0.39,
+     "box": [
+      109,
+      557,
+      367,
+      648
+     ]
+    },
+    {
+     "text": "Птзпвик",
+     "conf": 0.59,
+     "box": [
+      481,
+      877,
+      593,
+      897
+     ]
+    },
+    {
+     "text": "рУ(ОI",
+     "conf": 0.42,
+     "box": [
+      79,
+      271,
+      277,
+      395
+     ]
+    },
+    {
+     "text": "~ДЮРС",
+     "conf": 0.34,
+     "box": [
+      278,
+      426,
+      558,
+      585
+     ]
+    },
+    {
+     "text": "ДВРАЧ",
+     "conf": 0.83,
+     "box": [
+      40,
+      435,
+      309,
+      577
+     ]
+    }
+   ],
+   "typed_words": [
+    {
+     "text": "РУССКОЕ ШАМПАНСКОЕ",
+     "conf": 1.0,
+     "box": [
+      90,
+      357,
+      510,
+      373
+     ]
+    },
+    {
+     "text": "1870",
+     "conf": 1.0,
+     "box": [
+      240,
+      421,
+      360,
+      437
+     ]
+    },
+    {
+     "text": "Шампанский Дом",
+     "conf": 1.0,
+     "box": [
+      180,
+      466,
+      420,
+      482
+     ]
+    },
+    {
+     "text": "АБРАУ-ДЮРСО",
+     "conf": 1.0,
+     "box": [
+      90,
+      539,
+      510,
+      555
+     ]
+    },
+    {
+     "text": "ПОЛУСЛАДКОЕ КРАСНОЕ",
+     "conf": 1.0,
+     "box": [
+      120,
+      612,
+      480,
+      628
+     ]
+    }
+   ],
+   "unreadable": [],
+   "reasons_typed": {},
+   "hard_typed": {
+    "abrau-dyurso-russkoe-igristoe-polusladkoe-shardone-beloe-12": [
+     "цвет красное против «белое»"
+    ],
+    "abrau-dyurso-russkoe-igristoe-koshernoe-bryut-shardone-beloe-13": [
+     "сладость полусладкое против брют",
+     "цвет красное против «белое»"
+    ],
+    "abrau-dyurso-russkoe-igristoe-koshernoe-polusladkoe-shardone-beloe-12": [
+     "цвет красное против «белое»"
+    ]
+   },
+   "diagnosis": "исправлено чтением"
+  },
+  {
+   "image": "12083971_0.jpg",
+   "gold": "abrau-dyurso-victor-dravigny-polusladkoe-sovinon-blan-beloe-12",
+   "frame": "front",
+   "findable": true,
+   "top1_ocr": "abrau-dyurso-victor-dravigny-extra-brut-shardone-beloe-bryut-125",
+   "top1_typed": "abrau-dyurso-victor-dravigny-krasnoe-polusladkoe-kaberne-sovinon-125",
+   "top5_ocr": true,
+   "top5_typed": true,
+   "rank_geometry": 3,
+   "inliers_gold": 47,
+   "inliers_top1": 6,
+   "ocr_words": [
+    {
+     "text": "Iil",
+     "conf": 0.86,
+     "box": [
+      74,
+      276,
+      100,
+      304
+     ]
+    },
+    {
+     "text": "870",
+     "conf": 1.0,
+     "box": [
+      75,
+      525,
+      109,
+      541
+     ]
+    },
+    {
+     "text": "АБРА9-ДЮРЕ",
+     "conf": 0.65,
+     "box": [
+      28,
+      537,
+      145,
+      567
+     ]
+    }
+   ],
+   "typed_words": [
+    {
+     "text": "METHODE CLASSIQUE",
+     "conf": 1.0,
+     "box": [
+      53,
+      505,
+      125,
+      521
+     ]
+    },
+    {
+     "text": "1870",
+     "conf": 1.0,
+     "box": [
+      71,
+      526,
+      107,
+      542
+     ]
+    },
+    {
+     "text": "АБРАУ-ДЮРСО",
+     "conf": 1.0,
+     "box": [
+      40,
+      554,
+      138,
+      570
+     ]
+    },
+    {
+     "text": "VICTOR DRAVIGNY",
+     "conf": 1.0,
+     "box": [
+      53,
+      574,
+      125,
+      590
+     ]
+    },
+    {
+     "text": "ПОЛУСЛАДКОЕ",
+     "conf": 1.0,
+     "box": [
+      62,
+      602,
+      116,
+      618
+     ]
+    },
+    {
+     "text": "2019",
+     "conf": 1.0,
+     "box": [
+      76,
+      616,
+      102,
+      632
+     ]
+    }
+   ],
+   "unreadable": [],
+   "reasons_typed": {},
+   "hard_typed": {
+    "abrau-dyurso-victor-dravigny-koshernoe-bryut-shardone-beloe-125": [
+     "сладость полусладкое против брют"
+    ],
+    "abrau-dyurso-victor-dravigny-extra-brut-shardone-beloe-bryut-125": [
+     "сладость полусладкое против экстра брют"
+    ]
+   },
+   "diagnosis": "текстовое сравнение (различие: цвет, сорт)"
+  },
+  {
+   "image": "10806701_1.jpg",
+   "gold": "massandra-muskat",
+   "frame": "multi",
+   "findable": true,
+   "top1_ocr": "massandra-bastardo-bastardo-magarachskiy-krasnoe-sladkoe-16",
+   "top1_typed": "massandra-bastardo-bastardo-magarachskiy-krasnoe-sladkoe-16",
+   "top5_ocr": false,
+   "top5_typed": false,
+   "rank_geometry": -1,
+   "inliers_gold": null,
+   "inliers_top1": 3,
+   "ocr_words": [],
+   "typed_words": [
+    {
+     "text": "МАССАНДРА",
+     "conf": 1.0,
+     "box": [
+      29,
+      221,
+      119,
+      237
+     ]
+    },
+    {
+     "text": "1894",
+     "conf": 1.0,
+     "box": [
+      63,
+      244,
+      85,
+      260
+     ]
+    }
+   ],
+   "unreadable": [
+    {
+     "text": "",
+     "x": 0.5,
+     "y": 0.72,
+     "w": 0.4,
+     "unreadable": true,
+     "note": "рукописное название, похоже на «Мускатель», не читается уверенно"
+    },
+    {
+     "text": "",
+     "x": 0.5,
+     "y": 0.78,
+     "w": 0.4,
+     "unreadable": true,
+     "note": "строка под названием (сладость?) не читается"
+    }
+   ],
+   "reasons_typed": {},
+   "hard_typed": {},
+   "diagnosis": "кандидат не в шортлисте"
+  },
+  {
+   "image": "13168313_0.jpg",
+   "gold": "massandra-portveyn-belyy-krymskiy-kokur-beloe-sladkoe-18",
+   "frame": "front",
+   "findable": true,
+   "top1_ocr": "massandra-kagor-gurzuf-saperavi-krasnoe-sladkoe-16",
+   "top1_typed": "massandra-portveyn-belyy-gurzuf-kokur-belyy-beloe-sladkoe-135",
+   "top5_ocr": false,
+   "top5_typed": false,
+   "rank_geometry": 9,
+   "inliers_gold": 15,
+   "inliers_top1": 65,
+   "ocr_words": [
+    {
+     "text": "МАССАНДМ",
+     "conf": 0.65,
+     "box": [
+      52,
+      554,
+      202,
+      595
+     ]
+    },
+    {
+     "text": "КРЫМСКИЙ",
+     "conf": 0.98,
+     "box": [
+      49,
+      769,
+      170,
+      799
+     ]
+    },
+    {
+     "text": "БЕАЫЙ",
+     "conf": 0.57,
+     "box": [
+      125,
+      738,
+      196,
+      778
+     ]
+    },
+    {
+     "text": "ЛОРТВЕЙН",
+     "conf": 0.85,
+     "box": [
+      24,
+      743,
+      131,
+      784
+     ]
+    }
+   ],
+   "typed_words": [
+    {
+     "text": "МАССАНДРА",
+     "conf": 1.0,
+     "box": [
+      31,
+      529,
+      178,
+      545
+     ]
+    },
+    {
+     "text": "1894",
+     "conf": 1.0,
+     "box": [
+      89,
+      679,
+      120,
+      695
+     ]
+    },
+    {
+     "text": "ВИНО РОССИИ",
+     "conf": 1.0,
+     "box": [
+      73,
+      699,
+      136,
+      715
+     ]
+    },
+    {
+     "text": "ПОРТВЕЙН БЕЛЫЙ",
+     "conf": 1.0,
+     "box": [
+      42,
+      739,
+      168,
+      755
+     ]
+    },
+    {
+     "text": "КРЫМСКИЙ",
+     "conf": 1.0,
+     "box": [
+      63,
+      768,
+      147,
+      784
+     ]
+    }
+   ],
+   "unreadable": [],
+   "reasons_typed": {},
+   "hard_typed": {
+    "massandra-kagor-gurzuf-saperavi-krasnoe-sladkoe-16": [
+     "цвет белое против «красное»"
+    ]
+   },
+   "diagnosis": "текстовое сравнение (различие: имя, сорт)"
+  },
+  {
+   "image": "13795944_0.jpg",
+   "gold": "massandra-portveyn-belyy-krymskiy-kokur-beloe-sladkoe-18",
+   "frame": "front",
+   "findable": true,
+   "top1_ocr": "massandra-portveyn-krasnyy-alushta-krasnye-sorta-vinograda-krasnoe-sladkoe-17",
+   "top1_typed": "massandra-portveyn-belyy-alushta-belye-sorta-vinograda-beloe-sladkoe-17",
+   "top5_ocr": false,
+   "top5_typed": false,
+   "rank_geometry": 6,
+   "inliers_gold": 6,
+   "inliers_top1": 7,
+   "ocr_words": [
+    {
+     "text": "АССАНА",
+     "conf": 0.4,
+     "box": [
+      50,
+      210,
+      117,
+      235
+     ]
+    },
+    {
+     "text": "КТЫМСкИЙ",
+     "conf": 0.73,
+     "box": [
+      28,
+      332,
+      97,
+      350
+     ]
+    }
+   ],
+   "typed_words": [
+    {
+     "text": "МАССАНДРА",
+     "conf": 1.0,
+     "box": [
+      18,
+      237,
+      105,
+      253
+     ]
+    },
+    {
+     "text": "1894",
+     "conf": 1.0,
+     "box": [
+      52,
+      308,
+      71,
+      324
+     ]
+    },
+    {
+     "text": "ВИНО РОССИИ",
+     "conf": 1.0,
+     "box": [
+      43,
+      317,
+      80,
+      333
+     ]
+    },
+    {
+     "text": "ПОРТВЕЙН БЕЛЫЙ",
+     "conf": 1.0,
+     "box": [
+      24,
+      336,
+      99,
+      352
+     ]
+    },
+    {
+     "text": "КРЫМСКИЙ",
+     "conf": 1.0,
+     "box": [
+      37,
+      350,
+      86,
+      366
+     ]
+    }
+   ],
+   "unreadable": [],
+   "reasons_typed": {},
+   "hard_typed": {
+    "massandra-portveyn-krasnyy-alushta-krasnye-sorta-vinograda-krasnoe-sladkoe-17": [
+     "цвет белое против «красное»"
+    ]
+   },
+   "diagnosis": "текстовое сравнение (различие: имя, сорт)"
+  },
+  {
+   "image": "13918558_1.jpg",
+   "gold": "massandra-portveyn-belyy-krymskiy-kokur-beloe-sladkoe-18",
+   "frame": "front",
+   "findable": true,
+   "top1_ocr": "madera-krymskaya",
+   "top1_typed": "madera-krymskaya",
+   "top5_ocr": false,
+   "top5_typed": false,
+   "rank_geometry": 7,
+   "inliers_gold": 10,
+   "inliers_top1": 9,
+   "ocr_words": [
+    {
+     "text": "ПРОИЗВОДСТВЕЯНИ",
+     "conf": 0.66,
+     "box": [
+      318,
+      86,
+      593,
+      142
+     ]
+    },
+    {
+     "text": "MACC",
+     "conf": 0.87,
+     "box": [
+      315,
+      153,
+      600,
+      265
+     ]
+    },
+    {
+     "text": "$",
+     "conf": 0.97,
+     "box": [
+      108,
+      498,
+      136,
+      530
+     ]
+    },
+    {
+     "text": "ЗПДА",
+     "conf": 0.86,
+     "box": [
+      147,
+      390,
+      243,
+      494
+     ]
+    }
+   ],
+   "typed_words": [
+    {
+     "text": "МАССАНДРА",
+     "conf": 1.0,
+     "box": [
+      180,
+      400,
+      540,
+      416
+     ]
+    },
+    {
+     "text": "MASSANDRA THE CRIMEA 1894",
+     "conf": 1.0,
+     "box": [
+      60,
+      379,
+      240,
+      395
+     ]
+    },
+    {
+     "text": "ВЫДЕРЖКА В ДУБЕ 3 ГОДА",
+     "conf": 1.0,
+     "box": [
+      60,
+      541,
+      240,
+      557
+     ]
+    }
+   ],
+   "unreadable": [
+    {
+     "text": "",
+     "x": 0.5,
+     "y": 0.95,
+     "w": 0.4,
+     "unreadable": true,
+     "note": "название вина ниже края кадра"
+    }
+   ],
+   "reasons_typed": {},
+   "hard_typed": {},
+   "diagnosis": "текст не переставил (различие: имя, сорт)"
+  },
+  {
+   "image": "15536279_1.jpg",
+   "gold": "fanagoriya-fanagoriya-bryut-beloe-sovinon-blan-igristoe-bryut-beloe-11-13",
+   "frame": "front",
+   "findable": true,
+   "top1_ocr": "fanagoriya-fanagoriya-blanc-de-noirs-beloe-iz-chyornogo-merlo-igristoe-bryut-beloe-11-13",
+   "top1_typed": "fanagoriya-fanagoriya-blanc-de-noirs-beloe-iz-chyornogo-merlo-igristoe-bryut-beloe-11-13",
+   "top5_ocr": true,
+   "top5_typed": true,
+   "rank_geometry": 1,
+   "inliers_gold": 17,
+   "inliers_top1": 11,
+   "ocr_words": [
+    {
+     "text": "1",
+     "conf": 0.54,
+     "box": [
+      89,
+      79,
+      265,
+      105
+     ]
+    },
+    {
+     "text": "BRUT",
+     "conf": 0.61,
+     "box": [
+      148,
+      122,
+      216,
+      146
+     ]
+    }
+   ],
+   "typed_words": [
+    {
+     "text": "FANAGORIA",
+     "conf": 1.0,
+     "box": [
+      63,
+      94,
+      252,
+      110
+     ]
+    },
+    {
+     "text": "BRUT",
+     "conf": 1.0,
+     "box": [
+      110,
+      125,
+      204,
+      141
+     ]
+    },
+    {
+     "text": "METHODE CHARMAT",
+     "conf": 1.0,
+     "box": [
+      78,
+      145,
+      236,
+      161
+     ]
+    },
+    {
+     "text": "2022",
+     "conf": 1.0,
+     "box": [
+      133,
+      158,
+      181,
+      174
+     ]
+    },
+    {
+     "text": "dry",
+     "conf": 1.0,
+     "box": [
+      133,
+      176,
+      181,
+      192
+     ]
+    }
+   ],
+   "unreadable": [],
+   "reasons_typed": {},
+   "hard_typed": {},
+   "diagnosis": "текст не переставил (различие: имя, сорт)"
+  },
+  {
+   "image": "15598335_0.jpg",
+   "gold": "massandra-portveyn-belyy-krymskiy-kokur-beloe-sladkoe-18",
+   "frame": "front",
+   "findable": true,
+   "top1_ocr": "massandra-portveyn-krasnyy-alushta-krasnye-sorta-vinograda-krasnoe-sladkoe-17",
+   "top1_typed": "massandra-portveyn-belyy-alushta-belye-sorta-vinograda-beloe-sladkoe-17",
+   "top5_ocr": false,
+   "top5_typed": false,
+   "rank_geometry": 8,
+   "inliers_gold": 3,
+   "inliers_top1": 5,
+   "ocr_words": [
+    {
+     "text": "МАССАНН",
+     "conf": 0.31,
+     "box": [
+      30,
+      228,
+      100,
+      251
+     ]
+    }
+   ],
+   "typed_words": [
+    {
+     "text": "МАССАНДРА",
+     "conf": 1.0,
+     "box": [
+      15,
+      216,
+      88,
+      232
+     ]
+    },
+    {
+     "text": "1894",
+     "conf": 1.0,
+     "box": [
+      44,
+      288,
+      59,
+      304
+     ]
+    },
+    {
+     "text": "ВИНО РОССИИ",
+     "conf": 1.0,
+     "box": [
+      36,
+      297,
+      67,
+      313
+     ]
+    },
+    {
+     "text": "ПОРТВЕЙН БЕЛЫЙ",
+     "conf": 1.0,
+     "box": [
+      20,
+      310,
+      83,
+      326
+     ]
+    },
+    {
+     "text": "КРЫМСКИЙ",
+     "conf": 1.0,
+     "box": [
+      31,
+      322,
+      72,
+      338
+     ]
+    }
+   ],
+   "unreadable": [],
+   "reasons_typed": {},
+   "hard_typed": {
+    "massandra-portveyn-krasnyy-alushta-krasnye-sorta-vinograda-krasnoe-sladkoe-17": [
+     "цвет белое против «красное»"
+    ]
+   },
+   "diagnosis": "текстовое сравнение (различие: имя, сорт)"
+  },
+  {
+   "image": "15619693_0.jpg",
+   "gold": "fanagoriya-fanagoriya-bryut-beloe-sovinon-blan-igristoe-bryut-beloe-11-13",
+   "frame": "front",
+   "findable": true,
+   "top1_ocr": "fanagoriya-fanagoriya-blanc-de-noirs-beloe-iz-chyornogo-merlo-igristoe-bryut-beloe-11-13",
+   "top1_typed": "fanagoriya-fanagoriya-blanc-de-noirs-beloe-iz-chyornogo-merlo-igristoe-bryut-beloe-11-13",
+   "top5_ocr": true,
+   "top5_typed": true,
+   "rank_geometry": 4,
+   "inliers_gold": 5,
+   "inliers_top1": 4,
+   "ocr_words": [
+    {
+     "text": "IAN (",
+     "conf": 0.81,
+     "box": [
+      121,
+      237,
+      197,
+      255
+     ]
+    },
+    {
+     "text": "БРЮТ",
+     "conf": 0.6,
+     "box": [
+      127,
+      803,
+      181,
+      819
+     ]
+    },
+    {
+     "text": "FANAGORIA",
+     "conf": 1.0,
+     "box": [
+      64,
+      817,
+      240,
+      857
+     ]
+    },
+    {
+     "text": "2021",
+     "conf": 1.0,
+     "box": [
+      133,
+      875,
+      171,
+      891
+     ]
+    }
+   ],
+   "typed_words": [
+    {
+     "text": "БРЮТ",
+     "conf": 1.0,
+     "box": [
+      121,
+      768,
+      181,
+      784
+     ]
+    },
+    {
+     "text": "FANAGORIA",
+     "conf": 1.0,
+     "box": [
+      68,
+      797,
+      234,
+      813
+     ]
+    },
+    {
+     "text": "ЗГУ",
+     "conf": 1.0,
+     "box": [
+      136,
+      826,
+      166,
+      842
+     ]
+    },
+    {
+     "text": "BRUT 2021 WHITE",
+     "conf": 1.0,
+     "box": [
+      90,
+      845,
+      212,
+      861
+     ]
+    }
+   ],
+   "unreadable": [],
+   "reasons_typed": {},
+   "hard_typed": {
+    "rozovoe-polusladkoe": [
+     "сладость брют против полусладкое"
+    ],
+    "fanagoriya-beloe-polusladkoe": [
+     "сладость брют против полусладкое"
+    ]
+   },
+   "diagnosis": "текстовое сравнение (различие: имя, сорт)"
+  },
+  {
+   "image": "6182553_0.jpg",
+   "gold": "abrau-dyurso-russkoe-igristoe-polusuhoe-rozovoe-pino-nuar-12",
+   "frame": "front",
+   "findable": true,
+   "top1_ocr": "abrau-dyurso-udelnoe-vedomstvo-imperatorskoe-beloe-bryut",
+   "top1_typed": "abrau-dyurso-udelnoe-vedomstvo-imperatorskoe-beloe-polusladkoe",
+   "top5_ocr": false,
+   "top5_typed": false,
+   "rank_geometry": 12,
+   "inliers_gold": 36,
+   "inliers_top1": 7,
+   "ocr_words": [
+    {
+     "text": "АВРАЧ",
+     "conf": 0.7,
+     "box": [
+      15,
+      557,
+      99,
+      607
+     ]
+    },
+    {
+     "text": "ДЮРО",
+     "conf": 0.65,
+     "box": [
+      91,
+      566,
+      177,
+      608
+     ]
+    }
+   ],
+   "typed_words": [
+    {
+     "text": "РУССКОЕ ШАМПАНСКОЕ",
+     "conf": 1.0,
+     "box": [
+      39,
+      521,
+      158,
+      537
+     ]
+    },
+    {
+     "text": "1870",
+     "conf": 1.0,
+     "box": [
+      79,
+      552,
+      118,
+      568
+     ]
+    },
+    {
+     "text": "АБРАУ-ДЮРСО",
+     "conf": 1.0,
+     "box": [
+      39,
+      582,
+      158,
+      598
+     ]
+    },
+    {
+     "text": "РОЗОВОЕ",
+     "conf": 1.0,
+     "box": [
+      69,
+      605,
+      128,
+      621
+     ]
+    },
+    {
+     "text": "ПОЛУСУХОЕ",
+     "conf": 0.7,
+     "box": [
+      74,
+      620,
+      123,
+      636
+     ]
+    }
+   ],
+   "unreadable": [],
+   "reasons_typed": {},
+   "hard_typed": {
+    "abrau-dyurso-russkoe-igristoe-koshernoe-bryut-shardone-beloe-13": [
+     "сладость полусухое против брют",
+     "цвет розовое против «белое»"
+    ],
+    "abrau-dyurso-abrau-durso-reserve-brut-shardone-beloe-bryut-115": [
+     "сладость полусухое против брют",
+     "цвет розовое против «белое»"
+    ],
+    "abrau-dyurso-abrau-durso-brut-rose-reserve-pino-nuar-beloe-bryut-12": [
+     "сладость полусухое против брют",
+     "цвет розовое против «белое»"
+    ],
+    "abrau-dyurso-udelnoe-vedomstvo-imperatorskoe-beloe-bryut": [
+     "сладость полусухое против брют",
+     "цвет розовое против «белое»"
+    ]
+   },
+   "diagnosis": "текстовое сравнение (различие: сладость, цвет, имя, сорт)"
+  },
+  {
+   "image": "6522615_0.jpg",
+   "gold": "fanagoriya-fanagoriya-bryut-beloe-sovinon-blan-igristoe-bryut-beloe-11-13",
+   "frame": "front",
+   "findable": true,
+   "top1_ocr": "fanagoriya-beloe-polusladkoe",
+   "top1_typed": "fanagoriya-fanagoriya-bryut-beloe-sovinon-blan-igristoe-bryut-beloe-11-13",
+   "top5_ocr": true,
+   "top5_typed": true,
+   "rank_geometry": 3,
+   "inliers_gold": 4,
+   "inliers_top1": 5,
+   "ocr_words": [
+    {
+     "text": "3",
+     "conf": 0.96,
+     "box": [
+      85,
+      187,
+      105,
+      267
+     ]
+    },
+    {
+     "text": "FANAGORIA",
+     "conf": 0.82,
+     "box": [
+      22,
+      675,
+      174,
+      724
+     ]
+    }
+   ],
+   "typed_words": [
+    {
+     "text": "FANAGORIA",
+     "conf": 1.0,
+     "box": [
+      52,
+      292,
+      156,
+      308
+     ]
+    },
+    {
+     "text": "FANAGORIA",
+     "conf": 1.0,
+     "box": [
+      31,
+      695,
+      177,
+      711
+     ]
+    },
+    {
+     "text": "WHITE BRUT",
+     "conf": 1.0,
+     "box": [
+      73,
+      718,
+      135,
+      734
+     ]
+    }
+   ],
+   "unreadable": [],
+   "reasons_typed": {},
+   "hard_typed": {
+    "fanagoriya-fanagoria-extra-brut-rose-2019-pino-nuar-igristoe-bryut-rozovoe-ekstra-bryut-12": [
+     "сладость брют против экстра брют"
+    ],
+    "rozovoe-polusladkoe": [
+     "сладость брют против полусладкое"
+    ],
+    "fanagoriya-beloe-polusladkoe": [
+     "сладость брют против полусладкое"
+    ]
+   },
+   "diagnosis": "исправлено чтением"
+  },
+  {
+   "image": "9448391_0.jpg",
+   "gold": "fanagoriya-fanagoriya-bryut-beloe-sovinon-blan-igristoe-bryut-beloe-11-13",
+   "frame": "front",
+   "findable": true,
+   "top1_ocr": "fanagoriya-beloe-polusladkoe",
+   "top1_typed": "fanagoriya-fanagoriya-blanc-de-blancs-beloe-iz-belogo-shardone-igristoe-bryut-beloe-11-13",
+   "top5_ocr": false,
+   "top5_typed": false,
+   "rank_geometry": 7,
+   "inliers_gold": 4,
+   "inliers_top1": 5,
+   "ocr_words": [
+    {
+     "text": "RANAGORIA",
+     "conf": 0.91,
+     "box": [
+      32,
+      496,
+      153,
+      532
+     ]
+    },
+    {
+     "text": "201 F",
+     "conf": 0.38,
+     "box": [
+      78,
+      536,
+      104,
+      544
+     ]
+    }
+   ],
+   "typed_words": [
+    {
+     "text": "FANAGORIA",
+     "conf": 1.0,
+     "box": [
+      37,
+      210,
+      148,
+      226
+     ]
+    },
+    {
+     "text": "БРЮТ",
+     "conf": 1.0,
+     "box": [
+      74,
+      494,
+      111,
+      510
+     ]
+    },
+    {
+     "text": "FANAGORIA",
+     "conf": 1.0,
+     "box": [
+      41,
+      507,
+      144,
+      523
+     ]
+    },
+    {
+     "text": "BRUT 2018 WHITE",
+     "conf": 1.0,
+     "box": [
+      55,
+      531,
+      130,
+      547
+     ]
+    }
+   ],
+   "unreadable": [],
+   "reasons_typed": {},
+   "hard_typed": {
+    "fanagoriya-blanc-de-noir-mene-extra-brut-2019-pino-nuar-beloe-ekstra-bryut-12": [
+     "сладость брют против экстра брют",
+     "год ['2018'] против ['2019']"
+    ],
+    "fanagoriya-fanagoria-extra-brut-rose-2019-pino-nuar-igristoe-bryut-rozovoe-ekstra-bryut-12": [
+     "сладость брют против экстра брют",
+     "год ['2018'] против ['2019']"
+    ],
+    "rozovoe-polusladkoe": [
+     "сладость брют против полусладкое"
+    ],
+    "fanagoriya-beloe-polusladkoe": [
+     "сладость брют против полусладкое"
+    ]
+   },
+   "diagnosis": "текстовое сравнение (различие: имя, сорт)"
+  },
+  {
+   "image": "17762210_0.jpg",
+   "gold": "suhoe-beloe-zb-vajn-frizzante",
+   "frame": "front",
+   "findable": true,
+   "top1_ocr": "zolotaya-balka-zb-frizzante-dry-risling-beloe-suhoe-10",
+   "top1_typed": "zolotaya-balka-zb-frizzante-dry-risling-beloe-suhoe-10",
+   "top5_ocr": true,
+   "top5_typed": true,
+   "rank_geometry": 1,
+   "inliers_gold": 37,
+   "inliers_top1": 12,
+   "ocr_words": [
+    {
+     "text": "7",
+     "conf": 0.46,
+     "box": [
+      312,
+      578,
+      361,
+      637
+     ]
+    },
+    {
+     "text": "атиА-хяз",
+     "conf": 0.56,
+     "box": [
+      295,
+      1200,
+      522,
+      1248
+     ]
+    },
+    {
+     "text": "ZB",
+     "conf": 1.0,
+     "box": [
+      262,
+      1308,
+      414,
+      1429
+     ]
+    },
+    {
+     "text": "FRIZZANTE",
+     "conf": 1.0,
+     "box": [
+      126,
+      1537,
+      508,
+      1631
+     ]
+    },
+    {
+     "text": "исв",
+     "conf": 0.37,
+     "box": [
+      125,
+      1601,
+      216,
+      1647
+     ]
+    }
+   ],
+   "typed_words": [
+    {
+     "text": "ZB WINE",
+     "conf": 1.0,
+     "box": [
+      212,
+      1338,
+      394,
+      1354
+     ]
+    },
+    {
+     "text": "FRIZZANTE",
+     "conf": 1.0,
+     "box": [
+      121,
+      1556,
+      485,
+      1572
+     ]
+    },
+    {
+     "text": "LIGHTLY SPARKLING WINE",
+     "conf": 1.0,
+     "box": [
+      121,
+      1615,
+      485,
+      1631
+     ]
+    },
+    {
+     "text": "WHITE DRY",
+     "conf": 1.0,
+     "box": [
+      212,
+      1675,
+      394,
+      1691
+     ]
+    },
+    {
+     "text": "FRIZZANTE",
+     "conf": 0.5,
+     "box": [
+      182,
+      1180,
+      424,
+      1196
+     ]
+    }
+   ],
+   "unreadable": [],
+   "reasons_typed": {},
+   "hard_typed": {},
+   "diagnosis": "текст не переставил (различие: имя, сорт)"
+  },
+  {
+   "image": "6310320_0.jpg",
+   "gold": "abrau-dyurso-brut-dor-blanc-de-blancs-shardone-beloe-bryut-12",
+   "frame": "front",
+   "findable": true,
+   "top1_ocr": "abrau-dyurso-brut-dor-riesling-risling-beloe-bryut-12",
+   "top1_typed": "abrau-dyurso-brut-dor-riesling-risling-beloe-bryut-12",
+   "top5_ocr": false,
+   "top5_typed": false,
+   "rank_geometry": 6,
+   "inliers_gold": 30,
+   "inliers_top1": 16,
+   "ocr_words": [
+    {
+     "text": "'",
+     "conf": 0.54,
+     "box": [
+      266,
+      652,
+      344,
+      995
+     ]
+    },
+    {
+     "text": "dOt",
+     "conf": 0.56,
+     "box": [
+      283,
+      2034,
+      469,
+      2140
+     ]
+    },
+    {
+     "text": "2.010",
+     "conf": 0.67,
+     "box": [
+      216,
+      2172,
+      319,
+      2219
+     ]
+    },
+    {
+     "text": "1870",
+     "conf": 1.0,
+     "box": [
+      205,
+      1922,
+      309,
+      1974
+     ]
+    },
+    {
+     "text": "\"tlot",
+     "conf": 0.36,
+     "box": [
+      147,
+      2101,
+      254,
+      2177
+     ]
+    },
+    {
+     "text": "9tugn",
+     "conf": 0.37,
+     "box": [
+      230,
+      2128,
+      388,
+      2211
+     ]
+    }
+   ],
+   "typed_words": [
+    {
+     "text": "1870",
+     "conf": 1.0,
+     "box": [
+      332,
+      1909,
+      450,
+      1925
+     ]
+    },
+    {
+     "text": "РУССКИЙ ВИННЫЙ ДОМ",
+     "conf": 1.0,
+     "box": [
+      274,
+      1959,
+      508,
+      1975
+     ]
+    },
+    {
+     "text": "Абрау-Дюрсо",
+     "conf": 1.0,
+     "box": [
+      234,
+      2010,
+      548,
+      2026
+     ]
+    },
+    {
+     "text": "Brut d'Or",
+     "conf": 1.0,
+     "box": [
+      215,
+      2086,
+      567,
+      2102
+     ]
+    },
+    {
+     "text": "ВИНОДЕЛ ЦАРСКОГО ДВОРА",
+     "conf": 1.0,
+     "box": [
+      254,
+      2136,
+      528,
+      2152
+     ]
+    },
+    {
+     "text": "Victor Dravigny",
+     "conf": 1.0,
+     "box": [
+      234,
+      2187,
+      548,
+      2203
+     ]
+    },
+    {
+     "text": "2010",
+     "conf": 1.0,
+     "box": [
+      332,
+      2237,
+      450,
+      2253
+     ]
+    },
+    {
+     "text": "ВЫДЕРЖАНО В ГОРНЫХ ТОННЕЛЯХ",
+     "conf": 1.0,
+     "box": [
+      274,
+      2287,
+      508,
+      2303
+     ]
+    },
+    {
+     "text": "METHODE",
+     "conf": 1.0,
+     "box": [
+      469,
+      1051,
+      626,
+      1067
+     ]
+    }
+   ],
+   "unreadable": [],
+   "reasons_typed": {},
+   "hard_typed": {},
+   "diagnosis": "текст не переставил (различие: имя, сорт)"
+  },
+  {
+   "image": "7445929_1.jpg",
+   "gold": "balaklava-bryut-rezerv",
+   "frame": "front",
+   "findable": true,
+   "top1_ocr": "wine",
+   "top1_typed": "wine",
+   "top5_ocr": true,
+   "top5_typed": true,
+   "rank_geometry": 2,
+   "inliers_gold": 121,
+   "inliers_top1": 23,
+   "ocr_words": [
+    {
+     "text": "БАЛАKЛАВА",
+     "conf": 0.47,
+     "box": [
+      319,
+      193,
+      491,
+      213
+     ]
+    },
+    {
+     "text": "Б₽ЮТ!",
+     "conf": 0.46,
+     "box": [
+      513,
+      197,
+      601,
+      215
+     ]
+    },
+    {
+     "text": "БАЛАКЛАВА",
+     "conf": 1.0,
+     "box": [
+      237,
+      298,
+      662,
+      371
+     ]
+    },
+    {
+     "text": "RЕ$ЕRVЕ",
+     "conf": 0.58,
+     "box": [
+      352,
+      364,
+      549,
+      401
+     ]
+    },
+    {
+     "text": "ЗАЩИЩЕННЫМ ГЕОГРАФИЧЕСКИМ УКАЗАНИЕМ #КРЫМ\"",
+     "conf": 0.61,
+     "box": [
+      239,
+      461,
+      670,
+      492
+     ]
+    }
+   ],
+   "typed_words": [
+    {
+     "text": "БАЛАКЛАВА",
+     "conf": 1.0,
+     "box": [
+      180,
+      306,
+      720,
+      322
+     ]
+    },
+    {
+     "text": "RESERVE",
+     "conf": 1.0,
+     "box": [
+      315,
+      347,
+      585,
+      363
+     ]
+    },
+    {
+     "text": "Brut Rose",
+     "conf": 1.0,
+     "box": [
+      292,
+      388,
+      607,
+      404
+     ]
+    },
+    {
+     "text": "С ЗАЩИЩЕННЫМ ГЕОГРАФИЧЕСКИМ УКАЗАНИЕМ «КРЫМ»",
+     "conf": 1.0,
+     "box": [
+      180,
+      422,
+      720,
+      438
+     ]
+    }
+   ],
+   "unreadable": [],
+   "reasons_typed": {},
+   "hard_typed": {},
+   "diagnosis": "текст не переставил (различие: цвет, имя, сорт)"
+  },
+  {
+   "image": "org091_0.jpg",
+   "gold": "oleg",
+   "frame": "multi",
+   "findable": true,
+   "top1_ocr": "pobeda",
+   "top1_typed": "pobeda",
+   "top5_ocr": true,
+   "top5_typed": true,
+   "rank_geometry": 1,
+   "inliers_gold": 12,
+   "inliers_top1": 29,
+   "ocr_words": [
+    {
+     "text": "ТАБИЯ",
+     "conf": 0.57,
+     "box": [
+      311,
+      975,
+      835,
+      1085
+     ]
+    },
+    {
+     "text": "Il;",
+     "conf": 0.4,
+     "box": [
+      78,
+      2465,
+      142,
+      2523
+     ]
+    },
+    {
+     "text": "ОХЕГ",
+     "conf": 0.92,
+     "box": [
+      439,
+      2517,
+      590,
+      2576
+     ]
+    },
+    {
+     "text": "ИЗ ВИНОГРААА ВЫРАЩЕННОГО",
+     "conf": 0.53,
+     "box": [
+      387,
+      2651,
+      847,
+      2698
+     ]
+    },
+    {
+     "text": "Российской ФЕАЕРАЦИИ",
+     "conf": 0.93,
+     "box": [
+      424,
+      2689,
+      823,
+      2739
+     ]
+    },
+    {
+     "text": "ZvW",
+     "conf": 0.48,
+     "box": [
+      197,
+      3481,
+      922,
+      3726
+     ]
+    },
+    {
+     "text": "ПРОНЗВЕДЕНО",
+     "conf": 0.45,
+     "box": [
+      195,
+      2623,
+      387,
+      2680
+     ]
+    }
+   ],
+   "typed_words": [
+    {
+     "text": "2025",
+     "conf": 1.0,
+     "box": [
+      175,
+      2488,
+      292,
+      2504
+     ]
+    },
+    {
+     "text": "ОЛЕГ",
+     "conf": 1.0,
+     "box": [
+      467,
+      2525,
+      701,
+      2541
+     ]
+    },
+    {
+     "text": "БЕЛОЕ",
+     "conf": 1.0,
+     "box": [
+      116,
+      2600,
+      233,
+      2616
+     ]
+    },
+    {
+     "text": "СУХОЕ",
+     "conf": 1.0,
+     "box": [
+      116,
+      2674,
+      233,
+      2690
+     ]
+    },
+    {
+     "text": "ПРОИЗВЕДЕНО ИЗ ВИНОГРАДА, ВЫРАЩЕННОГО",
+     "conf": 1.0,
+     "box": [
+      350,
+      2600,
+      935,
+      2616
+     ]
+    },
+    {
+     "text": "НА ТЕРРИТОРИИ РОССИЙСКОЙ ФЕДЕРАЦИИ",
+     "conf": 1.0,
+     "box": [
+      350,
+      2674,
+      935,
+      2690
+     ]
+    },
+    {
+     "text": "АНАПА",
+     "conf": 1.0,
+     "box": [
+      935,
+      2749,
+      1052,
+      2765
+     ]
+    }
+   ],
+   "unreadable": [],
+   "reasons_typed": {},
+   "hard_typed": {},
+   "diagnosis": "текст не переставил (различие: цвет, имя, сорт)"
+  }
+ ]
+}

@@ -34,6 +34,11 @@ UPLOADS = next((ROOT / "dataset" / "uploads_root").rglob("uploads"), None)
 SCRAPE = ROOT / "data" / "datapack" / "wines.json"
 RAW_CARDS = ROOT / "data" / "raw" / "cards"     # обход каталога, не в репозитории
 PHOTO_MAP = ROOT / "data" / "datapack" / "photo_map.csv"   # его дистиллят, в репозитории
+# Ручные исправления привязки: проверенные глазами эталоны из официальных
+# источников и зафиксированные пробелы. Применяются последними и переживают
+# пересборку каталога — иначе каждая пересборка возвращала бы известные ошибки.
+PHOTO_OVERRIDES = ROOT / "data" / "datapack" / "photo_overrides.csv"
+REFS_DIR = ROOT / "data" / "refs"
 OUT_DIR = ROOT / "data" / "catalog"
 
 # Размеры превью в порядке убывания качества: оригинал предпочтительнее,
@@ -60,6 +65,19 @@ def norm(text: str) -> str:
     """Имя файла → ключ поиска: без расширения, не-словарные символы в '_'."""
     text = unicodedata.normalize("NFKD", text)
     return re.sub(r"[^\w]+", "_", text, flags=re.UNICODE).strip("_").lower()
+
+
+def collapse(text: str) -> str:
+    """Ключ без разделителей: только латиница и цифры после транслитерации.
+
+    Strapi режет имя по границам слов, которых нет в исходном имени:
+    «AligRiesl» → «Alig_Riesl», «DSC00839» → «DSC_00839», «10_44PM» →
+    «10_44_PM», а «_ (1)» схлопывает в «_1». Ключ с подчёркиваниями такие
+    файлы не находит, хотя они лежат в дампе под именем из CSV. Ключ без
+    разделителей терпим к любой расстановке границ; ложные склейки не
+    возникают, потому что сравнение остаётся точным по всей строке.
+    """
+    return re.sub(r"[^a-z0-9]", "", norm(translit(text)))
 
 
 def index_uploads(uploads: Path) -> dict[str, list[dict[str, str]]]:
@@ -135,6 +153,10 @@ def api_photo_map(available: set[str], refresh: bool = False) -> dict[str, str]:
                 if row["file"] in available}
 
 
+# Префикс ключа без разделителей: не пересекается с настоящими стемами дампа.
+COLLAPSED = "~"
+
+
 def candidate_keys(row: dict) -> list[tuple[str, str]]:
     """Ключи поиска файла, от самого надёжного к запасному."""
     photo = os.path.splitext(row["Название фото"].strip())[0]
@@ -142,14 +164,67 @@ def candidate_keys(row: dict) -> list[tuple[str, str]]:
     return [
         ("photo", norm(photo)),
         ("photo_translit", norm(translit(photo))),
+        ("photo_collapsed", COLLAPSED + collapse(photo)),
         ("slug", row["Slug"].strip().replace("-", "_").lower()),
         ("title_translit", norm(translit(title))),
     ]
 
 
+def with_collapsed(idx: dict[str, list[dict[str, str]]]) -> dict[str, list[dict[str, str]]]:
+    """Тот же индекс дампа плюс ключи без разделителей."""
+    out: dict[str, list[dict[str, str]]] = defaultdict(list)
+    for stem, groups in idx.items():
+        out[stem].extend(groups)
+        out[COLLAPSED + collapse(stem)].extend(groups)
+    return out
+
+
+def load_overrides() -> dict[str, dict[str, str]]:
+    """slug → строка photo_overrides.csv.
+
+    Пустой file — зафиксированный пробел: эталон платформы показывает другое
+    вино, а верного изображения найти не удалось. Такая позиция остаётся без
+    фото, и эвристика подбора по имени к ней не применяется — иначе она бы
+    снова подставила тот же неверный файл.
+    """
+    if not PHOTO_OVERRIDES.exists():
+        return {}
+    with PHOTO_OVERRIDES.open(encoding="utf-8") as fh:
+        rows = list(csv.DictReader(line for line in fh if not line.startswith("#")))
+    out: dict[str, dict[str, str]] = {}
+    for row in rows:
+        slug = (row.get("slug") or "").strip()
+        if not slug:
+            continue
+        if slug in out:
+            sys.exit(f"{PHOTO_OVERRIDES}: slug {slug} встречается дважды")
+        out[slug] = {k: (v or "").strip() for k, v in row.items()}
+    return out
+
+
+def resolve_override(slug: str, row: dict[str, str]) -> str | None:
+    """Путь к файлу переопределения относительно корня или None для пробела.
+
+    Файл сверяется по SHA-256: подмена картинки под тем же именем испортила бы
+    индекс молча, а причину искали бы в алгоритме.
+    """
+    if not row["file"]:
+        return None
+    path = REFS_DIR / row["file"]
+    if not path.exists():
+        sys.exit(f"{PHOTO_OVERRIDES}: для {slug} нет файла {path}")
+    if row.get("sha256"):
+        import hashlib
+        digest = hashlib.sha256(path.read_bytes()).hexdigest()
+        if digest != row["sha256"]:
+            sys.exit(f"{PHOTO_OVERRIDES}: у {path} другой SHA-256 ({digest[:12]}…), "
+                     f"ожидался {row['sha256'][:12]}…")
+    return str(path.relative_to(ROOT))
+
+
 def guess_photos(positions: dict[str, dict], api_map: dict[str, str],
                  idx: dict[str, list[dict[str, str]]],
-                 claimed: set[str]) -> dict[str, tuple[str, str, str]]:
+                 claimed: set[str], skip: set[str] = frozenset()) -> dict[str, tuple[str, str, str]]:
     """Подбор файла по имени для позиций, которых нет в обходе каталога.
 
     Неоднозначность здесь меряется конкуренцией позиций за имя, а не числом
@@ -163,7 +238,7 @@ def guess_photos(positions: dict[str, dict], api_map: dict[str, str],
     wanted: dict[str, list[str]] = defaultdict(list)
     keyname: dict[str, tuple[str, str]] = {}
     for slug, row in positions.items():
-        if slug in api_map:
+        if slug in api_map or slug in skip:
             continue
         for name, key in candidate_keys(row):
             free = [g for g in idx.get(key, []) if not set(g.values()) & claimed]
@@ -214,8 +289,9 @@ def main(refresh: bool = False) -> int:
         if slug:
             positions[slug] = row  # дубли строк в CSV схлопываем по slug
 
-    idx = index_uploads(UPLOADS)
+    idx = with_collapsed(index_uploads(UPLOADS))
     extras = load_scrape_extras()
+    overrides = load_overrides()
     available = {name for sizes in idx.values() for group in sizes
                  for name in group.values()}
     api_map = api_photo_map(available, refresh=refresh)
@@ -223,18 +299,28 @@ def main(refresh: bool = False) -> int:
     # иначе она снова раздаст одно фото нескольким винодельням.
     claimed = set(api_map.values())
 
-    guessed = guess_photos(positions, api_map, idx, claimed)
+    guessed = guess_photos(positions, api_map, idx, claimed, skip=set(overrides))
 
     catalog, report = [], []
     stats = defaultdict(int)
     for slug, row in positions.items():
-        photo_file = photo_size = strategy = None
+        photo_file = photo_size = strategy = photo_rel = None
 
-        if slug in api_map:
+        if slug in overrides:
+            photo_rel = resolve_override(slug, overrides[slug])
+            if photo_rel:
+                photo_file, photo_size, strategy = Path(photo_rel).name, "original", "override"
+            else:
+                strategy = "override-gap"
+
+        elif slug in api_map:
             photo_file, photo_size, strategy = api_map[slug], "original", "api"
 
         elif slug in guessed:
             photo_file, photo_size, strategy = guessed[slug]
+
+        if photo_file and not photo_rel:
+            photo_rel = f"{UPLOADS.relative_to(ROOT)}/{photo_file}"
 
         stats[f"{strategy or 'НЕТ'}/{photo_size or '-'}"] += 1
         stats["с фото" if photo_file else "без фото"] += 1
@@ -249,7 +335,7 @@ def main(refresh: bool = False) -> int:
             "color": row["Цвет"].strip(),
             "grapes": grapes,
             "description": row["Описание"].strip(),
-            "photo": f"{UPLOADS.relative_to(ROOT)}/{photo_file}" if photo_file else None,
+            "photo": photo_rel,
             "photo_size": photo_size,
             **extras.get(slug, {}),
         })

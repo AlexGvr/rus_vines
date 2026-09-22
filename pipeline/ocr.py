@@ -10,6 +10,7 @@ OCR работает по кропу бутылки от детектора: т�
 """
 from __future__ import annotations
 
+import sys
 from dataclasses import dataclass
 
 import numpy as np
@@ -18,6 +19,7 @@ from PIL import Image
 MAX_SIDE = 1280      # больше — не точнее, но заметно дороже по памяти
 MIN_CONF = 0.30      # ниже этого порога EasyOCR обычно выдаёт мусорные строки
 _state: dict = {}
+FAILURES: list[str] = []   # отказы распознавателя за процесс, см. read_words
 
 
 @dataclass(frozen=True)
@@ -73,7 +75,14 @@ def read_words(image: Image.Image, min_conf: float = MIN_CONF) -> list[Word]:
     prepared = _prepare(image)
     try:
         blocks = reader.readtext(prepared, detail=1, paragraph=False)
-    except Exception:
+    except Exception as error:
+        # Молчаливый пустой результат уже стоил замера: при двух прогонах
+        # на одной видеокарте чтение падало по памяти, кадр шёл дальше без
+        # слов, и текстовый канал «не сработал» там, где его не было вовсе.
+        # Отказ считается и печатается, чтобы его нельзя было принять
+        # за пустую этикетку.
+        FAILURES.append(f"{type(error).__name__}: {str(error)[:80]}")
+        print(f"OCR не отработал ({FAILURES[-1]})", file=sys.stderr, flush=True)
         return []
     scale = max(image.size) / max(prepared.shape[:2]) if max(prepared.shape[:2]) else 1.0
     words = []

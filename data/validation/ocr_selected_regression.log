@@ -1,0 +1,221 @@
+[transformers] Model config: bos_token_id must be `None` or an integer within the vocabulary (between 0 and 31999), got 49406. This may result in unexpected behavior.
+[transformers] Model config: eos_token_id must be `None` or an integer within the vocabulary (between 0 and 31999), got 49407. This may result in unexpected behavior.
+Loading weights:   0%|          | 0/888 [00:00<?, ?it/s]Loading weights:  42%|████▏     | 372/888 [00:00<00:00, 3680.58it/s]Loading weights:  85%|████████▍ | 753/888 [00:00<00:00, 3738.87it/s]Loading weights: 100%|██████████| 888/888 [00:00<00:00, 3751.38it/s]
+1/201 11164638_0.jpg
+2/201 13153768_0.jpg
+3/201 13153768_1.jpg
+4/201 13409943_0.jpg
+5/201 13409943_1.jpg
+6/201 14029896_0.jpg
+7/201 14029896_2.jpg
+8/201 5784977_0.jpg
+9/201 5784977_1.jpg
+10/201 9417887_0.jpg
+11/201 ir_etiketka-zashla-vot-vino-net-tot-sluchai_1.jpg
+12/201 ir_etiketka-zashla-vot-vino-net-tot-sluchai_2.jpg
+13/201 ir_mozhet-li-deshevoe-vino-byt-khoroshim-ya_1.jpg
+14/201 ir_mozhet-li-deshevoe-vino-byt-khoroshim-ya_2.jpg
+15/201 ir_podderzhivaem-otechestvennykh-proizvodit_0.jpg
+16/201 ir_podderzhivaem-otechestvennykh-proizvodit_1.jpg
+17/201 ir_podderzhivaem-otechestvennykh-proizvodit_2.jpg
+18/201 ir_prekrasnyi-aperitiv-na-leto-interesnaya-_0.jpg
+19/201 ir_prekrasnyi-aperitiv-na-leto-interesnaya-_1.jpg
+20/201 ir_prekrasnyi-aperitiv-na-leto-interesnaya-_2.jpg
+21/201 02eef911.webp
+22/201 096ca74e.jpg
+23/201 10777167_0.jpg
+24/201 11122332_0.jpg
+25/201 11813420_0.jpg
+26/201 11813420_2.jpg
+27/201 11865288_0.jpg
+28/201 12271541_0.jpg
+29/201 12980895_0.jpg
+30/201 12980895_2.jpg
+31/201 15839246_2.jpg
+32/201 12876444_0.jpg
+33/201 16117580_0.jpg
+34/201 16117580_1.jpg
+35/201 17368513_0.jpg
+36/201 17368513_1.jpg
+37/201 5921004_0.jpg
+38/201 10615250_0.jpg
+39/201 10615250_1.jpg
+40/201 11064469_0.jpg
+41/201 11064469_1.jpg
+42/201 11313721_0.jpg
+43/201 14098525_0.jpg
+44/201 14098525_1.jpg
+45/201 14555232_0.jpg
+46/201 14583333_0.jpg
+47/201 14635986_1.jpg
+48/201 14732673_0.jpg
+49/201 14732673_1.jpg
+50/201 14842757_0.jpg
+51/201 14842757_1.jpg
+52/201 15517452_0.jpg
+53/201 15517452_1.jpg
+54/201 15557112_0.jpg
+55/201 15586449_0.jpg
+56/201 15586449_1.jpg
+57/201 15763089_0.jpg
+58/201 15881383_0.jpg
+59/201 15881383_1.jpg
+60/201 1642455_0.jpg
+61/201 16831661_0.jpg
+62/201 16831661_1.jpg
+63/201 16952274_0.jpg
+64/201 17164427_0.jpg
+65/201 17164427_1.jpg
+66/201 17397266_0.jpg
+67/201 2663600_0.jpg
+68/201 2663600_1.jpg
+69/201 4303475_0.jpg
+70/201 5401549_0.jpg
+71/201 5401549_1.jpg
+72/201 5464419_0.jpg
+73/201 5861895_0.jpg
+74/201 6321068_0.jpg
+75/201 6531253_0.jpg
+76/201 6682735_0.jpg
+77/201 10043731_0.jpg
+78/201 10133023_0.jpg
+79/201 10206801_0.jpg
+80/201 10520335_0.jpg
+81/201 10575655_0.jpg
+82/201 10602595_0.jpg
+83/201 10678155_0.jpg
+84/201 10697703_0.jpg
+85/201 10802080_0.jpg
+86/201 10802080_1.jpg
+87/201 11151869_0.jpg
+88/201 11171408_0.jpg
+89/201 11250710_1.jpg
+90/201 11254800_0.jpg
+91/201 12025482_0.jpg
+92/201 12444550_1.jpg
+93/201 13160324_0.jpg
+94/201 13261288_0.jpg
+95/201 13314222_0.jpg
+96/201 13421617_0.jpg
+97/201 13455548_0.jpg
+98/201 13481814_0.jpg
+99/201 13481814_1.jpg
+100/201 13626115_0.jpg
+101/201 13718989_0.jpg
+102/201 13718989_1.jpg
+103/201 13792493_1.jpg
+104/201 13981139_0.jpg
+105/201 14120545_0.jpg
+106/201 14134121_0.jpg
+107/201 14705904_0.jpg
+108/201 14807880_0.jpg
+109/201 15598111_0.jpg
+110/201 15620151_0.jpg
+111/201 15622872_1.jpg
+112/201 15632542_0.jpg
+113/201 15763954_1.jpg
+114/201 15769591_1.jpg
+115/201 15848046_0.jpg
+116/201 16026698_0.jpg
+117/201 16448738_0.jpg
+118/201 16448738_1.jpg
+119/201 16470672_0.jpg
+120/201 16552967_0.jpg
+121/201 16552967_1.jpg
+122/201 16612700_0.jpg
+123/201 16612700_1.jpg
+124/201 16655658_0.jpg
+125/201 16827903_0.jpg
+126/201 16827903_1.jpg
+127/201 16850389_0.jpg
+128/201 16895037_0.jpg
+129/201 17489139_0.jpg
+130/201 17636747_0.jpg
+131/201 17650567_0.jpg
+132/201 17711736_0.jpg
+133/201 17711736_1.jpg
+134/201 4574044_0.jpg
+135/201 5439331_0.jpg
+136/201 5751651_0.jpg
+137/201 6106288_1.jpg
+138/201 6321414_1.jpg
+139/201 6358887_0.jpg
+140/201 6407984_1.jpg
+141/201 6489532_0.jpg
+142/201 7475798_1.jpg
+143/201 8192349_0.jpg
+144/201 8192349_1.jpg
+145/201 8606051_1.jpg
+146/201 9408720_0.jpg
+147/201 9408720_1.jpg
+148/201 9864036_1.jpg
+149/201 9919870_0.jpg
+150/201 ir_khoroshee-kaberne-po-dostupnoi-tsene_0.jpg
+151/201 ir_na-kazhdyi-den-n11563956_0.jpg
+152/201 ir_na-kazhdyi-den-n11563956_1.jpg
+153/201 ir_ne-otravilis-i-ne-oslepli-i-na-tom-spasi_0.jpg
+154/201 ir_odobreno-moim-ottsom-znachit-vino-pravil_0.jpg
+155/201 ir_odobreno-moim-ottsom-znachit-vino-pravil_1.jpg
+156/201 ir_otlichnoe-krasnoe-sukhoe-ot-shato-taman_0.jpg
+157/201 ir_proverennaya-klassika-n11666006_0.jpg
+158/201 ir_vino-nasyshchennoe-po-svoemu-terpkoe-bru_0.jpg
+159/201 org002_0.jpg
+160/201 org007_0.jpg
+161/201 org008_0.jpg
+162/201 org009_0.jpg
+163/201 org014_0.jpg
+164/201 org017_0.jpg
+165/201 org019_0.jpg
+166/201 org025_0.jpg
+167/201 org026_0.jpg
+168/201 org027_0.jpg
+169/201 org033_0.jpg
+170/201 org035_0.jpg
+171/201 org038_0.jpg
+172/201 org040_0.jpg
+173/201 org041_0.jpg
+174/201 org044_0.jpg
+175/201 org047_0.jpg
+176/201 org048_0.jpg
+177/201 org050_0.jpg
+178/201 org053_0.jpg
+179/201 org054_0.jpg
+180/201 org055_0.jpg
+181/201 org056_0.jpg
+182/201 org058_0.jpg
+183/201 org059_0.jpg
+184/201 org063_0.jpg
+185/201 org064_0.jpg
+186/201 org065_0.jpg
+187/201 org067_0.jpg
+188/201 org069_0.jpg
+189/201 org072_0.jpg
+190/201 org074_0.jpg
+191/201 org078_0.jpg
+192/201 org079_0.jpg
+193/201 org080_0.jpg
+194/201 org081_0.jpg
+195/201 org082_0.jpg
+196/201 org084_0.jpg
+197/201 org085_0.jpg
+198/201 org088_0.jpg
+199/201 org092_0.jpg
+200/201 org093_0.jpg
+201/201 org098_0.jpg
+{
+  "selected": {
+    "all_positives": {
+      "n": 173,
+      "top1": 130,
+      "top3": 147,
+      "top5": 153
+    },
+    "findable": {
+      "n": 164,
+      "top1": 130,
+      "top3": 144,
+      "top5": 150
+    },
+    "ocr_median_seconds": 0.1367440610192716
+  }
+}

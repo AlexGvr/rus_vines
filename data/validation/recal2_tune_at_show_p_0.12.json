@@ -1,0 +1,72 @@
+{
+ "source_report": "data/validation/recal2_tune.json",
+ "source_show_p": 0.1,
+ "show_p": 0.12,
+ "metrics": {
+  "all_positives": {
+   "n": 155,
+   "top1": 0.8193548387096774,
+   "top3": 0.8709677419354839,
+   "top5": 0.9032258064516129,
+   "retrieval_recall": {
+    "20": 0.9548387096774194,
+    "50": 0.967741935483871,
+    "100": 0.9806451612903225
+   },
+   "stage_top1_counts": {
+    "rank_shortlist": 120,
+    "rank_geometry": 119,
+    "rank_text": 127
+   }
+  },
+  "findable_diagnostic": {
+   "n": 147,
+   "top1": 0.8571428571428571,
+   "top3": 0.9115646258503401,
+   "top5": 0.9455782312925171,
+   "retrieval_recall": {
+    "20": 0.9863945578231292,
+    "50": 1.0,
+    "100": 1.0
+   },
+   "stage_top1_counts": {
+    "rank_shortlist": 119,
+    "rank_geometry": 118,
+    "rank_text": 126
+   }
+  },
+  "with_rejection_all_queries": {
+   "1": {
+    "tp": 121,
+    "fp": 11,
+    "fn": 34,
+    "precision": 0.9166666666666666,
+    "recall": 0.7806451612903226,
+    "f1": 0.8432055749128919
+   },
+   "3": {
+    "tp": 124,
+    "fp": 8,
+    "fn": 31,
+    "precision": 0.9393939393939394,
+    "recall": 0.8,
+    "f1": 0.8641114982578397
+   },
+   "5": {
+    "tp": 125,
+    "fp": 7,
+    "fn": 30,
+    "precision": 0.946969696969697,
+    "recall": 0.8064516129032258,
+    "f1": 0.8710801393728222
+   }
+  },
+  "show_p": 0.12,
+  "absent_n": 33,
+  "false_accept_rate": 0.18181818181818182
+ },
+ "refused_correct": 6,
+ "absent_shown": 6,
+ "absent_n": 33,
+ "note": "пересчёт того же прогона при текущем пороге confidence.json; исходный отчёт не менялся"
+}

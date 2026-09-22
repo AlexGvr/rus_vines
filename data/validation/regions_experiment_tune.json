@@ -1,0 +1,250 @@
+{
+ "n": 7,
+ "changed": 5,
+ "fixed": 3,
+ "broken": 0,
+ "items": [
+  {
+   "image": "ir_ochen-vkusnoe-legkoe-vino-dlya-semeinogo_0.jpg",
+   "gold": "fanagoriya-brule-muscat-ottonel-brut-muskat-ottonel-beloe-polusladkoe-12",
+   "top1": "fanagoriya-brule-muscat-ottonel-polusladkoe-muskat-ottonel-beloe-115",
+   "region_best": "fanagoriya-brule-muscat-ottonel-brut-muskat-ottonel-beloe-polusladkoe-12",
+   "scores": {
+    "fanagoriya-brule-muscat-ottonel-polusladkoe-muskat-ottonel-beloe-115": {
+     "inliers": 42,
+     "ncc": 0.927,
+     "hist": 0.998,
+     "coverage": 1.0
+    },
+    "fanagoriya-brule-muscat-ottonel-brut-muskat-ottonel-beloe-polusladkoe-12": {
+     "inliers": 48,
+     "ncc": 0.953,
+     "hist": 0.999,
+     "coverage": 1.0
+    }
+   }
+  },
+  {
+   "image": "13978352_0.jpg",
+   "gold": "abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12",
+   "top1": "abrau-dyurso-russkoe-igristoe-polusladkoe-shardone-beloe-12",
+   "region_best": "abrau-dyurso-russkoe-igristoe-polusladkoe-shardone-beloe-12",
+   "scores": {
+    "abrau-dyurso-russkoe-igristoe-polusladkoe-shardone-beloe-12": {
+     "inliers": 41,
+     "ncc": -0.038,
+     "hist": 0.283,
+     "coverage": 0.65
+    },
+    "abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12": {
+     "inliers": 41,
+     "ncc": -0.04,
+     "hist": 0.208,
+     "coverage": 0.74
+    },
+    "abrau-dyurso-russkoe-igristoe-koshernoe-bryut-shardone-beloe-13": {
+     "inliers": 29,
+     "ncc": -0.08,
+     "hist": 0.301,
+     "coverage": 0.74
+    },
+    "abrau-dyurso-russkoe-igristoe-polusuhoe-shardone-beloe-12": {
+     "inliers": 41,
+     "ncc": -0.06,
+     "hist": 0.298,
+     "coverage": 0.74
+    },
+    "abrau-dyurso-russkoe-igristoe-koshernoe-polusladkoe-shardone-beloe-12": {
+     "inliers": 40,
+     "ncc": -0.159,
+     "hist": 0.421,
+     "coverage": 0.7
+    }
+   }
+  },
+  {
+   "image": "13978352_1.jpg",
+   "gold": "abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12",
+   "top1": "abrau-dyurso-russkoe-igristoe-polusladkoe-shardone-beloe-12",
+   "region_best": "abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12",
+   "scores": {
+    "abrau-dyurso-russkoe-igristoe-polusladkoe-shardone-beloe-12": {
+     "inliers": 47,
+     "ncc": 0.088,
+     "hist": 0.15,
+     "coverage": 1.0
+    },
+    "abrau-dyurso-victor-dravigny-krasnoe-polusladkoe-kaberne-sovinon-125": {
+     "inliers": 62,
+     "ncc": -0.08,
+     "hist": 0.053,
+     "coverage": 1.0
+    },
+    "abrau-dyurso-russkoe-igristoe-polusuhoe-shardone-beloe-12": {
+     "inliers": 50,
+     "ncc": 0.085,
+     "hist": 0.162,
+     "coverage": 1.0
+    },
+    "abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12": {
+     "inliers": 46,
+     "ncc": 0.186,
+     "hist": 0.157,
+     "coverage": 1.0
+    }
+   }
+  },
+  {
+   "image": "15501518_0.jpg",
+   "gold": "abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12",
+   "top1": "abrau-dyurso-russkoe-igristoe-polusladkoe-shardone-beloe-12",
+   "region_best": "abrau-dyurso-russkoe-igristoe-polusladkoe-shardone-beloe-12",
+   "scores": {
+    "abrau-dyurso-russkoe-igristoe-polusladkoe-shardone-beloe-12": {
+     "inliers": 20,
+     "ncc": 0.121,
+     "hist": 0.044,
+     "coverage": 0.98
+    },
+    "abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12": {
+     "inliers": 20,
+     "ncc": -0.038,
+     "hist": 0.029,
+     "coverage": 0.99
+    },
+    "abrau-dyurso-russkoe-igristoe-koshernoe-polusladkoe-shardone-beloe-12": {
+     "inliers": 22,
+     "ncc": 0.041,
+     "hist": 0.178,
+     "coverage": 0.7
+    },
+    "abrau-dyurso-russkoe-igristoe-koshernoe-bryut-shardone-beloe-13": {
+     "inliers": 22,
+     "ncc": -0.152,
+     "hist": 0.122,
+     "coverage": 0.95
+    },
+    "abrau-dyurso-russkoe-igristoe-polusuhoe-shardone-beloe-12": {
+     "inliers": 23,
+     "ncc": 0.018,
+     "hist": 0.049,
+     "coverage": 0.98
+    },
+    "abrau-dyurso-victor-dravigny-bryut": {
+     "inliers": 6,
+     "ncc": -0.338,
+     "hist": -0.048,
+     "coverage": 1.0
+    }
+   }
+  },
+  {
+   "image": "12083971_0.jpg",
+   "gold": "abrau-dyurso-victor-dravigny-polusladkoe-sovinon-blan-beloe-12",
+   "top1": "abrau-dyurso-victor-dravigny-extra-brut-shardone-beloe-bryut-125",
+   "region_best": "abrau-dyurso-victor-dravigny-polusladkoe-sovinon-blan-beloe-12",
+   "scores": {
+    "abrau-dyurso-victor-dravigny-koshernoe-bryut-shardone-beloe-125": {
+     "inliers": 44,
+     "ncc": 0.212,
+     "hist": 0.05,
+     "coverage": 0.84
+    },
+    "abrau-dyurso-victor-dravigny-krasnoe-polusladkoe-kaberne-sovinon-125": {
+     "inliers": 5,
+     "ncc": -0.093,
+     "hist": -0.036,
+     "coverage": 0.57
+    },
+    "abrau-dyurso-victor-dravigny-polusladkoe-sovinon-blan-beloe-12": {
+     "inliers": 47,
+     "ncc": 0.572,
+     "hist": 0.375,
+     "coverage": 0.95
+    }
+   }
+  },
+  {
+   "image": "16151511_0.jpg",
+   "gold": "abrau-dyurso-russkoe-igristoe-polusuhoe-rozovoe-pino-nuar-12",
+   "top1": "abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12",
+   "region_best": "abrau-dyurso-russkoe-igristoe-polusladkoe-shardone-beloe-12",
+   "scores": {
+    "abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12": {
+     "inliers": 21,
+     "ncc": -0.188,
+     "hist": 0.213,
+     "coverage": 0.81
+    },
+    "abrau-dyurso-russkoe-igristoe-polusuhoe-rozovoe-pino-nuar-12": {
+     "inliers": 19,
+     "ncc": -0.092,
+     "hist": 0.323,
+     "coverage": 0.62
+    },
+    "abrau-dyurso-russkoe-igristoe-polusladkoe-shardone-beloe-12": {
+     "inliers": 16,
+     "ncc": -0.007,
+     "hist": 0.23,
+     "coverage": 0.8
+    },
+    "abrau-dyurso-russkoe-igristoe-koshernoe-polusladkoe-shardone-beloe-12": {
+     "inliers": 22,
+     "ncc": -0.247,
+     "hist": 0.23,
+     "coverage": 0.9
+    },
+    "abrau-dyurso-russkoe-igristoe-koshernoe-bryut-shardone-beloe-13": {
+     "inliers": 22,
+     "ncc": -0.159,
+     "hist": 0.204,
+     "coverage": 0.87
+    },
+    "abrau-dyurso-russkoe-igristoe-polusuhoe-shardone-beloe-12": {
+     "inliers": 14,
+     "ncc": -0.058,
+     "hist": 0.245,
+     "coverage": 0.81
+    }
+   }
+  },
+  {
+   "image": "16151511_1.jpg",
+   "gold": "abrau-dyurso-russkoe-igristoe-polusuhoe-rozovoe-pino-nuar-12",
+   "top1": "abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12",
+   "region_best": "abrau-dyurso-russkoe-igristoe-koshernoe-bryut-shardone-beloe-13",
+   "scores": {
+    "abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12": {
+     "inliers": 6,
+     "ncc": -0.03,
+     "hist": -0.002,
+     "coverage": 0.95
+    },
+    "abrau-dyurso-russkoe-igristoe-polusuhoe-rozovoe-pino-nuar-12": {
+     "inliers": 4,
+     "ncc": -0.255,
+     "hist": 0.181,
+     "coverage": 0.66
+    },
+    "abrau-dyurso-russkoe-igristoe-polusladkoe-shardone-beloe-12": {
+     "inliers": 6,
+     "ncc": -0.179,
+     "hist": -0.027,
+     "coverage": 0.98
+    },
+    "abrau-dyurso-russkoe-igristoe-koshernoe-bryut-shardone-beloe-13": {
+     "inliers": 5,
+     "ncc": 0.137,
+     "hist": -0.011,
+     "coverage": 1.0
+    },
+    "abrau-dyurso-russkoe-igristoe-koshernoe-polusladkoe-shardone-beloe-12": {
+     "inliers": 6,
+     "ncc": null,
+     "hist": null,
+     "coverage": 0.017405399659863947
+    }
+   }
+  }
+ ]
+}

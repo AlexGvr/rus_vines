@@ -1,6 +1,7 @@
 slug
 avtohtonnoe-vino-kryma-beloe-suhoe
 aligote-barrel-2024
+zb-vajn-spumante-bryut-beloe
 fanagoriya-100-ottenkov-krasnogo-kaberne-kaberne-sovinon-krasnoe-suhoe-135
 fanagoriya-100-ottenkov-krasnogo-pino-nuar-krasnoe-suhoe-135
 fanagoriya-100-ottenkov-krasnogo-saperavi-krasnoe-suhoe-14
@@ -155,13 +156,16 @@ chteau-le-grand-vostock-cabernet-sauvignon-kaberne-sovinon-krasnoe-suhoe-14
 chteau-le-grand-vostock-cabernet-sauvignon-reserve-kaberne-sovinon-krasnoe-suhoe-14
 belmas-winery-cabernet-sauvignon-rose-belmas-kaberne-sovinon-rozovoe-suhoe-13
 chteau-le-grand-vostock-cadet-karsov-shardone-beloe-suhoe-135
+cantiani-aligote-riesling
 cantiani-brut
+cantiani-cabernet-sauvignon
 cantiani-cabernet-sauvignon-merlot
 cantiani-cabernet-sauvignon-reserve-2024
 cantiani-chardonnay
 cantiani-merlot
 cantiani-riesling
 cantiani-riesling-1
+cantiani-riesling-rkatsiteli
 cantiani-rkatsiteli
 cantiani-rkatsiteli-1
 cantiani-saperavi-merlot
@@ -759,6 +763,7 @@ zmv-koktebel-bastardo-krasnoe-suhoe-14
 valeriy-zaharin-bastardo-kefesiya-avtohtonnoe-vino-kryma-bastardo-magarachskiy-krasnoe-suhoe-115
 belaya-lvicza
 levokumskoe-beloe-rkatsiteli-suhoe-10
+beloe-polusladkoe
 beloe-suhoe
 belbek-beloe-suhoe-kaberne-sovinon-krasnoe-14
 belbek-belbek-kaberne-fran-krasnoe-suhoe-13
@@ -957,7 +962,6 @@ derbent-vino-desono-shardone-beloe-suhoe-125
 zhemchuzhnaya-9-aligote-czitron
 zhemchuzhnaya-9-kaberne-sovinon-pino-nuar-1
 zhemchuzhnaya-9-kaberne-sovinon-pino-nuar
-zhemchuzhnaya-9-merlo-kaberne-sovinon
 zhemchuzhnaya-9-muskat-rozovyj-kaberne-sovinon
 zhemchuzhnaya-9-muskat-rozovyj-pino-gri
 zhemchuzhnaya-9-pino-gri-pino-nuar
@@ -968,11 +972,14 @@ zhemchuzhnaya-9-risling-sovinon-blan
 zhemchuzhnaya-9-sovinon-blan-aligote
 czitronnyj-magaracha-sovinon-blan
 zhemchuzhnaya-9-czitron-shardone-1
-zhemchuzhnaya-9-czitron-shardone
+zakat-denisov-vajneri
 belbek-zakat-merlo-sira-krasnoe-suhoe-132
 zb-vajn-vajt-suhoe-beloe
 zb-vajn-moskato-polusladkoe-beloe
+zb-vajn-moskato-polusladkoe-rozovoe
 zb-vajn-risling-polusuhoe-beloe
+zb-vajn-roze-suhoe-rozovoe
+zb-vajn-spumante-bryut-rozovoe
 zb-vajn-spumante-polusuhoe-beloe
 soyuz-vino-zelyonaya-dolina-kaberne-sovinon-krasnoe-suhoe-12
 soyuz-vino-zelyonaya-dolina-kaberne-merlo-kaberne-sovinon-krasnoe-polusladkoe-12
@@ -988,6 +995,7 @@ fanagoriya-zelyonoe-vino-risling-tsitronnyy-magaracha-beloe-polusuhoe-11
 fanagoriya-zelyonoe-vino-risling-tsitronnyy-magaracha-merlo-rozovoe-polusuhoe-11
 vinodelnya-myshako-zinfandel-mode-krasnoe-suhoe-148
 vinodelnya-myshako-zinfandel-mode-petnat-rozovoe-polusuhoe-12
+znoj-denisov-vajneri
 zolotaya-balka-igristoe-krasnoe-polusladkoe
 igristoe-vino-bryut-beloe-di-caspico
 novyy-svet-dom-shampanskih-vin-igristoe-vino-vyderzhannoe-bryut-krasnoe-novyy-svet-kaberne-sovinon-135
@@ -1906,6 +1914,7 @@ vinodelnya-vedernikov-fantom-3070-krasnostop-zolotovskiy-krasnoe-suhoe-145
 vinodelnya-vedernikov-fantom-5050-krasnostop-zolotovskiy-krasnoe-suhoe-145
 vinodelnya-vedernikov-fantom-7030-krasnostop-zolotovskiy-krasnoe-suhoe-15
 nikolaev-i-synovya-festeliya-pti-verdo-krasnoe-suhoe-135
+fioletovyj-rannij-petnat
 nikolaev-i-synovya-flamingo-malbek-rozovoe-suhoe-125
 kuban-vino-flyor-dyu-syud-blan-de-tamane-tsvetochnyy-beloe-suhoe-115
 kuban-vino-flyor-dyu-syud-roze-de-tamane-traminer-rozovyy-rozovoe-suhoe-125
@@ -2092,3 +2101,10 @@ kokur-suhoe
 kokur-suhoe
 soyuz-vino-kanonicheskie-traditsii-krasnoe-sladkoe-kaberne-sovinon-115
 beloe-polusladkoe
+abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12
+abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12
+abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12
+massandra-portveyn-belyy-krymskiy-kokur-beloe-sladkoe-18
+fanagoriya-fanagoriya-bryut-beloe-sovinon-blan-igristoe-bryut-beloe-11-13
+fanagoriya-fanagoriya-bryut-beloe-sovinon-blan-igristoe-bryut-beloe-11-13
+abrau-dyurso-russkoe-igristoe-polusladkoe-shardone-beloe-12

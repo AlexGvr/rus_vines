@@ -1,0 +1,163 @@
+{
+  "date": "2026-09-22",
+  "scope": "Исправление двух неверных эталонов из reference_mismatches.json и закрытие пробелов покрытия каталога (14 SKU без индекса из field_audit.json).",
+  "mechanism": {
+    "photo_overrides": "data/datapack/photo_overrides.csv — применяется pipeline/build_catalog.py последним; пустой file = зафиксированный пробел, SHA-256 сверяется при сборке",
+    "collapsed_key": "build_catalog.candidate_keys: ключ без разделителей (camelCase/цифры/скобки, которые Strapi режет иначе, чем norm())",
+    "index": "build_index.collect('clean') берёт путь из catalog.json как есть (эталоны из data/refs)"
+  },
+  "reference_mismatches_resolved": [
+    {
+      "slug": "zhemchuzhnaya-9-merlo-kaberne-sovinon",
+      "resolution": "gap",
+      "was": "ec2082cwb8d2y4rf36x235pckozylfad_9994a4e28f.webp = «АРАТТИ Каберне Совиньон 2021», дубль эталона aratti-kaberne-sovinon-2021-krasnoe-suhoe",
+      "searched": [
+        "dataset/uploads (нет файла с Мерло/Каберне линейки Жемчужная 9)",
+        "vino-svoe.ru/wines/<slug> — 404",
+        "winehelp2.ru/wine/aratti — товара нет",
+        "t.me/s/vino_aratti (q=Мерло, Каберне, Жемчужная; посты 519, 523, 1003) — только сертификат Продэкспо, фото этикетки нет"
+      ],
+      "consequence": "позиция без эталона; прежний файл больше не создаёт ложный дубль для aratti-kaberne-sovinon-2021"
+    },
+    {
+      "slug": "zhemchuzhnaya-9-czitron-shardone",
+      "resolution": "gap",
+      "was": "Aligote_Czitron_bel_suh_1cc2763d35.webp = «АЛИГОТЕ ЦИТРОН белое сухое 2024», дубль эталона zhemchuzhnaya-9-aligote-czitron",
+      "searched": [
+        "карточка платформы показывает тот же файл",
+        "winehelp2.ru: og:image товара «Цитронный Магарача и Шардоне белое сухое» — заглушка магазина, галерея та же, что у Алиготе/Цитрон",
+        "t.me/s/vino_aratti — этикетки «Цитрон Шардоне белое сухое» нет; есть только полусладкое (Czitron_Shard_p_sl, slug -1)"
+      ],
+      "consequence": "позиция без эталона; ложный дубль Алиготе/Цитрон убран"
+    }
+  ],
+  "coverage": [
+    {
+      "slug": "zakat-denisov-vajneri",
+      "strategy": "override",
+      "file": "zakat_denisov_platform.webp",
+      "source": "https://vino-svoe.ru/wines/zakat-denisov-vajneri",
+      "note": "этикетка «ЗАКАТ» Денисов, розовое; файл uploads/zakat_denisov_vajneri_no_bg_preview_carve_photos_1_6ae9baa13d.webp, отдаётся 388×1012"
+    },
+    {
+      "slug": "znoj-denisov-vajneri",
+      "strategy": "override",
+      "file": "znoj_denisov_platform.webp",
+      "source": "https://vino-svoe.ru/wines/znoj-denisov-vajneri",
+      "note": "этикетка «ЗНОЙ» Денисов, белое; файл uploads/Znoj_denisov_vajneri_no_bg_preview_carve_photos_0452c989d8.webp"
+    },
+    {
+      "slug": "fioletovyj-rannij-petnat",
+      "strategy": "override",
+      "file": "petnat_fioletovyj_platform.webp",
+      "source": "https://vino-svoe.ru/wines/fioletovyj-rannij-petnat",
+      "note": "этикетка «ПЕТ НАТ фиолетовый ранний» Гусевъ; файл uploads/petnat_fioletovyj_no_bg_preview_carve_photos_e4ddd605bc.webp"
+    },
+    {
+      "slug": "zb-vajn-spumante-bryut-beloe",
+      "strategy": "override",
+      "file": "zb_spumante_white_brut_krymwine.webp",
+      "source": "https://krymwine.ru/catalog/igristye-vina/zb_spumante_white_brut.html",
+      "note": "этикетка ZB SPUMANTE WHITE BRUT; у магазина сорта Шардоне/Рислинг/Пино Блан/Алиготе/Ркацители, в карточке только Алиготе — продукт один"
+    },
+    {
+      "slug": "zb-vajn-spumante-bryut-rozovoe",
+      "strategy": "override",
+      "file": "zb_spumante_rose_brut_krymwine.webp",
+      "source": "https://krymwine.ru/catalog/igristye-vina/zb_spumante_brut_rose.html",
+      "note": "этикетка ZB SPUMANTE ROSE BRUT"
+    },
+    {
+      "slug": "zb-vajn-moskato-polusladkoe-rozovoe",
+      "strategy": "override",
+      "file": "zb_moscato_rose_krymwine.webp",
+      "source": "https://krymwine.ru/catalog/igristye-vina/zb_moscato_rozovoe_polusladkoe.html",
+      "note": "этикетка ZB MOSCATO ROSE SEMISWEET"
+    },
+    {
+      "slug": "zhemchuzhnaya-9-merlo-kaberne-sovinon",
+      "strategy": "override-gap",
+      "file": null,
+      "source": "dataset/strapi_output0709.csv",
+      "note": "в CSV файл ec2082cwb8d2y4rf36x235pckozylfad.webp — это «АРАТТИ Каберне Совиньон 2021» (дубль эталона aratti-kaberne-sovinon-2021-krasnoe-suhoe); карточки на платформе нет (404); вино существует (бронза Продэкспо-2025, т.me/vino_aratti/1003), фото этикетки не найдено"
+    },
+    {
+      "slug": "zhemchuzhnaya-9-czitron-shardone",
+      "strategy": "override-gap",
+      "file": null,
+      "source": "https://vino-svoe.ru/wines/zhemchuzhnaya-9-czitron-shardone",
+      "note": "платформа и winehelp показывают этикетку «АЛИГОТЕ ЦИТРОН белое сухое» (дубль zhemchuzhnaya-9-aligote-czitron); этикетки «ЦИТРОН ШАРДОНЕ белое сухое» нигде нет — есть только полусладкое (-1)"
+    },
+    {
+      "slug": "kokur-suhoe-2025",
+      "strategy": "override-gap",
+      "file": null,
+      "source": "dataset/strapi_output0709.csv",
+      "note": "в CSV файл DSC00839-Photoroom.webp — этикетка «Два Брата КОКУР ПОЛУСУХОЕ 2025», он же эталон kokur-2025; карточки на платформе нет (404)"
+    },
+    {
+      "slug": "method-classic-kokur",
+      "strategy": "override-gap",
+      "file": null,
+      "source": "dataset/strapi_output0709.csv",
+      "note": "в CSV файл DSC00836.webp — этикетка «Два Брата ПИНО НУАР 2025», он же эталон pino-nuar-2025; карточки на платформе нет (404)"
+    },
+    {
+      "slug": "ona-skazala-da",
+      "strategy": "override-gap",
+      "file": null,
+      "source": "dataset/strapi_output0709.csv",
+      "note": "в CSV файл «Generated Image June 22, 2026» — сгенерированная сцена без этикетки; карточки на платформе нет (404)"
+    },
+    {
+      "slug": "rozovoe-polusladkoe-2",
+      "strategy": "override-gap",
+      "file": null,
+      "source": "dataset/strapi_output0709.csv",
+      "note": "в CSV файл «Generated Image June 22, 2026» — сгенерированная сцена (свадьба) без этикетки; карточки на платформе нет (404)"
+    },
+    {
+      "slug": "cantiani-aligote-riesling",
+      "strategy": "photo_collapsed",
+      "file": "Cantiani_Alig_Riesl_New_vid_042025_kopiya_fotor_bg_remover_20260821205234_286ee15115.webp",
+      "source": "дамп Strapi, имя файла из CSV кейса; для Cantiani совпадает с карточкой на vino-svoe.ru",
+      "note": "этикетка CANTIANI ALIGOTE RIESLING"
+    },
+    {
+      "slug": "cantiani-cabernet-sauvignon",
+      "strategy": "photo_collapsed",
+      "file": "Cantiani_Caber_Sauv_vid_042024_Photoroom_834a144a19.webp",
+      "source": "дамп Strapi, имя файла из CSV кейса; для Cantiani совпадает с карточкой на vino-svoe.ru",
+      "note": "этикетка CANTIANI CABERNET SAUVIGNON (из двух перезаливок взята та, что на платформе)"
+    },
+    {
+      "slug": "cantiani-riesling-rkatsiteli",
+      "strategy": "photo_collapsed",
+      "file": "Cantiani_Riesl_Rkats_New_vid_042025_kopiya_9745bc157c.webp",
+      "source": "дамп Strapi, имя файла из CSV кейса; для Cantiani совпадает с карточкой на vino-svoe.ru",
+      "note": "этикетка CANTIANI RIESLING RKATSITELI"
+    },
+    {
+      "slug": "zb-vajn-roze-suhoe-rozovoe",
+      "strategy": "photo_collapsed",
+      "file": "convertio_in_L1002577_1_8ca44facec.webp",
+      "source": "дамп Strapi, имя файла из CSV кейса; для Cantiani совпадает с карточкой на vino-svoe.ru",
+      "note": "этикетка ZB «…MY ROSE» 2022, розовое; сорт и сладость на этикетке не читаются — привязка по имени файла из CSV"
+    },
+    {
+      "slug": "beloe-polusladkoe",
+      "strategy": "photo_collapsed",
+      "file": "PU_Sjv7dn_M_Nil_H25_TO_9_Bcb_FVF_44_K64e2g_ZN_Sf1_Dla_R91_I_Bz4igu_F_Sby3dv31_Ew0g_Cz_Asn_No_G_SX_Bvl9_U3t_P7_B_Dw_12f081f20b.webp",
+      "source": "дамп Strapi, имя файла из CSV кейса; для Cantiani совпадает с карточкой на vino-svoe.ru",
+      "note": "этикетка «Массандра СТОЛОВОЕ БЕЛОЕ ПОЛУСЛАДКОЕ» (старое поколение); дополнительный эталон нового поколения остаётся в extra_refs.csv"
+    }
+  ],
+  "still_without_photo": [
+    "kokur-suhoe-2025",
+    "method-classic-kokur",
+    "ona-skazala-da",
+    "rozovoe-polusladkoe-2",
+    "zhemchuzhnaya-9-czitron-shardone",
+    "zhemchuzhnaya-9-merlo-kaberne-sovinon"
+  ]
+}

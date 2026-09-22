@@ -1,0 +1,141 @@
+{
+ "_note": "области различающих признаков как доли ширины/высоты эталона: [x1,y1,x2,y2]; заданы вручную по сетке для диагностики experiment_regions.py",
+ "abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12": [
+  0.25,
+  0.62,
+  0.75,
+  0.86
+ ],
+ "abrau-dyurso-russkoe-igristoe-koshernoe-bryut-shardone-beloe-13": [
+  0.25,
+  0.62,
+  0.75,
+  0.86
+ ],
+ "abrau-dyurso-russkoe-igristoe-polusladkoe-shardone-beloe-12": [
+  0.25,
+  0.62,
+  0.75,
+  0.86
+ ],
+ "abrau-dyurso-russkoe-igristoe-koshernoe-polusladkoe-shardone-beloe-12": [
+  0.25,
+  0.62,
+  0.75,
+  0.86
+ ],
+ "abrau-dyurso-russkoe-igristoe-polusuhoe-rozovoe-pino-nuar-12": [
+  0.25,
+  0.62,
+  0.75,
+  0.86
+ ],
+ "abrau-dyurso-russkoe-igristoe-polusuhoe-shardone-beloe-12": [
+  0.25,
+  0.62,
+  0.75,
+  0.86
+ ],
+ "fanagoriya-fanagoriya-bryut-beloe-sovinon-blan-igristoe-bryut-beloe-11-13": [
+  0.02,
+  0.8,
+  0.98,
+  0.94
+ ],
+ "fanagoriya-fanagoriya-blanc-de-noirs-beloe-iz-chyornogo-merlo-igristoe-bryut-beloe-11-13": [
+  0.05,
+  0.8,
+  0.95,
+  0.95
+ ],
+ "fanagoriya-beloe-polusladkoe": [
+  0.05,
+  0.8,
+  0.95,
+  0.93
+ ],
+ "rozovoe-polusladkoe": [
+  0.05,
+  0.8,
+  0.95,
+  0.93
+ ],
+ "fanagoriya-fanagoriya-blanc-de-blancs-beloe-iz-belogo-shardone-igristoe-bryut-beloe-11-13": [
+  0.02,
+  0.8,
+  0.98,
+  0.94
+ ],
+ "massandra-portveyn-belyy-krymskiy-kokur-beloe-sladkoe-18": [
+  0.05,
+  0.71,
+  0.95,
+  0.8
+ ],
+ "massandra-portveyn-krasnyy-alushta-krasnye-sorta-vinograda-krasnoe-sladkoe-17": [
+  0.05,
+  0.71,
+  0.95,
+  0.82
+ ],
+ "massandra-portveyn-belyy-gurzuf-kokur-belyy-beloe-sladkoe-135": [
+  0.1,
+  0.72,
+  0.9,
+  0.86
+ ],
+ "massandra-kagor-gurzuf-saperavi-krasnoe-sladkoe-16": [
+  0.05,
+  0.74,
+  0.95,
+  0.88
+ ],
+ "madera-krymskaya": [
+  0.05,
+  0.69,
+  0.95,
+  0.79
+ ],
+ "fanagoriya-brule-muscat-ottonel-brut-muskat-ottonel-beloe-polusladkoe-12": [
+  0.28,
+  0.86,
+  0.72,
+  0.905
+ ],
+ "fanagoriya-brule-muscat-ottonel-polusladkoe-muskat-ottonel-beloe-115": [
+  0.28,
+  0.86,
+  0.72,
+  0.905
+ ],
+ "abrau-dyurso-victor-dravigny-polusladkoe-sovinon-blan-beloe-12": [
+  0.3,
+  0.76,
+  0.7,
+  0.84
+ ],
+ "abrau-dyurso-victor-dravigny-extra-brut-shardone-beloe-bryut-125": [
+  0.25,
+  0.83,
+  0.75,
+  0.9
+ ],
+ "abrau-dyurso-victor-dravigny-koshernoe-bryut-shardone-beloe-125": [
+  0.3,
+  0.76,
+  0.7,
+  0.84
+ ],
+ "abrau-dyurso-victor-dravigny-krasnoe-polusladkoe-kaberne-sovinon-125": [
+  0.25,
+  0.85,
+  0.75,
+  0.91
+ ],
+ "abrau-dyurso-victor-dravigny-bryut": [
+  0.35,
+  0.78,
+  0.65,
+  0.86
+ ]
+}

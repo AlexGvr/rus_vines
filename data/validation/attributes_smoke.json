@@ -1,0 +1,171 @@
+{
+ "provenance": {
+  "args": {
+   "manifest": "/tmp/rus-vines-attributes-smoke.csv",
+   "output": "data/validation/attributes_smoke.json",
+   "index": "clean_mv",
+   "weights": "/home/alex/projects/rus_vines/data/index/confidence.json",
+   "topk": 20,
+   "candidate_features": false,
+   "views": "raw,detect",
+   "split": "all"
+  },
+  "sha256": {
+   "/tmp/rus-vines-attributes-smoke.csv": "09dcfda21ae12a0a4efb7c7278c292b6cd6e96dd8785088d5812e00a45257d1a",
+   "data/index/confidence.json": "ba7a85a0a923911a3a89ded0d572d2467fd01ee2df6bb039fcba1391425825fc",
+   "data/catalog/catalog.json": "cd79a705cbb45d65b65dd02573cef8179d0798c3812eb96850f47d5316ebf570",
+   "data/index/clean_mv.csv": "0e561f03ec4ac76c3a5fe543d1d3bacd0da0ca493bcc434d4861ecf868943e93",
+   "data/index/clean_mv.npy": "2249e73a99e5e906620bec7a5e10037c7b4ef64597574ec98953c979bc39d59f",
+   "pipeline/searchcore.py": "457a51b99e798dde5dec703cf18047c78854e545abc2a5e44e135cdcc80b355d",
+   "pipeline/text_match.py": "d536bac4401e5f6fe1f27397e59b8f8fa8b052a28c9704436b38828b457855ab",
+   "pipeline/imageprep.py": "3d09524aef6879de036119251db31691799ac4b6d15126d5b17c0a3f10a45d9c",
+   "pipeline/ocr.py": "b71cb40fb55e7ca5f32c4f309bd50c32a8e27e8c9dc23e14bad0e8c076854e51",
+   "pipeline/rerank.py": "8e3ff0cd1349df7d8a5183e3ec67632e5e6c87d9b1dcc9d94c91e8129216b4c0",
+   "pipeline/embed.py": "20f8b23124c5146b786a2067cd33c2e9d31b51d700fec604fe663db17b09bc3c",
+   "pipeline/eval_field.py": "c66076a3cdff5ef8f4896bbd2c26afa14019c0b6aeec5e858c17652dcd3f5b1c",
+   "pipeline/field_metrics.py": "727908986921a98de47e10f39b608d8a47b4a49ccd33cc5fb0749bba7300f4ac",
+   "data/datapack/verified_attributes.json": "a241cd3704269c35a0e9486701e64ece9ad6ea145dde07f4bc8a129b1c0ef542"
+  },
+  "environment": {
+   "LABEL_BAND": "0",
+   "KIN_GROUP": null,
+   "BRAND_FIRST": null,
+   "SIFT_DIR": null,
+   "SIFT_MAX_SIDE": null
+  },
+  "independent_holdout": false
+ },
+ "metrics": {
+  "all_positives": {
+   "n": 2,
+   "top1": 0.5,
+   "top3": 0.5,
+   "top5": 0.5,
+   "retrieval_recall": {
+    "20": 1.0,
+    "50": 1.0,
+    "100": 1.0
+   },
+   "stage_top1_counts": {
+    "rank_shortlist": 1,
+    "rank_geometry": 1,
+    "rank_text": 1
+   }
+  },
+  "findable_diagnostic": {
+   "n": 2,
+   "top1": 0.5,
+   "top3": 0.5,
+   "top5": 0.5,
+   "retrieval_recall": {
+    "20": 1.0,
+    "50": 1.0,
+    "100": 1.0
+   },
+   "stage_top1_counts": {
+    "rank_shortlist": 1,
+    "rank_geometry": 1,
+    "rank_text": 1
+   }
+  },
+  "with_rejection_all_queries": {
+   "1": {
+    "tp": 1,
+    "fp": 0,
+    "fn": 1,
+    "precision": 1.0,
+    "recall": 0.5,
+    "f1": 0.6666666666666666
+   },
+   "3": {
+    "tp": 1,
+    "fp": 0,
+    "fn": 1,
+    "precision": 1.0,
+    "recall": 0.5,
+    "f1": 0.6666666666666666
+   },
+   "5": {
+    "tp": 1,
+    "fp": 0,
+    "fn": 1,
+    "precision": 1.0,
+    "recall": 0.5,
+    "f1": 0.6666666666666666
+   }
+  },
+  "show_p": 0.11,
+  "absent_n": 1,
+  "false_accept_rate": 0.0
+ },
+ "n": 3,
+ "positives": 2,
+ "negatives": 1,
+ "results": [
+  {
+   "image": "org003_0.jpg",
+   "gold": "",
+   "kind": "field",
+   "frame": "front",
+   "rank_shortlist": -1,
+   "rank_retrieval100": -1,
+   "rank_geometry": -1,
+   "rank_text": -1,
+   "top1": "pino-nuar-dzhavaga",
+   "inliers": 16,
+   "probability": 0.0721429210797297,
+   "probability_top5": 0.07214433751860709,
+   "plain": false,
+   "conflicts": [
+    "на этикетке «2025», это pino-nuar-2025"
+   ],
+   "findable": false,
+   "duplicate": false,
+   "correct": false,
+   "in_top5": false,
+   "in_top3": false
+  },
+  {
+   "image": "org031_0.jpg",
+   "gold": "golubitskoe-estate-chardonnay",
+   "kind": "field",
+   "frame": "front",
+   "rank_shortlist": 0,
+   "rank_retrieval100": 0,
+   "rank_geometry": 0,
+   "rank_text": 15,
+   "top1": "pomeste-golubitskoe-shardone-rezerv-beloe-suhoe-132",
+   "inliers": 4,
+   "probability": 0.06724185538825883,
+   "probability_top5": 0.0831742701170126,
+   "plain": false,
+   "conflicts": [],
+   "findable": true,
+   "duplicate": false,
+   "correct": false,
+   "in_top5": false,
+   "in_top3": false
+  },
+  {
+   "image": "org051_0.jpg",
+   "gold": "zhemchuzhnaya-9-pino-nuar-muskat-rozovyj-2",
+   "kind": "field",
+   "frame": "multi",
+   "rank_shortlist": 1,
+   "rank_retrieval100": 1,
+   "rank_geometry": 1,
+   "rank_text": 0,
+   "top1": "zhemchuzhnaya-9-pino-nuar-muskat-rozovyj-2",
+   "inliers": 112,
+   "probability": 0.3689489141770309,
+   "probability_top5": 0.5497863277026904,
+   "plain": false,
+   "conflicts": [],
+   "findable": true,
+   "duplicate": false,
+   "correct": true,
+   "in_top5": true,
+   "in_top3": true
+  }
+ ]
+}

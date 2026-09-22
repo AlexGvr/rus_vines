@@ -1,0 +1,143 @@
+{
+  "date": "2026-09-22",
+  "scope": "Завершение аудита спорной разметки: 5 кадров со статусом needs_visual_review из label_conflicts.json и org018_0.jpg из query_label_notes.json. Решение принято по надписям на этикетке в кадре и на эталонах, не по ответу модели.",
+  "resolved": [
+    {
+      "image": "ir_ochen-vkusnoe-legkoe-vino-dlya-semeinogo_0.jpg",
+      "decision": "fanagoriya-brule-muscat-ottonel-brut-muskat-ottonel-beloe-polusladkoe-12",
+      "kind": "studio",
+      "frame": "front",
+      "evidence": "крупный план этикетки: «BRÛLÉ MUSCAT OTTONEL БРЮТ»; эталон slug …-brut читается «BRUT», эталон …-polusladkoe-115 — «ПОЛУСЛАДКОЕ»; кадр — предметная карточка на сером фоне",
+      "split": "tune"
+    },
+    {
+      "image": "11813420_1.jpg",
+      "decision": "kokur-suhoe",
+      "kind": "field",
+      "frame": "front",
+      "evidence": "этикетка: «вино с защищённым географическим указанием «Крым» ординарное сухое белое», 2020; эталон kokur-suhoe — «ЗГУ Крым сухое белое», 11%; эталон massandra-kokur — «вино ординарное полусладкое белое», 12%, 35 г/дм³",
+      "split": "test"
+    },
+    {
+      "image": "12161711_0.jpg",
+      "decision": "kokur-suhoe",
+      "kind": "field",
+      "frame": "multi",
+      "evidence": "две бутылки целиком: Inkerman Буссо слева, Массандра Кокур 2020 «сухое белое» правее центра; по правилу кейсодержателя целевая — центральная и целиком видимая; Буссо в каталоге отсутствует",
+      "split": "test"
+    },
+    {
+      "image": "14095313_0.jpg",
+      "decision": "kokur-suhoe",
+      "kind": "field",
+      "frame": "front",
+      "evidence": "этикетка: «российское вино с ЗГУ «Крым» ординарное сухое белое», 2021",
+      "split": "test"
+    },
+    {
+      "image": "12083971_0.jpg",
+      "decision": "abrau-dyurso-victor-dravigny-polusladkoe-sovinon-blan-beloe-12",
+      "kind": "field",
+      "frame": "front",
+      "evidence": "этикетка: «Абрау-Дюрсо Victor Dravigny ПОЛУСЛАДКОЕ 2019»; прежний кандидат …-brut-… — брют; в каталоге есть отдельная позиция «Victor Dravigny. Полусладкое» с эталоном той же этикетки",
+      "split": "tune (новая позиция, серия уже в tune)"
+    },
+    {
+      "image": "org018_0.jpg",
+      "decision": "-",
+      "kind": "field",
+      "frame": "multi",
+      "evidence": "правило кейсодержателя: из нескольких бутылок распознаётся центральная и целиком видимая, части соседних допустимы. Центральная целая бутылка — Inkerman Буссо (полусладкое розовое), в каталоге её нет. Шато Руж срезан левым краем кадра. Прежняя метка inkerman-shato-ruzh ставила целью срезанную бутылку.",
+      "split": "tune",
+      "consequence": "кадр стал отрицательным примером: любая карточка для него — ложный показ"
+    }
+  ],
+  "kept": [
+    {
+      "image": "7579301_0.jpg",
+      "decision": "rozovoe-polusladkoe-2",
+      "note": "этикетка «ABRAU Durso ROSE» (розовая с узором); ни у одного розового игристого Абрау-Дюрсо с эталоном такой этикетки нет (проверены Brut d'Or Rose, Spumante брют розе, Victor Dravigny Brut Rose, Империал Brut Rose, Русское игристое полусухое розовое). Сладость на снимке не читается; заголовок отзыва — «полусладкое». Позиция без эталона (см. photo_overrides.csv), кадр остаётся ненаходимым положительным."
+    }
+  ],
+  "manifest_after": {
+    "frames": 391,
+    "positive": 330,
+    "negative": 61,
+    "tune": {
+      "frames": 188,
+      "skus": 63,
+      "negative": 33
+    },
+    "test": {
+      "frames": 203,
+      "skus": 63,
+      "negative": 28
+    }
+  },
+  "split_registry": "назначения из manifest.splits.json сохранены, кроме одного ручного переноса: серия 6321068 (кадр 6321068_0.jpg + отброшенный 6321068_1.jpg) переведена из test в tune, потому что исправленная метка — позиция, все кадры которой уже в tune; перенос записан в manifest.splits.json (manual_moves)",
+  "found_during_miss_analysis": [
+    {
+      "image": "17552421_1.jpg",
+      "was": "derbent-vino-graf-vorontsov-bryut-rozovoe-pervenets-magaracha-105-125",
+      "decision": "derbent-vino-graf-vorontsov-beloe-polusladkoe-sovinon-blan-105-125",
+      "evidence": "этикетка крупно: «ГРАФ ВОРОНЦОВ игристое вино БЕЛОЕ ПОЛУСЛАДКОЕ»; OCR читал БЕЛОЕ(1.00) и ПОЛУСЛАДКОЕ(0.86), текстовый канал «портил» верный по разметке ответ — разметка была ошибкой (поставлена по листу по эталону лидера)",
+      "split": "tune"
+    },
+    {
+      "image": "15892757_1.jpg",
+      "was": "solnechnaya-dolina-porto-solnechnoy-doliny-kokur-belyy-beloe-sladkoe-175",
+      "decision": "-",
+      "evidence": "этикетка: «ПОРТО Солнечной Долины 2020 КРАСНОЕ»; единственная карточка Порто в каталоге — белое (Кокур Белый, «глубокий золотой цвет»); красного Порто в каталоге нет",
+      "split": "tune"
+    },
+    {
+      "image": "13541223_0.jpg",
+      "was": "massandra-muskat-belyy-yuzhnoberezhnyy-beloe-sladkoe-16",
+      "decision": "-",
+      "evidence": "этикетка: «МАДЕРА МАССАНДРА» (OCR тоже читал МАДЕРА 0.83); в каталоге у Массандры только «Мадера Крымская» — другая позиция; кадр стал отрицательным",
+      "split": "tune"
+    },
+    {
+      "image": "6321068_0.jpg",
+      "was": "abrau-dyurso-russkoe-igristoe-polusuhoe-shardone-beloe-12",
+      "decision": "abrau-dyurso-russkoe-igristoe-polusuhoe-rozovoe-pino-nuar-12",
+      "evidence": "этикетка: «Русское шампанское Абрау-Дюрсо РОЗОВОЕ полусухое»; OCR читал РОЗОВОЕ(0.99); метка ставилась как «сосед по линейке» без сверки цвета",
+      "split": "test"
+    },
+    {
+      "image": "14807880_0.jpg",
+      "was": "massandra-portveyn-belyy-gurzuf-kokur-belyy-beloe-sladkoe-135",
+      "decision": "massandra-portveyn-krasnyy-alushta-krasnye-sorta-vinograda-krasnoe-sladkoe-17",
+      "evidence": "этикетка: «ПОРТВЕЙН КРАСНЫЙ АЛУШТА 2022»; заголовок отзыва «Портвейн красный Массандра «Алушта»»; OCR читал ПОРТВЕЙН КРАСНЫЙ АХУШТА; метка «по листу» была ошибкой",
+      "split": "test"
+    },
+    {
+      "image": "org047_0.jpg",
+      "was": "aratti-kaberne-po-belomu",
+      "decision": "aratti-kaberne-po-belomu-1",
+      "evidence": "этикетка: «КАБЕРНЕ ПО-БЕЛОМУ 2024 ПОЛУСУХОЕ»; эталон карточки -1 читается «2024 ПОЛУСУХОЕ», эталон карточки без суффикса — «2023» без сладости; OCR читал ПОЛУСУХОЕ(1.00)",
+      "split": "test"
+    },
+    {
+      "image": "7445929_1.jpg",
+      "was": "balaklava-bryut-rezerv",
+      "decision": "wine",
+      "evidence": "этикетка: «БАЛАКЛАВА RESERVE Brut Rose … ЗГУ «Крым»»; заголовок отзыва: «Вино игристое розовое Золотая балка Балаклава Pinot Noir Brut»; найдено при ручной транскрипции промахов",
+      "split": "tune"
+    },
+    {
+      "image": "11406313_1.jpg",
+      "was": "frame=front",
+      "decision": "frame=back",
+      "evidence": "бутылка снята сзади: контрэтикетка целиком, от лицевой виден только край «BL»; slug не менялся",
+      "split": "tune"
+    },
+    {
+      "image": "10806701_1.jpg",
+      "was": "massandra-muskat (multi)",
+      "decision": "x",
+      "evidence": "центральная целиком видимая бутылка — розовое вино Массандры с рукописным названием; ни название, ни сладость не читаются, SKU не установить; «Мускат» стоит во втором ряду и частично закрыт",
+      "split": "tune"
+    }
+  ]
+}

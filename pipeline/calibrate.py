@@ -164,7 +164,7 @@ def collect(subset: str, index: str, views: list[tuple[str, ...]], topk: int,
             core.rerank(crop, candidates, reranker)
             label = core.LabelText(crop, read_words)
             core.settle(candidates, crop, channel, label,
-                        window=window, min_conf=min_conf)
+                        window=window, min_conf=min_conf, by_slug=by_slug)
             if not candidates:
                 continue
             # Улики против лидера — часть конвейера, а не отдельный замер:

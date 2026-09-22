@@ -1,0 +1,12 @@
+[
+  {
+    "slug": "zhemchuzhnaya-9-merlo-kaberne-sovinon",
+    "reference": "dataset/uploads_root/prod-svoe-vino-strapi/prod-svoe-vino/strapi/uploads/ec2082cwb8d2y4rf36x235pckozylfad_9994a4e28f.webp",
+    "issue": "На эталоне АРАТТИ Каберне Совиньон, а карточка Жемчужная 9 Мерло Каберне Совиньон."
+  },
+  {
+    "slug": "zhemchuzhnaya-9-czitron-shardone",
+    "reference": "dataset/uploads_root/prod-svoe-vino-strapi/prod-svoe-vino/strapi/uploads/Aligote_Czitron_bel_suh_1cc2763d35.webp",
+    "issue": "На эталоне Алиготе Цитрон, а карточка Цитрон Шардоне."
+  }
+]

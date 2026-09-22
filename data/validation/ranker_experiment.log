@@ -1,0 +1,45 @@
+Regression: {"all_positives": {"n": 173, "baseline_top1": 130, "ranker_top1": 129, "baseline_top3": 147, "ranker_top3": 153, "baseline_top5": 153, "ranker_top5": 161, "fixed": ["14732673_1.jpg", "10133023_0.jpg", "11171408_0.jpg"], "broken": ["5784977_1.jpg", "5401549_0.jpg", "10206801_0.jpg", "org092_0.jpg"]}, "findable": {"n": 164, "baseline_top1": 130, "ranker_top1": 129, "baseline_top3": 144, "ranker_top3": 150, "baseline_top5": 150, "ranker_top5": 158, "fixed": ["14732673_1.jpg", "10133023_0.jpg", "11171408_0.jpg"], "broken": ["5784977_1.jpg", "5401549_0.jpg", "10206801_0.jpg", "org092_0.jpg"]}}
+{
+  "all_positives": {
+    "n": 155,
+    "baseline_top1": 117,
+    "ranker_top1": 121,
+    "baseline_top3": 131,
+    "ranker_top3": 134,
+    "baseline_top5": 136,
+    "ranker_top5": 139,
+    "fixed": [
+      "17762210_0.jpg",
+      "15892757_1.jpg",
+      "12189057_0.jpg",
+      "org091_0.jpg",
+      "7445929_1.jpg",
+      "org031_0.jpg"
+    ],
+    "broken": [
+      "5881591_0.jpg",
+      "org039_0.jpg"
+    ]
+  },
+  "findable": {
+    "n": 145,
+    "baseline_top1": 116,
+    "ranker_top1": 120,
+    "baseline_top3": 130,
+    "ranker_top3": 133,
+    "baseline_top5": 135,
+    "ranker_top5": 138,
+    "fixed": [
+      "17762210_0.jpg",
+      "15892757_1.jpg",
+      "12189057_0.jpg",
+      "org091_0.jpg",
+      "7445929_1.jpg",
+      "org031_0.jpg"
+    ],
+    "broken": [
+      "5881591_0.jpg",
+      "org039_0.jpg"
+    ]
+  }
+}

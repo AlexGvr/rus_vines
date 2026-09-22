@@ -1,0 +1,149 @@
+[
+  {
+    "image": "ir_ochen-vkusnoe-legkoe-vino-dlya-semeinogo_0.jpg",
+    "previous_decisions": [
+      "ir_ochen-vkusnoe-legkoe-vino-dlya-semeinogo_0.jpg fanagoriya-brule-muscat-ottonel-brut-muskat-ottonel-beloe-polusladkoe-12 studio front",
+      "ir_ochen-vkusnoe-legkoe-vino-dlya-semeinogo_0.jpg fanagoriya-brule-muscat-ottonel-polusladkoe-muskat-ottonel-beloe-115 field front   # сверено по листу: эталон лидера совпал, инл 42"
+    ],
+    "status": "needs_visual_review"
+  },
+  {
+    "image": "11813420_1.jpg",
+    "previous_decisions": [
+      "11813420_1.jpg kokur-suhoe field front",
+      "11813420_1.jpg massandra-kokur field front   # сверено по листу: эталон лидера совпал, инл 86"
+    ],
+    "status": "needs_visual_review"
+  },
+  {
+    "image": "12161711_0.jpg",
+    "previous_decisions": [
+      "12161711_0.jpg kokur-suhoe field multi",
+      "12161711_0.jpg massandra-kokur field multi   # сверено по листу: эталон лидера совпал, инл 58"
+    ],
+    "status": "needs_visual_review"
+  },
+  {
+    "image": "14095313_0.jpg",
+    "previous_decisions": [
+      "14095313_0.jpg x",
+      "14095313_0.jpg massandra-kokur field front   # сверено по листу: эталон лидера совпал, инл 60"
+    ],
+    "status": "needs_visual_review"
+  },
+  {
+    "image": "16409233_1.jpg",
+    "previous_decisions": [
+      "16409233_1.jpg x",
+      "16409233_1.jpg massandra-muskat field front   # сверено по листу: эталон лидера совпал, инл 37"
+    ],
+    "status": "resolved",
+    "decision": "massandra-muskat"
+  },
+  {
+    "image": "17760897_0.jpg",
+    "previous_decisions": [
+      "17760897_0.jpg x",
+      "17760897_0.jpg shato-taman-kaberne-sovinon field front   # сверено по листу: эталон лидера совпал, инл 36"
+    ],
+    "status": "resolved",
+    "decision": "shato-taman-kaberne-sovinon"
+  },
+  {
+    "image": "12083971_0.jpg",
+    "previous_decisions": [
+      "12083971_0.jpg x",
+      "12083971_0.jpg abrau-dyurso-victor-dravigny-brut-shardone-beloe-bryut-12 field front   # сверено по листу: эталон лидера совпал, инл 70"
+    ],
+    "status": "needs_visual_review"
+  },
+  {
+    "image": "17303290_0.jpg",
+    "previous_decisions": [
+      "17303290_0.jpg x",
+      "17303290_0.jpg fanagoriya-sur-lie-clairet-saperavi-krasnoe-suhoe-13 field front   # сверено по листу: эталон лидера совпал, инл 44"
+    ],
+    "status": "resolved",
+    "decision": "fanagoriya-sur-lie-clairet-saperavi-krasnoe-suhoe-13"
+  },
+  {
+    "image": "10806701_0.jpg",
+    "previous_decisions": [
+      "10806701_0.jpg massandra-muskat field back   # сосед по линейке, Вино белое сухое Массандра \"Мускат\"",
+      "10806701_0.jpg x field front   # лицевой этикетки не видно (лидер massandra-kagor-gurzuf-saper, инл 35)"
+    ],
+    "status": "resolved",
+    "decision": "x",
+    "reason": "back label only"
+  },
+  {
+    "image": "11977525_1.jpg",
+    "previous_decisions": [
+      "11977525_1.jpg abrau-dyurso-russkoe-igristoe-polusuhoe-rozovoe-pino-nuar-12 field back   # сосед по линейке, Российское шампанское \"Абрау-Дюрсо\" полусухое ро",
+      "11977525_1.jpg x field front   # лицевой этикетки не видно (лидер abrau-dyurso-russkoe-igristo, инл 53)"
+    ],
+    "status": "resolved",
+    "decision": "x",
+    "reason": "back label only"
+  },
+  {
+    "image": "14555232_1.jpg",
+    "previous_decisions": [
+      "14555232_1.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-shardone-beloe-12 field back   # сосед по линейке, Российское шампанское Абрау-Дюрсо полусладкое",
+      "14555232_1.jpg x field front   # лицевой этикетки не видно (лидер abrau-dyurso-russkoe-igristo, инл 44)"
+    ],
+    "status": "resolved",
+    "decision": "x",
+    "reason": "back label only"
+  },
+  {
+    "image": "14583333_1.jpg",
+    "previous_decisions": [
+      "14583333_1.jpg massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13 field back   # сосед по линейке, Вино Массандра \"Мускат белый Красного камня\" бел",
+      "14583333_1.jpg x field front   # лицевой этикетки не видно (лидер valeriy-zaharin-avtohtonnoe-, инл 30)"
+    ],
+    "status": "resolved",
+    "decision": "x",
+    "reason": "back label only"
+  },
+  {
+    "image": "16890541_0.jpg",
+    "previous_decisions": [
+      "16890541_0.jpg - field back   # сосед по линейке, Русское игристое Абрау-Дюрсо брют",
+      "16890541_0.jpg x field front   # лицевой этикетки не видно (лидер abrau-dyurso-russkoe-igristo, инл 36)"
+    ],
+    "status": "resolved",
+    "decision": "x",
+    "reason": "back label only"
+  },
+  {
+    "image": "5861895_1.jpg",
+    "previous_decisions": [
+      "5861895_1.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-shardone-beloe-12 field back   # сосед по линейке, Российское шампанское Абрау-Дюрсо полусладкое",
+      "5861895_1.jpg x field front   # лицевой этикетки не видно (лидер abrau-dyurso-russkoe-igristo, инл 38)"
+    ],
+    "status": "resolved",
+    "decision": "x",
+    "reason": "back label only"
+  },
+  {
+    "image": "6321068_1.jpg",
+    "previous_decisions": [
+      "6321068_1.jpg abrau-dyurso-russkoe-igristoe-polusuhoe-shardone-beloe-12 field back   # сосед по линейке, Российское шампанское Абрау-Дюрсо полусухое",
+      "6321068_1.jpg x field front   # лицевой этикетки не видно (лидер abrau-dyurso-russkoe-igristo, инл 57)"
+    ],
+    "status": "resolved",
+    "decision": "x",
+    "reason": "back label only"
+  },
+  {
+    "image": "7579301_1.jpg",
+    "previous_decisions": [
+      "7579301_1.jpg rozovoe-polusladkoe-2 field back   # сосед по линейке, Российское шампанское Абрау-Дюрсо полусладкое",
+      "7579301_1.jpg x field front   # лицевой этикетки не видно (лидер derbent-vino-endemy-risling-, инл 33)"
+    ],
+    "status": "resolved",
+    "decision": "x",
+    "reason": "back label only"
+  }
+]

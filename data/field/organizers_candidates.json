@@ -1,0 +1,2102 @@
+{
+ "org001_0.jpg": [
+  {
+   "slug": "leto-kaberne-fran-2021-suhoe-krasnoe",
+   "inliers": 20,
+   "title": "LETO Каберне Фран 2021 сухое красное"
+  },
+  {
+   "slug": "vinodelnya-uzunov-roze-ekstra-bryut-kaberne-sovinon-rozovoe-127",
+   "inliers": 11,
+   "title": "Розе экстра брют"
+  },
+  {
+   "slug": "leto-kollekcziya-leta-kupazh-2021-suhoe-beloe",
+   "inliers": 10,
+   "title": "LETO Коллекция Лета Купаж 2021 сухое белое"
+  },
+  {
+   "p1": 0.055,
+   "p5": 0.096
+  }
+ ],
+ "org002_0.jpg": [
+  {
+   "slug": "alma-valley-pino-blan-beloe-suhoe-14",
+   "inliers": 43,
+   "title": "Пино Блан"
+  },
+  {
+   "slug": "shato-pino-gravitatsiya-kaberne-sovinon-merlo-krasnoe-suhoe-135",
+   "inliers": 34,
+   "title": "Гравитация. Каберне Совиньон - Мерло"
+  },
+  {
+   "slug": "shato-pino-aligote-rkatsiteli-beloe-suhoe-12",
+   "inliers": 29,
+   "title": "Алиготе - Ркацители белое сухое"
+  },
+  {
+   "p1": 0.048,
+   "p5": 0.227
+  }
+ ],
+ "org003_0.jpg": [
+  {
+   "slug": "pino-nuar-dzhavaga",
+   "inliers": 13,
+   "title": "Пино Нуар Джавага"
+  },
+  {
+   "slug": "usadba-mezyb-shishka-pino-nuar-rozovoe-suhoe-115",
+   "inliers": 7,
+   "title": "Шишка. Пино Нуар"
+  },
+  {
+   "slug": "pino-nuar",
+   "inliers": 4,
+   "title": "Пино Нуар"
+  },
+  {
+   "p1": 0.077,
+   "p5": 0.077
+  }
+ ],
+ "org004_0.jpg": [
+  {
+   "slug": "denisov_rubin_klaret_krasnaya_strelka",
+   "inliers": 4,
+   "title": "Рубин кларет . Красная стрелка"
+  },
+  {
+   "slug": "bogovich-wine-vineyard-pino-nuar-2-krasnoe-suhoe-12",
+   "inliers": 2,
+   "title": "Пино Нуар 2"
+  },
+  {
+   "slug": "denisov_pino_noir_klaret",
+   "inliers": 3,
+   "title": "Пино Нуар кларет. Красная стрелка"
+  },
+  {
+   "p1": 0.156,
+   "p5": 0.158
+  }
+ ],
+ "org005_0.jpg": [
+  {
+   "slug": "fanagoriya-cru-lermont-rubinovyy-magaracha-krasnoe-suhoe-13",
+   "inliers": 16,
+   "title": "Cru Lermont Рубиновый Магарача"
+  },
+  {
+   "slug": "usadba-divnomorskoe-muscat-ottonel-muskat-ottonel-beloe-sladkoe-135",
+   "inliers": 8,
+   "title": "Muscat Ottonel"
+  },
+  {
+   "slug": "fanagoriya-velvet-season-risling-beloe-sladkoe-12",
+   "inliers": 7,
+   "title": "Velvet Season"
+  },
+  {
+   "p1": 0.056,
+   "p5": 0.081
+  }
+ ],
+ "org006_0.jpg": [
+  {
+   "slug": "fanagoriya-formula-q-saperavi-krasnoe-suhoe-135",
+   "inliers": 7,
+   "title": "Formula Q"
+  },
+  {
+   "slug": "fanagoriya-formula-q-kaberne-sovinon-krasnoe-suhoe-135",
+   "inliers": 20,
+   "title": "Формула Q"
+  },
+  {
+   "slug": "fanagoriya-q-blanc-sovinon-blan-beloe-suhoe-14",
+   "inliers": 7,
+   "title": "Q Blanc"
+  },
+  {
+   "p1": 0.143,
+   "p5": 0.162
+  }
+ ],
+ "org007_0.jpg": [
+  {
+   "slug": "shato-pino-gravitatsiya-kaberne-sovinon-merlo-krasnoe-suhoe-135",
+   "inliers": 27,
+   "title": "Гравитация. Каберне Совиньон - Мерло"
+  },
+  {
+   "slug": "shato-pino-aligote-rkatsiteli-beloe-suhoe-12",
+   "inliers": 21,
+   "title": "Алиготе - Ркацители белое сухое"
+  },
+  {
+   "slug": "shato-pino-sovinon-blan-semilon-beloe-suhoe-115",
+   "inliers": 17,
+   "title": "Совиньон Блан - Семильон"
+  },
+  {
+   "p1": 0.17,
+   "p5": 0.189
+  }
+ ],
+ "org008_0.jpg": [
+  {
+   "slug": "skalistyj-bereg-shepot-czvetov",
+   "inliers": 161,
+   "title": "Скалистый берег Шепот цветов"
+  },
+  {
+   "slug": "skalistyy-bereg-dyhanie-voln-shardone-beloe-suhoe-121",
+   "inliers": 17,
+   "title": "Дыхание волн"
+  },
+  {
+   "slug": "skalistyy-bereg-melodiya-leta-krasnostop-zolotovskiy-rozovoe-suhoe-126",
+   "inliers": 17,
+   "title": "Мелодия лета"
+  },
+  {
+   "p1": 0.444,
+   "p5": 0.445
+  }
+ ],
+ "org009_0.jpg": [
+  {
+   "slug": "zhemchuzhnaya-9-aligote-czitron",
+   "inliers": 59,
+   "title": "Жемчужная 9 Алиготе, Цитрон"
+  },
+  {
+   "slug": "zhemchuzhnaya-9-czitron-shardone",
+   "inliers": 57,
+   "title": "Жемчужная 9 Цитрон, Шардоне"
+  },
+  {
+   "slug": "zhemchuzhnaya-9-czitron-shardone-1",
+   "inliers": 48,
+   "title": "Жемчужная 9 Цитрон, Шардоне"
+  },
+  {
+   "p1": 0.298,
+   "p5": 0.454
+  }
+ ],
+ "org010_0.jpg": [
+  {
+   "slug": "pobeda",
+   "inliers": 16,
+   "title": "Победа"
+  },
+  {
+   "slug": "rubin-golodrigi",
+   "inliers": 7,
+   "title": "Рубин Голодриги"
+  },
+  {
+   "slug": "kaberne-sovinon-2",
+   "inliers": 1,
+   "title": "Каберне Совиньон"
+  },
+  {
+   "p1": 0.426,
+   "p5": 0.429
+  }
+ ],
+ "org011_0.jpg": [
+  {
+   "slug": "relikta-relikta-sira-kaberne-fran-krasnoe-suhoe-13",
+   "inliers": 32,
+   "title": "Реликта Сира, Каберне Фран"
+  },
+  {
+   "slug": "perovskih_kaberne_fran_reserve",
+   "inliers": 20,
+   "title": "Каберне Фран Резерв"
+  },
+  {
+   "slug": "relikta-relikta-merlo-kaberne-sovinon-krasnoe-suhoe-135",
+   "inliers": 18,
+   "title": "Реликта Мерло, Каберне Совиньон"
+  },
+  {
+   "p1": 0.532,
+   "p5": 0.534
+  }
+ ],
+ "org012_0.jpg": [
+  {
+   "slug": "vinodelnya-78-aligote-otbornoe-beloe-suhoe-12",
+   "inliers": 18,
+   "title": "Алиготе Отборное"
+  },
+  {
+   "slug": "vinodelnya-uzunov-shardone-rezerv-beloe-suhoe-135",
+   "inliers": 7,
+   "title": "Шардоне Резерв"
+  },
+  {
+   "slug": "leto-kaberne-fran-rezerv-2021-suhoe-krasnoe",
+   "inliers": 7,
+   "title": "LETO Каберне Фран Резерв 2021 сухое красное"
+  },
+  {
+   "p1": 0.062,
+   "p5": 0.093
+  }
+ ],
+ "org013_0.jpg": [
+  {
+   "slug": "aya-organic-wine-vineyards-purity-in-syrah-sira-rozovoe-suhoe-132",
+   "inliers": 14,
+   "title": "Purity in Syrah"
+  },
+  {
+   "slug": "aya-organic-wine-vineyards-purity-in-merlot-merlo-rozovoe-suhoe-134",
+   "inliers": 9,
+   "title": "Purity in Merlot"
+  },
+  {
+   "slug": "aya-organic-wine-vineyards-purity-in-chenin-blanc-shenen-blan-beloe-suhoe-11",
+   "inliers": 7,
+   "title": "Purity in Chenin Blanc"
+  },
+  {
+   "p1": 0.264,
+   "p5": 0.313
+  }
+ ],
+ "org014_0.jpg": [
+  {
+   "slug": "massandra-muskat-belyy-yuzhnoberezhnyy-beloe-sladkoe-16",
+   "inliers": 21,
+   "title": "Мускат Белый Южнобережный"
+  },
+  {
+   "slug": "massandra-muskat",
+   "inliers": 35,
+   "title": "Массандра Мускат"
+  },
+  {
+   "slug": "massandra-muskatel-rozovyy-belye-sorta-vinograda-rozovoe-sladkoe-16",
+   "inliers": 68,
+   "title": "Мускатель розовый"
+  },
+  {
+   "p1": 0.114,
+   "p5": 0.158
+  }
+ ],
+ "org015_0.jpg": [
+  {
+   "slug": "inkermanskiy-zmv-winemakers-selection-saperavi-krasnoe-polusladkoe-12",
+   "inliers": 5,
+   "title": "Winemaker's Selection Саперави"
+  },
+  {
+   "slug": "kaberne-sovinon-appasimento",
+   "inliers": 10,
+   "title": "Каберне Совиньон Appassimento"
+  },
+  {
+   "slug": "winemaker-selection",
+   "inliers": 8,
+   "title": "Winemaker selection"
+  },
+  {
+   "p1": 0.025,
+   "p5": 0.025
+  }
+ ],
+ "org016_0.jpg": [
+  {
+   "slug": "czitronnyj-magaracha-sovinon-blan",
+   "inliers": 50,
+   "title": "Жемчужная 9 Цитрон, Совиньон блан"
+  },
+  {
+   "slug": "zhemchuzhnaya-9-czitron-shardone",
+   "inliers": 18,
+   "title": "Жемчужная 9 Цитрон, Шардоне"
+  },
+  {
+   "slug": "zhemchuzhnaya-9-aligote-czitron",
+   "inliers": 16,
+   "title": "Жемчужная 9 Алиготе, Цитрон"
+  },
+  {
+   "p1": 0.529,
+   "p5": 0.53
+  }
+ ],
+ "org017_0.jpg": [
+  {
+   "slug": "oleg",
+   "inliers": 13,
+   "title": "Олег"
+  },
+  {
+   "slug": "czitronnyj-magaracha",
+   "inliers": 11,
+   "title": "Цитрон"
+  },
+  {
+   "slug": "rozovoe-zoloto",
+   "inliers": 10,
+   "title": "Розовое золото"
+  },
+  {
+   "p1": 0.019,
+   "p5": 0.019
+  }
+ ],
+ "org018_0.jpg": [
+  {
+   "slug": "vinodelnya-myshako-marselan-krasnoe-suhoe-143",
+   "inliers": 17,
+   "title": "Марселан"
+  },
+  {
+   "slug": "inkerman-shato-ruzh",
+   "inliers": 10,
+   "title": "Inkerman Шато Руж"
+  },
+  {
+   "slug": "inkermanskiy-zmv-inkerman-rozovoe-polusladkoe-rkatsiteli-12",
+   "inliers": 10,
+   "title": "Инкерман Розовое полусладкое"
+  },
+  {
+   "p1": 0.042,
+   "p5": 0.097
+  }
+ ],
+ "org019_0.jpg": [
+  {
+   "slug": "aratti-kaberne-sovinon-2021-krasnoe-suhoe",
+   "inliers": 63,
+   "title": "АРАТТИ Каберне Совиньон 2021 красное сухое"
+  },
+  {
+   "slug": "zhemchuzhnaya-9-merlo-kaberne-sovinon",
+   "inliers": 37,
+   "title": "Жемчужная 9 Мерло, Каберне Совиньон"
+  },
+  {
+   "slug": "zolotoe-pole-kaffa-kaberne-sovinon-krasnoe-suhoe-125",
+   "inliers": 19,
+   "title": "KAFFA \"Каберне Совиньон\""
+  },
+  {
+   "p1": 0.443,
+   "p5": 0.443
+  }
+ ],
+ "org020_0.jpg": [
+  {
+   "slug": "donskoe-vinodelcheskoe-hozyaystvo-elbuzd-merlo-krasnoe-suhoe-13",
+   "inliers": 7,
+   "title": "Мерло"
+  },
+  {
+   "slug": "perovskih_merlo",
+   "inliers": 12,
+   "title": "Мерло"
+  },
+  {
+   "slug": "vinnyy-kooperativ-intuitsiya-kaberne-sovinon-merlo-saperavi-krasnoe-suhoe-128",
+   "inliers": 7,
+   "title": "Каберне Совиньон - Мерло"
+  },
+  {
+   "p1": 0.014,
+   "p5": 0.113
+  }
+ ],
+ "org021_0.jpg": [
+  {
+   "slug": "belaya-lvicza",
+   "inliers": 96,
+   "title": "Белая Львица белое полусладкое"
+  },
+  {
+   "slug": "chernaya-lvicza-polusladkoe-krasnoe",
+   "inliers": 43,
+   "title": "Черная Львица полусладкое красное"
+  },
+  {
+   "slug": "aratti-kaberne-sovinon-2021-krasnoe-suhoe",
+   "inliers": 20,
+   "title": "АРАТТИ Каберне Совиньон 2021 красное сухое"
+  },
+  {
+   "p1": 0.615,
+   "p5": 0.66
+  }
+ ],
+ "org022_0.jpg": [
+  {
+   "slug": "aratti-kaberne-sovinon-2020-krasnoe-suhoe",
+   "inliers": 62,
+   "title": "АРАТТИ Каберне Совиньон 2020 красное сухое"
+  },
+  {
+   "slug": "zhemchuzhnaya-9-merlo-kaberne-sovinon",
+   "inliers": 18,
+   "title": "Жемчужная 9 Мерло, Каберне Совиньон"
+  },
+  {
+   "slug": "aratti-kaberne-sovinon-2021-krasnoe-suhoe",
+   "inliers": 17,
+   "title": "АРАТТИ Каберне Совиньон 2021 красное сухое"
+  },
+  {
+   "p1": 0.677,
+   "p5": 0.68
+  }
+ ],
+ "org023_0.jpg": [
+  {
+   "slug": "denisov-winery-sovinon-blan-beloe-suhoe-115",
+   "inliers": 5,
+   "title": "Совиньон Блан"
+  },
+  {
+   "slug": "orlov_sauvignon_blan",
+   "inliers": 26,
+   "title": "Совиньон Блан"
+  },
+  {
+   "slug": "vinodelnya-pokrovskaya-sovinon-blan-pokrovskoe-beloe-suhoe-12",
+   "inliers": 2,
+   "title": "Совиньон Блан. Покровское"
+  },
+  {
+   "p1": 0.104,
+   "p5": 0.112
+  }
+ ],
+ "org024_0.jpg": [
+  {
+   "slug": "aratti-kaberne-sovinon-2020-krasnoe-suhoe",
+   "inliers": 72,
+   "title": "АРАТТИ Каберне Совиньон 2020 красное сухое"
+  },
+  {
+   "slug": "zhemchuzhnaya-9-merlo-kaberne-sovinon",
+   "inliers": 21,
+   "title": "Жемчужная 9 Мерло, Каберне Совиньон"
+  },
+  {
+   "slug": "artvin-kaberne-sovinon-grand-rezerv-krasnoe-suhoe-13",
+   "inliers": 15,
+   "title": "Каберне Совиньон Гранд Резерв"
+  },
+  {
+   "p1": 0.721,
+   "p5": 0.722
+  }
+ ],
+ "org025_0.jpg": [
+  {
+   "slug": "abrau-dyurso-brut-dor-rose-pino-nuar-rozovoe-bryut-12",
+   "inliers": 4,
+   "title": "Brut d'Or Rose"
+  },
+  {
+   "slug": "mont-blanc-blanc-de-blancs",
+   "inliers": 7,
+   "title": "Mont Blanc, Blanc de Blancs"
+  },
+  {
+   "slug": "roze-1",
+   "inliers": 7,
+   "title": "Розе"
+  },
+  {
+   "p1": 0.071,
+   "p5": 0.076
+  }
+ ],
+ "org026_0.jpg": [
+  {
+   "slug": "golubitskoe-estate-noble-selection-red-blend-kaberne-sovinon-krasnoe-suhoe-136",
+   "inliers": 8,
+   "title": "Noble Selection Red Blend"
+  },
+  {
+   "slug": "golubitskoe-estate-noble-selection-white-blend-shardone-beloe-suhoe-135",
+   "inliers": 13,
+   "title": "Noble Selection White Blend"
+  },
+  {
+   "slug": "golubitskoe-estate-kaberne-sovinon-noble-selection-krasnoe-suhoe-133",
+   "inliers": 7,
+   "title": "Каберне Совиньон Noble Selection"
+  },
+  {
+   "p1": 0.13,
+   "p5": 0.13
+  }
+ ],
+ "org027_0.jpg": [
+  {
+   "slug": "denisov_pet_nat_rubin",
+   "inliers": 58,
+   "title": "Пет-Нат Рубин"
+  },
+  {
+   "slug": "dva-brata-pet-nat-kokur-2024",
+   "inliers": 40,
+   "title": "Два Брата Пет Нат Кокур, 2024"
+  },
+  {
+   "slug": "vinodelnya-vedernikov-vinodelnya-vedernikov-pet-nat-roze-tsimlyanskiy-chernyy-rozovoe-suhoe-12",
+   "inliers": 14,
+   "title": "Винодельня Ведерниковъ Пет-Нат Розе"
+  },
+  {
+   "p1": 0.775,
+   "p5": 0.776
+  }
+ ],
+ "org028_0.jpg": [
+  {
+   "slug": "vinodelnya-zhakov-rozeo-saperavi-rozovoe-suhoe-115",
+   "inliers": 4,
+   "title": "Розео"
+  },
+  {
+   "slug": "vinodelnya-78-muskat-polusladkoe-muskat-ottonel-beloe-115",
+   "inliers": 5,
+   "title": "Мускат полусладкое"
+  },
+  {
+   "slug": "zhemchuzhnaya-9-pino-nuar-muskat-rozovyj-1",
+   "inliers": 5,
+   "title": "Жемчужная 9 Пино Нуар, Мускат розовый"
+  },
+  {
+   "p1": 0.049,
+   "p5": 0.054
+  }
+ ],
+ "org029_0.jpg": [
+  {
+   "slug": "vinodelnya-zhakov-rozeo-saperavi-rozovoe-suhoe-115",
+   "inliers": 4,
+   "title": "Розео"
+  },
+  {
+   "slug": "vinodelnya-78-muskat-polusladkoe-muskat-ottonel-beloe-115",
+   "inliers": 5,
+   "title": "Мускат полусладкое"
+  },
+  {
+   "slug": "vinodelnya-vedernikov-krasnostop-zolotovskiy-roze-rozovoe-suhoe-12",
+   "inliers": 4,
+   "title": "Красностоп Золотовский розе"
+  },
+  {
+   "p1": 0.061,
+   "p5": 0.065
+  }
+ ],
+ "org030_0.jpg": [
+  {
+   "slug": "fanagoriya-alveus-ultra-cuvee-brut-shardone-beloe-bryut-12",
+   "inliers": 7,
+   "title": "Alveus Ultra Cuvee Brut"
+  },
+  {
+   "slug": "fanagoriya-alveus-ultra-cuvee-ekstra-bryut-rozovoe-merlo-12",
+   "inliers": 10,
+   "title": "Alveus Ultra Cuvee. Экстра брют розовое"
+  },
+  {
+   "slug": "fanagoriya-alveus-ultra-cuvee-bryut-rozovoe-merlo-igristoe-bryut-rozovoe-12",
+   "inliers": 5,
+   "title": "Alveus Ultra Cuvee. Брют розовое"
+  },
+  {
+   "p1": 0.072,
+   "p5": 0.092
+  }
+ ],
+ "org031_0.jpg": [
+  {
+   "slug": "golubitskoe-estate-chardonnay",
+   "inliers": 15,
+   "title": "Golubitskoe Estate Chardonnay"
+  },
+  {
+   "slug": "pomeste-golubitskoe-shardone-rezerv-beloe-suhoe-132",
+   "inliers": 0,
+   "title": "Шардоне Резерв"
+  },
+  {
+   "slug": "golubitskoe-estate-shardone-rezerv-beloe-suhoe-135",
+   "inliers": 9,
+   "title": "Шардоне Резерв"
+  },
+  {
+   "p1": 0.404,
+   "p5": 0.404
+  }
+ ],
+ "org032_0.jpg": [
+  {
+   "slug": "roze-2",
+   "inliers": 38,
+   "title": "Розе"
+  },
+  {
+   "slug": "pobeda",
+   "inliers": 20,
+   "title": "Победа"
+  },
+  {
+   "slug": "kaberne-sovinon-2",
+   "inliers": 16,
+   "title": "Каберне Совиньон"
+  },
+  {
+   "p1": 0.143,
+   "p5": 0.143
+  }
+ ],
+ "org033_0.jpg": [
+  {
+   "slug": "fanagoriya-alveus-ultra-cuvee-brut-shardone-beloe-bryut-12",
+   "inliers": 7,
+   "title": "Alveus Ultra Cuvee Brut"
+  },
+  {
+   "slug": "fanagoriya-alveus-ultra-cuvee-ekstra-bryut-rozovoe-merlo-12",
+   "inliers": 6,
+   "title": "Alveus Ultra Cuvee. Экстра брют розовое"
+  },
+  {
+   "slug": "fanagoriya-alveus-ultra-cuvee-bryut-rozovoe-merlo-igristoe-bryut-rozovoe-12",
+   "inliers": 7,
+   "title": "Alveus Ultra Cuvee. Брют розовое"
+  },
+  {
+   "p1": 0.093,
+   "p5": 0.102
+  }
+ ],
+ "org034_0.jpg": [
+  {
+   "slug": "denisov_pazori_risling",
+   "inliers": 43,
+   "title": "Пазори Рислинг"
+  },
+  {
+   "slug": "denisov-winery-pino-nuar-shardone-ekstra-bryut-beloe-125",
+   "inliers": 38,
+   "title": "Пино Нуар - Шардоне экстра брют"
+  },
+  {
+   "slug": "denisov_barynya_kurmyshi",
+   "inliers": 5,
+   "title": "Барыня. Курмыши"
+  },
+  {
+   "p1": 0.27,
+   "p5": 0.402
+  }
+ ],
+ "org035_0.jpg": [
+  {
+   "slug": "derbent-vino-desono-kaberne-sovinon-krasnoe-suhoe-125",
+   "inliers": 29,
+   "title": "Дэсоно Каберне Совиньон"
+  },
+  {
+   "slug": "derbent-vino-desono-shardone-beloe-suhoe-125",
+   "inliers": 16,
+   "title": "Дэсоно Шардоне"
+  },
+  {
+   "slug": "derbent-vino-desono-kaberne-fran-krasnoe-suhoe-125",
+   "inliers": 14,
+   "title": "Дэсоно Каберне Фран"
+  },
+  {
+   "p1": 0.282,
+   "p5": 0.3
+  }
+ ],
+ "org036_0.jpg": [
+  {
+   "slug": "czitronnyj-magaracha-sovinon-blan",
+   "inliers": 97,
+   "title": "Жемчужная 9 Цитрон, Совиньон блан"
+  },
+  {
+   "slug": "zhemchuzhnaya-9-czitron-shardone",
+   "inliers": 57,
+   "title": "Жемчужная 9 Цитрон, Шардоне"
+  },
+  {
+   "slug": "zhemchuzhnaya-9-aligote-czitron",
+   "inliers": 50,
+   "title": "Жемчужная 9 Алиготе, Цитрон"
+  },
+  {
+   "p1": 0.608,
+   "p5": 0.609
+  }
+ ],
+ "org037_0.jpg": [
+  {
+   "slug": "shato-pino-gravitatsiya-kaberne-sovinon-merlo-krasnoe-suhoe-135",
+   "inliers": 49,
+   "title": "Гравитация. Каберне Совиньон - Мерло"
+  },
+  {
+   "slug": "shato-pino-aligote-rkatsiteli-beloe-suhoe-12",
+   "inliers": 39,
+   "title": "Алиготе - Ркацители белое сухое"
+  },
+  {
+   "slug": "shato-pino-kaberne-fran-kaberne-sovinon-krasnoe-suhoe-135",
+   "inliers": 30,
+   "title": "Каберне Фран - Каберне Совиньон"
+  },
+  {
+   "p1": 0.109,
+   "p5": 0.199
+  }
+ ],
+ "org038_0.jpg": [
+  {
+   "slug": "kaberne-sovinon",
+   "inliers": 7,
+   "title": "Каберне Совиньон"
+  },
+  {
+   "slug": "vinodelnya-pokrovskaya-pokrovskoe-sladkoe-krasnoe-kaberne-sovinon-13",
+   "inliers": 5,
+   "title": "Покровское сладкое красное"
+  },
+  {
+   "slug": "vinodelnya-pokrovskaya-pokrovskoe-krasnoe-kaberne-sovinon-suhoe-14",
+   "inliers": 8,
+   "title": "Покровское красное"
+  },
+  {
+   "p1": 0.034,
+   "p5": 0.034
+  }
+ ],
+ "org039_0.jpg": [
+  {
+   "slug": "denisov-winery-sovinon-blan-beloe-suhoe-115",
+   "inliers": 6,
+   "title": "Совиньон Блан"
+  },
+  {
+   "slug": "vinodelnya-uzunov-sovinon-blan-beloe-suhoe-125",
+   "inliers": 15,
+   "title": "Совиньон Блан"
+  },
+  {
+   "slug": "dubinin-winery-sovinon-blan-beloe-suhoe-12",
+   "inliers": 10,
+   "title": "Совиньон Блан"
+  },
+  {
+   "p1": 0.113,
+   "p5": 0.119
+  }
+ ],
+ "org040_0.jpg": [
+  {
+   "slug": "zhemchuzhnaya-9-pino-nuar-muskat-rozovyj-1",
+   "inliers": 96,
+   "title": "Жемчужная 9 Пино Нуар, Мускат розовый"
+  },
+  {
+   "slug": "zhemchuzhnaya-9-pino-nuar-muskat-rozovyj-2",
+   "inliers": 101,
+   "title": "Жемчужная 9 Пино нуар, Мускат Розовый"
+  },
+  {
+   "slug": "zhemchuzhnaya-9-pino-nuar-muskat-rozovyj",
+   "inliers": 104,
+   "title": "Жемчужная 9 Пино Нуар, Мускат Розовый"
+  },
+  {
+   "p1": 0.425,
+   "p5": 0.427
+  }
+ ],
+ "org041_0.jpg": [
+  {
+   "slug": "fanagoriya-zelyonoe-vino-risling-tsitronnyy-magaracha-beloe-polusuhoe-11",
+   "inliers": 20,
+   "title": "Зелёное вино. Рислинг - Цитронный Магарача"
+  },
+  {
+   "slug": "fanagoriya-zelyonoe-vino-risling-tsitronnyy-magaracha-merlo-rozovoe-polusuhoe-11",
+   "inliers": 21,
+   "title": "Зелёное вино. Рислинг - Цитронный Магарача - Мерло"
+  },
+  {
+   "slug": "alma-valley-solntse-vozduh-vinograd-shardone-beloe-polusuhoe-13",
+   "inliers": 5,
+   "title": "Солнце, воздух, виноград"
+  },
+  {
+   "p1": 0.307,
+   "p5": 0.325
+  }
+ ],
+ "org042_0.jpg": [
+  {
+   "slug": "khrustaleva-76-muscat-bryut-beloe",
+   "inliers": 20,
+   "title": "Khrustaleva 76 muscat, брют, белое"
+  },
+  {
+   "slug": "aya-khrustaleva-76-merlot-organik",
+   "inliers": 9,
+   "title": "Aya Khrustaleva 76 merlot Органик"
+  },
+  {
+   "slug": "khrustaleva-76-merlot-polusuhoe-rozovoe",
+   "inliers": 6,
+   "title": "Khrustaleva 76 merlot, полусухое, розовое"
+  },
+  {
+   "p1": 0.125,
+   "p5": 0.179
+  }
+ ],
+ "org043_0.jpg": [
+  {
+   "slug": "golubitskoe-estate-merlo-krasnoe-suhoe-135",
+   "inliers": 50,
+   "title": "Мерло"
+  },
+  {
+   "slug": "golubitskoe-rose",
+   "inliers": 33,
+   "title": "Golubitskoe Rose"
+  },
+  {
+   "slug": "golubitskoe-estate-kaberne-sovinon-krasnoe-suhoe-137",
+   "inliers": 30,
+   "title": "Каберне Совиньон"
+  },
+  {
+   "p1": 0.15,
+   "p5": 0.206
+  }
+ ],
+ "org044_0.jpg": [
+  {
+   "slug": "fanagoriya-primum-alveus-blanc-de-blancs-ekstra-bryut-2019-shardone-beloe-11-13",
+   "inliers": 22,
+   "title": "Primum Alveus Blanc De Blancs Экстра Брют 2019"
+  },
+  {
+   "slug": "valeriy-zaharin-aligote-burlyuk-beloe-bryut-115",
+   "inliers": 14,
+   "title": "Алиготе. Бурлюк"
+  },
+  {
+   "slug": "fanagoriya-primum-alveus-brut-2021-shardone-beloe-bryut-11-13",
+   "inliers": 13,
+   "title": "Primum Alveus. Brut 2021"
+  },
+  {
+   "p1": 0.089,
+   "p5": 0.112
+  }
+ ],
+ "org045_0.jpg": [
+  {
+   "slug": "zhemchuzhnaya-9-czitron-shardone-1",
+   "inliers": 44,
+   "title": "Жемчужная 9 Цитрон, Шардоне"
+  },
+  {
+   "slug": "czitronnyj-magaracha-sovinon-blan",
+   "inliers": 46,
+   "title": "Жемчужная 9 Цитрон, Совиньон блан"
+  },
+  {
+   "slug": "zhemchuzhnaya-9-aligote-czitron",
+   "inliers": 28,
+   "title": "Жемчужная 9 Алиготе, Цитрон"
+  },
+  {
+   "p1": 0.345,
+   "p5": 0.427
+  }
+ ],
+ "org046_0.jpg": [
+  {
+   "slug": "vinodelnya-uzunov-nrav-krasnostop-zolotovskiy-krasnoe-suhoe-132",
+   "inliers": 14,
+   "title": "Нрав"
+  },
+  {
+   "slug": "vaynkraft-pino-nuar-krasnoe-suhoe-13",
+   "inliers": 11,
+   "title": "Пино Нуар"
+  },
+  {
+   "slug": "pino-nuar-dzhavaga",
+   "inliers": 10,
+   "title": "Пино Нуар Джавага"
+  },
+  {
+   "p1": 0.06,
+   "p5": 0.082
+  }
+ ],
+ "org047_0.jpg": [
+  {
+   "slug": "aratti-kaberne-po-belomu",
+   "inliers": 15,
+   "title": "АРАТТИ Каберне по-белому"
+  },
+  {
+   "slug": "aratti-kaberne-po-belomu-1",
+   "inliers": 11,
+   "title": "АРАТТИ Каберне по-белому"
+  },
+  {
+   "slug": "aratti-kaberne-sovinon-2021-krasnoe-suhoe",
+   "inliers": 5,
+   "title": "АРАТТИ Каберне Совиньон 2021 красное сухое"
+  },
+  {
+   "p1": 0.225,
+   "p5": 0.226
+  }
+ ],
+ "org048_0.jpg": [
+  {
+   "slug": "orlov_sauvignon_blan",
+   "inliers": 11,
+   "title": "Совиньон Блан"
+  },
+  {
+   "slug": "sober-bash-pino-gri-beloe-suhoe-11",
+   "inliers": 14,
+   "title": "Пино Гри"
+  },
+  {
+   "slug": "czitronnyj-magaracha-sovinon-blan",
+   "inliers": 11,
+   "title": "Жемчужная 9 Цитрон, Совиньон блан"
+  },
+  {
+   "p1": 0.056,
+   "p5": 0.077
+  }
+ ],
+ "org049_0.jpg": [
+  {
+   "slug": "millstream-av-igristoe-molodoe-suhoe-beloe",
+   "inliers": 35,
+   "title": "MILLSTREAM AV игристое молодое, сухое, белое"
+  },
+  {
+   "slug": "fanagoriya-primum-alveus-extra-brut-2016-shardone-beloe-bryut-12",
+   "inliers": 16,
+   "title": "Primum Alveus Extra Brut 2016"
+  },
+  {
+   "slug": "abrau-dyurso-imperial-brut-rose-pino-nuar-rozovoe-bryut-12",
+   "inliers": 14,
+   "title": "Империал Brut Rose"
+  },
+  {
+   "p1": 0.085,
+   "p5": 0.13
+  }
+ ],
+ "org050_0.jpg": [
+  {
+   "slug": "winemaker-selection",
+   "inliers": 43,
+   "title": "Winemaker selection"
+  },
+  {
+   "slug": "inkermanskiy-zmv-inkerman-rozovoe-polusladkoe-rkatsiteli-12",
+   "inliers": 8,
+   "title": "Инкерман Розовое полусладкое"
+  },
+  {
+   "slug": "inkermanskiy-zmv-winemakers-selection-saperavi-krasnoe-polusladkoe-12",
+   "inliers": 48,
+   "title": "Winemaker's Selection Саперави"
+  },
+  {
+   "p1": 0.859,
+   "p5": 0.859
+  }
+ ],
+ "org051_0.jpg": [
+  {
+   "slug": "zhemchuzhnaya-9-pino-nuar-muskat-rozovyj-2",
+   "inliers": 113,
+   "title": "Жемчужная 9 Пино нуар, Мускат Розовый"
+  },
+  {
+   "slug": "zhemchuzhnaya-9-pino-nuar-muskat-rozovyj-1",
+   "inliers": 107,
+   "title": "Жемчужная 9 Пино Нуар, Мускат розовый"
+  },
+  {
+   "slug": "zhemchuzhnaya-9-pino-nuar-muskat-rozovyj",
+   "inliers": 93,
+   "title": "Жемчужная 9 Пино Нуар, Мускат Розовый"
+  },
+  {
+   "p1": 0.382,
+   "p5": 0.553
+  }
+ ],
+ "org052_0.jpg": [
+  {
+   "slug": "roze-2",
+   "inliers": 53,
+   "title": "Розе"
+  },
+  {
+   "slug": "sober-bash-rubin-rubin-rubin-azos-krasnoe-suhoe-14",
+   "inliers": 24,
+   "title": "Рубин & Рубин"
+  },
+  {
+   "slug": "pobeda",
+   "inliers": 17,
+   "title": "Победа"
+  },
+  {
+   "p1": 0.229,
+   "p5": 0.229
+  }
+ ],
+ "org053_0.jpg": [
+  {
+   "slug": "uva-vallis-risling",
+   "inliers": 20,
+   "title": "Uva Vallis Рислинг"
+  },
+  {
+   "slug": "uva-vallis-shardone",
+   "inliers": 2,
+   "title": "Uva Vallis Шардоне"
+  },
+  {
+   "slug": "uva-vallis-sira",
+   "inliers": 7,
+   "title": "Uva Vallis Сира"
+  },
+  {
+   "p1": 0.509,
+   "p5": 0.511
+  }
+ ],
+ "org054_0.jpg": [
+  {
+   "slug": "denisov_barynya_kurmyshi",
+   "inliers": 66,
+   "title": "Барыня. Курмыши"
+  },
+  {
+   "slug": "vinodelnya-78-saperavi-krasnoe-suhoe-135",
+   "inliers": 19,
+   "title": "Саперави"
+  },
+  {
+   "slug": "denisov_pereplyas_kurmyshi",
+   "inliers": 8,
+   "title": "Перепляс. Курмыши"
+  },
+  {
+   "p1": 0.9,
+   "p5": 0.9
+  }
+ ],
+ "org055_0.jpg": [
+  {
+   "slug": "fanagoriya-zelyonoe-vino-risling-tsitronnyy-magaracha-beloe-polusuhoe-11",
+   "inliers": 30,
+   "title": "Зелёное вино. Рислинг - Цитронный Магарача"
+  },
+  {
+   "slug": "fanagoriya-zelyonoe-vino-risling-tsitronnyy-magaracha-merlo-rozovoe-polusuhoe-11",
+   "inliers": 23,
+   "title": "Зелёное вино. Рислинг - Цитронный Магарача - Мерло"
+  },
+  {
+   "slug": "fanagoriya-ice-wine-risling-tihoe-beloe-sladkoe-10",
+   "inliers": 10,
+   "title": "Ice Wine Рислинг тихое"
+  },
+  {
+   "p1": 0.424,
+   "p5": 0.424
+  }
+ ],
+ "org056_0.jpg": [
+  {
+   "slug": "roze-2",
+   "inliers": 15,
+   "title": "Розе"
+  },
+  {
+   "slug": "rozovoe-zoloto",
+   "inliers": 17,
+   "title": "Розовое золото"
+  },
+  {
+   "slug": "rubin-golodrigi",
+   "inliers": 9,
+   "title": "Рубин Голодриги"
+  },
+  {
+   "p1": 0.176,
+   "p5": 0.197
+  }
+ ],
+ "org057_0.jpg": [
+  {
+   "slug": "denisov-winery-sovinon-blan-beloe-suhoe-115",
+   "inliers": 10,
+   "title": "Совиньон Блан"
+  },
+  {
+   "slug": "dubinin-winery-sovinon-blan-beloe-suhoe-12",
+   "inliers": 4,
+   "title": "Совиньон Блан"
+  },
+  {
+   "slug": "zhemchuzhnaya-9-sovinon-blan-aligote",
+   "inliers": 1,
+   "title": "Жемчужная 9 Совиньон блан, Алиготе"
+  },
+  {
+   "p1": 0.267,
+   "p5": 0.269
+  }
+ ],
+ "org058_0.jpg": [
+  {
+   "slug": "usadba-divnomorskoe-holodnyy-tuman-risling-beloe-suhoe-115",
+   "inliers": 26,
+   "title": "Холодный Туман"
+  },
+  {
+   "slug": "usadba-divnomorskoe-solnechnyy-veter-shardone-beloe-suhoe-125",
+   "inliers": 18,
+   "title": "Солнечный Ветер"
+  },
+  {
+   "slug": "usadba-divnomorskoe-yuzhnyy-les-merlo-krasnoe-suhoe-137",
+   "inliers": 41,
+   "title": "Южный Лес"
+  },
+  {
+   "p1": 0.272,
+   "p5": 0.309
+  }
+ ],
+ "org059_0.jpg": [
+  {
+   "slug": "golubitskoe-estate-kaberne-sovinon-krasnoe-suhoe-137",
+   "inliers": 51,
+   "title": "Каберне Совиньон"
+  },
+  {
+   "slug": "golubitskoe-estate-merlo-krasnoe-suhoe-135",
+   "inliers": 40,
+   "title": "Мерло"
+  },
+  {
+   "slug": "golubitskoe-rose",
+   "inliers": 37,
+   "title": "Golubitskoe Rose"
+  },
+  {
+   "p1": 0.408,
+   "p5": 0.427
+  }
+ ],
+ "org060_0.jpg": [
+  {
+   "slug": "zhemchuzhnaya-9-czitron-shardone-1",
+   "inliers": 77,
+   "title": "Жемчужная 9 Цитрон, Шардоне"
+  },
+  {
+   "slug": "zhemchuzhnaya-9-aligote-czitron",
+   "inliers": 35,
+   "title": "Жемчужная 9 Алиготе, Цитрон"
+  },
+  {
+   "slug": "zhemchuzhnaya-9-czitron-shardone",
+   "inliers": 39,
+   "title": "Жемчужная 9 Цитрон, Шардоне"
+  },
+  {
+   "p1": 0.477,
+   "p5": 0.477
+  }
+ ],
+ "org061_0.jpg": [
+  {
+   "slug": "golubitskoe-estate-merlo-krasnoe-suhoe-135",
+   "inliers": 24,
+   "title": "Мерло"
+  },
+  {
+   "slug": "golubitskoe-estate-merlo-rezerv-krasnoe-suhoe-135",
+   "inliers": 6,
+   "title": "Мерло Резерв"
+  },
+  {
+   "slug": "golubitskoe-estate-red-blend-kaberne-sovinon-krasnoe-suhoe-136",
+   "inliers": 20,
+   "title": "Red Blend"
+  },
+  {
+   "p1": 0.422,
+   "p5": 0.422
+  }
+ ],
+ "org062_0.jpg": [
+  {
+   "slug": "abrau-dyurso-brut-dor-riesling-risling-beloe-bryut-12",
+   "inliers": 34,
+   "title": "Brut d'Or. Riesling"
+  },
+  {
+   "slug": "aristov-anima-millesimato",
+   "inliers": 23,
+   "title": "Аристов Anima Millesimato"
+  },
+  {
+   "slug": "abrau-dyurso-russkoe-igristoe-polusuhoe-shardone-beloe-12",
+   "inliers": 22,
+   "title": "Русское Игристое полусухое"
+  },
+  {
+   "p1": 0.082,
+   "p5": 0.154
+  }
+ ],
+ "org063_0.jpg": [
+  {
+   "slug": "pobeda",
+   "inliers": 42,
+   "title": "Победа"
+  },
+  {
+   "slug": "vinodelnya-vedernikov-gubernatorskoe-rozovoe-tsimlyanskiy-chernyy-suhoe-11",
+   "inliers": 26,
+   "title": "Губернаторское. Розовое"
+  },
+  {
+   "slug": "rozovoe-zoloto",
+   "inliers": 22,
+   "title": "Розовое золото"
+  },
+  {
+   "p1": 0.083,
+   "p5": 0.146
+  }
+ ],
+ "org064_0.jpg": [
+  {
+   "slug": "roze-2",
+   "inliers": 11,
+   "title": "Розе"
+  },
+  {
+   "slug": "rozovoe-zoloto",
+   "inliers": 18,
+   "title": "Розовое золото"
+  },
+  {
+   "slug": "bukovinka",
+   "inliers": 20,
+   "title": "Буковинка"
+  },
+  {
+   "p1": 0.187,
+   "p5": 0.206
+  }
+ ],
+ "org065_0.jpg": [
+  {
+   "slug": "zhemchuzhnaya-9-pino-nuar-muskat-rozovyj-1",
+   "inliers": 132,
+   "title": "Жемчужная 9 Пино Нуар, Мускат розовый"
+  },
+  {
+   "slug": "zhemchuzhnaya-9-pino-nuar-muskat-rozovyj",
+   "inliers": 112,
+   "title": "Жемчужная 9 Пино Нуар, Мускат Розовый"
+  },
+  {
+   "slug": "zhemchuzhnaya-9-pino-nuar-muskat-rozovyj-2",
+   "inliers": 132,
+   "title": "Жемчужная 9 Пино нуар, Мускат Розовый"
+  },
+  {
+   "p1": 0.448,
+   "p5": 0.577
+  }
+ ],
+ "org066_0.jpg": [
+  {
+   "slug": "denisov-winery-sovinon-blan-beloe-suhoe-115",
+   "inliers": 4,
+   "title": "Совиньон Блан"
+  },
+  {
+   "slug": "orlov_sauvignon_blan",
+   "inliers": 8,
+   "title": "Совиньон Блан"
+  },
+  {
+   "slug": "vinodelnya-pokrovskaya-sovinon-blan-pokrovskoe-beloe-suhoe-12",
+   "inliers": 10,
+   "title": "Совиньон Блан. Покровское"
+  },
+  {
+   "p1": 0.119,
+   "p5": 0.123
+  }
+ ],
+ "org067_0.jpg": [
+  {
+   "slug": "usadba-divnomorskoe-holodnyy-tuman-risling-beloe-suhoe-115",
+   "inliers": 27,
+   "title": "Холодный Туман"
+  },
+  {
+   "slug": "usadba-divnomorskoe-yuzhnyy-les-merlo-krasnoe-suhoe-137",
+   "inliers": 39,
+   "title": "Южный Лес"
+  },
+  {
+   "slug": "usadba-divnomorskoe-solnechnyy-veter-shardone-beloe-suhoe-125",
+   "inliers": 28,
+   "title": "Солнечный Ветер"
+  },
+  {
+   "p1": 0.166,
+   "p5": 0.271
+  }
+ ],
+ "org068_0.jpg": [
+  {
+   "slug": "derbent-vino-graf-vorontsov-beloe-polusladkoe-sovinon-blan-105-125",
+   "inliers": 6,
+   "title": "Граф Воронцов. Белое полусладкое"
+  },
+  {
+   "slug": "novyy-svet-dom-shampanskih-vin-rossiyskoe-shampanskoe-kollektsionnoe-bryut-beloe-novyy-svet-yubileynoe-risling-13",
+   "inliers": 4,
+   "title": "Российское шампанское коллекционное брют белое «Новый Свет. Юбилейное»"
+  },
+  {
+   "slug": "vinodelnya-78-muskat-polusladkoe-muskat-ottonel-beloe-115",
+   "inliers": 5,
+   "title": "Мускат полусладкое"
+  },
+  {
+   "p1": 0.073,
+   "p5": 0.078
+  }
+ ],
+ "org069_0.jpg": [
+  {
+   "slug": "aratti-kaberne-po-belomu",
+   "inliers": 32,
+   "title": "АРАТТИ Каберне по-белому"
+  },
+  {
+   "slug": "aratti-kaberne-po-belomu-1",
+   "inliers": 26,
+   "title": "АРАТТИ Каберне по-белому"
+  },
+  {
+   "slug": "aratti-vremena-goda-saperavi-vyderzhannyj-zima",
+   "inliers": 9,
+   "title": "АРАТТИ Времена Года Саперави выдержанный Зима"
+  },
+  {
+   "p1": 0.254,
+   "p5": 0.254
+  }
+ ],
+ "org070_0.jpg": [
+  {
+   "slug": "pobeda",
+   "inliers": 49,
+   "title": "Победа"
+  },
+  {
+   "slug": "czitronnyj-magaracha",
+   "inliers": 35,
+   "title": "Цитрон"
+  },
+  {
+   "slug": "rozovoe-zoloto",
+   "inliers": 33,
+   "title": "Розовое золото"
+  },
+  {
+   "p1": 0.033,
+   "p5": 0.344
+  }
+ ],
+ "org071_0.jpg": [
+  {
+   "slug": "fanagoriya-zelyonoe-vino-risling-tsitronnyy-magaracha-beloe-polusuhoe-11",
+   "inliers": 13,
+   "title": "Зелёное вино. Рислинг - Цитронный Магарача"
+  },
+  {
+   "slug": "fanagoriya-zelyonoe-vino-risling-tsitronnyy-magaracha-merlo-rozovoe-polusuhoe-11",
+   "inliers": 15,
+   "title": "Зелёное вино. Рислинг - Цитронный Магарача - Мерло"
+  },
+  {
+   "slug": "fanagoriya-100-ottenkov-krasnogo-pino-nuar-krasnoe-suhoe-135",
+   "inliers": 5,
+   "title": "100 оттенков красного. Пино Нуар"
+  },
+  {
+   "p1": 0.06,
+   "p5": 0.099
+  }
+ ],
+ "org072_0.jpg": [
+  {
+   "slug": "usadba-divnomorskoe-holodnyy-tuman-risling-beloe-suhoe-115",
+   "inliers": 36,
+   "title": "Холодный Туман"
+  },
+  {
+   "slug": "usadba-divnomorskoe-solnechnyy-veter-shardone-beloe-suhoe-125",
+   "inliers": 32,
+   "title": "Солнечный Ветер"
+  },
+  {
+   "slug": "usadba-divnomorskoe-yuzhnyy-les-merlo-krasnoe-suhoe-137",
+   "inliers": 48,
+   "title": "Южный Лес"
+  },
+  {
+   "p1": 0.248,
+   "p5": 0.318
+  }
+ ],
+ "org073_0.jpg": [
+  {
+   "slug": "abrau-dyurso-brut-dor-riesling-risling-beloe-bryut-12",
+   "inliers": 41,
+   "title": "Brut d'Or. Riesling"
+  },
+  {
+   "slug": "abrau-dyurso-russkoe-igristoe-polusuhoe-shardone-beloe-12",
+   "inliers": 45,
+   "title": "Русское Игристое полусухое"
+  },
+  {
+   "slug": "dva-brata-pet-nat-kokur-2024",
+   "inliers": 62,
+   "title": "Два Брата Пет Нат Кокур, 2024"
+  },
+  {
+   "p1": 0.072,
+   "p5": 0.183
+  }
+ ],
+ "org074_0.jpg": [
+  {
+   "slug": "zhemchuzhnaya-9-sovinon-blan-aligote",
+   "inliers": 8,
+   "title": "Жемчужная 9 Совиньон блан, Алиготе"
+  },
+  {
+   "slug": "vinodelnya-78-aligote-otbornoe-beloe-suhoe-12",
+   "inliers": 8,
+   "title": "Алиготе Отборное"
+  },
+  {
+   "slug": "sober-bash-risling-risling-reynskiy-beloe-suhoe-11",
+   "inliers": 6,
+   "title": "Рислинг"
+  },
+  {
+   "p1": 0.066,
+   "p5": 0.074
+  }
+ ],
+ "org075_0.jpg": [
+  {
+   "slug": "abrau-dyurso-russkoe-igristoe-polusuhoe-rozovoe-pino-nuar-12",
+   "inliers": 12,
+   "title": "Русское Игристое полусухое розовое"
+  },
+  {
+   "slug": "abrau-dyurso-imperial-brut-rose-pino-nuar-rozovoe-bryut-12",
+   "inliers": 12,
+   "title": "Империал Brut Rose"
+  },
+  {
+   "slug": "abrau-dyurso-imperatorskoe-polusladkoe-shardone-beloe-12",
+   "inliers": 9,
+   "title": "Императорское полусладкое"
+  },
+  {
+   "p1": 0.138,
+   "p5": 0.138
+  }
+ ],
+ "org076_0.jpg": [
+  {
+   "slug": "usadba-mezyb-usadba-mezyb-vione-beloe-suhoe-118",
+   "inliers": 102,
+   "title": "Усадьба Мезыбь. Вионье"
+  },
+  {
+   "slug": "pobeda",
+   "inliers": 36,
+   "title": "Победа"
+  },
+  {
+   "slug": "rozovoe-zoloto",
+   "inliers": 18,
+   "title": "Розовое золото"
+  },
+  {
+   "p1": 0.096,
+   "p5": 0.275
+  }
+ ],
+ "org077_0.jpg": [
+  {
+   "slug": "fanagoriya-zelyonoe-vino-risling-tsitronnyy-magaracha-beloe-polusuhoe-11",
+   "inliers": 17,
+   "title": "Зелёное вино. Рислинг - Цитронный Магарача"
+  },
+  {
+   "slug": "fanagoriya-100-ottenkov-shardone-beloe-suhoe-14",
+   "inliers": 12,
+   "title": "100 оттенков. Шардоне"
+  },
+  {
+   "slug": "fanagoriya-q-blanc-sovinon-blan-beloe-suhoe-14",
+   "inliers": 8,
+   "title": "Q Blanc"
+  },
+  {
+   "p1": 0.055,
+   "p5": 0.088
+  }
+ ],
+ "org078_0.jpg": [
+  {
+   "slug": "denisov-winery-risling-beloe-suhoe-115",
+   "inliers": 13,
+   "title": "Рислинг"
+  },
+  {
+   "slug": "risling",
+   "inliers": 10,
+   "title": "Рислинг"
+  },
+  {
+   "slug": "vinodelnya-78-muskat-otbornyy-muskat-yantarnyy-beloe-suhoe-125",
+   "inliers": 10,
+   "title": "Мускат Отборный"
+  },
+  {
+   "p1": 0.333,
+   "p5": 0.335
+  }
+ ],
+ "org079_0.jpg": [
+  {
+   "slug": "novyy-svet-dom-shampanskih-vin-novyy-svet-polusladkoe-roze-shardone-rozovoe-115",
+   "inliers": 71,
+   "title": "Новый Свет полусладкое розе"
+  },
+  {
+   "slug": "novyj-svet-vyderzhannoe-bryut",
+   "inliers": 48,
+   "title": "Новый Свет выдержанное брют"
+  },
+  {
+   "slug": "novyj-svet-polusladkoe",
+   "inliers": 48,
+   "title": "Новый Свет полусладкое"
+  },
+  {
+   "p1": 0.133,
+   "p5": 0.298
+  }
+ ],
+ "org080_0.jpg": [
+  {
+   "slug": "fanagoriya-zelyonoe-vino-risling-tsitronnyy-magaracha-beloe-polusuhoe-11",
+   "inliers": 25,
+   "title": "Зелёное вино. Рислинг - Цитронный Магарача"
+  },
+  {
+   "slug": "fanagoriya-zelyonoe-vino-risling-tsitronnyy-magaracha-merlo-rozovoe-polusuhoe-11",
+   "inliers": 25,
+   "title": "Зелёное вино. Рислинг - Цитронный Магарача - Мерло"
+  },
+  {
+   "slug": "fanagoriya-100-ottenkov-shardone-beloe-suhoe-14",
+   "inliers": 16,
+   "title": "100 оттенков. Шардоне"
+  },
+  {
+   "p1": 0.345,
+   "p5": 0.372
+  }
+ ],
+ "org081_0.jpg": [
+  {
+   "slug": "balaklava-muskat-beloe-polusladkoe",
+   "inliers": 58,
+   "title": "Балаклава Мускат белое полусладкое"
+  },
+  {
+   "slug": "balaklava-muskat",
+   "inliers": 44,
+   "title": "Балаклава Мускат"
+  },
+  {
+   "slug": "wine",
+   "inliers": 35,
+   "title": "Балаклава Брют Резерв Розе"
+  },
+  {
+   "p1": 0.2,
+   "p5": 0.306
+  }
+ ],
+ "org082_0.jpg": [
+  {
+   "slug": "fanagoriya-zelyonoe-vino-risling-tsitronnyy-magaracha-merlo-rozovoe-polusuhoe-11",
+   "inliers": 32,
+   "title": "Зелёное вино. Рислинг - Цитронный Магарача - Мерло"
+  },
+  {
+   "slug": "fanagoriya-zelyonoe-vino-risling-tsitronnyy-magaracha-beloe-polusuhoe-11",
+   "inliers": 24,
+   "title": "Зелёное вино. Рислинг - Цитронный Магарача"
+  },
+  {
+   "slug": "fanagoriya-dekanter-chardonnay-2020-shardone-beloe-suhoe-135",
+   "inliers": 17,
+   "title": "Декантер Chardonnay 2020"
+  },
+  {
+   "p1": 0.268,
+   "p5": 0.305
+  }
+ ],
+ "org083_0.jpg": [
+  {
+   "slug": "valeriy-zaharin-avtorskoe-vino-ot-valeriya-zaharina-bastardo-bastardo-magarachskiy-krasnoe-suhoe-12",
+   "inliers": 69,
+   "title": "Авторское вино от Валерия Захарьина. Бастардо"
+  },
+  {
+   "slug": "valeriy-zaharin-avtorskoe-vino-ot-valeriya-zaharina-krasnoe-pino-nuar-suhoe-125",
+   "inliers": 69,
+   "title": "Авторское вино от Валерия Захарьина. Красное"
+  },
+  {
+   "slug": "valeriy-zaharin-avtorskoe-vino-ot-valeriya-zaharina-aleatiko-rozovoe-suhoe-115",
+   "inliers": 76,
+   "title": "Авторское вино от Валерия Захарьина. Алеатико"
+  },
+  {
+   "p1": 0.243,
+   "p5": 0.245
+  }
+ ],
+ "org084_0.jpg": [
+  {
+   "slug": "kaberne-sovinon-1",
+   "inliers": 5,
+   "title": "Каберне Совиньон"
+  },
+  {
+   "slug": "vinodelnya-begildeeva-kaberne-sovinon-krasnoe-suhoe-14",
+   "inliers": 4,
+   "title": "Каберне Совиньон"
+  },
+  {
+   "slug": "vinodelnya-pokrovskaya-pokrovskoe-krasnoe-kaberne-sovinon-suhoe-14",
+   "inliers": 7,
+   "title": "Покровское красное"
+  },
+  {
+   "p1": 0.081,
+   "p5": 0.081
+  }
+ ],
+ "org085_0.jpg": [
+  {
+   "slug": "perovskih_polusuhoe_krasnoe",
+   "inliers": 39,
+   "title": "Полусухое Красное"
+  },
+  {
+   "slug": "krasnostop-zolotovskij",
+   "inliers": 20,
+   "title": "Красностоп Золотовский"
+  },
+  {
+   "slug": "perovskih_odesskiy_chernyi",
+   "inliers": 20,
+   "title": "Одесский черный. Лимитированная серия"
+  },
+  {
+   "p1": 0.496,
+   "p5": 0.504
+  }
+ ],
+ "org086_0.jpg": [
+  {
+   "slug": "merlo",
+   "inliers": 10,
+   "title": "Мерло"
+  },
+  {
+   "slug": "vinodelnya-batrak-perfekt-klassik-merlo-krasnoe-suhoe-135",
+   "inliers": 8,
+   "title": "Perfekt Klassik Мерло"
+  },
+  {
+   "slug": "vinodelnya-vedernikov-krasnostop-zolotovskiy-krasnoe-suhoe-13",
+   "inliers": 7,
+   "title": "Красностоп Золотовский"
+  },
+  {
+   "p1": 0.092,
+   "p5": 0.098
+  }
+ ],
+ "org087_0.jpg": [
+  {
+   "slug": "usadba-mezyb-shishka-kupazh-5-kaberne-sovinon-rozovoe-suhoe-133",
+   "inliers": 47,
+   "title": "Шишка. Купаж №5"
+  },
+  {
+   "slug": "usadba-mezyb-shishka-pino-nuar-rozovoe-suhoe-115",
+   "inliers": 51,
+   "title": "Шишка. Пино Нуар"
+  },
+  {
+   "slug": "usadba-mezyb-shishka-shenen-blan-beloe-suhoe-13",
+   "inliers": 46,
+   "title": "Шишка. Шенен Блан"
+  },
+  {
+   "p1": 0.37,
+   "p5": 0.422
+  }
+ ],
+ "org088_0.jpg": [
+  {
+   "slug": "pino-nuar-dzhavaga",
+   "inliers": 25,
+   "title": "Пино Нуар Джавага"
+  },
+  {
+   "slug": "pozdnij-sbor-krasnoe",
+   "inliers": 15,
+   "title": "Поздний сбор, Красное"
+  },
+  {
+   "slug": "pozdnij-sbor-beloe",
+   "inliers": 12,
+   "title": "Поздний сбор, Белое"
+  },
+  {
+   "p1": 0.012,
+   "p5": 0.015
+  }
+ ],
+ "org089_0.jpg": [
+  {
+   "slug": "golubitskoe-rose",
+   "inliers": 22,
+   "title": "Golubitskoe Rose"
+  },
+  {
+   "slug": "golubitskoe-estate-kaberne-sovinon-krasnoe-suhoe-137",
+   "inliers": 20,
+   "title": "Каберне Совиньон"
+  },
+  {
+   "slug": "pomeste-golubitskoe-kaberne-sovinon-rezerv-krasnoe-suhoe-143",
+   "inliers": 7,
+   "title": "Каберне Совиньон Резерв"
+  },
+  {
+   "p1": 0.096,
+   "p5": 0.137
+  }
+ ],
+ "org090_0.jpg": [
+  {
+   "slug": "pobeda",
+   "inliers": 38,
+   "title": "Победа"
+  },
+  {
+   "slug": "vinodelnya-pokrovskaya-pokrovskoe-krasnoe-kaberne-sovinon-suhoe-14",
+   "inliers": 21,
+   "title": "Покровское красное"
+  },
+  {
+   "slug": "rozovoe-zoloto",
+   "inliers": 15,
+   "title": "Розовое золото"
+  },
+  {
+   "p1": 0.124,
+   "p5": 0.163
+  }
+ ],
+ "org091_0.jpg": [
+  {
+   "slug": "pobeda",
+   "inliers": 22,
+   "title": "Победа"
+  },
+  {
+   "slug": "vinodelnya-pokrovskaya-risling-pokrovskoe-risling-reynskiy-beloe-suhoe-13",
+   "inliers": 15,
+   "title": "Рислинг. Покровское"
+  },
+  {
+   "slug": "oleg",
+   "inliers": 13,
+   "title": "Олег"
+  },
+  {
+   "p1": 0.104,
+   "p5": 0.125
+  }
+ ],
+ "org092_0.jpg": [
+  {
+   "slug": "vinodelnya-vedernikov-vedernikov-dolina-dona-krasnoe-suhoe-kaberne-sovinon-125",
+   "inliers": 7,
+   "title": "Ведерниковъ Долина Дона Красное Сухое"
+  },
+  {
+   "slug": "vinodelnya-vedernikov-vedernikov-dolina-dona-beloe-suhoe-aligote-12",
+   "inliers": 19,
+   "title": "Ведерниковъ Долина Дона Белое Сухое"
+  },
+  {
+   "slug": "vinodelnya-vedernikov-vedernikov-gubernatorskoe-golubok-krasnoe-suhoe-115",
+   "inliers": 12,
+   "title": "Ведерниковъ Губернаторское «Голубок»"
+  },
+  {
+   "p1": 0.042,
+   "p5": 0.043
+  }
+ ],
+ "org093_0.jpg": [
+  {
+   "slug": "usadba-divnomorskoe-holodnyy-tuman-risling-beloe-suhoe-115",
+   "inliers": 23,
+   "title": "Холодный Туман"
+  },
+  {
+   "slug": "usadba-divnomorskoe-yuzhnyy-les-merlo-krasnoe-suhoe-137",
+   "inliers": 38,
+   "title": "Южный Лес"
+  },
+  {
+   "slug": "usadba-divnomorskoe-solnechnyy-veter-shardone-beloe-suhoe-125",
+   "inliers": 20,
+   "title": "Солнечный Ветер"
+  },
+  {
+   "p1": 0.137,
+   "p5": 0.246
+  }
+ ],
+ "org094_0.jpg": [
+  {
+   "slug": "oleg",
+   "inliers": 10,
+   "title": "Олег"
+  },
+  {
+   "slug": "rubin-golodrigi",
+   "inliers": 3,
+   "title": "Рубин Голодриги"
+  },
+  {
+   "slug": "roze-2",
+   "inliers": 9,
+   "title": "Розе"
+  },
+  {
+   "p1": 0.259,
+   "p5": 0.263
+  }
+ ],
+ "org095_0.jpg": [
+  {
+   "slug": "zhemchuzhnaya-9-sovinon-blan-aligote",
+   "inliers": 8,
+   "title": "Жемчужная 9 Совиньон блан, Алиготе"
+  },
+  {
+   "slug": "blagolyubov-sovinon-blan-beloe-suhoe-125",
+   "inliers": 5,
+   "title": "Совиньон Блан"
+  },
+  {
+   "slug": "vinodelnya-pokrovskaya-sovinon-blan-pokrovskoe-beloe-suhoe-12",
+   "inliers": 5,
+   "title": "Совиньон Блан. Покровское"
+  },
+  {
+   "p1": 0.036,
+   "p5": 0.036
+  }
+ ],
+ "org096_0.jpg": [
+  {
+   "slug": "denisov_rubin_klaret_krasnaya_strelka",
+   "inliers": 79,
+   "title": "Рубин кларет . Красная стрелка"
+  },
+  {
+   "slug": "denisov_pino_noir_klaret",
+   "inliers": 56,
+   "title": "Пино Нуар кларет. Красная стрелка"
+  },
+  {
+   "slug": "kd-kokur",
+   "inliers": 9,
+   "title": "KD Кокур"
+  },
+  {
+   "p1": 0.387,
+   "p5": 0.453
+  }
+ ],
+ "org097_0.jpg": [
+  {
+   "slug": "pobeda",
+   "inliers": 38,
+   "title": "Победа"
+  },
+  {
+   "slug": "rozovoe-zoloto",
+   "inliers": 20,
+   "title": "Розовое золото"
+  },
+  {
+   "slug": "vinodelnya-uzunov-nrav-krasnostop-zolotovskiy-krasnoe-suhoe-132",
+   "inliers": 16,
+   "title": "Нрав"
+  },
+  {
+   "p1": 0.026,
+   "p5": 0.028
+  }
+ ],
+ "org098_0.jpg": [
+  {
+   "slug": "caperavi-avtorskoe-vino",
+   "inliers": 6,
+   "title": "Cаперави. Авторское вино"
+  },
+  {
+   "slug": "kaberne-sovinon",
+   "inliers": 6,
+   "title": "Каберне Совиньон"
+  },
+  {
+   "slug": "massandra-heres",
+   "inliers": 27,
+   "title": "Массандра Херес"
+  },
+  {
+   "p1": 0.117,
+   "p5": 0.117
+  }
+ ],
+ "org099_0.jpg": [
+  {
+   "slug": "abrau-dyurso-imperial-brut-rose-pino-nuar-rozovoe-bryut-12",
+   "inliers": 27,
+   "title": "Империал Brut Rose"
+  },
+  {
+   "slug": "fanagoriya-blanc-de-blancs-shardone-beloe-bryut-12",
+   "inliers": 17,
+   "title": "Blanc de Blancs"
+  },
+  {
+   "slug": "fanagoriya-alveus-ultra-cuvee-bryut-rozovoe-merlo-igristoe-bryut-rozovoe-12",
+   "inliers": 16,
+   "title": "Alveus Ultra Cuvee. Брют розовое"
+  },
+  {
+   "p1": 0.053,
+   "p5": 0.127
+  }
+ ],
+ "org100_0.jpg": [
+  {
+   "slug": "imenie-sikory-sovinon-blan-semeynyy-rezerv-beloe-suhoe-13",
+   "inliers": 0,
+   "title": "Совиньон Блан. Семейный резерв"
+  },
+  {
+   "slug": "vinodelnya-pokrovskaya-sovinon-blan-pokrovskoe-beloe-suhoe-12",
+   "inliers": 4,
+   "title": "Совиньон Блан. Покровское"
+  },
+  {
+   "slug": "vinodelnya-begildeeva-kaberne-sovinon-krasnoe-suhoe-14",
+   "inliers": 3,
+   "title": "Каберне Совиньон"
+  },
+  {
+   "p1": 0.009,
+   "p5": 0.01
+  }
+ ]
+}

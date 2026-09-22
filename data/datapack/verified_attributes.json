@@ -1,0 +1,111 @@
+{
+  "version": 1,
+  "source": "Visually verified against official catalog reference photos, 2026-09-22",
+  "wines": {
+    "zhemchuzhnaya-9-pino-nuar-muskat-rozovyj": {
+      "sweetness": "сухое",
+      "evidence": {
+        "path": "dataset/uploads_root/prod-svoe-vino-strapi/prod-svoe-vino/strapi/uploads/Pino_Nuar_Muskat_suh_82108c8383.webp",
+        "sha256": "0e043d699d78b99811a093261b6e6b1c14bebb222de5c4cdcb6f5bed18c2721c",
+        "label_text": "РОЗОВОЕ СУХОЕ"
+      }
+    },
+    "zhemchuzhnaya-9-pino-nuar-muskat-rozovyj-1": {
+      "sweetness": "полусухое",
+      "evidence": {
+        "path": "dataset/uploads_root/prod-svoe-vino-strapi/prod-svoe-vino/strapi/uploads/Pino_Nuar_Muskat_p_suh_6f84a398e4.webp",
+        "sha256": "dff2a1fdd503993a163bf7131e499512b775e122d1568ce1f792a4ecd2a12fb2",
+        "label_text": "РОЗОВОЕ ПОЛУСУХОЕ"
+      }
+    },
+    "zhemchuzhnaya-9-pino-nuar-muskat-rozovyj-2": {
+      "sweetness": "полусладкое",
+      "evidence": {
+        "path": "dataset/uploads_root/prod-svoe-vino-strapi/prod-svoe-vino/strapi/uploads/Pino_Nuar_Muskat_p_sl_7adf03cd48.webp",
+        "sha256": "2f95103fd827baf89532282def7f37a45829abf10e69619016ddea7cabc75637",
+        "label_text": "РОЗОВОЕ ПОЛУСЛАДКОЕ"
+      }
+    },
+    "zhemchuzhnaya-9-aligote-czitron": {
+      "sweetness": "сухое",
+      "evidence": {
+        "path": "dataset/uploads_root/prod-svoe-vino-strapi/prod-svoe-vino/strapi/uploads/Aligote_Czitron_bel_suh_8bc8ca2832.webp",
+        "sha256": "f8f18b0635d5e81af85e5894e7bc6d6674ea3c6ff4a30817d6017d7f8256f583",
+        "label_text": "БЕЛОЕ СУХОЕ"
+      }
+    },
+    "zhemchuzhnaya-9-kaberne-sovinon-pino-nuar-1": {
+      "sweetness": "полусладкое",
+      "evidence": {
+        "path": "dataset/uploads_root/prod-svoe-vino-strapi/prod-svoe-vino/strapi/uploads/Kaberne_Pino_nuar_p_sl_ba5ed7824d.webp",
+        "sha256": "c15d36271a35650f8f398a4deac91c7157d4d208079723f26231522f7b022fc6",
+        "label_text": "РОЗОВОЕ ПОЛУСЛАДКОЕ"
+      }
+    },
+    "zhemchuzhnaya-9-kaberne-sovinon-pino-nuar": {
+      "sweetness": "полусухое",
+      "evidence": {
+        "path": "dataset/uploads_root/prod-svoe-vino-strapi/prod-svoe-vino/strapi/uploads/Kaberne_Pino_Nuar_p_suh_fe5a6a54b9.webp",
+        "sha256": "cf94c3ba2f9edf8dbb9ff4111e920be282409be60afffb92f9db03865c24e2e8",
+        "label_text": "РОЗОВОЕ ПОЛУСУХОЕ"
+      }
+    },
+    "zhemchuzhnaya-9-muskat-rozovyj-kaberne-sovinon": {
+      "sweetness": "полусладкое",
+      "evidence": {
+        "path": "dataset/uploads_root/prod-svoe-vino-strapi/prod-svoe-vino/strapi/uploads/Muskat_Kaberne_p_sl_7faf5a7173.webp",
+        "sha256": "ad6a4433f308d3ec296cc832b15877a766ca7dcdbd59c4cac94386ddb51ca7bb",
+        "label_text": "РОЗОВОЕ ПОЛУСЛАДКОЕ"
+      }
+    },
+    "zhemchuzhnaya-9-muskat-rozovyj-pino-gri": {
+      "sweetness": "сухое",
+      "evidence": {
+        "path": "dataset/uploads_root/prod-svoe-vino-strapi/prod-svoe-vino/strapi/uploads/Muskat_Pino_Gri_suh_bbbbbf5ff9.webp",
+        "sha256": "328dabc121b454591c4cffd074d6375cbdae331967c5dbd4a770e8fd7246b47a",
+        "label_text": "РОЗОВОЕ СУХОЕ"
+      }
+    },
+    "zhemchuzhnaya-9-pino-gri-pino-nuar": {
+      "sweetness": "сухое",
+      "evidence": {
+        "path": "dataset/uploads_root/prod-svoe-vino-strapi/prod-svoe-vino/strapi/uploads/Pino_Gri_Pino_Nuar_suh_9c75ca2f52.webp",
+        "sha256": "359ac16467d82c6d8bb8ec1ab00fcb9bfee1857537eb93c0f857ced71fa659b8",
+        "label_text": "РОЗОВОЕ СУХОЕ"
+      }
+    },
+    "zhemchuzhnaya-9-risling-sovinon-blan": {
+      "sweetness": "полусухое",
+      "evidence": {
+        "path": "dataset/uploads_root/prod-svoe-vino-strapi/prod-svoe-vino/strapi/uploads/Risling_Sovinon_p_suh_2e0b39c41e.webp",
+        "sha256": "21c68ad7acf7bb8d7e460eb97eb7f4d942965fde05e038d8d383390ac0d9636e",
+        "label_text": "БЕЛОЕ ПОЛУСУХОЕ"
+      }
+    },
+    "zhemchuzhnaya-9-sovinon-blan-aligote": {
+      "sweetness": "сухое",
+      "evidence": {
+        "path": "dataset/uploads_root/prod-svoe-vino-strapi/prod-svoe-vino/strapi/uploads/Sovinon_Aligote_suh_f405e4e033.webp",
+        "sha256": "f74830ef018961600a772bf7cf636c818c502cebb047158039279854adabcf89",
+        "label_text": "БЕЛОЕ СУХОЕ"
+      }
+    },
+    "zhemchuzhnaya-9-czitron-shardone-1": {
+      "sweetness": "полусладкое",
+      "evidence": {
+        "path": "dataset/uploads_root/prod-svoe-vino-strapi/prod-svoe-vino/strapi/uploads/Czitron_Shard_p_sl_b94274915f.webp",
+        "sha256": "ad61dd4b7d208837205fbfec1c684294b1a7310edd994f98435d652d440e24b5",
+        "label_text": "БЕЛОЕ ПОЛУСЛАДКОЕ"
+      }
+    },
+    "fanagoriya-brule-muscat-ottonel-brut-muskat-ottonel-beloe-polusladkoe-12": {
+      "sweetness": "брют",
+      "evidence": {
+        "path": "dataset/uploads_root/prod-svoe-vino-strapi/prod-svoe-vino/strapi/uploads/fanagoriya_brule_muscat_ottonel_brut_muskat_ottonel_beloe_polusladkoe_12_cdfd9c20be.webp",
+        "sha256": "5e04b746526a961a48401953df6bba160c02d1a918397b35f2d22f5f6cfbef27",
+        "label_text": "MUSCAT OTTONEL BRUT",
+        "note": "slug и карточка платформы говорят «полусладкое», заголовок и эталонная этикетка — BRUT; транскрипция ir_ochen-vkusnoe-legkoe-vino-dlya-semeinogo_0.jpg давала противоречие обеим карточкам Brûlé сразу"
+      }
+    }
+  }
+}

@@ -20,9 +20,11 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import json
 import os
 import sys
+from collections import Counter
 from pathlib import Path
 
 import numpy as np
@@ -36,6 +38,7 @@ from imageprep import normalize_batch  # noqa: E402
 from ocr import read_words  # noqa: E402
 from rerank import PrecomputedReranker  # noqa: E402
 from text_match import TextChannel  # noqa: E402
+from field_metrics import summarize  # noqa: E402
 
 FIELD = ROOT / "data" / "field"
 PUBLIC = ROOT / "dataset" / "eval" / "queries"
@@ -118,10 +121,14 @@ SCORABLE = {"front", "collage", "multi"}
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--manifest", default=str(FIELD / "manifest.csv"))
+    ap.add_argument("--output", default=str(INDEX_DIR / "field_report.json"),
+                    help="отдельный файл отчёта для воспроизводимых сравнений")
     ap.add_argument("--index", default="clean_mv")
     ap.add_argument("--weights", default=str(INDEX_DIR / "confidence.json"),
                     help="веса и пороги; тот же файл читает сервис")
     ap.add_argument("--topk", type=int, default=20)
+    ap.add_argument("--candidate-features", action="store_true",
+                    help="сохранить признаки всех кандидатов для эксперимента с ранжированием")
     ap.add_argument("--views", default="raw,detect",
                     help="виды запроса через запятую, шаги внутри вида через '+'")
     ap.add_argument("--split", choices=["tune", "test", "all"], default="all",
@@ -132,6 +139,10 @@ def main() -> None:
     query_views = [tuple(x for x in spec.split("+") if x and x != "raw")
                    for spec in args.views.split(",")]
     rows = list(csv.DictReader(Path(args.manifest).open(encoding="utf-8")))
+    duplicates = [name for name, count in Counter(r['image'] for r in rows).items()
+                  if count > 1]
+    if duplicates:
+        sys.exit(f"повторные кадры в манифесте: {duplicates[:5]}; исправьте разметку")
     if args.split != "all":
         rows = [r for r in rows if r.get("split") == args.split]
     if not rows:
@@ -154,10 +165,7 @@ def main() -> None:
     # Позиция «находима», если её эталон попал в индекс. Одного поля photo
     # для этого мало: у части позиций фото в дампе нет вовсе, и эталон для
     # них приходит из data/catalog/extra_refs.csv.
-    sys.path.insert(0, str(ROOT / "pipeline"))
-    from build_index import extra_references
-    findable_slugs = {slug for slug, wine in by_slug.items() if wine.get("photo")}
-    findable_slugs |= {slug for _, slug in extra_references()}
+    findable_slugs = {slug for slug in index_slugs if slug}
 
     # Полевой кадр не должен оказаться среди эталонов: тогда запрос искал бы
     # сам себя. Индекс собирается только из фотографий каталога, но проверка
@@ -188,11 +196,15 @@ def main() -> None:
             return order.index(gold) if gold in order else -1
 
         rank_shortlist = place(row["slug"]) if row["slug"] else -1
+        retrieval = core.shortlist(scores, index_slugs, 100)
+        retrieval_order = [c.slug for c in retrieval]
+        rank_retrieval = (retrieval_order.index(row["slug"])
+                          if row["slug"] in retrieval_order else -1)
         core.rerank(shot, candidates, reranker)
         rank_geometry = place(row["slug"]) if row["slug"] else -1
         label = core.LabelText(shot, read_words)
         core.settle(candidates, shot, channel, label,
-                    window=0.80, min_conf=0.60)
+                    window=0.80, min_conf=0.60, by_slug=by_slug)
         rank_text = place(row["slug"]) if row["slug"] else -1
         core.check_leader(candidates, shot, channel, label,
                           0.60, 0.80, by_slug)
@@ -203,6 +215,7 @@ def main() -> None:
             "kind": row.get("kind", "field"),
             "frame": row.get("frame", "front"),
             "rank_shortlist": rank_shortlist,
+            "rank_retrieval100": rank_retrieval,
             "rank_geometry": rank_geometry,
             "rank_text": rank_text,
             "top1": candidates[0].slug if candidates else "",
@@ -220,7 +233,23 @@ def main() -> None:
                        and candidates[0].slug == row["slug"],
             "in_top5": bool(row["slug"])
                        and row["slug"] in [c.slug for c in candidates[:5]],
+            "in_top3": bool(row["slug"])
+                       and row["slug"] in [c.slug for c in candidates[:3]],
         })
+        if args.candidate_features:
+            words = label(shot)
+            rivals = [c.slug for c in candidates]
+            # Прочитанные строки нужны разбору промахов: нулевое текстовое
+            # подтверждение не значит, что OCR ничего не прочитал.
+            results[-1]['words'] = [{'text': w.text, 'conf': round(w.conf, 3),
+                                     'box': list(w.box)} for w in words]
+            results[-1]['candidates'] = [{
+                'slug': c.slug, 'cv': c.cv, 'inliers': c.inliers,
+                'coverage': c.coverage,
+                'hard_conflicts': len(channel.hard_conflicts(c.slug, words)),
+                'text_conflicts': len(channel.conflicts_with(c.slug, words, rivals)),
+                'text_support': len(channel.confirms(c.slug, words, rivals)),
+            } for c in candidates]
         print(f"  {row['image'][:44]:44} p={results[-1]['probability']:.3f} "
               f"инл {results[-1]['inliers']:>4} "
               f"{'ВЕРНО' if results[-1]['correct'] else ''}", flush=True)
@@ -412,8 +441,39 @@ def main() -> None:
                   f"(показов {total_shown}, из них для вин вне каталога "
                   f"{len(shown_absent)})")
 
-    out = INDEX_DIR / "field_report.json"
+    out = Path(args.output)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    tracked_inputs = [Path(args.manifest), Path(args.weights), CATALOG,
+                      INDEX_DIR / f"{args.index}.csv", INDEX_DIR / f"{args.index}.npy",
+                      *[ROOT / "pipeline" / name for name in
+                        ("searchcore.py", "text_match.py", "imageprep.py", "ocr.py",
+                         "rerank.py", "embed.py", "eval_field.py", "field_metrics.py")]]
+    verified_attributes = ROOT / 'data/datapack/verified_attributes.json'
+    if verified_attributes.exists():
+        tracked_inputs.append(verified_attributes)
+    def digest(path):
+        with path.open("rb") as fh:
+            return hashlib.file_digest(fh, "sha256").hexdigest()
+    metrics = summarize(results, show_p)
+    primary = metrics['all_positives']
+    import ocr as ocr_module
+    if ocr_module.FAILURES:
+        print(f"\nВНИМАНИЕ: OCR не отработал {len(ocr_module.FAILURES)} раз — "
+              f"такие кадры шли без текста; замер не парный: {ocr_module.FAILURES[0]}")
+    print(f"\nВсе положительные, без исключения отсутствующих эталонов: n={primary['n']}")
+    for key in ('top1', 'top3', 'top5'):
+        value = primary[key]
+        print(f"  {key}: {value:.1%}" if value is not None else f"  {key}: нет положительных кадров")
     out.write_text(json.dumps({
+        "provenance": {"args": vars(args),
+                       "sha256": {str(p.relative_to(ROOT)) if p.is_relative_to(ROOT)
+                                  else str(p): digest(p) for p in tracked_inputs},
+                       "environment": {key: os.environ.get(key) for key in
+                           ("LABEL_BAND", "KIN_GROUP", "BRAND_FIRST", "SIFT_DIR",
+                            "SIFT_MAX_SIDE", "TEXT_ALIASES", "OCR_JOIN", "NAME_FIRST")},
+                       "ocr_failures": len(ocr_module.FAILURES),
+                       "independent_holdout": False},
+        "metrics": metrics,
         "n": len(results), "positives": len(positives), "negatives": len(negatives),
         "results": results,
     }, ensure_ascii=False, indent=1), encoding="utf-8")

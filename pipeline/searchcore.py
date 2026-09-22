@@ -90,7 +90,7 @@ def pick_view(views: list, similarity) -> int:
     return int(best.argmax()) if len(best) else 0
 
 
-GEOMETRY_MARGIN = 0.25
+GEOMETRY_MARGIN = 0.50
 
 
 def rerank(crop: Image.Image, candidates: list[Candidate], reranker,
@@ -113,6 +113,14 @@ def rerank(crop: Image.Image, candidates: list[Candidate], reranker,
     часть: top-1 46.7% -> 60.0%, top-5 60.0% -> 70.0%. Синтетика, 400
     запросов: 90.2% -> 91.2% и 94.2% -> 95.2%. Отключать геометрию совсем
     нельзя — на синтетике один косинус даёт 80.8%.
+
+    Порог отрыва пересчитан, когда настроечная часть выросла с 30 кадров
+    до 203 и в неё вошла съёмка у полки. На 169 находимых кадрах: один
+    косинус 77.5% / 91.7%, отрыв 25% — 77.5% / 88.8%, отрыв 50% — 78.7%
+    / 91.1%. При прежнем пороге геометрия не добавляла к косинусу ничего
+    по top-1 и отнимала три пункта по top-5: на магазинном снимке этикетка
+    видна целиком, и косинус сам справляется, а перестановка по точкам
+    чаще мешает. Отсюда 0.50.
     """
     stats = reranker.stats(crop, [c.slug for c in candidates])
     for candidate in candidates:
@@ -179,11 +187,18 @@ def read_label(crop: Image.Image, read_words) -> list:
     читается на 4 кадрах из 33, сладость на 6, то есть условие почти
     всегда выполняется и проход всё равно нужен.
 
-    По умолчанию выключено. С развёрткой медиана ответа на публичных фото
-    кейса 1888 мс против 615 без неё. Качество при этом внутри шума:
-    на настроечной части top-1 34 из 64 против 33 и уверенных ответов
-    10 против 7 (все верны в обоих случаях), на тестовой top-1 тот же
-    19 из 57, а F1 top-1 34.9% против 38.6%. Включается LABEL_BAND=1.
+    По умолчанию выключено, включается LABEL_BAND=1. Вопрос решается
+    не развёрткой, а разрешением входного кадра, и это стоило отдельной
+    проверки. На копиях съёмки организаторов, сжатых до 1600 px, развёртка
+    давала +1 кадр (47 из 55 против 46). На тех же кадрах в исходных
+    3024x4032 разницы нет вовсе: 47 из 55 и 54 в пятёрке с ней и без неё,
+    F1 top-1 81.5% против 80.7%, F1 top-5 87.0% против 88.1% — знак
+    разный, величина внутри шума. Медиана ответа при этом 1597 мс против
+    654. Кроп по бутылке берётся с оригинала, и на исходном разрешении
+    у OCR уже есть те пиксели, ради которых полосу увеличивали вдвое.
+
+    Прежний замер на старом наборе из 33 кадров говорил то же самое:
+    top-1 34 из 64 против 33 при медиане 1888 мс против 615.
 
     Координаты строк полосы переводятся обратно в кроп: отбор по месту
     на кадре отсеивает надписи с соседней бутылки, и сравнивать он должен
@@ -194,7 +209,11 @@ def read_label(crop: Image.Image, read_words) -> list:
     from imageprep import label_band_view
     from text_match import extract_attributes
 
-    words = list(read_words(crop))
+    from text_match import join_spaced
+
+    # Разрядка и разрыв слова склеиваются один раз здесь: все потребители
+    # строк — перестановка, отвод лидера, улики — читают уже склеенное.
+    words = [replace(w, text=join_spaced(w.text)) for w in read_words(crop)]
     if os.environ.get("LABEL_BAND", "0") != "1":
         return words
     attrs = extract_attributes(" ".join(w.text for w in words))
@@ -210,21 +229,116 @@ def read_label(crop: Image.Image, read_words) -> list:
     return words
 
 
+def kin_group(candidates: list[Candidate], by_slug: dict | None,
+              words, channel, min_conf: float) -> set[str]:
+    """Кандидаты, которых надо сравнить текстом, даже если геометрия их развела.
+
+    Два случая, в обоих число совпавших точек обманывает.
+
+    Однофамильцы лидера. У линейки с общей этикеткой точки считаются по
+    общей части: у «Табии» верное вино набирает 10 точек против 42 у
+    соседа, хотя различает их одно слово под рисунком. Окно по инлаерам
+    такого кандидата в группу не пускает, и текст его не видит.
+
+    Кандидаты прочитанной винодельни. Имя винодельни — самая крупная
+    надпись, и читается оно там, где сорт уже не читается. «INKERMAN»
+    и «Литавщуков» распознаются целиком, а первым при этом стоит вино
+    другой винодельни с похожей по виду этикеткой.
+
+    По умолчанию выключено, включается KIN_GROUP=1. Замерено на
+    настроечной части (160 находимых кадров): без правила лидер верен
+    в 131, с правилом — в 115, F1 top-1 81.8% против 74.7%. Причина
+    в качестве чтения. На снимке у полки надпись крупная и читается,
+    а на кадре из отзыва OCR отдаёт кашу вроде «CiOE» и «FOJCTOE», и эта
+    каша, попав в расширенную группу, штрафует верного лидера, которого
+    геометрия до того выбирала правильно. Расширять группу можно только
+    вместе с проверкой качества чтения, а её пока нет.
+    """
+    from text_match import brand_slugs, name_slugs
+
+    if not candidates:
+        return set()
+    group: set[str] = set()
+    # Однофамильцы и вина прочитанной винодельни — под KIN_GROUP, как и было
+    # замерено. Владелец прочитанного имени вина — отдельное правило со
+    # своим переключателем (NAME_FIRST внутри name_slugs): оно приводит
+    # одного кандидата по точно прочитанному слову, а не всю линейку.
+    if os.environ.get("KIN_GROUP", "0") == "1":
+        if by_slug:
+            brand = (by_slug.get(candidates[0].slug) or {}).get("manufacturer")
+            if brand:
+                group |= {c.slug for c in candidates
+                          if (by_slug.get(c.slug) or {}).get("manufacturer") == brand}
+        group |= brand_slugs([c.slug for c in candidates], words, channel, min_conf)
+    group |= name_slugs([c.slug for c in candidates], words, channel, min_conf,
+                        weight={c.slug: float(c.inliers) for c in candidates})
+    return group
+
+
+def prefer_brand(candidates: list[Candidate], words, channel,
+                 min_conf: float) -> list[Candidate]:
+    """Вперёд — вина винодельни, чьё имя прочитано на этикетке.
+
+    Отдельный шаг, а не улика внутри группы, потому что правило разрешения
+    одностороннее: оно опускает кандидата, у которого прочитанного слова
+    нет, но поднять кандидата выше тех, кто в группу не попал, не может.
+    А здесь нужно именно это. На снимке у полки крупно читается «INKERMAN»
+    или «Литавщуков», при этом первым по геометрии стоит вино другой
+    винодельни с похожей этикеткой: «Марселан» Мысхако, «Мерло» Усадьбы
+    Перовских. Имя винодельни — самая надёжная надпись на кадре, и если
+    она прочитана уверенно и принадлежит ровно одной винодельне шортлиста,
+    её вина идут первыми.
+
+    Порядок внутри обеих частей сохраняется: шаг только разделяет своих
+    и чужих, выбор конкретного вина остаётся за текстом и геометрией.
+    """
+    from text_match import brand_slugs
+
+    if len(candidates) < 2 or os.environ.get("BRAND_FIRST", "1") != "1":
+        return candidates
+    own = brand_slugs([c.slug for c in candidates], words, channel, min_conf)
+    if not own or len(own) == len(candidates):
+        return candidates
+    place = {c.slug: i for i, c in enumerate(candidates)}
+    candidates.sort(key=lambda c: (c.slug not in own, place[c.slug]))
+    return candidates
+
+
 def resolve(candidates: list[Candidate], crop: Image.Image, channel,
-            read_words, window: float, min_conf: float) -> list[Candidate]:
+            read_words, window: float, min_conf: float,
+            by_slug: dict | None = None) -> list[Candidate]:
     """Перестановка близких кандидатов по прочитанному тексту.
 
-    OCR считается только когда группа близких кандидатов есть: при ясном
-    лидере текст ничего не решит, а время ответа вырастет на сотню
-    миллисекунд.
+    OCR считается только когда есть кого сравнивать: близкая по геометрии
+    группа либо родня лидера по винодельне. При одиноком лидере текст
+    ничего не решит, а время ответа вырастет на сотню миллисекунд.
     """
     from text_match import resolve_close
 
-    if not has_close_group(candidates, window):
+    words = read_words(crop)
+    kin = kin_group(candidates, by_slug, words, channel, min_conf)
+    # Группа сравнения — лучший по геометрии плюс приведённые. Сравнивать
+    # есть с кем, если приведён хоть один кандидат кроме самого лидера:
+    # владелец прочитанного имени приходит один, и прежняя проверка
+    # «в родне меньше двух» отправляла его обратно, не сравнив.
+    others = kin - ({candidates[0].slug} if candidates else set())
+    if not has_close_group(candidates, window) and not others:
         return candidates
+    # Сильное имя (NAME_STRONG): все, кто стоит впереди владельца, входят
+    # в группу. Правило одностороннее и поднять никого не может — оно
+    # только опускает тех, у кого прочитанного слова нет; чтобы владелец
+    # точно прочитанного имени вышел вперёд, противоречие должны получить
+    # все, кто перед ним.
+    if os.environ.get("NAME_STRONG", "1") != "0":
+        from text_match import strong_name_slugs
+        strong = strong_name_slugs([c.slug for c in candidates], words, channel, min_conf)
+        for slug in strong:
+            index = next((i for i, c in enumerate(candidates) if c.slug == slug), None)
+            if index:
+                kin |= {c.slug for c in candidates[:index]} | {slug}
     pairs = [(c.slug, float(c.inliers)) for c in candidates]
-    ranked, reasons = resolve_close(pairs, read_words(crop), channel,
-                                    window=window, min_conf=min_conf)
+    ranked, reasons = resolve_close(pairs, words, channel,
+                                    window=window, min_conf=min_conf, extra=kin)
     if not any(reasons.values()):
         return candidates
     position = {slug: i for i, (slug, _) in enumerate(ranked)}
@@ -334,7 +448,8 @@ def may_drop_caveat(candidates: list[Candidate], by_slug: dict,
 
 
 def demote_contradicted(candidates: list[Candidate], channel, words,
-                        min_conf: float, depth: int = 4) -> None:
+                        min_conf: float, depth: int = 4,
+                        margin: float = GEOMETRY_MARGIN) -> None:
     """Лидер, которому этикетка прямо противоречит, уступает место.
 
     До этой правки проверка лидера только понижала уверенность, а ответ
@@ -352,20 +467,44 @@ def demote_contradicted(candidates: list[Candidate], channel, words,
     скорее ошибается чтение, а не каталог, и лучше оставить порядок
     зрению.
     """
+    # Два независимых признака (цвет и сладость), прочитанных вместе,
+    # ошибкой чтения быть почти не могут — тогда глубина не ограничена
+    # (DEMOTE_DEPTH). На 6182553_0.jpg «РОЗОВОЕ ПОЛУСУХОЕ» противоречило
+    # четырём кандидатам подряд, и на четвёртом отвод останавливался.
+    if os.environ.get("DEMOTE_DEPTH", "0") != "0" and candidates:
+        from text_match import attributes_from_words, central_words
+        attrs = attributes_from_words(central_words(words, min_conf, band=0.5))
+        if attrs.color and attrs.sweetness:
+            depth = len(candidates)
+    demoted = False
     for _ in range(depth):
         leader = candidates[0]
         leader.hard = channel.hard_conflicts(leader.slug, words, min_conf)
         if not leader.hard:
-            return
+            break
         nxt = next((i for i, c in enumerate(candidates[1:], 1)
                     if not channel.hard_conflicts(c.slug, words, min_conf)), None)
         if nxt is None:
             return
         candidates.insert(nxt, candidates.pop(0))
+        demoted = True
+    # После отвода геометрия решает заново среди оставшихся (DEMOTE_GEOMETRY).
+    # Порядок по косинусу держался потому, что геометрия не была решающей
+    # на всём шортлисте; когда противоречащие выбыли, среди оставшихся она
+    # может быть решающей: у «Victor Dravigny. Полусладкое» 47 точек против
+    # 5 у «Красного полусладкого», а отвод ставил первым просто следующего.
+    if demoted and os.environ.get("DEMOTE_GEOMETRY", "0") != "0":
+        clean_ones = [c for c in candidates if not channel.hard_conflicts(c.slug, words, min_conf)]
+        if len(clean_ones) >= 2:
+            ranked = sorted(clean_ones, key=lambda c: (-c.inliers, -c.cv))
+            if ranked[0].inliers >= ranked[1].inliers * (1.0 + margin) and ranked[0] is not candidates[0]:
+                candidates.remove(ranked[0])
+                candidates.insert(0, ranked[0])
 
 
 def settle(candidates: list[Candidate], crop: Image.Image, channel,
-           read_words, window: float, min_conf: float) -> list[Candidate]:
+           read_words, window: float, min_conf: float,
+           by_slug: dict | None = None) -> list[Candidate]:
     """Окончательный выбор вина: перестановка по тексту и отвод лидера.
 
     Отделено от check_leader намеренно. Раньше отвод лидера по прочитанному
@@ -379,7 +518,9 @@ def settle(candidates: list[Candidate], crop: Image.Image, channel,
     какой это ответ. Поэтому здесь — всё, что меняет ответ, без порогов;
     в check_leader — всё, что меняет только оформление выдачи.
     """
-    resolve(candidates, crop, channel, read_words, window, min_conf)
+    words = read_words(crop)
+    prefer_brand(candidates, words, channel, min_conf)
+    resolve(candidates, crop, channel, read_words, window, min_conf, by_slug)
     if candidates:
         demote_contradicted(candidates, channel, read_words(crop), min_conf)
     return candidates

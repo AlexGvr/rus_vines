@@ -1,0 +1,41 @@
+{
+  "manifest_sha256": "2d448587e99bd7de303c84eac8d1882f6bcc981ee36ec17e3c259409d7359eb0",
+  "n": 391,
+  "test_role": "development_regression_not_independent",
+  "split_overlaps": {
+    "image": [],
+    "series": [],
+    "slug": []
+  },
+  "missing_images": [],
+  "unknown_slugs": [],
+  "exact_duplicate_images": [],
+  "exact_duplicate_split_overlaps": [],
+  "query_reference_overlap": [],
+  "missing_index_files": [],
+  "catalog_without_index": [
+    "kokur-suhoe-2025",
+    "method-classic-kokur",
+    "ona-skazala-da",
+    "rozovoe-polusladkoe-2",
+    "zhemchuzhnaya-9-czitron-shardone",
+    "zhemchuzhnaya-9-merlo-kaberne-sovinon"
+  ],
+  "positive_images_without_index": [
+    {
+      "image": "7579301_0.jpg",
+      "slug": "rozovoe-polusladkoe-2",
+      "kind": "field",
+      "split": "tune",
+      "series": "7579301",
+      "source": "https://otzovik.com/review_7579301.html",
+      "title": "Российское шампанское Абрау-Дюрсо полусладкое",
+      "frame": "front",
+      "note": "сосед по линейке, Российское шампанское Абрау-Дюрсо полусладкое"
+    }
+  ],
+  "limitations": [
+    "Byte hashes detect exact duplicates only; resized and near duplicates require visual review.",
+    "Valid slug does not verify that its label matches the photograph."
+  ]
+}

@@ -60,7 +60,7 @@ def series_of(name: str) -> str:
     return head or stem
 
 
-def assign_splits(rows: list[dict]) -> dict[str, str]:
+def assign_splits(rows: list[dict], locked: dict[str, str] | None = None):
     """Часть выборки для каждой связной группы «вино — фотосерия».
 
     Делить по позициям каталога нужно затем, чтобы тест отвечал на вопрос
@@ -71,13 +71,9 @@ def assign_splits(rows: list[dict]) -> dict[str, str]:
     и в положительные (вино решает часть), и в отрицательные (серия
     решает часть).
 
-    Поэтому вино и серия связываются в один граф, а часть назначается
-    связной группе целиком. Группы упорядочены по имени, распределение
-    чередуется — повторная сборка даёт то же самое.
-
-    Обучающей части у полевого набора нет намеренно: семидесяти кадров
-    не хватит, чтобы обучать на них веса. Здесь выбираются только пороги
-    и правила, и для этого нужны две части.
+    Назначения хранятся для всех узлов графа, включая удалённые кадры.
+    Новые группы идут в tune: независимый holdout собирается отдельно.
+    Если новая связь объединяет разные части, сборка завершается ошибкой.
     """
     parent: dict[str, str] = {}
 
@@ -93,15 +89,47 @@ def assign_splits(rows: list[dict]) -> dict[str, str]:
         if a != b:
             parent[max(a, b)] = min(a, b)
 
+    locked = locked or {}
     for row in rows:
         series = f"серия:{row['series']}"
         find(series)
+        union(series, f"кадр:{row['image']}")
         if row["slug"]:
             union(series, f"вино:{row['slug']}")
 
-    groups = sorted({find(f"серия:{row['series']}") for row in rows})
-    return {group: ("tune" if i % 2 == 0 else "test")
-            for i, group in enumerate(groups)}, find
+    groups = defaultdict(set)
+    for node in list(parent):
+        if node in locked:
+            if locked[node] not in {"tune", "test"}:
+                raise ValueError(f"неизвестная часть для {node}: {locked[node]}")
+            groups[find(node)].add(locked[node])
+    splits = {}
+    for node in list(parent):
+        group = find(node)
+        parts = groups[group]
+        if len(parts) > 1:
+            raise ValueError(f"новая связь объединяет tune и test: {group}")
+        splits[group] = next(iter(parts), "tune")
+    return splits, find
+
+
+def split_nodes(row: dict) -> list[str]:
+    return [f"кадр:{row['image']}", f"серия:{row['series']}"] + (
+        [f"вино:{row['slug']}"] if row['slug'] else [])
+
+
+def load_split_registry(path: Path, previous: Path) -> dict[str, str]:
+    if path.exists():
+        return json.loads(path.read_text(encoding="utf-8"))["nodes"]
+    nodes = {}
+    if previous.exists():
+        with previous.open(encoding="utf-8") as fh:
+            for row in csv.DictReader(fh):
+                for node in split_nodes(row):
+                    if node in nodes and nodes[node] != row["split"]:
+                        raise ValueError(f"исходный манифест содержит утечку: {node}")
+                    nodes[node] = row["split"]
+    return nodes
 
 
 def key_of(title: str) -> str:
@@ -281,7 +309,8 @@ def build(decisions_path: Path, out_path: Path) -> None:
     known = {w["slug"] for w in catalog}
     sources = json.loads((FIELD / "sources.json").read_text(encoding="utf-8"))
 
-    rows, dropped = [], 0
+    rows, dropped, pending = [], 0, 0
+    seen = {}
     for raw in decisions_path.read_text(encoding="utf-8").splitlines():
         line, _, note = raw.partition("#")
         line, note = line.strip(), note.strip()
@@ -291,11 +320,20 @@ def build(decisions_path: Path, out_path: Path) -> None:
         name, label = parts[0], parts[1]
         kind = parts[2] if len(parts) > 2 else "field"
         frame = parts[3] if len(parts) > 3 else "front"
+        decision = (label, kind, frame)
+        if name in seen:
+            if seen[name] != decision:
+                raise ValueError(f"противоречивые решения для {name}: {seen[name]} / {decision}")
+            continue
+        seen[name] = decision
         if frame not in frames:
             sys.exit(f"{name}: четвёртое поле должно быть одним из "
                      f"{sorted(frames)}, не «{frame}»")
         if not (FIELD / name).exists() and not (ROOT / "dataset" / "eval" / "queries" / name).exists():
             sys.exit(f"нет такого кадра: {name}")
+        if label == "?":
+            pending += 1
+            continue
         if label == "x":
             dropped += 1
             continue
@@ -309,9 +347,13 @@ def build(decisions_path: Path, out_path: Path) -> None:
                      "source": sources.get(name, {}).get("review", "публичный набор кейса"),
                      "title": sources.get(name, {}).get("listing_title", "")})
 
-    splits, find = assign_splits(rows)
+    registry_path = out_path.with_suffix(".splits.json")
+    locked = load_split_registry(registry_path, out_path)
+    splits, find = assign_splits(rows, locked)
     for row in rows:
         row["split"] = splits[find(f"серия:{row['series']}")]
+        for node in split_nodes(row):
+            locked[node] = row["split"]
 
     # Проверки остаются: правило деления можно сломать правкой, а молчаливая
     # утечка между частями обесценивает весь замер.
@@ -321,6 +363,12 @@ def build(decisions_path: Path, out_path: Path) -> None:
         if crossing:
             sys.exit(f"{field_name} попал в разные части: {sorted(crossing)[:5]}")
 
+    registry_tmp = registry_path.with_suffix(".json.tmp")
+    registry_tmp.write_text(json.dumps({
+        "version": 1, "test_role": "development_regression_not_independent",
+        "new_group_split": "tune", "nodes": locked,
+    }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    registry_tmp.replace(registry_path)
     with out_path.open("w", newline="", encoding="utf-8") as fh:
         writer = csv.DictWriter(fh, fieldnames=["image", "slug", "kind", "split",
                                                 "series", "source", "title",
@@ -332,6 +380,7 @@ def build(decisions_path: Path, out_path: Path) -> None:
     print(f"манифест: {out_path}")
     print(f"кадров {len(rows)}: вино есть в каталоге {positive}, "
           f"вина в каталоге нет {len(rows) - positive}; отброшено кадров {dropped}")
+    print(f"не разрешена разметка: {pending} (не входят в метрики)")
     print(f"из них съёмка: {shot}, предметная карточка товара: {len(rows) - shot}")
     counts: dict[str, int] = {}
     for row in rows:

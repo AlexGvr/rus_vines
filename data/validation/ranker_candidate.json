@@ -1,0 +1,24 @@
+{
+  "features": [
+    "cv",
+    "log_inliers",
+    "coverage",
+    "relative_inliers",
+    "inverse_cv_rank",
+    "hard_conflicts",
+    "text_conflicts",
+    "text_support"
+  ],
+  "weights": [
+    22.340789171152135,
+    0.4994809542144795,
+    0.41894497222921456,
+    1.412545260322471,
+    2.3401486839612824,
+    -0.4906517351492346,
+    -0.4456063742747715,
+    1.1710717830915367
+  ],
+  "training_sha256": "44d7344ecd751eda172bb8102bccb13405cdc56db5592e94ac6a0e51c7f24112",
+  "status": "experimental_not_deployed"
+}

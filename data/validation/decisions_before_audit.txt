@@ -1,0 +1,723 @@
+# Разметка полевого набора. По строке на кадр:
+#     <файл> <slug каталога | -> <field|studio>   # комментарий
+#
+# Второе поле — правильный ответ. Прочерк означает, что позиции нет
+# в каталоге. Важно: другое поколение упаковки отсутствием позиции НЕ
+# является. У «Абрау Купаж тёмный» в каталоге эталон с рисунком машинки,
+# покупатели снимают бутылки с пейзажем, но позиция та же самая — значит
+# это положительные примеры, и ненайденный ответ здесь ложный отказ,
+# а не правильное молчание.
+#
+# Третье поле отделяет съёмку от предметной карточки товара. Предметные
+# снимки на белом фоне попали в набор вместе с пользовательскими и
+# устойчивость к съёмке телефоном не проверяют, поэтому считаются отдельно.
+
+# Абрау-Дюрсо «Абрау Купаж тёмный сухое» — позиция в каталоге есть,
+# эталон другого поколения.
+11164638_0.jpg abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13 field front
+11164638_1.jpg x     # рельеф стекла, этикетки не видно
+11164638_2.jpg x     # акцизная марка
+13153768_0.jpg abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13 field collage
+13153768_1.jpg abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13 field front
+13153768_2.jpg x     # контрэтикетка
+13409943_0.jpg abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13 field front
+13409943_1.jpg abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13 field front
+13409943_2.jpg x     # контрэтикетка
+14029896_0.jpg abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13 field front
+14029896_1.jpg x     # контрэтикетка
+14029896_2.jpg abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13 field front
+5784977_0.jpg abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13 field front
+5784977_1.jpg abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13 field front
+5784977_2.jpg  x     # контрэтикетка
+9417887_0.jpg abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13 field front
+9417887_1.jpg  x     # контрэтикетка
+9417887_2.jpg  x     # пробка
+
+# Золотая Балка, серия ZB Wine «MY ROSE» — в каталоге нет (есть соседи
+# по серии: ZB Wine Sauvignon Blanc, ZB Moscato Rose и другие)
+ir_etiketka-zashla-vot-vino-net-tot-sluchai_1.jpg - studio front
+ir_etiketka-zashla-vot-vino-net-tot-sluchai_2.jpg - field front
+
+# Фанагория «Авторский стиль», «Номерной резерв», «Авторское», QORTIS —
+# таких позиций в каталоге нет
+ir_luchshee-iz-dostupnykh-vin-na-segodnya-m_0.jpg - studio front
+ir_luchshee-iz-dostupnykh-vin-na-segodnya-m_2.jpg - studio front
+ir_mozhet-li-deshevoe-vino-byt-khoroshim-ya_1.jpg - studio front
+ir_mozhet-li-deshevoe-vino-byt-khoroshim-ya_2.jpg - studio front
+ir_myagkoe-s-priyatnym-agodnym-vkusom-i-per_0.jpg - studio front
+ir_myagkoe-s-priyatnym-agodnym-vkusom-i-per_1.jpg - studio front
+ir_myagkoe-s-priyatnym-agodnym-vkusom-i-per_2.jpg - studio front
+ir_podderzhivaem-otechestvennykh-proizvodit_0.jpg - studio front
+ir_podderzhivaem-otechestvennykh-proizvodit_1.jpg - field front
+ir_podderzhivaem-otechestvennykh-proizvodit_2.jpg - field multi
+ir_prekrasnyi-aperitiv-na-leto-interesnaya-_0.jpg - studio front
+ir_prekrasnyi-aperitiv-na-leto-interesnaya-_1.jpg fanagoriya-zelyonoe-vino-risling-tsitronnyy-magaracha-beloe-polusuhoe-11 studio front   # в отзыве о Qortis выложено другое вино той же винодельни
+ir_prekrasnyi-aperitiv-na-leto-interesnaya-_2.jpg - studio front
+ir_pei-da-raduisya_0.jpg - studio front
+ir_pei-da-raduisya_2.jpg - studio front
+
+# BRÛLÉ Cuvée Rosé Demi-Sec — в каталоге только Cuvée Brut Розовое
+ir_ochen-vkusnoe-legkoe-vino-dlya-semeinogo_1.jpg - studio front
+
+# Положительные: позиция и этикетка совпадают с каталогом
+ir_ochen-vkusnoe-legkoe-vino-dlya-semeinogo_0.jpg fanagoriya-brule-muscat-ottonel-brut-muskat-ottonel-beloe-polusladkoe-12 studio front
+ir_pei-da-raduisya_1.jpg soyuz-vino-kanonicheskie-traditsii-krasnoe-sladkoe-kaberne-sovinon-115 field front
+
+# Публичный набор кейса
+02eef911.webp massandra-muskatel-belyy-belye-sorta-vinograda-beloe-sladkoe-16 field multi
+019c68d0.jpg - field multi   # Табия Пино Нуар, в каталоге нет
+096ca74e.jpg - field front   # ARISTOV DONUM, в каталоге нет
+
+# --- вторая партия: вина, отобранные по совпадению с каталогом ---
+# Привязка подтверждена глазами по листам data/field/sheets: совпадает
+# и название, и оформление этикетки. Кадры без лицевой этикетки в браке.
+
+# вино-массандра-кокур-сухое  ->  kokur-suhoe
+10777167_0.jpg kokur-suhoe field front
+10777167_1.jpg x
+10777167_2.jpg x
+11122332_0.jpg kokur-suhoe field front
+11122332_1.jpg x
+11122332_2.jpg x
+11813420_0.jpg kokur-suhoe field front
+11813420_1.jpg kokur-suhoe field front
+11813420_2.jpg kokur-suhoe field back
+12161711_0.jpg kokur-suhoe field multi
+12161711_1.jpg x   # контрэтикетка, ошибка первой разметки
+12161711_2.jpg x   # коллаж, лицевой этикетки толком не видно
+14095313_0.jpg x
+14095313_1.jpg x
+14095313_2.jpg x
+
+# вино-массандра-полусладкое-белое  ->  beloe-polusladkoe
+11865288_0.jpg beloe-polusladkoe field front
+11865288_1.jpg x
+12271541_0.jpg beloe-polusladkoe field front
+12271541_1.jpg x
+12271541_2.jpg x
+12980895_0.jpg beloe-polusladkoe field front
+12980895_1.jpg x
+12980895_2.jpg beloe-polusladkoe field front
+15839246_0.jpg x
+15839246_1.jpg x
+15839246_2.jpg beloe-polusladkoe field front
+16409233_0.jpg x
+16409233_1.jpg x
+16409233_2.jpg x
+
+# вино-белое-сухое-кубань-вино-шато-тамань-ркаците  ->  kuban-vino-shato-tamane-rkatsiteli-myuller-turgau-shardone-2025-beloe-suhoe-12
+10314919_0.jpg kuban-vino-shato-tamane-rkatsiteli-myuller-turgau-shardone-2025-beloe-suhoe-12 field front
+10314919_1.jpg x
+11406313_0.jpg kuban-vino-shato-tamane-rkatsiteli-myuller-turgau-shardone-2025-beloe-suhoe-12 field front
+11406313_1.jpg kuban-vino-shato-tamane-rkatsiteli-myuller-turgau-shardone-2025-beloe-suhoe-12 field front
+11406313_2.jpg x
+11751350_0.jpg kuban-vino-shato-tamane-rkatsiteli-myuller-turgau-shardone-2025-beloe-suhoe-12 field multi
+11751350_1.jpg kuban-vino-shato-tamane-rkatsiteli-myuller-turgau-shardone-2025-beloe-suhoe-12 field front
+11751350_2.jpg - field front   # в отзыве о Шато Тамань выложена бутылка Torre Tallada
+12101221_0.jpg kuban-vino-shato-tamane-rkatsiteli-myuller-turgau-shardone-2025-beloe-suhoe-12 field front
+12101221_1.jpg x
+12101221_2.jpg kuban-vino-shato-tamane-rkatsiteli-myuller-turgau-shardone-2025-beloe-suhoe-12 field back
+
+# вино-сухое-розовое-кубань-вино-шато-тамань-кабер  ->  shato-taman-kaberne-sovinon
+13918721_0.jpg shato-taman-kaberne-sovinon field front
+13918721_1.jpg x
+13918721_2.jpg x
+14692624_0.jpg shato-taman-kaberne-sovinon field front
+14692624_1.jpg x
+14692624_2.jpg shato-taman-kaberne-sovinon field front
+14907980_0.jpg shato-taman-kaberne-sovinon field front
+14907980_1.jpg x
+14907980_2.jpg shato-taman-kaberne-sovinon field front
+17031076_0.jpg shato-taman-kaberne-sovinon field front
+17031076_1.jpg x
+17031076_2.jpg x
+17760897_0.jpg x
+17760897_1.jpg x
+
+# шампанское-абрау-дюрсо-victor-dravigny-виктор-др  ->  abrau-dyurso-victor-dravigny-bryut
+12876444_0.jpg abrau-dyurso-victor-dravigny-bryut field front
+12876444_1.jpg x
+12876444_2.jpg x
+16117580_0.jpg abrau-dyurso-victor-dravigny-bryut field neck
+16117580_1.jpg abrau-dyurso-victor-dravigny-bryut field neck
+16117580_2.jpg x
+17368513_0.jpg abrau-dyurso-victor-dravigny-bryut field front
+17368513_1.jpg abrau-dyurso-victor-dravigny-bryut field front
+17368513_2.jpg x
+5921004_0.jpg abrau-dyurso-victor-dravigny-bryut field front
+5921004_1.jpg x
+5921004_2.jpg x
+7555709_0.jpg x
+7555709_1.jpg x
+7555709_2.jpg x
+
+# русское-шампанское-полусладкое-красное-абрау-дюр  ->  abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12
+10390039_0.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12 field front   # старое оформление: на этикетке «Русское шампанское»
+10390039_1.jpg x
+13978352_0.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12 field front
+13978352_1.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12 field back
+13978352_2.jpg x
+15501518_0.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12 field front
+15501518_1.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12 field front
+15501518_2.jpg x
+3284063_0.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12 field front   # старое оформление: на этикетке «Русское шампанское»
+3284063_1.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12 field front   # старое оформление: на этикетке «Русское шампанское»
+3284063_2.jpg x
+5881591_0.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12 field front   # старое оформление: на этикетке «Русское шампанское»
+5881591_1.jpg x
+5881591_2.jpg x
+
+# Товары, привязку которых подтвердить не удалось: либо в каталоге
+# нет такой позиции, либо на снимках оформление другого поколения.
+12083971_0.jpg x
+12109290_0.jpg x
+12109290_1.jpg x
+12109290_2.jpg x
+12397439_0.jpg x
+12397439_1.jpg x
+12873011_0.jpg x
+12873011_1.jpg x
+12873011_2.jpg x
+12968049_0.jpg x
+12968049_1.jpg x
+14366341_0.jpg x
+14366341_1.jpg x
+14366341_2.jpg x
+15636042_0.jpg x
+15636042_1.jpg x
+15636042_2.jpg x
+15658041_0.jpg x
+15658041_1.jpg x
+15658041_2.jpg x
+16903203_0.jpg x
+16903203_1.jpg x
+16903203_2.jpg x
+17303290_0.jpg x
+17303290_1.jpg x
+17303290_2.jpg x
+17734712_0.jpg x
+17734712_1.jpg x
+5175323_0.jpg x
+5608099_0.jpg x
+6173590_0.jpg x
+6173590_1.jpg x
+6173590_2.jpg x
+6607009_0.jpg x
+6607009_1.jpg x
+6607009_2.jpg x
+7512060_0.jpg x
+7512060_1.jpg x
+7512060_2.jpg x
+9243219_0.jpg x
+9243219_1.jpg x
+9243219_2.jpg x
+9338548_0.jpg x
+9338548_1.jpg x
+9338548_2.jpg x
+9867668_0.jpg x
+9867668_1.jpg x
+9867668_2.jpg x
+
+# Соседи по линейке: вина, которые система путает с набором.
+10615250_0.jpg abrau-dyurso-russkoe-igristoe-polusuhoe-shardone-beloe-12 field front   # сосед по линейке, Российское шампанское Абрау-Дюрсо полусухое
+10615250_1.jpg abrau-dyurso-russkoe-igristoe-polusuhoe-shardone-beloe-12 field back   # сосед по линейке, Российское шампанское Абрау-Дюрсо полусухое
+10729273_0.jpg massandra-muskat field front   # сосед по линейке, Вино белое сухое Массандра "Мускат"
+10729273_1.jpg massandra-muskat field back   # сосед по линейке, Вино белое сухое Массандра "Мускат"
+10806701_0.jpg massandra-muskat field back   # сосед по линейке, Вино белое сухое Массандра "Мускат"
+10806701_1.jpg massandra-muskat field multi   # сосед по линейке, Вино белое сухое Массандра "Мускат"
+11064469_0.jpg muskat-avtorskoe-vino field front   # сосед по линейке, Вино белое сухое Массандра "Мускат"
+11064469_1.jpg muskat-avtorskoe-vino field front   # сосед по линейке, Вино белое сухое Массандра "Мускат"
+11246121_0.jpg x field front   # этикетки не видно
+11246121_1.jpg x field front   # этикетки не видно
+11313721_0.jpg abrau-dyurso-russkoe-igristoe-polusuhoe-shardone-beloe-12 field front   # сосед по линейке, Российское шампанское Абрау-Дюрсо полусухое
+11313721_1.jpg x field front   # этикетки не видно
+11585211_0.jpg abrau-dyurso-russkoe-igristoe-polusuhoe-rozovoe-pino-nuar-12 field front   # сосед по линейке, Российское шампанское "Абрау-Дюрсо" полусухое ро
+11585211_1.jpg x field front   # этикетки не видно
+11977525_0.jpg x field front   # этикетки не видно
+11977525_1.jpg abrau-dyurso-russkoe-igristoe-polusuhoe-rozovoe-pino-nuar-12 field back   # сосед по линейке, Российское шампанское "Абрау-Дюрсо" полусухое ро
+12176352_0.jpg massandra-muskat field front   # сосед по линейке, Вино белое сухое Массандра "Мускат"
+12176352_1.jpg x field front   # этикетки не видно
+13168313_0.jpg massandra-portveyn-belyy-krymskiy-kokur-beloe-sladkoe-18 field front   # сосед по линейке, Вино Массандра "Портвейн белый Крымский"
+13168313_1.jpg massandra-portveyn-belyy-krymskiy-kokur-beloe-sladkoe-18 field front   # сосед по линейке, Вино Массандра "Портвейн белый Крымский"
+13795944_0.jpg massandra-portveyn-belyy-krymskiy-kokur-beloe-sladkoe-18 field front   # сосед по линейке, Вино Массандра "Портвейн белый Крымский"
+13795944_1.jpg massandra-portveyn-belyy-krymskiy-kokur-beloe-sladkoe-18 field back   # сосед по линейке, Вино Массандра "Портвейн белый Крымский"
+13918558_0.jpg massandra-portveyn-belyy-krymskiy-kokur-beloe-sladkoe-18 field front   # сосед по линейке, Вино Массандра "Портвейн белый Крымский"
+13918558_1.jpg massandra-portveyn-belyy-krymskiy-kokur-beloe-sladkoe-18 field front   # сосед по линейке, Вино Массандра "Портвейн белый Крымский"
+14098525_0.jpg massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13 field front   # сосед по линейке, Вино Массандра "Мускат белый Красного камня" бел
+14098525_1.jpg massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13 field front   # сосед по линейке, Вино Массандра "Мускат белый Красного камня" бел
+14544567_0.jpg x field front   # этикетки не видно
+14544567_1.jpg - field front   # сосед по линейке, Портвейн белый Массандра "Поручик Голицын"
+14555232_0.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-shardone-beloe-12 field front   # сосед по линейке, Российское шампанское Абрау-Дюрсо полусладкое
+14555232_1.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-shardone-beloe-12 field back   # сосед по линейке, Российское шампанское Абрау-Дюрсо полусладкое
+14583333_0.jpg massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13 field front   # сосед по линейке, Вино Массандра "Мускат белый Красного камня" бел
+14583333_1.jpg massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13 field back   # сосед по линейке, Вино Массандра "Мускат белый Красного камня" бел
+14635986_0.jpg x field front   # этикетки не видно
+14635986_1.jpg massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13 field front   # сосед по линейке, Вино Массандра "Мускат белый Красного камня"
+14732673_0.jpg massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13 field front   # сосед по линейке, Вино Массандра "Мускат белый Красного камня" бел
+14732673_1.jpg massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13 field front   # сосед по линейке, Вино Массандра "Мускат белый Красного камня" бел
+14842757_0.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-shardone-beloe-12 field front   # сосед по линейке, Российское шампанское Абрау-Дюрсо полусладкое
+14842757_1.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-shardone-beloe-12 field back   # сосед по линейке, Российское шампанское Абрау-Дюрсо полусладкое
+15517452_0.jpg fanagoriya-beloe-polusladkoe field front   # сосед по линейке, Игристое белое полусладкое вино "Фанагория"
+15517452_1.jpg fanagoriya-beloe-polusladkoe field back   # сосед по линейке, Игристое белое полусладкое вино "Фанагория"
+15536279_0.jpg fanagoriya-fanagoriya-bryut-beloe-sovinon-blan-igristoe-bryut-beloe-11-13 field front   # сосед по линейке, Вино игристое Фанагория брют белое
+15536279_1.jpg fanagoriya-fanagoriya-bryut-beloe-sovinon-blan-igristoe-bryut-beloe-11-13 field front   # сосед по линейке, Вино игристое Фанагория брют белое
+15557112_0.jpg fanagoriya-beloe-polusladkoe field front   # сосед по линейке, Игристое белое полусладкое вино "Фанагория"
+15557112_1.jpg x field front   # этикетки не видно
+15586449_0.jpg fanagoriya-beloe-polusladkoe field front   # сосед по линейке, Игристое белое полусладкое вино "Фанагория"
+15586449_1.jpg fanagoriya-beloe-polusladkoe field back   # сосед по линейке, Игристое белое полусладкое вино "Фанагория"
+15598335_0.jpg massandra-portveyn-belyy-krymskiy-kokur-beloe-sladkoe-18 field front   # сосед по линейке, Вино Массандра "Портвейн белый Крымский"
+15598335_1.jpg massandra-portveyn-belyy-krymskiy-kokur-beloe-sladkoe-18 field back   # сосед по линейке, Вино Массандра "Портвейн белый Крымский"
+15619693_0.jpg fanagoriya-fanagoriya-bryut-beloe-sovinon-blan-igristoe-bryut-beloe-11-13 field front   # сосед по линейке, Вино игристое Фанагория брют белое
+15619693_1.jpg x field front   # этикетки не видно
+15678756_0.jpg - field front   # сосед по линейке, Портвейн Массандра Гурзуф
+15763089_0.jpg - field front   # сосед по линейке, Портвейн Массандра Гурзуф
+15881383_0.jpg - field front   # сосед по линейке, Портвейн Массандра Гурзуф
+15881383_1.jpg - field back   # сосед по линейке, Портвейн Массандра Гурзуф
+16151511_0.jpg abrau-dyurso-russkoe-igristoe-polusuhoe-rozovoe-pino-nuar-12 field front   # сосед по линейке, Российское шампанское "Абрау-Дюрсо" полусухое ро
+16151511_1.jpg abrau-dyurso-russkoe-igristoe-polusuhoe-rozovoe-pino-nuar-12 field front   # сосед по линейке, Российское шампанское "Абрау-Дюрсо" полусухое ро
+1642455_0.jpg abrau-dyurso-russkoe-igristoe-polusuhoe-shardone-beloe-12 field front   # сосед по линейке, Российское шампанское Абрау-Дюрсо полусухое
+1642455_1.jpg x field front   # этикетки не видно
+16729787_0.jpg massandra-muskat field front   # сосед по линейке, Вино белое сухое Массандра "Мускат"
+16729787_1.jpg massandra-muskat field front   # сосед по линейке, Вино белое сухое Массандра "Мускат"
+16787831_0.jpg - field back   # сосед по линейке, Портвейн Массандра Гурзуф
+16813195_0.jpg fanagoriya-fanagoriya-bryut-beloe-sovinon-blan-igristoe-bryut-beloe-11-13 field front   # сосед по линейке, Вино игристое Фанагория брют белое
+16813195_1.jpg fanagoriya-fanagoriya-bryut-beloe-sovinon-blan-igristoe-bryut-beloe-11-13 field front   # сосед по линейке, Вино игристое Фанагория брют белое
+16831661_0.jpg massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13 field front   # сосед по линейке, Вино Массандра "Мускат белый Красного камня" бел
+16831661_1.jpg massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13 field front   # сосед по линейке, Вино Массандра "Мускат белый Красного камня" бел
+16890541_0.jpg - field back   # сосед по линейке, Русское игристое Абрау-Дюрсо брют
+16952274_0.jpg fanagoriya-beloe-polusladkoe field front   # сосед по линейке, Игристое белое полусладкое вино "Фанагория"
+17125435_0.jpg - field front   # сосед по линейке, Портвейн белый Массандра "Поручик Голицын"
+17125435_1.jpg x field front   # этикетки не видно
+17164427_0.jpg fanagoriya-beloe-polusladkoe field front   # сосед по линейке, Игристое белое полусладкое вино "Фанагория"
+17164427_1.jpg fanagoriya-beloe-polusladkoe field back   # сосед по линейке, Игристое белое полусладкое вино "Фанагория"
+17397266_0.jpg massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13 field front   # сосед по линейке, Вино Массандра "Мускат белый Красного камня"
+17397266_1.jpg x field front   # этикетки не видно
+2663600_0.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-shardone-beloe-12 field front   # сосед по линейке, Российское шампанское Абрау-Дюрсо полусладкое
+2663600_1.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-shardone-beloe-12 field back   # сосед по линейке, Российское шампанское Абрау-Дюрсо полусладкое
+4303475_0.jpg massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13 field front   # сосед по линейке, Вино Массандра "Мускат белый Красного камня"
+4303475_1.jpg x field front   # этикетки не видно
+5401549_0.jpg massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13 field front   # сосед по линейке, Вино Массандра "Мускат белый Красного камня"
+5401549_1.jpg massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13 field front   # сосед по линейке, Вино Массандра "Мускат белый Красного камня"
+5464419_0.jpg - field front   # сосед по линейке, Портвейн белый Массандра "Поручик Голицын"
+5464419_1.jpg x field front   # этикетки не видно
+5861895_0.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-shardone-beloe-12 field front   # сосед по линейке, Российское шампанское Абрау-Дюрсо полусладкое
+5861895_1.jpg abrau-dyurso-russkoe-igristoe-polusladkoe-shardone-beloe-12 field back   # сосед по линейке, Российское шампанское Абрау-Дюрсо полусладкое
+6182553_0.jpg abrau-dyurso-russkoe-igristoe-polusuhoe-rozovoe-pino-nuar-12 field front   # сосед по линейке, Российское шампанское "Абрау-Дюрсо" полусухое ро
+6182553_1.jpg x field front   # этикетки не видно
+6321068_0.jpg abrau-dyurso-russkoe-igristoe-polusuhoe-shardone-beloe-12 field front   # сосед по линейке, Российское шампанское Абрау-Дюрсо полусухое
+6321068_1.jpg abrau-dyurso-russkoe-igristoe-polusuhoe-shardone-beloe-12 field back   # сосед по линейке, Российское шампанское Абрау-Дюрсо полусухое
+6522615_0.jpg fanagoriya-fanagoriya-bryut-beloe-sovinon-blan-igristoe-bryut-beloe-11-13 field front   # сосед по линейке, Вино игристое Фанагория брют белое
+6522615_1.jpg fanagoriya-fanagoriya-bryut-beloe-sovinon-blan-igristoe-bryut-beloe-11-13 field back   # сосед по линейке, Вино игристое Фанагория брют белое
+6531253_0.jpg abrau-dyurso-russkoe-igristoe-polusuhoe-shardone-beloe-12 field multi   # сосед по линейке, Российское шампанское Абрау-Дюрсо полусухое
+6531253_1.jpg x field front   # этикетки не видно
+6682735_0.jpg massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13 field front   # сосед по линейке, Вино Массандра "Мускат белый Красного камня"
+6682735_1.jpg x field front   # этикетки не видно
+7193178_0.jpg massandra-portveyn-belyy-krymskiy-kokur-beloe-sladkoe-18 field front   # сосед по линейке, Вино Массандра "Портвейн белый Крымский"
+7193178_1.jpg massandra-portveyn-belyy-krymskiy-kokur-beloe-sladkoe-18 field back   # сосед по линейке, Вино Массандра "Портвейн белый Крымский"
+7579301_0.jpg rozovoe-polusladkoe-2 field front   # сосед по линейке, Российское шампанское Абрау-Дюрсо полусладкое
+7579301_1.jpg rozovoe-polusladkoe-2 field back   # сосед по линейке, Российское шампанское Абрау-Дюрсо полусладкое
+9448391_0.jpg fanagoriya-fanagoriya-bryut-beloe-sovinon-blan-igristoe-bryut-beloe-11-13 field front   # сосед по линейке, Вино игристое Фанагория брют белое
+9448391_1.jpg x field front   # этикетки не видно
+9465984_0.jpg - field front   # сосед по линейке, Портвейн белый Массандра "Поручик Голицын"
+9465984_1.jpg - field front   # сосед по линейке, Портвейн белый Массандра "Поручик Голицын"
+
+# --- Отзовик, сбор 21.09.2026: кадры с уверенным лидером (>=30 совпавших точек).
+# Сверено по листам «кадр рядом с эталоном лидера». Кадр, где разновидность
+# различается только мелким шрифтом, оставлен без метки — таких 221.
+
+10043731_0.jpg massandra-portveyn-krasnyy-alushta-krasnye-sorta-vinograda-krasnoe-sladkoe-17 field front   # сверено по листу: эталон лидера совпал, инл 96
+10043731_1.jpg x field front   # лицевой этикетки не видно (лидер massandra-kagor-gurzuf-saper, инл 33)
+10133023_0.jpg novyy-svet-dom-shampanskih-vin-rossiyskoe-shampanskoe-vyderzhannoe-polusladkoe-rozovoe-novyy-svet-shardone-125 field front   # сверено по листу: эталон лидера совпал, инл 53
+10133023_1.jpg x field front   # лицевой этикетки не видно (лидер novyy-svet-dom-shampanskih-v, инл 34)
+10206801_0.jpg balaklava-muskat-beloe-polusladkoe field front   # сверено по листу: эталон лидера совпал, инл 41
+10239033_1.jpg x field front   # лицевой этикетки не видно (лидер fanagoriya-zelyonoe-vino-ris, инл 42)
+10334693_1.jpg x field front   # лицевой этикетки не видно (лидер vino-suhoe-krasnoe-endemy-sa, инл 53)
+10390039_1.jpg x field front   # лицевой этикетки не видно (лидер abrau-dyurso-russkoe-igristo, инл 52)
+10413627_0.jpg portvejn-surozh field front   # сверено по листу: эталон лидера совпал, инл 77
+10434058_0.jpg soyuz-vino-kubanskoe-traditsionnoe-beloe-polusladkoe-07-belye-sorta-vinograda-11 field front   # сверено по листу: эталон лидера совпал, инл 87
+10520335_0.jpg soyuz-vino-kubanskoe-traditsionnoe-beloe-polusladkoe-belye-sorta-vinograda-11 field front   # сверено по листу: эталон лидера совпал, инл 209
+10520582_1.jpg x field front   # лицевой этикетки не видно (лидер chateau-tamagne-signature-ka, инл 57)
+10575655_0.jpg soyuz-vino-kubanskoe-traditsionnoe-beloe-polusladkoe-belye-sorta-vinograda-11 field front   # сверено по листу: эталон лидера совпал, инл 156
+10602595_0.jpg soyuz-vino-shato-de-mongolfer-shiraz-polusuhoe-krasnoe-11 field front   # сверено по листу: эталон лидера совпал, инл 137
+10615014_1.jpg x field front   # лицевой этикетки не видно (лидер novyj-svet-shardone, инл 41)
+10678155_0.jpg vysokij-bereg-risling-zelenaya-seriya field front   # сверено по листу: эталон лидера совпал, инл 32
+10691512_1.jpg x field front   # лицевой этикетки не видно (лидер novyy-svet-dom-shampanskih-v, инл 54)
+10697703_0.jpg novyy-svet-dom-shampanskih-vin-rossiyskoe-shampanskoe-vyderzhannoe-polusladkoe-rozovoe-novyy-svet-shardone-125 field front   # сверено по листу: эталон лидера совпал, инл 45
+10697703_1.jpg x field front   # лицевой этикетки не видно (лидер novyj-svet-kaberne-sovinon, инл 32)
+10729273_0.jpg massandra-muskat field front   # сверено по листу: эталон лидера совпал, инл 54
+10767951_1.jpg x field front   # лицевой этикетки не видно (лидер vinodelnya-berdyaeva-kaberne, инл 61)
+10777167_0.jpg kokur-suhoe field front   # сверено по листу: эталон лидера совпал, инл 78
+10802080_0.jpg zmv-koktebel-kagor-vysshego-kachestva-kaberne-sovinon-krasnoe-sladkoe-16 field multi   # сверено по листу: эталон лидера совпал, инл 31
+10802080_1.jpg zmv-koktebel-kagor-vysshego-kachestva-kaberne-sovinon-krasnoe-sladkoe-16 field front   # сверено по листу: эталон лидера совпал, инл 54
+10806701_0.jpg x field front   # лицевой этикетки не видно (лидер massandra-kagor-gurzuf-saper, инл 35)
+10929730_1.jpg x field front   # лицевой этикетки не видно (лидер usadba-aleksandrovskaya-bubn, инл 44)
+11122332_0.jpg kokur-suhoe field front   # сверено по листу: эталон лидера совпал, инл 83
+11151869_0.jpg rozovoe-polusladkoe field front   # сверено по листу: эталон лидера совпал, инл 31
+11151869_1.jpg x field front   # лицевой этикетки не видно (лидер derbent-vino-endemy-kaberne-, инл 30)
+11152241_1.jpg x field front   # лицевой этикетки не видно (лидер igristoe-vino-bryut-beloe-di, инл 49)
+11164638_2.jpg x field front   # лицевой этикетки не видно (лидер novyy-svet-dom-shampanskih-v, инл 50)
+11171408_0.jpg usadba-divnomorskoe-muscat-ottonel-muskat-ottonel-beloe-sladkoe-135 field front   # сверено по листу: эталон лидера совпал, инл 58
+11179082_0.jpg novyy-svet-dom-shampanskih-vin-igristoe-vino-vyderzhannoe-bryut-rozovoe-novyy-svet-pino-nuar-125 field front   # сверено по листу: эталон лидера совпал, инл 52
+11179082_1.jpg x field front   # лицевой этикетки не видно (лидер novyy-svet-dom-shampanskih-v, инл 62)
+11250710_0.jpg x field front   # лицевой этикетки не видно (лидер abrau-dyurso-imperial-brut-r, инл 68)
+11250710_1.jpg abrau-dyurso-imperial-brut-rose-pino-nuar-rozovoe-bryut-12 field front   # сверено по листу: эталон лидера совпал, инл 74
+11254800_0.jpg abrau-dyurso-imperial-brut-rose-pino-nuar-rozovoe-bryut-12 field front   # сверено по листу: эталон лидера совпал, инл 55
+11258546_1.jpg agora-muskat-chernyj field front   # сверено по листу: эталон лидера совпал, инл 35
+11290690_1.jpg x field front   # лицевой этикетки не видно (лидер novyy-svet-dom-shampanskih-v, инл 71)
+11489505_0.jpg abrau-dyurso-victor-dravigny-krasnoe-polusladkoe-kaberne-sovinon-125 field front   # сверено по листу: эталон лидера совпал, инл 88
+11585211_0.jpg abrau-dyurso-russkoe-igristoe-polusuhoe-rozovoe-pino-nuar-12 field front   # сверено по листу: эталон лидера совпал, инл 67
+11597455_1.jpg x field front   # лицевой этикетки не видно (лидер novyy-svet-dom-shampanskih-v, инл 40)
+11708583_0.jpg myshako-igristoe-beloe-polusladkoe field front   # сверено по листу: эталон лидера совпал, инл 50
+11747387_1.jpg x field front   # лицевой этикетки не видно (лидер fanagoriya-velvet-season-ris, инл 69)
+11813420_0.jpg kokur-suhoe field front   # сверено по листу: эталон лидера совпал, инл 47
+11813420_1.jpg massandra-kokur field front   # сверено по листу: эталон лидера совпал, инл 86
+11865288_1.jpg x field front   # лицевой этикетки не видно (лидер massandra-portveyn-belyy-alu, инл 101)
+11876113_0.jpg novyy-svet-dom-shampanskih-vin-rossiyskoe-shampanskoe-vyderzhannoe-bryut-beloe-novyy-svet-shardone-125 field front   # сверено по листу: эталон лидера совпал, инл 77
+11913153_0.jpg massandra-portveyn-krasnyy-livadiya-kaberne-sovinon-krasnoe-sladkoe-185 field front   # сверено по листу: эталон лидера совпал, инл 81
+11918966_0.jpg soyuz-vino-kanonicheskie-traditsii-krasnoe-sladkoe-kaberne-sovinon-115 field front   # сверено по листу: эталон лидера совпал, инл 82
+11918966_1.jpg soyuz-vino-kanonicheskie-traditsii-krasnoe-sladkoe-kaberne-sovinon-115 field front   # сверено по листу: эталон лидера совпал, инл 78
+11977525_1.jpg x field front   # лицевой этикетки не видно (лидер abrau-dyurso-russkoe-igristo, инл 53)
+12025482_0.jpg rozovoe-polusladkoe field front   # сверено по листу: эталон лидера совпал, инл 37
+12083971_0.jpg abrau-dyurso-victor-dravigny-brut-shardone-beloe-bryut-12 field front   # сверено по листу: эталон лидера совпал, инл 70
+12116780_1.jpg x field front   # лицевой этикетки не видно (лидер derbent-vino-endemy-kaberne-, инл 43)
+12131003_1.jpg x field front   # лицевой этикетки не видно (лидер usadba-mezyb-usadba-mezyb-vi, инл 58)
+12161711_0.jpg massandra-kokur field multi   # сверено по листу: эталон лидера совпал, инл 58
+12176352_0.jpg massandra-muskat field front   # сверено по листу: эталон лидера совпал, инл 49
+12189057_0.jpg abrau-dyurso-victor-dravigny-krasnoe-polusladkoe-kaberne-sovinon-125 field front   # сверено по листу: эталон лидера совпал, инл 89
+12256845_0.jpg massandra-kagor-gurzuf-saperavi-krasnoe-sladkoe-16 field front   # сверено по листу: эталон лидера совпал, инл 103
+12256845_1.jpg x field front   # лицевой этикетки не видно (лидер perovskih_polusladkoe_krasno, инл 110)
+12271541_1.jpg x field front   # лицевой этикетки не видно (лидер massandra-portveyn-belyy-alu, инл 44)
+12275155_1.jpg x field front   # лицевой этикетки не видно (лидер igristoe-vino-endemy-bianka-, инл 33)
+12322348_1.jpg x field front   # лицевой этикетки не видно (лидер massandra-kagor-yuzhnoberezh, инл 31)
+12433889_1.jpg x field front   # лицевой этикетки не видно (лидер artvin-kaberne-sovinon-grand, инл 32)
+12444550_1.jpg fanagoriya-cru-lermont-saperavi-saperavi-krasnoe-suhoe-135 field front   # сверено по листу: эталон лидера совпал, инл 45
+12907611_1.jpg x field front   # лицевой этикетки не видно (лидер abrau-dyurso-victor-dravigny, инл 47)
+12915926_1.jpg x field front   # лицевой этикетки не видно (лидер soyuz-vino-lenty-kaberne-kry, инл 47)
+12958551_1.jpg x field front   # лицевой этикетки не видно (лидер bogovich-wine-vineyard-pino-, инл 32)
+12980229_0.jpg portvejn-surozh field front   # сверено по листу: эталон лидера совпал, инл 35
+12980229_1.jpg x field front   # лицевой этикетки не видно (лидер perovskih_polusladkoe_krasno, инл 157)
+12980895_0.jpg beloe-polusladkoe field front   # сверено по листу: эталон лидера совпал, инл 56
+12980895_1.jpg x field front   # лицевой этикетки не видно (лидер polusladkoe-rozovoe-zolotaya, инл 44)
+12980895_2.jpg beloe-polusladkoe field front   # сверено по листу: эталон лидера совпал, инл 52
+13160324_0.jpg massandra-heres field front   # сверено по листу: эталон лидера совпал, инл 63
+13160324_1.jpg x field front   # лицевой этикетки не видно (лидер perovskih_polusuhoe_krasnoe, инл 36)
+13168313_1.jpg massandra-portveyn-belyy-krymskiy-kokur-beloe-sladkoe-18 field front   # сверено по листу: эталон лидера совпал, инл 34
+13261288_0.jpg agora-muskat field front   # сверено по листу: эталон лидера совпал, инл 55
+13304053_1.jpg x field front   # лицевой этикетки не видно (лидер kuban-vino-shato-tamane-ruzh, инл 75)
+13314222_0.jpg solnechnaya-dolina-chernyy-polkovnik-odesskiy-chernyy-krasnoe-sladkoe-175 field front   # сверено по листу: эталон лидера совпал, инл 159
+13316603_1.jpg x field front   # лицевой этикетки не видно (лидер perovskih_polusladkoe_krasno, инл 58)
+13327626_0.jpg soyuz-vino-lenty-izabella-krymskaya-krasnoe-polusladkoe-11 field front   # сверено по листу: эталон лидера совпал, инл 157
+13330615_0.jpg soyuz-vino-kanonicheskie-traditsii-krasnoe-sladkoe-kaberne-sovinon-115 field front   # сверено по листу: эталон лидера совпал, инл 52
+13345236_0.jpg novyy-svet-dom-shampanskih-vin-rossiyskoe-shampanskoe-vyderzhannoe-bryut-beloe-novyy-svet-shardone-125 field front   # сверено по листу: эталон лидера совпал, инл 91
+13345236_1.jpg x field front   # лицевой этикетки не видно (лидер novyy-svet-dom-shampanskih-v, инл 59)
+13417423_1.jpg x field front   # лицевой этикетки не видно (лидер usadba-mezyb-usadba-mezyb-sh, инл 68)
+13421617_0.jpg agora-muskat field front   # сверено по листу: эталон лидера совпал, инл 62
+13455548_0.jpg agora-muskat field front   # сверено по листу: эталон лидера совпал, инл 108
+13481814_0.jpg madera-krymskaya field front   # сверено по листу: эталон лидера совпал, инл 41
+13481814_1.jpg madera-krymskaya field collage   # сверено по листу: эталон лидера совпал, инл 44
+13541223_0.jpg massandra-muskat-belyy-yuzhnoberezhnyy-beloe-sladkoe-16 field front   # сверено по листу: эталон лидера совпал, инл 38
+13546111_0.jpg chateau-le-grand-vostock-kyuve-karsov-rezerv-shardone-beloe-suhoe-14 field front   # сверено по листу: эталон лидера совпал, инл 31
+13563755_0.jpg agora-muskat-chernyj field front   # сверено по листу: эталон лидера совпал, инл 58
+13563755_1.jpg x field front   # лицевой этикетки не видно (лидер agora-muskat, инл 68)
+13626115_0.jpg agora-pino-nuar field front   # сверено по листу: эталон лидера совпал, инл 90
+13626115_1.jpg x field front   # лицевой этикетки не видно (лидер bogovich-wine-vineyard-pino-, инл 62)
+13718989_0.jpg soyuz-vino-konfessa-pino-gridzhio-beloe-polusladkoe-11 field multi   # сверено по листу: эталон лидера совпал, инл 93
+13718989_1.jpg soyuz-vino-konfessa-pino-gridzhio-beloe-polusladkoe-11 field front   # сверено по листу: эталон лидера совпал, инл 81
+13792493_1.jpg massandra-muskatel-rozovyy-belye-sorta-vinograda-rozovoe-sladkoe-16 field front   # сверено по листу: эталон лидера совпал, инл 104
+13847459_0.jpg alma-valley-sovinon-blan-beloe-suhoe-14 field front   # сверено по листу: эталон лидера совпал, инл 37
+13891914_0.jpg soyuz-vino-kubanskoe-traditsionnoe-beloe-polusladkoe-07-belye-sorta-vinograda-11 field front   # сверено по листу: эталон лидера совпал, инл 90
+13891914_1.jpg x field front   # лицевой этикетки не видно (лидер rkacziteli-beloe-suhoe, инл 47)
+13981139_0.jpg zmv-koktebel-kagor-vysshego-kachestva-kaberne-sovinon-krasnoe-sladkoe-16 field front   # сверено по листу: эталон лидера совпал, инл 58
+14036482_1.jpg x field front   # лицевой этикетки не видно (лидер fanagoriya-100-ottenkov-shar, инл 94)
+14095313_0.jpg massandra-kokur field front   # сверено по листу: эталон лидера совпал, инл 60
+14095313_1.jpg x field front   # лицевой этикетки не видно (лидер massandra-kokur, инл 57)
+14098525_0.jpg massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13 field front   # сверено по листу: эталон лидера совпал, инл 33
+14120545_0.jpg massandra-muskatel-rozovyy-belye-sorta-vinograda-rozovoe-sladkoe-16 field multi   # сверено по листу: эталон лидера совпал, инл 53
+14134121_0.jpg massandra-heres field front   # сверено по листу: эталон лидера совпал, инл 60
+14230309_1.jpg novyy-svet-dom-shampanskih-vin-rossiyskoe-shampanskoe-vyderzhannoe-bryut-beloe-novyy-svet-shardone-125 field front   # сверено по листу: эталон лидера совпал, инл 66
+14245784_1.jpg x field front   # лицевой этикетки не видно (лидер abrau-dyurso-russkoe-igristo, инл 49)
+14299958_0.jpg solnechnaya-dolina-chernyy-doktor-solnechnoy-doliny-ekim-kara-krasnoe-sladkoe-16 field front   # сверено по листу: эталон лидера совпал, инл 108
+14428988_0.jpg alma-valley-sovinon-blan-beloe-suhoe-14 field front   # сверено по листу: эталон лидера совпал, инл 34
+14428988_1.jpg alma-valley-sovinon-blan-beloe-suhoe-14 field front   # сверено по листу: эталон лидера совпал, инл 61
+14523359_0.jpg vinodelnya-pokrovskaya-marinka-marinovskiy-rozovoe-suhoe-123 field front   # сверено по листу: эталон лидера совпал, инл 54
+14523359_1.jpg vinodelnya-pokrovskaya-marinka-marinovskiy-rozovoe-suhoe-123 field front   # сверено по листу: эталон лидера совпал, инл 94
+14544567_1.jpg portvejn-surozh field front   # сверено по листу: эталон лидера совпал, инл 30
+14555232_1.jpg x field front   # лицевой этикетки не видно (лидер abrau-dyurso-russkoe-igristo, инл 44)
+14574490_0.jpg alma-valley-sovinon-blan-beloe-suhoe-14 field front   # сверено по листу: эталон лидера совпал, инл 31
+14583333_1.jpg x field front   # лицевой этикетки не видно (лидер valeriy-zaharin-avtohtonnoe-, инл 30)
+14629551_0.jpg soyuz-vino-kanonicheskie-traditsii-krasnoe-sladkoe-kaberne-sovinon-115 field front   # сверено по листу: эталон лидера совпал, инл 139
+14692212_1.jpg x field front   # лицевой этикетки не видно (лидер abrau-dyurso-victor-dravigny, инл 38)
+14692624_0.jpg shato-taman-kaberne-sovinon field front   # сверено по листу: эталон лидера совпал, инл 30
+14692624_2.jpg shato-taman-kaberne-sovinon field front   # сверено по листу: эталон лидера совпал, инл 35
+14705904_0.jpg agora-muskat field front   # сверено по листу: эталон лидера совпал, инл 40
+14705904_1.jpg x field front   # лицевой этикетки не видно (лидер agora-risling, инл 43)
+14714932_0.jpg vinodelnya-myshako-pino-gridzhio-beloe-polusuhoe-123 field front   # сверено по листу: эталон лидера совпал, инл 41
+14794445_0.jpg agora-muskat-chernyj field front   # сверено по листу: эталон лидера совпал, инл 37
+14807880_0.jpg massandra-portveyn-belyy-gurzuf-kokur-belyy-beloe-sladkoe-135 field front   # сверено по листу: эталон лидера совпал, инл 73
+14907980_1.jpg x field front   # лицевой этикетки не видно (лидер zhemchuzhnaya-9-kaberne-sovi, инл 40)
+15302501_0.jpg agora-saperavi field front   # сверено по листу: эталон лидера совпал, инл 77
+15302501_1.jpg x field front   # лицевой этикетки не видно (лидер artvin-kaberne-sovinon-grand, инл 66)
+15354460_0.jpg suhoe-beloe-zb-vajn-frizzante field front   # сверено по листу: эталон лидера совпал, инл 46
+15501518_2.jpg x field front   # лицевой этикетки не видно (лидер abrau-dyurso-russkoe-igristo, инл 34)
+15561384_1.jpg x field front   # лицевой этикетки не видно (лидер fanagoriya-velvet-season-ris, инл 52)
+15598111_0.jpg portvejn-krymskij field front   # сверено по листу: эталон лидера совпал, инл 69
+15609486_1.jpg x field front   # лицевой этикетки не видно (лидер perovskih_polusladkoe_krasno, инл 37)
+15620151_0.jpg novyy-svet-dom-shampanskih-vin-igristoe-vino-vyderzhannoe-bryut-krasnoe-novyy-svet-kaberne-sovinon-135 field front   # сверено по листу: эталон лидера совпал, инл 42
+15622872_1.jpg fanagoriya-beloe-polusladkoe field front   # сверено по листу: эталон лидера совпал, инл 33
+15632542_0.jpg vinodelnya-myshako-quintessence-new-generation-brut-white-shardone-beloe-bryut-11 field front   # сверено по листу: эталон лидера совпал, инл 32
+15658041_1.jpg x field front   # лицевой этикетки не видно (лидер abrau-dyurso-victor-dravigny, инл 32)
+15724973_1.jpg x field front   # лицевой этикетки не видно (лидер usadba-mezyb-usadba-mezyb-sh, инл 32)
+15763954_1.jpg kuban-vino-vysokiy-bereg-merlo-krasnoe-suhoe-135 field front   # сверено по листу: эталон лидера совпал, инл 64
+15769591_1.jpg massandra-muskatel-rozovyy-belye-sorta-vinograda-rozovoe-sladkoe-16 field front   # сверено по листу: эталон лидера совпал, инл 84
+15839246_2.jpg beloe-polusladkoe field front   # сверено по листу: эталон лидера совпал, инл 76
+15848046_0.jpg soyuz-vino-konfessa-pino-gridzhio-beloe-polusladkoe-11 field front   # сверено по листу: эталон лидера совпал, инл 109
+15867534_0.jpg abrau-dyurso-abrau-dyurso-pino-nuar-krasnoe-suhoe-13 field front   # сверено по листу: эталон лидера совпал, инл 97
+15881383_0.jpg massandra-portveyn-belyy-gurzuf-kokur-belyy-beloe-sladkoe-135 field front   # сверено по листу: эталон лидера совпал, инл 48
+15884677_0.jpg x field front   # лицевой этикетки не видно (лидер valeriy-zaharin-aleatiko-kef, инл 33)
+15892757_1.jpg solnechnaya-dolina-porto-solnechnoy-doliny-kokur-belyy-beloe-sladkoe-175 field front   # сверено по листу: эталон лидера совпал, инл 42
+15950811_0.jpg massandra-muskat-belyy-yuzhnoberezhnyy-beloe-sladkoe-16 field front   # сверено по листу: эталон лидера совпал, инл 30
+16026698_0.jpg vinodelnya-myshako-quintessence-new-generation-brut-white-shardone-beloe-bryut-11 field front   # сверено по листу: эталон лидера совпал, инл 45
+16043907_0.jpg x field front   # лицевой этикетки не видно (лидер rozovoe-polusladkoe, инл 33)
+16058818_0.jpg rozovoe-bryut-1 field front   # сверено по листу: эталон лидера совпал, инл 89
+16103021_0.jpg abrau-dyurso-victor-dravigny-krasnoe-polusladkoe-kaberne-sovinon-125 field front   # сверено по листу: эталон лидера совпал, инл 104
+16103021_1.jpg abrau-dyurso-victor-dravigny-krasnoe-polusladkoe-kaberne-sovinon-125 field front   # сверено по листу: эталон лидера совпал, инл 86
+16159809_0.jpg soyuz-vino-kanonicheskie-traditsii-krasnoe-sladkoe-kaberne-sovinon-115 field front   # сверено по листу: эталон лидера совпал, инл 67
+16409233_1.jpg massandra-muskat field front   # сверено по листу: эталон лидера совпал, инл 37
+16422830_0.jpg shato-taman-shardone field multi   # сверено по листу: эталон лидера совпал, инл 43
+16422830_1.jpg shato-taman-shardone field front   # сверено по листу: эталон лидера совпал, инл 106
+16431007_0.jpg vysokij-bereg-czvajgelt field front   # сверено по листу: эталон лидера совпал, инл 34
+16431591_0.jpg shato-taman-kaberne-sovinon field multi   # сверено по листу: эталон лидера совпал, инл 60
+16431591_1.jpg shato-taman-kaberne-sovinon field front   # сверено по листу: эталон лидера совпал, инл 53
+16448738_0.jpg chateau-tamagne-nature-vert field multi   # сверено по листу: эталон лидера совпал, инл 46
+16448738_1.jpg chateau-tamagne-nature-vert field front   # сверено по листу: эталон лидера совпал, инл 77
+16470672_0.jpg vysokij-bereg-risling-zelenaya-seriya field front   # сверено по листу: эталон лидера совпал, инл 32
+16524370_0.jpg derbent-vino-di-kaspiko-merlo-krasnoe-suhoe-13 field front   # сверено по листу: эталон лидера совпал, инл 41
+16552967_0.jpg vysokij-bereg-risling-zelenaya-seriya field front   # сверено по листу: эталон лидера совпал, инл 34
+16552967_1.jpg vysokij-bereg-risling-zelenaya-seriya field front   # сверено по листу: эталон лидера совпал, инл 37
+16612700_0.jpg shato-taman-saperavi field multi   # сверено по листу: эталон лидера совпал, инл 77
+16612700_1.jpg shato-taman-saperavi field front   # сверено по листу: эталон лидера совпал, инл 81
+16620817_0.jpg x field front   # лицевой этикетки не видно (лидер vinodelnya-raevskoe-renessan, инл 38)
+16655658_0.jpg kuban-vino-vysokiy-bereg-merlo-krasnoe-suhoe-135 field front   # сверено по листу: эталон лидера совпал, инл 94
+16662579_0.jpg massandra-muskat-belyy-yuzhnoberezhnyy-beloe-sladkoe-16 field front   # сверено по листу: эталон лидера совпал, инл 178
+16729787_0.jpg massandra-muskat field front   # сверено по листу: эталон лидера совпал, инл 87
+16729787_1.jpg massandra-muskat field front   # сверено по листу: эталон лидера совпал, инл 102
+16827903_0.jpg shato-taman-saperavi field multi   # сверено по листу: эталон лидера совпал, инл 106
+16827903_1.jpg shato-taman-saperavi field front   # сверено по листу: эталон лидера совпал, инл 97
+16850389_0.jpg vinodelnya-myshako-merlo-black-out-krasnoe-sladkoe-14 field front   # сверено по листу: эталон лидера совпал, инл 38
+16890541_0.jpg x field front   # лицевой этикетки не видно (лидер abrau-dyurso-russkoe-igristo, инл 36)
+16895037_0.jpg cantiani-saperavi-merlot field front   # сверено по листу: эталон лидера совпал, инл 59
+16902408_1.jpg x field front   # лицевой этикетки не видно (лидер vinodelnya-vedernikov-5050-t, инл 37)
+16927035_0.jpg x field front   # лицевой этикетки не видно (лидер polusladkoe-beloe-zolotaya-b, инл 30)
+17027770_1.jpg x field front   # лицевой этикетки не видно (лидер abrau-dyurso-russkoe-igristo, инл 47)
+17031076_0.jpg shato-taman-kaberne-sovinon field front   # сверено по листу: эталон лидера совпал, инл 61
+17031076_2.jpg x field front   # лицевой этикетки не видно (лидер caucasian-dzharag, инл 32)
+17094708_0.jpg vinodelnya-myshako-kaberne-sovinon-black-out-krasnoe-polusuhoe-16 field front   # сверено по листу: эталон лидера совпал, инл 31
+17094708_1.jpg vinodelnya-myshako-kaberne-sovinon-black-out-krasnoe-polusuhoe-16 field front   # сверено по листу: эталон лидера совпал, инл 41
+17288951_1.jpg x field front   # лицевой этикетки не видно (лидер vinodelnya-myshako-aligote-v, инл 46)
+17303290_0.jpg fanagoriya-sur-lie-clairet-saperavi-krasnoe-suhoe-13 field front   # сверено по листу: эталон лидера совпал, инл 44
+17405240_1.jpg x field front   # лицевой этикетки не видно (лидер abrau-dyurso-victor-dravigny, инл 60)
+17489139_0.jpg derbent-vino-graf-vorontsov-bryut-beloe-sovinon-blan-105-125 field front   # сверено по листу: эталон лидера совпал, инл 80
+17489139_1.jpg x field front   # лицевой этикетки не видно (лидер vinodelnya-vedernikov-sibirk, инл 33)
+17502638_0.jpg shato-taman-grape-dance-1 field front   # сверено по листу: эталон лидера совпал, инл 87
+17552421_1.jpg derbent-vino-graf-vorontsov-bryut-rozovoe-pervenets-magaracha-105-125 field front   # сверено по листу: эталон лидера совпал, инл 107
+17607545_0.jpg x field front   # лицевой этикетки не видно (лидер vinodelnya-vedernikov-sibirk, инл 212)
+17636747_0.jpg soyuz-vino-izola-del-sole-roze-v-banke-krasnostop-rozovoe-suhoe-11 field front   # сверено по листу: эталон лидера совпал, инл 92
+17637471_0.jpg agora-saperavi field front   # сверено по листу: эталон лидера совпал, инл 69
+17637471_1.jpg agora-saperavi field front   # сверено по листу: эталон лидера совпал, инл 49
+17650567_0.jpg alma-valley-risling-beloe-polusuhoe-125 field front   # сверено по листу: эталон лидера совпал, инл 32
+17656401_0.jpg suhoe-beloe-zb-vajn-frizzante field front   # сверено по листу: эталон лидера совпал, инл 49
+17656401_1.jpg suhoe-beloe-zb-vajn-frizzante field front   # сверено по листу: эталон лидера совпал, инл 50
+17711736_0.jpg agora-pino-nuar field front   # сверено по листу: эталон лидера совпал, инл 142
+17711736_1.jpg agora-pino-nuar field front   # сверено по листу: эталон лидера совпал, инл 163
+17734712_1.jpg x field front   # лицевой этикетки не видно (лидер abrau-dyurso-victor-dravigny, инл 35)
+17760897_0.jpg shato-taman-kaberne-sovinon field front   # сверено по листу: эталон лидера совпал, инл 36
+17762210_0.jpg suhoe-beloe-zb-vajn-frizzante field front   # сверено по листу: эталон лидера совпал, инл 37
+17805154_0.jpg loco-cimbali-kuprin-bastardo-magarachskiy-krasnoe-suhoe-138 field front   # сверено по листу: эталон лидера совпал, инл 34
+17810665_1.jpg x field front   # лицевой этикетки не видно (лидер sober-bash-trezvaya-golova-r, инл 31)
+2323659_1.jpg x field front   # лицевой этикетки не видно (лидер fanagoriya-100-ottenkov-shar, инл 57)
+2543236_1.jpg x field front   # лицевой этикетки не видно (лидер fanagoriya-zelyonoe-vino-ris, инл 47)
+3124666_0.jpg massandra-portveyn-krasnyy-livadiya-kaberne-sovinon-krasnoe-sladkoe-185 field front   # сверено по листу: эталон лидера совпал, инл 43
+3307896_1.jpg x field front   # лицевой этикетки не видно (лидер domaine-lipko-muskat-pomeste, инл 45)
+3725581_1.jpg x field front   # лицевой этикетки не видно (лидер olymp-winery-shato-belbek-ka, инл 38)
+3981998_1.jpg x field front   # лицевой этикетки не видно (лидер novyy-svet-dom-shampanskih-v, инл 32)
+4303475_0.jpg massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13 field front   # сверено по листу: эталон лидера совпал, инл 55
+4389158_1.jpg x field front   # лицевой этикетки не видно (лидер novyy-svet-dom-shampanskih-v, инл 30)
+4394905_1.jpg x field front   # лицевой этикетки не видно (лидер massandra-portveyn-krasnyy-l, инл 43)
+4456929_0.jpg massandra-muskatel-chernyy-krasnye-sorta-vinograda-krasnoe-sladkoe-16 field front   # сверено по листу: эталон лидера совпал, инл 47
+4515365_1.jpg x field front   # лицевой этикетки не видно (лидер fanagoriya-brule-cabernet-sa, инл 42)
+4574044_0.jpg massandra-kagor-yuzhnoberezhnyy-saperavi-krasnoe-sladkoe-16 field front   # сверено по листу: эталон лидера совпал, инл 38
+4827416_1.jpg x field front   # лицевой этикетки не видно (лидер soyuz-vino-kubanskoe-tradits, инл 41)
+5313368_0.jpg massandra-portveyn-krasnyy-livadiya-kaberne-sovinon-krasnoe-sladkoe-185 field front   # сверено по листу: эталон лидера совпал, инл 54
+5313368_1.jpg x field front   # лицевой этикетки не видно (лидер massandra-portveyn-belyy-alu, инл 86)
+5401549_1.jpg massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13 field front   # сверено по листу: эталон лидера совпал, инл 43
+5439331_0.jpg massandra-heres field front   # сверено по листу: эталон лидера совпал, инл 61
+5751651_0.jpg massandra-muskatel-belyy-belye-sorta-vinograda-beloe-sladkoe-16 field front   # сверено по листу: эталон лидера совпал, инл 83
+5861895_1.jpg x field front   # лицевой этикетки не видно (лидер abrau-dyurso-russkoe-igristo, инл 38)
+5872469_1.jpg x field front   # лицевой этикетки не видно (лидер kuban-vino-shato-tamane-reze, инл 45)
+5921004_0.jpg abrau-dyurso-victor-dravigny-bryut field front   # сверено по листу: эталон лидера совпал, инл 83
+5921004_1.jpg x field front   # лицевой этикетки не видно (лидер novyy-svet-dom-shampanskih-v, инл 39)
+5921626_0.jpg massandra-muskat field multi   # сверено по листу: эталон лидера совпал, инл 43
+5921626_1.jpg x field front   # лицевой этикетки не видно (лидер soyuz-vino-soyuz-vino-muskat, инл 68)
+5960717_0.jpg x field front   # лицевой этикетки не видно (лидер balaklava-muskat-beloe-polus, инл 48)
+5960717_1.jpg x field front   # лицевой этикетки не видно (лидер balaklava-muskat-beloe-polus, инл 42)
+6106288_1.jpg fanagoriya-ledyanoe-vino-muskat-muskat-ottonel-beloe-sladkoe-11 field front   # сверено по листу: эталон лидера совпал, инл 33
+6213900_1.jpg x field front   # лицевой этикетки не видно (лидер massandra-kagor-gurzuf-saper, инл 40)
+6310320_0.jpg abrau-dyurso-brut-dor-blanc-de-blancs-shardone-beloe-bryut-12 field front   # сверено по листу: эталон лидера совпал, инл 30
+6321068_1.jpg x field front   # лицевой этикетки не видно (лидер abrau-dyurso-russkoe-igristo, инл 57)
+6321414_1.jpg massandra-kagor-yuzhnoberezhnyy-saperavi-krasnoe-sladkoe-16 field collage   # сверено по листу: эталон лидера совпал, инл 111
+6358887_0.jpg massandra-muskatel-rozovyy-belye-sorta-vinograda-rozovoe-sladkoe-16 field front   # сверено по листу: эталон лидера совпал, инл 52
+6407984_1.jpg massandra-kagor-yuzhnoberezhnyy-saperavi-krasnoe-sladkoe-16 field front   # сверено по листу: эталон лидера совпал, инл 53
+6422982_0.jpg massandra-portveyn-belyy-alushta-belye-sorta-vinograda-beloe-sladkoe-17 field front   # сверено по листу: эталон лидера совпал, инл 39
+6489532_0.jpg soyuz-vino-kubanskoe-traditsionnoe-krasnoe-suhoe-krasnye-sorta-vinograda-11 field front   # сверено по листу: эталон лидера совпал, инл 145
+6547491_1.jpg x field front   # лицевой этикетки не видно (лидер skalistyy-bereg-skalistyy-be, инл 43)
+6565062_0.jpg x field front   # лицевой этикетки не видно (лидер derbent-vino-endemy-risling-, инл 83)
+6682735_0.jpg massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13 field front   # сверено по листу: эталон лидера совпал, инл 33
+6731712_0.jpg vysokij-bereg-traminer-zelenaya-seriya field front   # сверено по листу: эталон лидера совпал, инл 32
+6771144_1.jpg x field front   # лицевой этикетки не видно (лидер vino-suhoe-krasnoe-endemy-sa, инл 57)
+6809101_1.jpg x field front   # лицевой этикетки не видно (лидер usadba-perovskih-kaberne-sov, инл 61)
+7000197_0.jpg soyuz-vino-kubanskoe-traditsionnoe-krasnoe-polusladkoe-krasnye-sorta-vinograda-11 field front   # сверено по листу: эталон лидера совпал, инл 276
+7050097_1.jpg x field front   # лицевой этикетки не видно (лидер vinodelnya-uzunov-sovinon-bl, инл 78)
+7124981_1.jpg x field front   # лицевой этикетки не видно (лидер agora-terruarnoe-bastardo, инл 59)
+7193178_0.jpg massandra-portveyn-krasnyy-livadiya-kaberne-sovinon-krasnoe-sladkoe-185 field front   # сверено по листу: эталон лидера совпал, инл 46
+7445929_1.jpg balaklava-bryut-rezerv field front   # сверено по листу: эталон лидера совпал, инл 121
+7475798_1.jpg portvejn-krymskij field front   # сверено по листу: эталон лидера совпал, инл 32
+7476974_1.jpg x field front   # лицевой этикетки не видно (лидер agora-terruarnoe-bastardo, инл 36)
+7490259_1.jpg x field front   # лицевой этикетки не видно (лидер novyy-svet-dom-shampanskih-v, инл 51)
+7512060_2.jpg x field front   # лицевой этикетки не видно (лидер abrau-dyurso-russkoe-igristo, инл 35)
+7579301_1.jpg x field front   # лицевой этикетки не видно (лидер derbent-vino-endemy-risling-, инл 33)
+7804494_1.jpg x field front   # лицевой этикетки не видно (лидер sober-bash-krasnostop-krasno, инл 37)
+8061283_1.jpg myshako-igristoe-beloe-polusladkoe field front   # сверено по листу: эталон лидера совпал, инл 31
+8133185_1.jpg x field front   # лицевой этикетки не видно (лидер massandra-kagor-yuzhnoberezh, инл 39)
+8136759_1.jpg massandra-portveyn-krasnyy-livadiya-kaberne-sovinon-krasnoe-sladkoe-185 field front   # сверено по листу: эталон лидера совпал, инл 37
+8140183_0.jpg massandra-bastardo-bastardo-magarachskiy-krasnoe-sladkoe-16 field front   # сверено по листу: эталон лидера совпал, инл 48
+8192349_0.jpg massandra-muskatel-rozovyy-belye-sorta-vinograda-rozovoe-sladkoe-16 field front   # сверено по листу: эталон лидера совпал, инл 63
+8192349_1.jpg massandra-muskatel-rozovyy-belye-sorta-vinograda-rozovoe-sladkoe-16 field front   # сверено по листу: эталон лидера совпал, инл 57
+8258832_1.jpg x field front   # лицевой этикетки не видно (лидер alma-valley-merlo-rezerv-kra, инл 44)
+8333445_1.jpg x field front   # лицевой этикетки не видно (лидер rkacziteli-beloe-suhoe, инл 35)
+8447202_1.jpg x field front   # лицевой этикетки не видно (лидер rkacziteli-beloe-suhoe, инл 36)
+8474555_1.jpg x field front   # лицевой этикетки не видно (лидер beloe-suhoe, инл 68)
+8606051_1.jpg massandra-portveyn-krasnyy-alushta-krasnye-sorta-vinograda-krasnoe-sladkoe-17 field front   # сверено по листу: эталон лидера совпал, инл 39
+8743598_0.jpg massandra-muskat-belyy-yuzhnoberezhnyy-beloe-sladkoe-16 field front   # сверено по листу: эталон лидера совпал, инл 55
+8899674_1.jpg x field front   # лицевой этикетки не видно (лидер vinodelnya-myshako-marselan-, инл 32)
+9226609_1.jpg x field front   # лицевой этикетки не видно (лидер balaklava-bryut-rezerv, инл 41)
+9243219_1.jpg x field front   # лицевой этикетки не видно (лидер abrau-dyurso-russkoe-igristo, инл 31)
+9268703_1.jpg massandra-muskat-belyy-yuzhnoberezhnyy-beloe-sladkoe-16 field front   # сверено по листу: эталон лидера совпал, инл 55
+9277691_1.jpg x field front   # лицевой этикетки не видно (лидер perovskih_polusladkoe_krasno, инл 39)
+9338548_1.jpg x field front   # лицевой этикетки не видно (лидер abrau-dyurso-russkoe-igristo, инл 42)
+9374342_1.jpg x field front   # лицевой этикетки не видно (лидер igristoe-vino-endemy-pino-bl, инл 44)
+9408720_0.jpg fanagoriya-ledyanoe-vino-muskat-muskat-ottonel-beloe-sladkoe-11 field front   # сверено по листу: эталон лидера совпал, инл 56
+9408720_1.jpg fanagoriya-ledyanoe-vino-muskat-muskat-ottonel-beloe-sladkoe-11 field front   # сверено по листу: эталон лидера совпал, инл 56
+9686097_1.jpg x field front   # лицевой этикетки не видно (лидер massandra-portveyn-belyy-alu, инл 71)
+9864036_1.jpg massandra-kagor-yuzhnoberezhnyy-saperavi-krasnoe-sladkoe-16 field front   # сверено по листу: эталон лидера совпал, инл 48
+9873195_0.jpg massandra-muskat-belyy-yuzhnoberezhnyy-beloe-sladkoe-16 field front   # сверено по листу: эталон лидера совпал, инл 40
+9873195_1.jpg massandra-muskat-belyy-yuzhnoberezhnyy-beloe-sladkoe-16 field front   # сверено по листу: эталон лидера совпал, инл 73
+9893354_1.jpg x field front   # лицевой этикетки не видно (лидер caucasian-dzharag, инл 56)
+9908067_1.jpg x field front   # лицевой этикетки не видно (лидер fanagoriya-velvet-season-ris, инл 51)
+9919870_0.jpg massandra-heres field front   # сверено по листу: эталон лидера совпал, инл 83
+9961374_1.jpg x field front   # лицевой этикетки не видно (лидер vinodelnya-uzunov-shardone-r, инл 47)
+9969373_1.jpg x field front   # лицевой этикетки не видно (лидер caucasian-dzharag, инл 38)
+ir_dostoino-pyaterki-no-poluchit-chetyre_1.jpg x field front   # лицевой этикетки не видно (лидер zhemchuzhnaya-9-kaberne-sovi, инл 32)
+ir_khoroshee-kaberne-po-dostupnoi-tsene_0.jpg shato-taman-kaberne field front   # сверено по листу: эталон лидера совпал, инл 152
+ir_na-kazhdyi-den-n11563956_0.jpg shato-taman-kaberne field front   # сверено по листу: эталон лидера совпал, инл 39
+ir_na-kazhdyi-den-n11563956_1.jpg shato-taman-kaberne field front   # сверено по листу: эталон лидера совпал, инл 77
+ir_ne-otravilis-i-ne-oslepli-i-na-tom-spasi_0.jpg shato-taman-kaberne field front   # сверено по листу: эталон лидера совпал, инл 70
+ir_ochen-vkusnoe-legkoe-vino-dlya-semeinogo_0.jpg fanagoriya-brule-muscat-ottonel-polusladkoe-muskat-ottonel-beloe-115 field front   # сверено по листу: эталон лидера совпал, инл 42
+ir_odobreno-moim-ottsom-znachit-vino-pravil_0.jpg shato-taman-kaberne field front   # сверено по листу: эталон лидера совпал, инл 72
+ir_odobreno-moim-ottsom-znachit-vino-pravil_1.jpg shato-taman-kaberne field front   # сверено по листу: эталон лидера совпал, инл 93
+ir_otlichnoe-krasnoe-sukhoe-ot-shato-taman_0.jpg shato-taman-kaberne field front   # сверено по листу: эталон лидера совпал, инл 117
+ir_pei-da-raduisya_1.jpg soyuz-vino-kanonicheskie-traditsii-krasnoe-sladkoe-kaberne-sovinon-115 field front   # сверено по листу: эталон лидера совпал, инл 115
+ir_proverennaya-klassika-n11666006_0.jpg shato-taman-kaberne field front   # сверено по листу: эталон лидера совпал, инл 124
+ir_proverennaya-klassika-n11666006_1.jpg x field front   # лицевой этикетки не видно (лидер kuban-vino-shato-tamane-ruzh, инл 36)
+ir_vino-nasyshchennoe-po-svoemu-terpkoe-bru_0.jpg shato-taman-kaberne field front   # сверено по листу: эталон лидера совпал, инл 104
+ir_vkus-napitka-prost-i-priyaten-vybrala-eg_2.jpg x field front   # лицевой этикетки не видно (лидер kuban-vino-shato-tamane-alig, инл 47)
+
+# --- Съёмка организаторов, 100 кадров из магазина (Реальные фото.zip).
+# Метка поставлена глазами по крупному кропу этикетки. Прочерк ставился
+# только после проверки: названия нет в каталоге и у этой винодельни
+# такого вина нет. Спорные кадры оставлены без метки.
+
+org002_0.jpg - field front   # нет в каталоге: Беленькое, линейка с радугой
+org003_0.jpg - field front   # нет в каталоге: Табия Пино Нуар
+org004_0.jpg denisov_rubin_klaret_krasnaya_strelka field front   # сверено глазами, кандидат 1
+org007_0.jpg - field front   # нет в каталоге: то же
+org008_0.jpg skalistyj-bereg-shepot-czvetov field front   # сверено глазами, кандидат 1
+org009_0.jpg zhemchuzhnaya-9-aligote-czitron field front   # сверено глазами, кандидат 1
+org010_0.jpg pobeda field front   # сверено глазами, кандидат 1
+org011_0.jpg relikta-relikta-sira-kaberne-fran-krasnoe-suhoe-13 field front   # сверено глазами, кандидат 1
+org013_0.jpg - field front   # нет в каталоге: AVA Purity in Balance
+org014_0.jpg massandra-muskatel-belyy-belye-sorta-vinograda-beloe-sladkoe-16 field front   # вино в каталоге есть, поиск не нашёл
+org016_0.jpg czitronnyj-magaracha-sovinon-blan field front   # сверено глазами, кандидат 1
+org017_0.jpg rozovoe-zoloto field front   # сверено глазами, кандидат 3
+org018_0.jpg inkerman-shato-ruzh field multi   # сверено глазами, кандидат 2
+org019_0.jpg aratti-kaberne-sovinon-2021-krasnoe-suhoe field front   # сверено глазами, кандидат 1
+org020_0.jpg merlo-litavshhuk field front   # вино в каталоге есть, поиск не нашёл
+org021_0.jpg belaya-lvicza field front   # сверено глазами, кандидат 1
+org022_0.jpg aratti-kaberne-sovinon-2020-krasnoe-suhoe field front   # сверено глазами, кандидат 1
+org023_0.jpg denisov-winery-sovinon-blan-beloe-suhoe-115 field front   # вино в каталоге есть, поиск не нашёл
+org024_0.jpg aratti-kaberne-sovinon-2020-krasnoe-suhoe field front   # сверено глазами, кандидат 1
+org025_0.jpg - field front   # нет в каталоге: Mont Fleur
+org026_0.jpg golubitskoe-estate-noble-selection-red-blend-kaberne-sovinon-krasnoe-suhoe-136 field front   # сверено глазами, кандидат 1
+org027_0.jpg denisov_pet_nat_rubin field front   # сверено глазами, кандидат 1
+org028_0.jpg zakat-denisov-vajneri field front   # вино в каталоге есть, поиск не нашёл
+org029_0.jpg zakat-denisov-vajneri field front   # вино в каталоге есть, поиск не нашёл
+org030_0.jpg - field front   # нет в каталоге: Alveus Оранж брют
+org031_0.jpg golubitskoe-estate-chardonnay field front   # сверено глазами, кандидат 1
+org033_0.jpg - field front   # нет в каталоге: то же
+org034_0.jpg denisov_pazori_risling field front   # сверено глазами, кандидат 1
+org035_0.jpg derbent-vino-desono-kaberne-sovinon-krasnoe-suhoe-125 field multi   # сверено глазами, кандидат 1
+org036_0.jpg czitronnyj-magaracha-sovinon-blan field front   # сверено глазами, кандидат 1
+org037_0.jpg - field front   # нет в каталоге: то же
+org038_0.jpg - field front   # нет в каталоге: Мослаури, Грузия
+org039_0.jpg denisov-winery-sovinon-blan-beloe-suhoe-115 field front   # вино в каталоге есть, поиск не нашёл
+org040_0.jpg zhemchuzhnaya-9-pino-nuar-muskat-rozovyj-1 field front   # сверено глазами, кандидат 1
+org041_0.jpg fanagoriya-zelyonoe-vino-risling-tsitronnyy-magaracha-beloe-polusuhoe-11 field front   # сверено глазами, кандидат 1
+org042_0.jpg - field front   # нет в каталоге: Khrustaleva 76 Pinot Gris
+org044_0.jpg - field front   # нет в каталоге: то же
+org045_0.jpg zhemchuzhnaya-9-czitron-shardone-1 field front   # сверено глазами, кандидат 1
+org046_0.jpg - field front   # нет в каталоге: Табия, этикетка-мозаика
+org047_0.jpg aratti-kaberne-po-belomu field front   # сверено глазами, кандидат 1
+org048_0.jpg - field front   # нет в каталоге: Литавщук Совиньон Блан
+org049_0.jpg - field front   # нет в каталоге: то же
+org050_0.jpg winemaker-selection field multi   # сверено глазами, кандидат 1
+org051_0.jpg zhemchuzhnaya-9-pino-nuar-muskat-rozovyj-2 field multi   # сверено глазами, кандидат 1
+org053_0.jpg uva-vallis-risling field front   # сверено глазами, кандидат 1
+org054_0.jpg denisov_barynya_kurmyshi field front   # сверено глазами, кандидат 1
+org055_0.jpg fanagoriya-zelyonoe-vino-risling-tsitronnyy-magaracha-beloe-polusuhoe-11 field front   # сверено глазами, кандидат 1
+org056_0.jpg roze-2 field front   # сверено глазами, кандидат 1
+org057_0.jpg denisov-winery-sovinon-blan-beloe-suhoe-115 field front   # вино в каталоге есть, поиск не нашёл
+org058_0.jpg - field front   # нет в каталоге: Вторая линия. Вечерница
+org059_0.jpg golubitskoe-estate-kaberne-sovinon-krasnoe-suhoe-137 field multi   # сверено глазами, кандидат 1
+org060_0.jpg zhemchuzhnaya-9-czitron-shardone-1 field multi   # сверено глазами, кандидат 1
+org061_0.jpg golubitskoe-estate-merlo-krasnoe-suhoe-135 field multi   # сверено глазами, кандидат 1
+org062_0.jpg - field front   # нет в каталоге: Aristov Donum XXIV
+org063_0.jpg roze-2 field front   # вино в каталоге есть, поиск не нашёл
+org064_0.jpg roze-2 field front   # сверено глазами, кандидат 1
+org065_0.jpg zhemchuzhnaya-9-pino-nuar-muskat-rozovyj-1 field front   # сверено глазами, кандидат 1
+org066_0.jpg denisov-winery-sovinon-blan-beloe-suhoe-115 field front   # вино в каталоге есть, поиск не нашёл
+org067_0.jpg - field front   # нет в каталоге: то же
+org068_0.jpg - field front   # нет в каталоге: Левъ Голицынъ Коронационное
+org069_0.jpg aratti-kaberne-po-belomu field front   # сверено глазами, кандидат 1
+org070_0.jpg bukovinka field front   # вино в каталоге есть, поиск не нашёл
+org072_0.jpg - field front   # нет в каталоге: то же
+org073_0.jpg - field front   # нет в каталоге: то же
+org074_0.jpg - field front   # нет в каталоге: то же
+org075_0.jpg abrau-dyurso-russkoe-igristoe-polusuhoe-rozovoe-pino-nuar-12 field front   # сверено глазами, кандидат 1
+org077_0.jpg - field front   # нет в каталоге: Фанагория RS White
+org078_0.jpg denisov-winery-risling-beloe-suhoe-115 field front   # сверено глазами, кандидат 1
+org079_0.jpg novyy-svet-dom-shampanskih-vin-novyy-svet-polusladkoe-roze-shardone-rozovoe-115 field front   # сверено глазами, кандидат 1
+org080_0.jpg fanagoriya-zelyonoe-vino-risling-tsitronnyy-magaracha-beloe-polusuhoe-11 field front   # сверено глазами, кандидат 1
+org081_0.jpg balaklava-muskat-beloe-polusladkoe field front   # сверено глазами, кандидат 1
+org082_0.jpg fanagoriya-zelyonoe-vino-risling-tsitronnyy-magaracha-beloe-polusuhoe-11 field front   # сверено глазами, кандидат 2
+org084_0.jpg - field front   # нет в каталоге: Литавщук Каберне Совиньон
+org085_0.jpg perovskih_polusuhoe_krasnoe field front   # сверено глазами, кандидат 1
+org086_0.jpg - field front   # нет в каталоге: Белогор
+org087_0.jpg usadba-mezyb-shishka-kupazh-5-kaberne-sovinon-rozovoe-suhoe-133 field front   # сверено глазами, кандидат 1
+org088_0.jpg pozdnij-sbor-beloe field front   # сверено глазами, кандидат 3
+org091_0.jpg oleg field multi   # сверено глазами, кандидат 3
+org092_0.jpg vinodelnya-vedernikov-vedernikov-dolina-dona-beloe-suhoe-aligote-12 field multi   # сверено глазами, кандидат 2
+org093_0.jpg - field front   # нет в каталоге: то же
+org094_0.jpg oleg field multi   # сверено глазами, кандидат 1
+org095_0.jpg - field front   # нет в каталоге: то же
+org096_0.jpg denisov_rubin_klaret_krasnaya_strelka field front   # сверено глазами, кандидат 1
+org098_0.jpg - field front   # нет в каталоге: Массандра Саперави ординарное
+org099_0.jpg - field front   # нет в каталоге: то же

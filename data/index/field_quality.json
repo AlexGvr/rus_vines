@@ -1,0 +1,38 @@
+{
+ "set": "полевой набор, регрессионная часть (development, не независимая приёмка)",
+ "independent_holdout": false,
+ "report": "data/validation/final3_test.json",
+ "report_sha256": "148a6505c216252a5122dec04799095763290f2a2f7db1f15cc84e1d60418644",
+ "positives": 175,
+ "top1_all_positives": 0.7543,
+ "top3_all_positives": 0.8686,
+ "top5_all_positives": 0.8857,
+ "with_reference": 166,
+ "top1_with_reference": 0.7952,
+ "show_p": 0.12,
+ "f1_top1_with_rejection": 0.7578,
+ "false_shows": 25,
+ "absent_n": 28,
+ "absent_shown_rate": 0.2857,
+ "latency_ms": {
+  "median": 399.5,
+  "p95": 874.7,
+  "max": 1335.8,
+  "over_sla": 0,
+  "over_sla_share": 0.0,
+  "sla_ms": 3000
+ },
+ "search": {
+  "shown_total": 146,
+  "refused_correct": 10,
+  "absent_shown": 8,
+  "absent_n": 28,
+  "f1_top1_with_rejection": 0.7663551401869159,
+  "states": {
+   "confident": 49,
+   "uncertain": 97,
+   "unsure": 57
+  },
+  "confident_wrong": 0
+ }
+}

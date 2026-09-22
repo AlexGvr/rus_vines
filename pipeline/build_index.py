@@ -52,7 +52,9 @@ def collect(variant: str) -> tuple[list[str], list[str | None]]:
     updir = uploads_dir()
 
     if variant == "clean":
-        rows = [(str(updir / Path(w["photo"]).name), w["slug"])
+        # Путь берётся из каталога как есть: после переопределений часть
+        # эталонов лежит не в дампе, а в data/refs (см. photo_overrides.csv).
+        rows = [(str(ROOT / w["photo"]), w["slug"])
                 for w in catalog if w.get("photo")]
         return [p for p, _ in rows], [s for _, s in rows]
 

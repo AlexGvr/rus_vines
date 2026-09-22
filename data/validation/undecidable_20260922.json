@@ -1,0 +1,263 @@
+{
+ "date": "2026-09-22",
+ "purpose": "случаи, где точный SKU по фотографии не определяется; нужны подтверждённые правила эквивалентности от организаторов либо дополнительный ракурс; эвристиками не компенсируется",
+ "items": [
+  {
+   "case": "ZB Frizzante white dry — две карточки одного продукта разных поколений упаковки",
+   "frames": [
+    "17762210_0.jpg (tune)"
+   ],
+   "cards": [
+    {
+     "slug": "suhoe-beloe-zb-vajn-frizzante",
+     "title": "Сухое белое ЗБ вайн Фриззанте",
+     "manufacturer": "Золотая Балка",
+     "category": "Белое",
+     "grapes": [
+      "Ркацители"
+     ],
+     "alcohol": null,
+     "platform_sweetness": null,
+     "photo": "Frizante_beloe_suhoe_2f45164bc4.webp"
+    },
+    {
+     "slug": "zolotaya-balka-zb-frizzante-dry-risling-beloe-suhoe-10",
+     "title": "ZB Frizzante Dry",
+     "manufacturer": "Золотая Балка",
+     "category": "Белое",
+     "grapes": [
+      "Мускат Янтарный",
+      "Рислинг",
+      "Ркацители"
+     ],
+     "alcohol": 10,
+     "platform_sweetness": "Сухое",
+     "photo": "zolotaya_balka_zb_frizzante_dry_risling_beloe_suhoe_10_992e8ffb9f.webp"
+    }
+   ],
+   "what_photo_shows": "кремовая этикетка ZB WINE FRIZZANTE LIGHTLY SPARKLING WINE WHITE DRY; на золотой карточке та же надпись, другой цвет этикетки",
+   "question": "считать ли карточки эквивалентными (один SKU) — по шести признакам расходятся сорта (Ркацители против Мускат/Рислинг/Ркацители) и крепость (None против 10)"
+  },
+  {
+   "case": "Brut d'Or Victor Dravigny 2010 — на этикетке нет сорта, в каталоге только винтажи 2021 с сортами",
+   "frames": [
+    "6310320_0.jpg (tune)"
+   ],
+   "cards": [
+    {
+     "slug": "abrau-dyurso-brut-dor-blanc-de-blancs-shardone-beloe-bryut-12",
+     "title": "Brut d'Or Blanc de Blancs",
+     "manufacturer": "Абрау-Дюрсо",
+     "category": "Белое",
+     "grapes": [
+      "Шардоне"
+     ],
+     "alcohol": 12,
+     "platform_sweetness": "Брют",
+     "photo": "abrau_dyurso_brut_dor_blanc_de_blancs_shardone_igristoe_bryut_beloe_12_792f571be3.webp"
+    },
+    {
+     "slug": "abrau-dyurso-brut-dor-blanc-de-noirs-pino-nuar-beloe-bryut-115",
+     "title": "Brut d'Or Blanc de Noirs",
+     "manufacturer": "Абрау-Дюрсо",
+     "category": "Белое",
+     "grapes": [
+      "Пино Нуар"
+     ],
+     "alcohol": 11,
+     "platform_sweetness": "Брют",
+     "photo": "abrau_dyurso_brut_dor_blanc_de_noirs_pino_nuar_igristoe_bryut_beloe_115_d3fbb6965d.webp"
+    },
+    {
+     "slug": "abrau-dyurso-brut-dor-blanc-de-noirs-pino-nuar-beloe-bryut-125",
+     "title": "Brut d'Or Blanc de Noirs",
+     "manufacturer": "Абрау-Дюрсо",
+     "category": "Белое",
+     "grapes": [
+      "Пино Нуар"
+     ],
+     "alcohol": 12,
+     "platform_sweetness": "Брют",
+     "photo": "abrau_dyurso_brut_dor_blanc_de_noirs_pino_nuar_beloe_bryut_125_2d16522a48.webp"
+    },
+    {
+     "slug": "abrau-dyurso-brut-dor-rose-pino-nuar-rozovoe-bryut-12",
+     "title": "Brut d'Or Rose",
+     "manufacturer": "Абрау-Дюрсо",
+     "category": "Розовое",
+     "grapes": [
+      "Пино Нуар"
+     ],
+     "alcohol": 12,
+     "platform_sweetness": "Брют",
+     "photo": "abrau_dyurso_brut_dor_rose_pino_nuar_rozovoe_bryut_12_8b5bd155e6.webp"
+    }
+   ],
+   "what_photo_shows": "«Абрау-Дюрсо Brut d'Or Victor Dravigny 2010, выдержано в горных тоннелях»; ни Blanc de Blancs, ни Riesling",
+   "question": "какой slug ожидается для старых винтажей линейки без указания сорта; допустим ли ответ любой картой линейки Brut d'Or"
+  },
+  {
+   "case": "Кокур сухое против Массандра Кокур",
+   "frames": [
+    "11813420_1.jpg",
+    "12161711_0.jpg",
+    "14095313_0.jpg (test)"
+   ],
+   "cards": [
+    {
+     "slug": "kokur-suhoe",
+     "title": "Кокур сухое",
+     "manufacturer": "Массандра",
+     "category": "Белое",
+     "grapes": [
+      "Кокур"
+     ],
+     "alcohol": 11,
+     "platform_sweetness": "Сухое",
+     "photo": "PU_Sjv7dn_M_Nil_H25_TO_9_Bcb_E_Hx_Fs_Vdacxiw9g14_S_j_Nls_QH_Uw8_Gotsf9_O_Tvh_VAM_2_MP_Fez_WL_9o66c_Kdh_RE_Gsm_Uq_A_d6dd6cde3c.webp"
+    },
+    {
+     "slug": "massandra-kokur",
+     "title": "Массандра Кокур",
+     "manufacturer": "Массандра",
+     "category": "Белое",
+     "grapes": [
+      "Кокур Белый"
+     ],
+     "alcohol": 12,
+     "platform_sweetness": "Полусухое",
+     "photo": "Massandra_Kokur_1fa858a17c.webp"
+    }
+   ],
+   "what_photo_shows": "этикетка «КОКУР … ЗГУ Крым ординарное сухое белое»; эталон massandra-kokur читается «полусладкое белое»",
+   "question": "две карточки — разные разливы одного вина или разные SKU; подтверждение эквивалентности нужно от организаторов"
+  },
+  {
+   "case": "Балаклава Мускат против Балаклава Мускат белое полусладкое",
+   "frames": [
+    "org081_0.jpg (test)"
+   ],
+   "cards": [
+    {
+     "slug": "balaklava-muskat",
+     "title": "Балаклава Мускат",
+     "manufacturer": "Золотая Балка",
+     "category": "Белое",
+     "grapes": [
+      "Мускат"
+     ],
+     "alcohol": 12,
+     "platform_sweetness": "Брют",
+     "photo": "Muskat_4b2f12e649.webp"
+    },
+    {
+     "slug": "balaklava-muskat-beloe-polusladkoe",
+     "title": "Балаклава Мускат белое полусладкое",
+     "manufacturer": "Золотая Балка",
+     "category": "Белое",
+     "grapes": [
+      "Мускат Белый",
+      "Мускат Оттонель",
+      "Мускат Янтарный"
+     ],
+     "alcohol": 11,
+     "platform_sweetness": "Полусладкое",
+     "photo": "Balaklava_Muskat_beloe_polusladkoe_0e4a6563a4.webp"
+    }
+   ],
+   "what_photo_shows": "«БАЛАКЛАВА … ПОЛУСЛАДКОЕ БЕЛОЕ»",
+   "question": "карточка без сладости (платформа: брют, 12%) — другое вино или неполная карточка того же"
+  },
+  {
+   "case": "Фанагория брют белое: три поколения упаковки под одной карточкой, Blanc de Blancs/Blanc de Noirs — отдельные карточки с той же надписью BRUT",
+   "frames": [
+    "15536279_1.jpg",
+    "15619693_0.jpg",
+    "6522615_0.jpg",
+    "9448391_0.jpg (tune)"
+   ],
+   "cards": [
+    {
+     "slug": "fanagoriya-fanagoriya-bryut-beloe-sovinon-blan-igristoe-bryut-beloe-11-13",
+     "title": "Фанагория. Брют белое",
+     "manufacturer": "Фанагория",
+     "category": "Белое",
+     "grapes": [
+      "Алиготе",
+      "Мерло",
+      "Пино Нуар",
+      "Рисус",
+      "Совиньон Блан",
+      "Шардоне"
+     ],
+     "alcohol": 11,
+     "platform_sweetness": "Брют",
+     "photo": "fanagoriya_fanagoriya_bryut_beloe_sovinon_blan_igristoe_bryut_beloe_11_13_3b08e056cc.webp"
+    }
+   ],
+   "what_photo_shows": "чёрная этикетка «БРЮТ FANAGORIA ЗГУ BRUT 2021 WHITE» и оранжевая «FANAGORIA WHITE BRUT» — обе не совпадают с эталоном (белая этикетка 2021)",
+   "question": "допустимы ли дополнительные эталоны старых поколений (добавлены из магазинов, см. extra_refs.csv); считается ли Blanc de Noirs отдельным SKU при одинаковой надписи BRUT"
+  },
+  {
+   "case": "Victor Dravigny Полусладкое (белое) против Красное полусладкое — цвет на этикетке не написан",
+   "frames": [
+    "12083971_0.jpg (tune)"
+   ],
+   "cards": [
+    {
+     "slug": "abrau-dyurso-victor-dravigny-polusladkoe-sovinon-blan-beloe-12",
+     "title": "Victor Dravigny. Полусладкое",
+     "manufacturer": "Абрау-Дюрсо",
+     "category": "Белое",
+     "grapes": [
+      "Рислинг",
+      "Совиньон Блан",
+      "Шардоне"
+     ],
+     "alcohol": 12,
+     "platform_sweetness": "Полусладкое",
+     "photo": "abrau_dyurso_victor_dravigny_polusladkoe_sovinon_blan_beloe_12_ec087df76c.webp"
+    },
+    {
+     "slug": "abrau-dyurso-victor-dravigny-krasnoe-polusladkoe-kaberne-sovinon-125",
+     "title": "Victor Dravigny. Красное полусладкое",
+     "manufacturer": "Абрау-Дюрсо",
+     "category": "Красное",
+     "grapes": [
+      "Каберне Совиньон"
+     ],
+     "alcohol": 12,
+     "platform_sweetness": "Полусладкое",
+     "photo": "abrau_dyurso_victor_dravigny_krasnoe_polusladkoe_kaberne_sovinon_125_f0e4d2775c.webp"
+    }
+   ],
+   "what_photo_shows": "зелёная этикетка «VICTOR DRAVIGNY ПОЛУСЛАДКОЕ 2019»; цвет вина виден только по стеклу",
+   "question": "нет — различимо по цвету этикетки (зелёная против …), это дефект правила геометрии, не данных; оставлено для сведения"
+  },
+  {
+   "case": "«Абрау-Дюрсо Розовое полусладкое» — карточка без эталона, на снимке «ABRAU Durso ROSE» с узором",
+   "frames": [
+    "7579301_0.jpg (tune)"
+   ],
+   "cards": [
+    {
+     "slug": "rozovoe-polusladkoe-2",
+     "title": "Розовое полусладкое",
+     "manufacturer": "Абрау-Дюрсо",
+     "category": "Розовое",
+     "grapes": [
+      "Каберне Совиньон",
+      "Каберне Фран",
+      "Мерло",
+      "Пино Нуар"
+     ],
+     "alcohol": null,
+     "platform_sweetness": null,
+     "photo": null
+    }
+   ],
+   "what_photo_shows": "розовая этикетка с волнистым узором «ABRAU Durso ROSE»; в магазинах найден только «Abrau Light Rose» (другой продукт, мускат/пино нуар)",
+   "question": "какой продукт стоит за карточкой «Розовое полусладкое» (сорта Каберне Совиньон, Каберне Фран, Мерло, Пино Нуар) и есть ли у организаторов его фото"
+  }
+ ]
+}
