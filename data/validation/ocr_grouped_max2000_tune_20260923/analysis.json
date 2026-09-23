@@ -1,0 +1,81 @@
+{
+ "checks": {
+  "observations": 187,
+  "unique_images": 187,
+  "views_match": true,
+  "sha_match": true,
+  "complete_json": true,
+  "log_tracebacks": 0,
+  "log_memory_errors": 0,
+  "log_done_lines": 187,
+  "launches": 1
+ },
+ "metrics": {
+  "all_positives": {
+   "before": {
+    "top1": "134/154 = 87.0%",
+    "top3": "141/154 = 91.6%",
+    "top5": "142/154 = 92.2%"
+   },
+   "after": {
+    "top1": "135/154 = 87.7%",
+    "top3": "141/154 = 91.6%",
+    "top5": "142/154 = 92.2%"
+   }
+  },
+  "findable": {
+   "before": {
+    "top1": "133/145 = 91.7%",
+    "top3": "140/145 = 96.6%",
+    "top5": "141/145 = 97.2%"
+   },
+   "after": {
+    "top1": "134/145 = 92.4%",
+    "top3": "140/145 = 96.6%",
+    "top5": "141/145 = 97.2%"
+   }
+  }
+ },
+ "fixed": [
+  {
+   "image": "16151511_0.jpg",
+   "gold": "Русское Игристое полусухое розовое",
+   "before": "Русское Игристое полусладкое красное",
+   "after": "Русское Игристое полусухое розовое",
+   "admitted": 1,
+   "admitted_words": [
+    "РОЗОВОЕ ПОЛУСУХОЕ"
+   ]
+  }
+ ],
+ "broken": [],
+ "wrong_to_wrong": [],
+ "negative_leader_changes": [],
+ "sku_with_leader_changes": {
+  "Русское Игристое полусухое розовое": {
+   "frames": 6,
+   "correct_before": 3,
+   "correct_after": 4,
+   "leader_changed": 1
+  }
+ },
+ "series_with_fixed_or_broken": {
+  "16151511": 1
+ },
+ "timing": {
+  "median_s": 8.62,
+  "p95_s": 25.53,
+  "max_s": 27.12,
+  "total_min": 31.7,
+  "median_s_frames_over_2000px": 18.15,
+  "median_s_frames_upto_2000px": 3.51,
+  "n_over_2000px": 69
+ },
+ "words": {
+  "frames_with_admitted": 57,
+  "admitted_total": 88,
+  "grouped_total": 226,
+  "frames_with_any_group": 108,
+  "boxes_median": 8.0
+ }
+}

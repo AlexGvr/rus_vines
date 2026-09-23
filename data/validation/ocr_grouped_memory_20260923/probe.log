@@ -1,0 +1,68 @@
+=== native_frame11 10:18:22
+[32mCreating model: ('PP-OCRv5_server_det', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `/home/alex/.paddlex/official_models/PP-OCRv5_server_det`.[0m
+/tmp/rus-vines-paddle-ocr/lib/python3.12/site-packages/paddle/utils/cpp_extension/extension_utils.py:712: UserWarning: No ccache found. Please be aware that recompiling all source files may be required. You can download and install ccache from: https://github.com/ccache/ccache/blob/master/doc/INSTALL.md
+  warnings.warn(warning_message)
+[32mCreating model: ('cyrillic_PP-OCRv5_mobile_rec', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `/home/alex/.paddlex/official_models/cyrillic_PP-OCRv5_mobile_rec`.[0m
+[33mResized image size (1797x4032) exceeds max_side_limit of 4000. Resizing to fit within limit.[0m
+Traceback (most recent call last):
+  File "/home/alex/projects/rus_vines/data/validation/ocr_grouped_memory_20260923/probe.py", line 21, in <module>
+    res = list(ocr.predict(a.source, **kw))[0]
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/rus-vines-paddle-ocr/lib/python3.12/site-packages/paddleocr/_pipelines/ocr.py", line 223, in predict
+    return list(
+           ^^^^^
+  File "/tmp/rus-vines-paddle-ocr/lib/python3.12/site-packages/paddlex/inference/pipelines/_parallel.py", line 161, in predict
+    yield from self._pipeline.predict(
+  File "/tmp/rus-vines-paddle-ocr/lib/python3.12/site-packages/paddlex/inference/pipelines/ocr/pipeline.py", line 366, in predict
+    det_results = list(
+                  ^^^^^
+  File "/tmp/rus-vines-paddle-ocr/lib/python3.12/site-packages/paddlex/inference/models/predictors/base_predictor.py", line 117, in __call__
+    yield from self.apply(input, **kwargs)
+  File "/tmp/rus-vines-paddle-ocr/lib/python3.12/site-packages/paddlex/inference/models/predictors/base_predictor.py", line 140, in apply
+    pred = self.process(batch_data, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/rus-vines-paddle-ocr/lib/python3.12/site-packages/paddlex/inference/models/text_detection/predictor.py", line 145, in process
+    batch_preds = self.runner(x=x)
+                  ^^^^^^^^^^^^^^^^
+  File "/tmp/rus-vines-paddle-ocr/lib/python3.12/site-packages/paddlex/inference/models/runners/paddle_static/runner.py", line 297, in __call__
+    pred = self.infer(x)
+           ^^^^^^^^^^^^^
+  File "/tmp/rus-vines-paddle-ocr/lib/python3.12/site-packages/paddlex/inference/models/runners/paddle_static/runner.py", line 265, in __call__
+    self.predictor.run()
+MemoryError: In user code:
+
+
+    ResourceExhaustedError: Fail to alloc memory of 37158912000 size, error code is 12.
+      [Hint: Expected error == 0, but received error:12 != 0:0.] (at /paddle/paddle/phi/core/memory/allocation/cpu_allocator.cc:44)
+      [operator < pd_kernel.phi_kernel > error]
+exit=1 peak_rss_mb=10460 10:18:42
+=== max2000_frame11 10:18:42
+[32mCreating model: ('PP-OCRv5_server_det', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `/home/alex/.paddlex/official_models/PP-OCRv5_server_det`.[0m
+/tmp/rus-vines-paddle-ocr/lib/python3.12/site-packages/paddle/utils/cpp_extension/extension_utils.py:712: UserWarning: No ccache found. Please be aware that recompiling all source files may be required. You can download and install ccache from: https://github.com/ccache/ccache/blob/master/doc/INSTALL.md
+  warnings.warn(warning_message)
+[32mCreating model: ('cyrillic_PP-OCRv5_mobile_rec', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `/home/alex/.paddlex/official_models/cyrillic_PP-OCRv5_mobile_rec`.[0m
+{"tag": "max2000_frame11", "source": "data/validation/ocr_grouped_tune_20260923/crops/010.png", "limit": {"text_det_limit_type": "max", "text_det_limit_side_len": 2000}, "seconds": 15.65, "boxes": 7, "maxrss_mb_after_load": 496, "maxrss_mb_peak": 9611}
+exit=0 peak_rss_mb=7495 10:19:00
+=== max1600_frame11 10:19:00
+[32mCreating model: ('PP-OCRv5_server_det', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `/home/alex/.paddlex/official_models/PP-OCRv5_server_det`.[0m
+/tmp/rus-vines-paddle-ocr/lib/python3.12/site-packages/paddle/utils/cpp_extension/extension_utils.py:712: UserWarning: No ccache found. Please be aware that recompiling all source files may be required. You can download and install ccache from: https://github.com/ccache/ccache/blob/master/doc/INSTALL.md
+  warnings.warn(warning_message)
+[32mCreating model: ('cyrillic_PP-OCRv5_mobile_rec', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `/home/alex/.paddlex/official_models/cyrillic_PP-OCRv5_mobile_rec`.[0m
+{"tag": "max1600_frame11", "source": "data/validation/ocr_grouped_tune_20260923/crops/010.png", "limit": {"text_det_limit_type": "max", "text_det_limit_side_len": 1600}, "seconds": 9.91, "boxes": 6, "maxrss_mb_after_load": 496, "maxrss_mb_peak": 6327}
+exit=0 peak_rss_mb=6188 10:19:12
+=== native_frame10 10:19:12
+[32mCreating model: ('PP-OCRv5_server_det', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `/home/alex/.paddlex/official_models/PP-OCRv5_server_det`.[0m
+/tmp/rus-vines-paddle-ocr/lib/python3.12/site-packages/paddle/utils/cpp_extension/extension_utils.py:712: UserWarning: No ccache found. Please be aware that recompiling all source files may be required. You can download and install ccache from: https://github.com/ccache/ccache/blob/master/doc/INSTALL.md
+  warnings.warn(warning_message)
+[32mCreating model: ('cyrillic_PP-OCRv5_mobile_rec', None, None)[0m
+[32mModel files already exist. Using cached files. To redownload, please delete the directory manually: `/home/alex/.paddlex/official_models/cyrillic_PP-OCRv5_mobile_rec`.[0m
+{"tag": "native_frame10", "source": "data/validation/ocr_grouped_tune_20260923/crops/009.png", "limit": {}, "seconds": 13.04, "boxes": 19, "maxrss_mb_after_load": 496, "maxrss_mb_peak": 7876}
+exit=0 peak_rss_mb=4928 10:19:28
+=== probe done 10:19:28

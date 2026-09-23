@@ -1,0 +1,29 @@
+Creating model: ('PP-OCRv5_server_det', None, None)
+Model files already exist. Using cached files. To redownload, please delete the directory manually: `/home/alex/.paddlex/official_models/PP-OCRv5_server_det`.
+/tmp/rus-vines-paddle-ocr/lib/python3.12/site-packages/paddle/utils/cpp_extension/extension_utils.py:712: UserWarning: No ccache found. Please be aware that recompiling all source files may be required. You can download and install ccache from: https://github.com/ccache/ccache/blob/master/doc/INSTALL.md
+  warnings.warn(warning_message)
+Creating model: ('cyrillic_PP-OCRv5_mobile_rec', None, None)
+Model files already exist. Using cached files. To redownload, please delete the directory manually: `/home/alex/.paddlex/official_models/cyrillic_PP-OCRv5_mobile_rec`.
+Model files already exist. Using cached files. To redownload, please delete the directory manually: `/home/alex/.paddlex/official_models/cyrillic_PP-OCRv5_mobile_rec`.
+1/187 ir_luchshee-iz-dostupnykh-vin-na-segodnya-m_0.jpg 2.58s
+2/187 ir_luchshee-iz-dostupnykh-vin-na-segodnya-m_2.jpg 4.00s
+3/187 ir_myagkoe-s-priyatnym-agodnym-vkusom-i-per_0.jpg 1.21s
+libpng warning: iCCP: known incorrect sRGB profile
+4/187 ir_myagkoe-s-priyatnym-agodnym-vkusom-i-per_1.jpg 3.43s
+libpng warning: iCCP: known incorrect sRGB profile
+5/187 ir_myagkoe-s-priyatnym-agodnym-vkusom-i-per_2.jpg 0.65s
+6/187 ir_pei-da-raduisya_0.jpg 2.23s
+7/187 ir_pei-da-raduisya_2.jpg 0.58s
+8/187 ir_ochen-vkusnoe-legkoe-vino-dlya-semeinogo_1.jpg 2.35s
+9/187 ir_ochen-vkusnoe-legkoe-vino-dlya-semeinogo_0.jpg 1.67s
+10/187 ir_pei-da-raduisya_1.jpg 13.07s
+Resized image size (1797x4032) exceeds max_side_limit of 4000. Resizing to fit within limit.
+Creating model: ('PP-OCRv5_server_det', None, None)
+Model files already exist. Using cached files. To redownload, please delete the directory manually: `/home/alex/.paddlex/official_models/PP-OCRv5_server_det`.
+/tmp/rus-vines-paddle-ocr/lib/python3.12/site-packages/paddle/utils/cpp_extension/extension_utils.py:712: UserWarning: No ccache found. Please be aware that recompiling all source files may be required. You can download and install ccache from: https://github.com/ccache/ccache/blob/master/doc/INSTALL.md
+  warnings.warn(warning_message)
+Creating model: ('cyrillic_PP-OCRv5_mobile_rec', None, None)
+Model files already exist. Using cached files. To redownload, please delete the directory manually: `/home/alex/.paddlex/official_models/cyrillic_PP-OCRv5_mobile_rec`.
+Model files already exist. Using cached files. To redownload, please delete the directory manually: `/home/alex/.paddlex/official_models/cyrillic_PP-OCRv5_mobile_rec`.
+Start 11/187 019c68d0.jpg
+Resized image size (1797x4032) exceeds max_side_limit of 4000. Resizing to fit within limit.

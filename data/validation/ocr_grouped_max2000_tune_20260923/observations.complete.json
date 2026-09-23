@@ -1,0 +1,10 @@
+{
+  "n": 187,
+  "script_sha256": "c01c140c7a9d2e549bd1b3d5a5cbb1f7c36cf896147cdc3b8f5c4b92615ada51",
+  "views_sha256": "db51606fca923efeb227fe9238c69c6e8c75cccd0a83c73d284ba28383356134",
+  "detector_limit": {
+    "text_det_limit_type": "max",
+    "text_det_limit_side_len": 2000
+  },
+  "note": "CPU offline experiment. Only automatically grouped fragments emitted; no manual ROIs."
+}
