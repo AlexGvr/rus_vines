@@ -318,7 +318,7 @@ org016_0.jpg,czitronnyj-magaracha-sovinon-blan,field,tune,org016,публичн�
 org017_0.jpg,rozovoe-zoloto,field,test,org017,публичный набор кейса,,front,"сверено глазами, кандидат 3"
 org018_0.jpg,,field,tune,org018,публичный набор кейса,,multi,"аудит 2026-09-22: по правилу кейсодержателя целевая — центральная целиком видимая бутылка, это Inkerman Буссо, его в каталоге нет; Шато Руж слева срезан краем кадра"
 org019_0.jpg,aratti-kaberne-sovinon-2021-krasnoe-suhoe,field,test,org019,публичный набор кейса,,front,"сверено глазами, кандидат 1"
-org020_0.jpg,merlo-2,field,tune,org020,публичный набор кейса,,front,"2026-09-23: на этикетке «Семейная винодельня Литавщуков, Мерло, сухое красное» (красная, с бочками) — ровно фото новой карточки платформы merlo-2; у merlo-litavshhuk из выгрузки белая этикетка «Merlot 2022», и с платформы она убрана. Прежняя разметка: merlo-litavshhuk"
+org020_0.jpg,merlo-litavshhuk,field,tune,org020,публичный набор кейса,,front,"вино в каталоге есть, поиск не нашёл"
 org021_0.jpg,belaya-lvicza,field,tune,org021,публичный набор кейса,,front,"сверено глазами, кандидат 1"
 org022_0.jpg,aratti-kaberne-sovinon-2020-krasnoe-suhoe,field,tune,org022,публичный набор кейса,,front,"сверено глазами, кандидат 1"
 org023_0.jpg,denisov-winery-sovinon-blan-beloe-suhoe-115,field,tune,org023,публичный набор кейса,,front,"вино в каталоге есть, поиск не нашёл"
@@ -344,7 +344,7 @@ org044_0.jpg,,field,test,org044,публичный набор кейса,,front,
 org045_0.jpg,zhemchuzhnaya-9-czitron-shardone-1,field,tune,org045,публичный набор кейса,,front,"сверено глазами, кандидат 1"
 org046_0.jpg,,field,tune,org046,публичный набор кейса,,front,"нет в каталоге: Табия, этикетка-мозаика"
 org047_0.jpg,aratti-kaberne-po-belomu-1,field,test,org047,публичный набор кейса,,front,аудит 2026-09-22: на этикетке «КАБЕРНЕ ПО-БЕЛОМУ 2024 ПОЛУСУХОЕ» — это карточка -1 (эталон с «2024 полусухое»); карточка без суффикса — эталон «2023» без сладости; прежняя метка была ошибкой
-org048_0.jpg,sovinon-blan,field,test,org048,публичный набор кейса,,front,"2026-09-23: позиция появилась на платформе после выгрузки (sync_platform.py); на этикетке «Совиньон Блан, полусладкое белое», как в карточке"
+org048_0.jpg,,field,test,org048,публичный набор кейса,,front,нет в каталоге: Литавщук Совиньон Блан
 org049_0.jpg,,field,tune,org049,публичный набор кейса,,front,нет в каталоге: то же
 org050_0.jpg,winemaker-selection,field,test,org050,публичный набор кейса,,multi,"сверено глазами, кандидат 1"
 org051_0.jpg,zhemchuzhnaya-9-pino-nuar-muskat-rozovyj-2,field,tune,org051,публичный набор кейса,,multi,"сверено глазами, кандидат 1"
@@ -368,7 +368,7 @@ org069_0.jpg,aratti-kaberne-po-belomu,field,test,org069,публичный на�
 org070_0.jpg,bukovinka,field,tune,org070,публичный набор кейса,,front,"вино в каталоге есть, поиск не нашёл"
 org072_0.jpg,,field,test,org072,публичный набор кейса,,front,нет в каталоге: то же
 org073_0.jpg,,field,tune,org073,публичный набор кейса,,front,нет в каталоге: то же
-org074_0.jpg,,field,test,org074,публичный набор кейса,,front,"нет в каталоге: Литавщук Совиньон Блан полусухое; на платформе с 2026-09 есть только полусладкое (sovinon-blan) и сухое (sovinon-blan-2, другая этикетка)"
+org074_0.jpg,,field,test,org074,публичный набор кейса,,front,нет в каталоге: то же
 org075_0.jpg,abrau-dyurso-russkoe-igristoe-polusuhoe-rozovoe-pino-nuar-12,field,tune,org075,публичный набор кейса,,front,"сверено глазами, кандидат 1"
 org077_0.jpg,,field,tune,org077,публичный набор кейса,,front,нет в каталоге: Фанагория RS White
 org078_0.jpg,denisov-winery-risling-beloe-suhoe-115,field,test,org078,публичный набор кейса,,front,"сверено глазами, кандидат 1"
@@ -376,7 +376,7 @@ org079_0.jpg,novyy-svet-dom-shampanskih-vin-novyy-svet-polusladkoe-roze-shardone
 org080_0.jpg,fanagoriya-zelyonoe-vino-risling-tsitronnyy-magaracha-beloe-polusuhoe-11,field,test,org080,публичный набор кейса,,front,"сверено глазами, кандидат 1"
 org081_0.jpg,balaklava-muskat-beloe-polusladkoe,field,test,org081,публичный набор кейса,,front,"сверено глазами, кандидат 1"
 org082_0.jpg,fanagoriya-zelyonoe-vino-risling-tsitronnyy-magaracha-beloe-polusuhoe-11,field,test,org082,публичный набор кейса,,front,"сверено глазами, кандидат 2"
-org084_0.jpg,kaberne-sovinon-3,field,test,org084,публичный набор кейса,,front,"2026-09-23: позиция появилась на платформе после выгрузки (sync_platform.py); на этикетке «Каберне Совиньон, полусухое красное», как в карточке"
+org084_0.jpg,,field,test,org084,публичный набор кейса,,front,нет в каталоге: Литавщук Каберне Совиньон
 org085_0.jpg,perovskih_polusuhoe_krasnoe,field,test,org085,публичный набор кейса,,front,"сверено глазами, кандидат 1"
 org086_0.jpg,,field,tune,org086,публичный набор кейса,,front,нет в каталоге: Белогор
 org087_0.jpg,usadba-mezyb-shishka-kupazh-5-kaberne-sovinon-rozovoe-suhoe-133,field,tune,org087,публичный набор кейса,,front,"сверено глазами, кандидат 1"
@@ -385,7 +385,7 @@ org091_0.jpg,oleg,field,tune,org091,публичный набор кейса,,mu
 org092_0.jpg,vinodelnya-vedernikov-vedernikov-dolina-dona-beloe-suhoe-aligote-12,field,test,org092,публичный набор кейса,,multi,"сверено глазами, кандидат 2"
 org093_0.jpg,,field,test,org093,публичный набор кейса,,front,нет в каталоге: то же
 org094_0.jpg,oleg,field,tune,org094,публичный набор кейса,,multi,"сверено глазами, кандидат 1"
-org095_0.jpg,,field,tune,org095,публичный набор кейса,,front,"нет в каталоге: Литавщук Совиньон Блан полусухое; на платформе с 2026-09 есть только полусладкое (sovinon-blan) и сухое (sovinon-blan-2, другая этикетка)"
+org095_0.jpg,,field,tune,org095,публичный набор кейса,,front,нет в каталоге: то же
 org096_0.jpg,denisov_rubin_klaret_krasnaya_strelka,field,tune,org096,публичный набор кейса,,front,"сверено глазами, кандидат 1"
 org098_0.jpg,,field,test,org098,публичный набор кейса,,front,нет в каталоге: Массандра Саперави ординарное
 org099_0.jpg,,field,tune,org099,публичный набор кейса,,front,нет в каталоге: то же

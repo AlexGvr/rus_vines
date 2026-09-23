@@ -1,0 +1,24 @@
+start 17:21:07
+  400/2091
+  800/2091
+  1200/2091
+  1600/2091
+  2000/2091
+эталонов 2091, точек 768799, 107 МБ за 95 с → /home/alex/projects/rus_vines/data/index/sift
+[transformers] Model config: bos_token_id must be `None` or an integer within the vocabulary (between 0 and 31999), got 49406. This may result in unexpected behavior.
+[transformers] Model config: eos_token_id must be `None` or an integer within the vocabulary (between 0 and 31999), got 49407. This may result in unexpected behavior.
+индекс clean_mv: видов 2, строк на вид 2091, из них без привязки к каталогу (мусор): 0
+Loading weights:   0%|          | 0/888 [00:00<?, ?it/s]Loading weights:  19%|█▊        | 165/888 [00:00<00:00, 1631.81it/s]Loading weights:  65%|██████▍   | 577/888 [00:00<00:00, 3076.57it/s]Loading weights: 100%|██████████| 888/888 [00:00<00:00, 3219.04it/s]
+  500/2087
+  1000/2087
+  1500/2087
+  2000/2087
+  вид «кадр целиком»: эмбеддингов 2087 за 101 с, строк 2091
+  500/2087
+  1000/2087
+  1500/2087
+  2000/2087
+  вид «detect»: эмбеддингов 2087 за 137 с, строк 2091
+строк индекса: 4182, размерность 1152
+сохранено: /home/alex/projects/rus_vines/data/index/clean_mv.npy
+chain done 17:41:31

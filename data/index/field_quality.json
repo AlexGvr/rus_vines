@@ -1,45 +1,32 @@
 {
- "set": "полевой набор, регрессионная часть (development, не независимая приёмка)",
+ "set": "кадры организатора (публичный набор кейса), регрессионная часть (development, не независимая приёмка)",
  "independent_holdout": false,
- "report": "data/validation/sync3_test.json",
- "report_sha256": "da745fc5284ce410c453f4f8130570339202b927a5a93977ab7e59ad85962f45",
- "positives": 177,
- "top1_all_positives": 0.7571,
- "top3_all_positives": 0.8701,
- "top5_all_positives": 0.887,
- "with_reference": 168,
- "top1_with_reference": 0.7976,
- "show_p": 0.12,
- "f1_top1_with_rejection": 0.7607,
- "false_shows": 25,
- "absent_n": 26,
- "absent_shown_rate": 0.3077,
+ "report": "data/validation/dsonly_cal_test.json",
+ "report_sha256": "59fe01eecaf90cf21d0b995d03a109475fb205613fdaa359d9703de177485444",
+ "positives": 30,
+ "top1_all_positives": 0.9,
+ "top3_all_positives": 0.9333,
+ "top5_all_positives": 0.9333,
+ "with_reference": 30,
+ "top1_with_reference": 0.9,
+ "show_p": 0.1,
+ "f1_top1_with_rejection": 0.8525,
+ "false_shows": 5,
+ "absent_n": 15,
+ "absent_shown_rate": 0.2667,
  "organizer": {
   "frames": 45,
-  "positives": 32,
-  "top1_positives": 0.9062,
-  "absent_n": 13,
-  "absent_shown_rate": 0.2308
+  "positives": 30,
+  "top1_positives": 0.9,
+  "absent_n": 15,
+  "absent_shown_rate": 0.2667
  },
  "latency_ms": {
-  "median": 399.5,
-  "p95": 874.7,
-  "max": 1335.8,
+  "median": 781.9,
+  "p95": 1544.3,
+  "max": 1883.1,
   "over_sla": 0,
   "over_sla_share": 0.0,
   "sla_ms": 3000
- },
- "search": {
-  "shown_total": 146,
-  "refused_correct": 10,
-  "absent_shown": 8,
-  "absent_n": 28,
-  "f1_top1_with_rejection": 0.7663551401869159,
-  "states": {
-   "confident": 49,
-   "uncertain": 97,
-   "unsure": 57
-  },
-  "confident_wrong": 0
  }
 }

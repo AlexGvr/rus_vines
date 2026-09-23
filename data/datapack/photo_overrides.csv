@@ -4,19 +4,19 @@ slug,file,sha256,source,note
 # Каждая строка сверена глазами: винодельня, линейка, сорт, цвет, сладость на этикетке.
 #
 # Эталоны с самой платформы (карточка на vino-svoe.ru есть, файла в дампе 07.09 нет):
-zakat-denisov-vajneri,zakat_denisov_platform.webp,53c97ae6bb5f4c0227ba850baa8dcb2c65e3373732eb00c97b5c89d6ae509e07,https://vino-svoe.ru/wines/zakat-denisov-vajneri,"этикетка «ЗАКАТ» Денисов, розовое; файл uploads/zakat_denisov_vajneri_no_bg_preview_carve_photos_1_6ae9baa13d.webp, отдаётся 388×1012"
-znoj-denisov-vajneri,znoj_denisov_platform.webp,8a3cd98f07287723a3e6e7274f0712764eda57cbc9686acfa42c03ca02ecf50d,https://vino-svoe.ru/wines/znoj-denisov-vajneri,"этикетка «ЗНОЙ» Денисов, белое; файл uploads/Znoj_denisov_vajneri_no_bg_preview_carve_photos_0452c989d8.webp"
-fioletovyj-rannij-petnat,petnat_fioletovyj_platform.webp,7730b8704954c53e77b67500505e05135c1a4116f64c1bebab01a2b09adc3426,https://vino-svoe.ru/wines/fioletovyj-rannij-petnat,"этикетка «ПЕТ НАТ фиолетовый ранний» Гусевъ; файл uploads/petnat_fioletovyj_no_bg_preview_carve_photos_e4ddd605bc.webp"
 #
 # Фирменный магазин «Золотой Балки» (krymwine.ru); карточек на платформе нет (404), в дампе файлов нет:
-zb-vajn-spumante-bryut-beloe,zb_spumante_white_brut_krymwine.webp,e2e22068ae141274f7fe692966d0a0f8d5e2a8b61fb17e23b183fa20dac826dd,https://krymwine.ru/catalog/igristye-vina/zb_spumante_white_brut.html,"этикетка ZB SPUMANTE WHITE BRUT; у магазина сорта Шардоне/Рислинг/Пино Блан/Алиготе/Ркацители, в карточке только Алиготе — продукт один"
-zb-vajn-spumante-bryut-rozovoe,zb_spumante_rose_brut_krymwine.webp,55315be7e8ff9a06a34aa4bce6d7776c6f4c9d7a1d8941dc3740a768fe7d50a9,https://krymwine.ru/catalog/igristye-vina/zb_spumante_brut_rose.html,"этикетка ZB SPUMANTE ROSE BRUT"
-zb-vajn-moskato-polusladkoe-rozovoe,zb_moscato_rose_krymwine.webp,8a04b412801a14f4ceb06b240a4ce1a7f72c42ffef5be443346070046eb1a304,https://krymwine.ru/catalog/igristye-vina/zb_moscato_rozovoe_polusladkoe.html,"этикетка ZB MOSCATO ROSE SEMISWEET"
 #
 # Пробелы: эталон платформы показывает другое вино, верного изображения не найдено
 # (проверены дамп, карточка платформы, winehelp2.ru, телеграм-канал винодельни):
+zakat-denisov-vajneri,,,dataset/strapi_output0709.csv,в дампе кейса файла эталона нет; по рекомендации организатора эталоны только из датасета — позиция без эталона (прежний источник: https://vino-svoe.ru/wines/zakat-denisov-vajneri)
+znoj-denisov-vajneri,,,dataset/strapi_output0709.csv,в дампе кейса файла эталона нет; по рекомендации организатора эталоны только из датасета — позиция без эталона (прежний источник: https://vino-svoe.ru/wines/znoj-denisov-vajneri)
+fioletovyj-rannij-petnat,,,dataset/strapi_output0709.csv,в дампе кейса файла эталона нет; по рекомендации организатора эталоны только из датасета — позиция без эталона (прежний источник: https://vino-svoe.ru/wines/fioletovyj-rannij-petnat)
+zb-vajn-spumante-bryut-beloe,,,dataset/strapi_output0709.csv,в дампе кейса файла эталона нет; по рекомендации организатора эталоны только из датасета — позиция без эталона (прежний источник: https://krymwine.ru/catalog/igristye-vina/zb_spumante_white_brut.html)
+zb-vajn-spumante-bryut-rozovoe,,,dataset/strapi_output0709.csv,в дампе кейса файла эталона нет; по рекомендации организатора эталоны только из датасета — позиция без эталона (прежний источник: https://krymwine.ru/catalog/igristye-vina/zb_spumante_brut_rose.html)
+zb-vajn-moskato-polusladkoe-rozovoe,,,dataset/strapi_output0709.csv,в дампе кейса файла эталона нет; по рекомендации организатора эталоны только из датасета — позиция без эталона (прежний источник: https://krymwine.ru/catalog/igristye-vina/zb_moscato_rozovoe_polusladkoe.html)
 zhemchuzhnaya-9-merlo-kaberne-sovinon,,,dataset/strapi_output0709.csv,"в CSV файл ec2082cwb8d2y4rf36x235pckozylfad.webp — это «АРАТТИ Каберне Совиньон 2021» (дубль эталона aratti-kaberne-sovinon-2021-krasnoe-suhoe); карточки на платформе нет (404); вино существует (бронза Продэкспо-2025, т.me/vino_aratti/1003), фото этикетки не найдено"
-zhemchuzhnaya-9-czitron-shardone,,,https://vino-svoe.ru/wines/zhemchuzhnaya-9-czitron-shardone,"платформа и winehelp показывают этикетку «АЛИГОТЕ ЦИТРОН белое сухое» (дубль zhemchuzhnaya-9-aligote-czitron); этикетки «ЦИТРОН ШАРДОНЕ белое сухое» нигде нет — есть только полусладкое (-1)"
+zhemchuzhnaya-9-czitron-shardone,,,https://vino-svoe.ru/wines/zhemchuzhnaya-9-czitron-shardone,платформа и winehelp показывают этикетку «АЛИГОТЕ ЦИТРОН белое сухое» (дубль zhemchuzhnaya-9-aligote-czitron); этикетки «ЦИТРОН ШАРДОНЕ белое сухое» нигде нет — есть только полусладкое (-1)
 kokur-suhoe-2025,,,dataset/strapi_output0709.csv,"в CSV файл DSC00839-Photoroom.webp — этикетка «Два Брата КОКУР ПОЛУСУХОЕ 2025», он же эталон kokur-2025; карточки на платформе нет (404)"
 method-classic-kokur,,,dataset/strapi_output0709.csv,"в CSV файл DSC00836.webp — этикетка «Два Брата ПИНО НУАР 2025», он же эталон pino-nuar-2025; карточки на платформе нет (404)"
 ona-skazala-da,,,dataset/strapi_output0709.csv,"в CSV файл «Generated Image June 22, 2026» — сгенерированная сцена без этикетки; карточки на платформе нет (404)"

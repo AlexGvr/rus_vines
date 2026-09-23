@@ -83,7 +83,10 @@ def evaluate(cases: list[Case], shown: np.ndarray) -> dict:
     }
 
 
-def field_queries(split: str) -> tuple[list[str], dict[str, str]]:
+ORGANIZER_SOURCE = "публичный набор кейса"
+
+
+def field_queries(split: str, source: str = "all") -> tuple[list[str], dict[str, str]]:
     """Реальные снимки настроечной части: путь и правильный slug.
 
     Кадр без вина из каталога — это готовый отрицательный пример, причём
@@ -98,6 +101,10 @@ def field_queries(split: str) -> tuple[list[str], dict[str, str]]:
     for row in csv.DictReader(manifest.open(encoding="utf-8")):
         if row["split"] != split or row["kind"] != "field":
             continue
+        # source=organizer — только кадры из датасета кейса (публичный набор
+        # организатора): по его рекомендации решение опирается только на них.
+        if source == "organizer" and row.get("source") != ORGANIZER_SOURCE:
+            continue
         path = ROOT / "data" / "field" / row["image"]
         if not path.exists():
             path = ROOT / "dataset" / "eval" / "queries" / row["image"]
@@ -109,7 +116,7 @@ def field_queries(split: str) -> tuple[list[str], dict[str, str]]:
 
 def collect(subset: str, index: str, views: list[tuple[str, ...]], topk: int,
             window: float, min_conf: float, limit: int,
-            field_split: str = "") -> list[Case]:
+            field_split: str = "", field_source: str = "all") -> list[Case]:
     manifest = list(csv.DictReader(
         (QUERIES / f"manifest_{subset}.csv").open(encoding="utf-8")))
     if limit:
@@ -122,7 +129,7 @@ def collect(subset: str, index: str, views: list[tuple[str, ...]], topk: int,
             gold[str(path)] = row["slug"]
     real = set()
     if field_split:
-        field_paths, field_gold = field_queries(field_split)
+        field_paths, field_gold = field_queries(field_split, field_source)
         paths.extend(field_paths)
         gold.update(field_gold)
         real = set(field_paths)
@@ -263,6 +270,8 @@ def main() -> None:
     ap.add_argument("--field-split", default="tune",
                     help="какую часть полевого набора подмешать в обучение; "
                          "test не указывать — он для итоговой проверки")
+    ap.add_argument("--field-source", choices=["all", "organizer"], default="all",
+                    help="organizer — подмешивать только кадры публичного набора кейса")
     ap.add_argument("--write", action="store_true",
                     help="записать веса и пороги в data/index/confidence.json")
     args = ap.parse_args()
@@ -272,7 +281,8 @@ def main() -> None:
              for spec in args.views.split(",")]
 
     cases = collect(args.subset, args.index, views, args.topk,
-                    args.window, args.min_conf, args.limit, args.field_split)
+                    args.window, args.min_conf, args.limit, args.field_split,
+                    args.field_source)
     present = [c for c in cases if c.present]
     real = [c for c in cases if c.field]
     print(f"\nнабор {args.subset}: {len(present)} запросов с вином в каталоге, "
@@ -373,7 +383,8 @@ def main() -> None:
             "outcome_weights": outcome_weights,
             "features": list(core.FEATURE_ORDER),
             "thresholds": previous,
-            "trained_on": f"{args.subset} + полевая часть {args.field_split}",
+            "trained_on": f"{args.subset} + полевая часть {args.field_split}"
+                          + (" (только кадры организатора)" if args.field_source == "organizer" else ""),
             "n_cases": len(cases), "n_field": len(real), "field_weight": repeat,
         }, ensure_ascii=False, indent=1), encoding="utf-8")
         print(f"веса записаны: {artifact} (пороги пока прежние, "

@@ -56,6 +56,8 @@ def main() -> None:
     ap.add_argument("--endpoint", default="http://127.0.0.1:8080/v1/eval/predict")
     ap.add_argument("--manifest", default=str(FIELD / "manifest.csv"))
     ap.add_argument("--split", choices=["tune", "test", "all"], default="all")
+    ap.add_argument("--source", choices=["all", "organizer"], default="all",
+                    help="organizer — только кадры публичного набора кейса")
     ap.add_argument("--sla-ms", type=float, default=3000)
     ap.add_argument("--warmup", type=int, default=3)
     ap.add_argument("--output", default=str(ROOT / "data" / "validation" / "api_check.json"))
@@ -64,6 +66,8 @@ def main() -> None:
     rows = list(csv.DictReader(Path(args.manifest).open(encoding="utf-8")))
     if args.split != "all":
         rows = [r for r in rows if r["split"] == args.split]
+    if args.source == "organizer":
+        rows = [r for r in rows if r.get("source") == "публичный набор кейса"]
     pairs = [(r, locate(r["image"])) for r in rows]
     missing = [r["image"] for r, p in pairs if p is None]
     if missing:
@@ -104,7 +108,10 @@ def main() -> None:
     p95 = latencies[min(len(latencies) - 1, int(round(0.95 * len(latencies))) - 1)] if latencies else 0
     over = sum(1 for v in latencies if v > args.sla_ms)
     summary = {
-        "endpoint": args.endpoint, "split": args.split, "n": len(results),
+        "endpoint": args.endpoint, "split": args.split, "source": args.source,
+        "n": len(results),
+        # Для правила «пустой ответ верен для вина вне каталога».
+        "null_ok": sum((x["correct"] if x["gold"] else x["predicted"] is None) for x in results),
         "http_failures": failed,
         "positives": len(positives),
         "top1_all_positives": sum(x["correct"] for x in positives) / max(len(positives), 1),

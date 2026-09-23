@@ -11,6 +11,7 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 import sys
 from pathlib import Path
@@ -40,8 +41,15 @@ def main() -> None:
     ap.add_argument("--check", help="отчёт по отложенной части: только проверка выбранного порога")
     ap.add_argument("--max-false-accept", type=float, default=0.30)
     ap.add_argument("--write", action="store_true", help="записать show_p в confidence.json")
+    ap.add_argument("--source", choices=["all", "organizer"], default="all",
+                    help="organizer — только кадры публичного набора кейса")
     args = ap.parse_args()
     results = json.loads(Path(args.report).read_text(encoding="utf-8"))["results"]
+    manifest = {r["image"]: r for r in csv.DictReader(
+        (ROOT / "data/field/manifest.csv").open(encoding="utf-8"))}
+    keep = (lambda r: manifest.get(r["image"], {}).get("source") == "публичный набор кейса") \
+        if args.source == "organizer" else (lambda r: True)
+    results = [r for r in results if keep(r)]
     rows = table(results, GRID)
     print(f"{'порог':>6} {'F1 top-1':>9} {'точн':>6} {'полн':>6} {'FP':>4} {'F1 top-5':>9} "
           f"{'ложн.прин':>10} {'зря отказ':>10}")
@@ -55,7 +63,8 @@ def main() -> None:
           f"порог {best['threshold']:.2f}, F1 top-1 {best['f1_top1'] * 100:.1f}%, "
           f"ложное принятие {best['false_accept'] * 100:.1f}%, зря отказано {best['refused_correct']}")
     if args.check:
-        held = json.loads(Path(args.check).read_text(encoding="utf-8"))["results"]
+        held = [r for r in json.loads(Path(args.check).read_text(encoding="utf-8"))["results"]
+                if keep(r)]
         for p in sorted({best["threshold"], 0.11, 0.15, 0.20}):
             r = table(held, [p])[0]
             print(f"  отложенная часть при {p:.2f}: F1 top-1 {r['f1_top1'] * 100:.1f}%, "
@@ -66,7 +75,8 @@ def main() -> None:
         artifact = json.loads(path.read_text(encoding="utf-8"))
         artifact["thresholds"]["show_p"] = best["threshold"]
         artifact["thresholds_note"] = (
-            f"Порог показа {best['threshold']:.2f} выбран threshold_sweep.py по {Path(args.report).name}: "
+            f"Порог показа {best['threshold']:.2f} выбран threshold_sweep.py по {Path(args.report).name}"
+            f"{' (только кадры организатора)' if args.source == 'organizer' else ''}: "
             f"наибольший F1 top-1 среди порогов с ложным принятием ниже {args.max_false_accept:.0%} "
             f"(F1 {best['f1_top1'] * 100:.1f}%, ложное принятие {best['false_accept'] * 100:.1f}%, "
             f"верных отказано {best['refused_correct']}). Считается по всем запросам настроечной части, "

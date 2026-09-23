@@ -10,16 +10,7 @@ slug,file,source,note
 #
 # Позиция без собственного фото в дампе получает здесь единственный
 # эталон: без него она не попадает в индекс и не находится никогда.
-abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13,abrau_kupazh_decanter.jpg,decanter,
-kokur-suhoe,kokur_decanter.jpg,decanter,
-kokur-suhoe,kokur_winemore.webp,winemore,
-soyuz-vino-kanonicheskie-traditsii-krasnoe-sladkoe-kaberne-sovinon-115,kanon_proizvoditel.jpg,proizvoditel,
-beloe-polusladkoe,massandra_beloe_polusladkoe_ladoga.jpg,ladogawine.ru,"единственный эталон позиции: в дампе платформы фото нет вовсе"
-abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12,abrau_ri_polusladkoe_krasnoe_old_winestyle.webp,winestyle,"старая упаковка «Русское шампанское / Шампанский Дом», красная окантовка; 151×595"
-abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12,abrau_ri_polusladkoe_krasnoe_old_decanter.jpg,decanter,"старая упаковка «Русское шампанское», 320×520"
-abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12,abrau_ri_polusladkoe_krasnoe_new_winestyle.webp,winestyle,"текущая упаковка, независимый студийный снимок"
-massandra-portveyn-belyy-krymskiy-kokur-beloe-sladkoe-18,massandra_portveyn_belyy_krymskiy_official.jpg,proizvoditel,"официальное фото производителя, 384×1440, альфа-канал сведён на белый"
-fanagoriya-fanagoriya-bryut-beloe-sovinon-blan-igristoe-bryut-beloe-11-13,fanagoria_bryut_beloe_2018_black_fortwine.jpg,fortwine,тёмно-синяя этикетка «БРЮТ FANAGORIA ЗГУ BRUT 2018 WHITE» — поколение 2018–2021
-fanagoriya-fanagoriya-bryut-beloe-sovinon-blan-igristoe-bryut-beloe-11-13,fanagoria_bryut_beloe_2018_black_decanter.jpg,decanter,"та же тёмная этикетка 2018, 320×520"
-abrau-dyurso-russkoe-igristoe-polusladkoe-shardone-beloe-12,abrau_ri_polusladkoe_beloe_old_decanter.jpg,decanter,"старая упаковка «Русское шампанское … ПОЛУСЛАДКОЕ», 320×520"
 # abrau_ri_polusuhoe_rozovoe_old_lenta.jpg (lenta, старая упаковка розового полусухого) лежит в data/refs, но в индекс не включён: парный замер 2026-09-22 дал 0 исправленных и −1 на tune (старая красная и старая розовая этикетки различаются одним словом и цветом окантовки).
+# 2026-09-23: по рекомендации организатора сервис использует только изображения
+# из датасета кейса. Эталоны с сайтов магазинов и производителей удалены; замер
+# их вклада и прежний список — в docs/metrics.md и истории git (коммит 59f756f).

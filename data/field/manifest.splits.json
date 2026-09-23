@@ -853,9 +853,6 @@
     "вино:abrau-dyurso-victor-dravigny-polusladkoe-sovinon-blan-beloe-12": "tune",
     "вино:derbent-vino-graf-vorontsov-beloe-polusladkoe-sovinon-blan-105-125": "tune",
     "вино:aratti-kaberne-po-belomu-1": "test",
-    "вино:wine": "tune",
-    "вино:sovinon-blan": "test",
-    "вино:kaberne-sovinon-3": "test",
-    "вино:merlo-2": "tune"
+    "вино:wine": "tune"
   }
 }

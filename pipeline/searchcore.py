@@ -31,7 +31,7 @@ RULE_SWITCHES = (
     "NAME_STRONG", "NAME_TRANSLIT", "GROUP_LEADER", "DEMOTE_GEOMETRY", "DEMOTE_DEPTH",
     "LABEL_BAND", "KIN_GROUP", "BRAND_FIRST", "GEOM_WEIGHT", "GEOM_WEIGHT_ALPHA",
     "SIFT_MAX_SIDE", "SIFT_DIR", "YOLO_WEIGHTS", "YOLO_CONF", "YOLO_IMGSZ",
-    "PLATFORM_ADDITIONS",
+    "PLATFORM_ADDITIONS", "GEOMETRY_MARGIN",
 )
 
 # Позиции, появившиеся на платформе после выгрузки кейса (sync_platform.py).
@@ -132,7 +132,10 @@ def pick_view(views: list, similarity) -> int:
     return int(best.argmax()) if len(best) else 0
 
 
-GEOMETRY_MARGIN = 0.50
+# Решающий отрыв геометрии: порядок по инлаерам принимается, только если
+# лидер обходит второго больше чем на эту долю, иначе порядок косинусный.
+# Переменная окружения — для парного замера без правки кода.
+GEOMETRY_MARGIN = float(os.environ.get("GEOMETRY_MARGIN", "0.50"))
 
 
 def rerank(crop: Image.Image, candidates: list[Candidate], reranker,

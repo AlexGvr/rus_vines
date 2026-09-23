@@ -26,13 +26,23 @@ def main() -> None:
     ap.add_argument("report", help="отчёт eval_field.py по регрессионной части")
     ap.add_argument("--api", default="", help="отчёт api_check.py (латентность, /v1/search)")
     ap.add_argument("--output", default=str(ROOT / "data" / "index" / "field_quality.json"))
+    ap.add_argument("--source", choices=["all", "organizer"], default="organizer",
+                    help="organizer — только кадры публичного набора кейса (изображения "
+                         "датасета; по рекомендации организатора другие не используются)")
     args = ap.parse_args()
     data = json.loads(Path(args.report).read_text(encoding="utf-8"))
+    if args.source == "organizer":
+        src = {r["image"]: r.get("source") for r in csv.DictReader(
+            (ROOT / "data/field/manifest.csv").open(encoding="utf-8"))}
+        data["results"] = [r for r in data["results"]
+                           if src.get(r["image"]) == "публичный набор кейса"]
     show_p = json.loads((ROOT / "data/index/confidence.json").read_text())["thresholds"]["show_p"]
     m = summarize(data["results"], show_p)
     p, f, q = m["all_positives"], m["findable_diagnostic"], m["with_rejection_all_queries"]["1"]
     block = {
-        "set": "полевой набор, регрессионная часть (development, не независимая приёмка)",
+        "set": ("кадры организатора (публичный набор кейса), регрессионная часть"
+                if args.source == "organizer" else "полевой набор, регрессионная часть")
+               + " (development, не независимая приёмка)",
         "independent_holdout": False,
         "report": str(Path(args.report).relative_to(ROOT)) if Path(args.report).is_absolute() else args.report,
         "report_sha256": hashlib.sha256(Path(args.report).read_bytes()).hexdigest(),
