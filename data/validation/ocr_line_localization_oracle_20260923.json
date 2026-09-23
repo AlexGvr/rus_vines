@@ -1,0 +1,102 @@
+{
+  "diagnostic_only": true,
+  "note": "Manual line localization; unchanged EasyOCR recognition; cannot count as automatic recognition quality. No catalog hints or allowlist.",
+  "results": [
+    {
+      "image": "ir_ochen-vkusnoe-legkoe-vino-dlya-semeinogo_0.jpg",
+      "roi": [
+        138,
+        400,
+        237,
+        416
+      ],
+      "words": [
+        {
+          "text": " MUSCAT оттонE _",
+          "conf": 0.17014429292200065
+        }
+      ],
+      "seconds": 0.21623616432771087
+    },
+    {
+      "image": "ir_ochen-vkusnoe-legkoe-vino-dlya-semeinogo_0.jpg",
+      "roi": [
+        166,
+        415,
+        209,
+        432
+      ],
+      "words": [
+        {
+          "text": "AIs",
+          "conf": 0.007039827109823193
+        }
+      ],
+      "seconds": 0.012551052030175924
+    },
+    {
+      "image": "13978352_0.jpg",
+      "roi": [
+        47,
+        615,
+        199,
+        650
+      ],
+      "words": [
+        {
+          "text": "iar цечоцил} /",
+          "conf": 0.00026025081106575537
+        }
+      ],
+      "seconds": 0.013098245020955801
+    },
+    {
+      "image": "15598335_0.jpg",
+      "roi": [
+        12,
+        312,
+        102,
+        332
+      ],
+      "words": [
+        {
+          "text": "[ЮРТЕйн ГЕXЫИ ",
+          "conf": 0.0679532317225783
+        }
+      ],
+      "seconds": 0.009691732004284859
+    },
+    {
+      "image": "15598335_0.jpg",
+      "roi": [
+        23,
+        329,
+        85,
+        348
+      ],
+      "words": [
+        {
+          "text": "#КРЫМСХИН",
+          "conf": 0.19391412972386335
+        }
+      ],
+      "seconds": 0.012106652371585369
+    },
+    {
+      "image": "16151511_0.jpg",
+      "roi": [
+        209,
+        262,
+        398,
+        296
+      ],
+      "words": [
+        {
+          "text": "~РОЗОВОЕ ПОАУСУХОЕ",
+          "conf": 0.49242883600161125
+        }
+      ],
+      "seconds": 0.010978632606565952
+    }
+  ]
+}

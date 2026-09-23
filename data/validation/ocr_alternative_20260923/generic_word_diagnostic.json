@@ -1,0 +1,52 @@
+{
+  "tune": {
+    "baseline_replay_mismatches": [],
+    "changes": []
+  },
+  "test": {
+    "baseline_replay_mismatches": [],
+    "changes": []
+  },
+  "automatic_with_generic_word_excluded": [
+    {
+      "image": "ir_ochen-vkusnoe-legkoe-vino-dlya-semeinogo_0.jpg",
+      "gold": "fanagoriya-brule-muscat-ottonel-brut-muskat-ottonel-beloe-polusladkoe-12",
+      "answer": "fanagoriya-brule-muscat-ottonel-polusladkoe-muskat-ottonel-beloe-115"
+    },
+    {
+      "image": "13978352_0.jpg",
+      "gold": "abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12",
+      "answer": "abrau-dyurso-russkoe-igristoe-polusladkoe-shardone-beloe-12"
+    },
+    {
+      "image": "15598335_0.jpg",
+      "gold": "massandra-portveyn-belyy-krymskiy-kokur-beloe-sladkoe-18",
+      "answer": "massandra-portveyn-krasnyy-alushta-krasnye-sorta-vinograda-krasnoe-sladkoe-17"
+    },
+    {
+      "image": "16151511_0.jpg",
+      "gold": "abrau-dyurso-russkoe-igristoe-polusuhoe-rozovoe-pino-nuar-12",
+      "answer": "abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12"
+    },
+    {
+      "image": "10390039_0.jpg",
+      "gold": "abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12",
+      "answer": "abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12"
+    },
+    {
+      "image": "13168313_0.jpg",
+      "gold": "massandra-portveyn-belyy-krymskiy-kokur-beloe-sladkoe-18",
+      "answer": "massandra-portveyn-belyy-krymskiy-kokur-beloe-sladkoe-18"
+    },
+    {
+      "image": "15536279_1.jpg",
+      "gold": "fanagoriya-fanagoriya-bryut-beloe-sovinon-blan-igristoe-bryut-beloe-11-13",
+      "answer": "fanagoriya-fanagoriya-bryut-beloe-sovinon-blan-igristoe-bryut-beloe-11-13"
+    },
+    {
+      "image": "7445929_1.jpg",
+      "gold": "wine",
+      "answer": "wine"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+1/4 ir_ochen-vkusnoe-legkoe-vino-dlya-semeinogo_0.jpg: False -> False 0.79s
+2/4 13978352_0.jpg: False -> False 1.17s
+3/4 15598335_0.jpg: False -> False 0.44s
+4/4 16151511_0.jpg: False -> False 0.60s
+{
+  "before": {
+    "top1": 0,
+    "top3": 3,
+    "top5": 3
+  },
+  "after": {
+    "top1": 0,
+    "top3": 3,
+    "top5": 3
+  },
+  "n": 4,
+  "positives": 4,
+  "fixed": [],
+  "broken": [],
+  "extra_seconds_median": 0.6937278567347676,
+  "extra_seconds_p95": 1.1139952865662053
+}

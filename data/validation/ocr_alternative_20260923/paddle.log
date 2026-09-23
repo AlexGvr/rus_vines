@@ -1,0 +1,35 @@
+Connectivity check to the model hoster has been skipped because `PADDLE_PDX_DISABLE_MODEL_SOURCE_CHECK` is enabled.
+Using official model (cyrillic_PP-OCRv5_mobile_rec), the model files will be automatically downloaded and saved in `/home/alex/.paddlex/official_models/cyrillic_PP-OCRv5_mobile_rec`.
+Fetching 6 files:   0%|          | 0/6 [00:00<?, ?it/s]Fetching 6 files:  17%|█▋        | 1/6 [00:00<00:03,  1.41it/s]Fetching 6 files:  67%|██████▋   | 4/6 [00:00<00:00,  4.94it/s]Fetching 6 files:  83%|████████▎ | 5/6 [00:01<00:00,  5.52it/s]Fetching 6 files: 100%|██████████| 6/6 [00:02<00:00,  2.04it/s]Fetching 6 files: 100%|██████████| 6/6 [00:02<00:00,  2.55it/s]
+/tmp/rus-vines-paddle-ocr/lib/python3.12/site-packages/paddle/utils/cpp_extension/extension_utils.py:712: UserWarning: No ccache found. Please be aware that recompiling all source files may be required. You can download and install ccache from: https://github.com/ccache/ccache/blob/master/doc/INSTALL.md
+  warnings.warn(warning_message)
+{'index': 0, 'model': 'cyrillic_PP-OCRv5_mobile_rec', 'text': 'MUSCAT OTTONEL', 'conf': 0.9978172183036804, 'seconds': 0.09346533892676234}
+{'index': 1, 'model': 'cyrillic_PP-OCRv5_mobile_rec', 'text': 'HPO', 'conf': 0.19785326719284058, 'seconds': 0.050727910827845335}
+{'index': 2, 'model': 'cyrillic_PP-OCRv5_mobile_rec', 'text': ' ', 'conf': 0.4220532774925232, 'seconds': 0.0461801839992404}
+{'index': 3, 'model': 'cyrillic_PP-OCRv5_mobile_rec', 'text': 'ПОРТВЕЙН БЕМЫ', 'conf': 0.7356231212615967, 'seconds': 0.04055357025936246}
+{'index': 4, 'model': 'cyrillic_PP-OCRv5_mobile_rec', 'text': 'КРЫМСКИЙ', 'conf': 0.7653977870941162, 'seconds': 0.04073674604296684}
+{'index': 5, 'model': 'cyrillic_PP-OCRv5_mobile_rec', 'text': 'РОЗОВОЕ ПОЛУСУХОЕ', 'conf': 0.9519361853599548, 'seconds': 0.0414314828813076}
+{'index': 6, 'model': 'cyrillic_PP-OCRv5_mobile_rec', 'text': 'KPACHOE-', 'conf': 0.7866494655609131, 'seconds': 0.04399594012647867}
+{'index': 7, 'model': 'cyrillic_PP-OCRv5_mobile_rec', 'text': 'HVELLKON', 'conf': 0.3156764507293701, 'seconds': 0.040473018772900105}
+{'index': 8, 'model': 'cyrillic_PP-OCRv5_mobile_rec', 'text': 'ПОРТВЕЙН БЕЛЕИ', 'conf': 0.9170479774475098, 'seconds': 0.04269887274131179}
+{'index': 9, 'model': 'cyrillic_PP-OCRv5_mobile_rec', 'text': 'КРЫМСКИЙ', 'conf': 0.9352861642837524, 'seconds': 0.04237121995538473}
+{'index': 10, 'model': 'cyrillic_PP-OCRv5_mobile_rec', 'text': 'BRUT', 'conf': 0.9047856330871582, 'seconds': 0.04278464103117585}
+{'index': 11, 'model': 'cyrillic_PP-OCRv5_mobile_rec', 'text': 'FANAGORIA', 'conf': 0.9832653403282166, 'seconds': 0.04297996312379837}
+{'index': 12, 'model': 'cyrillic_PP-OCRv5_mobile_rec', 'text': 'БАЛАКЛАВА', 'conf': 0.9920023679733276, 'seconds': 0.054454927798360586}
+{'index': 13, 'model': 'cyrillic_PP-OCRv5_mobile_rec', 'text': 'Brut Rose', 'conf': 0.986573338508606, 'seconds': 0.047673019114881754}
+Using official model (latin_PP-OCRv5_mobile_rec), the model files will be automatically downloaded and saved in `/home/alex/.paddlex/official_models/latin_PP-OCRv5_mobile_rec`.
+Fetching 6 files:   0%|          | 0/6 [00:00<?, ?it/s]Fetching 6 files:  17%|█▋        | 1/6 [00:00<00:02,  1.88it/s]Fetching 6 files:  83%|████████▎ | 5/6 [00:00<00:00,  6.50it/s]Fetching 6 files: 100%|██████████| 6/6 [00:02<00:00,  2.24it/s]Fetching 6 files: 100%|██████████| 6/6 [00:02<00:00,  2.62it/s]
+{'index': 0, 'model': 'latin_PP-OCRv5_mobile_rec', 'text': 'MUSCAT OTTONEL', 'conf': 0.9977408051490784, 'seconds': 0.04206259408965707}
+{'index': 1, 'model': 'latin_PP-OCRv5_mobile_rec', 'text': 'DO', 'conf': 0.32452335953712463, 'seconds': 0.041145593859255314}
+{'index': 2, 'model': 'latin_PP-OCRv5_mobile_rec', 'text': '', 'conf': 0.0, 'seconds': 0.04213547892868519}
+{'index': 3, 'model': 'latin_PP-OCRv5_mobile_rec', 'text': ' ', 'conf': 0.9863155484199524, 'seconds': 0.041936574038118124}
+{'index': 4, 'model': 'latin_PP-OCRv5_mobile_rec', 'text': '', 'conf': 0.0, 'seconds': 0.04108445392921567}
+{'index': 5, 'model': 'latin_PP-OCRv5_mobile_rec', 'text': ' C', 'conf': 0.6042793989181519, 'seconds': 0.04213914927095175}
+{'index': 6, 'model': 'latin_PP-OCRv5_mobile_rec', 'text': 'KPACHOE', 'conf': 0.9792634844779968, 'seconds': 0.04131863685324788}
+{'index': 7, 'model': 'latin_PP-OCRv5_mobile_rec', 'text': 'AKN', 'conf': 0.40923476219177246, 'seconds': 0.041125154588371515}
+{'index': 8, 'model': 'latin_PP-OCRv5_mobile_rec', 'text': ' ', 'conf': 0.9923426508903503, 'seconds': 0.041702115908265114}
+{'index': 9, 'model': 'latin_PP-OCRv5_mobile_rec', 'text': '', 'conf': 0.0, 'seconds': 0.041489040944725275}
+{'index': 10, 'model': 'latin_PP-OCRv5_mobile_rec', 'text': 'BRUT', 'conf': 0.999751627445221, 'seconds': 0.042332420125603676}
+{'index': 11, 'model': 'latin_PP-OCRv5_mobile_rec', 'text': 'FANAGORIA', 'conf': 0.9936442971229553, 'seconds': 0.0464110067114234}
+{'index': 12, 'model': 'latin_PP-OCRv5_mobile_rec', 'text': 'KABA', 'conf': 0.7549180388450623, 'seconds': 0.050149007234722376}
+{'index': 13, 'model': 'latin_PP-OCRv5_mobile_rec', 'text': 'Brut Rose', 'conf': 0.9776332378387451, 'seconds': 0.045847102999687195}

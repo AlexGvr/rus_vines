@@ -1,0 +1,11 @@
+Model files already exist. Using cached files. To redownload, please delete the directory manually: `/home/alex/.paddlex/official_models/cyrillic_PP-OCRv5_mobile_rec`.
+/tmp/rus-vines-paddle-ocr/lib/python3.12/site-packages/paddle/utils/cpp_extension/extension_utils.py:712: UserWarning: No ccache found. Please be aware that recompiling all source files may be required. You can download and install ccache from: https://github.com/ccache/ccache/blob/master/doc/INSTALL.md
+  warnings.warn(warning_message)
+ir_ochen-vkusnoe-legkoe-vino-dlya-semeinogo_0.jpg []
+13978352_0.jpg [{'text': 'АBРАУ-ДЮРСО', 'conf': 0.6147857308387756, 'box': [33, 575, 208, 628], 'roi': [28, 570, 213, 633], 'members': [2, 3]}]
+15598335_0.jpg []
+16151511_0.jpg [{'text': 'ПУССКОЕ ИГРИСТОЕ', 'conf': 0.7656087279319763, 'box': [186, 127, 430, 191], 'roi': [180, 121, 436, 197], 'members': [0, 1]}, {'text': 'АBРАY-ДIPCО', 'conf': 0.5969111323356628, 'box': [159, 199, 454, 280], 'roi': [151, 191, 462, 288], 'members': [3, 4]}, {'text': 'РОЗОВОЕ ПОЛУСУХОЕ', 'conf': 0.9058418869972229, 'box': [213, 262, 394, 295], 'roi': [210, 259, 397, 298], 'members': [5, 6]}]
+10390039_0.jpg [{'text': 'АBPAY-ДЮPCO', 'conf': 0.5937755703926086, 'box': [15, 600, 204, 658], 'roi': [9, 594, 210, 664], 'members': [3, 5]}]
+13168313_0.jpg []
+15536279_1.jpg [{'text': 'METHODECRARMA', 'conf': 0.6137120723724365, 'box': [114, 150, 241, 161], 'roi': [113, 149, 242, 162], 'members': [2, 3]}]
+7445929_1.jpg [{'text': 'АЛАКЛАВА БРЮТ»', 'conf': 0.9757328629493713, 'box': [336, 194, 599, 213], 'roi': [334, 192, 601, 215], 'members': [0, 1]}]

@@ -1,0 +1,198 @@
+[
+  {
+    "image": "ir_ochen-vkusnoe-legkoe-vino-dlya-semeinogo_0.jpg",
+    "roi": [
+      138,
+      400,
+      237,
+      416
+    ],
+    "expected": "MUSCAT OTTONEL",
+    "group": "target",
+    "source": "data/validation/transcript_final3_assets/ir_ochen-vkusnoe-legkoe-vino-dlya-semeinogo_0.jpg",
+    "language": "latin",
+    "file": "data/validation/ocr_alternative_20260923/lines/00.png"
+  },
+  {
+    "image": "ir_ochen-vkusnoe-legkoe-vino-dlya-semeinogo_0.jpg",
+    "roi": [
+      166,
+      415,
+      209,
+      432
+    ],
+    "expected": "BRUT",
+    "group": "target",
+    "source": "data/validation/transcript_final3_assets/ir_ochen-vkusnoe-legkoe-vino-dlya-semeinogo_0.jpg",
+    "language": "latin",
+    "file": "data/validation/ocr_alternative_20260923/lines/01.png"
+  },
+  {
+    "image": "13978352_0.jpg",
+    "roi": [
+      47,
+      615,
+      199,
+      650
+    ],
+    "expected": "КРАСНОЕ ПОЛУСЛАДКОЕ",
+    "group": "target",
+    "source": "data/validation/transcript_final3_assets/13978352_0.jpg",
+    "language": "cyrillic",
+    "file": "data/validation/ocr_alternative_20260923/lines/02.png"
+  },
+  {
+    "image": "15598335_0.jpg",
+    "roi": [
+      12,
+      312,
+      102,
+      332
+    ],
+    "expected": "ПОРТВЕЙН БЕЛЫЙ",
+    "group": "target",
+    "source": "data/validation/transcript_final3_assets/15598335_0.jpg",
+    "language": "cyrillic",
+    "file": "data/validation/ocr_alternative_20260923/lines/03.png"
+  },
+  {
+    "image": "15598335_0.jpg",
+    "roi": [
+      23,
+      329,
+      85,
+      348
+    ],
+    "expected": "КРЫМСКИЙ",
+    "group": "target",
+    "source": "data/validation/transcript_final3_assets/15598335_0.jpg",
+    "language": "cyrillic",
+    "file": "data/validation/ocr_alternative_20260923/lines/04.png"
+  },
+  {
+    "image": "16151511_0.jpg",
+    "roi": [
+      209,
+      262,
+      398,
+      296
+    ],
+    "expected": "РОЗОВОЕ ПОЛУСУХОЕ",
+    "group": "target",
+    "source": "data/validation/transcript_final3_assets/16151511_0.jpg",
+    "language": "cyrillic",
+    "file": "data/validation/ocr_alternative_20260923/lines/05.png"
+  },
+  {
+    "image": "10390039_0.jpg",
+    "roi": [
+      68,
+      650,
+      148,
+      673
+    ],
+    "expected": "КРАСНОЕ",
+    "group": "control",
+    "source": "data/validation/ocr_alternative_20260923/10390039_0.jpg",
+    "language": "cyrillic",
+    "file": "data/validation/ocr_alternative_20260923/lines/06.png"
+  },
+  {
+    "image": "10390039_0.jpg",
+    "roi": [
+      69,
+      666,
+      149,
+      686
+    ],
+    "expected": "ПОЛУСЛАДКОЕ",
+    "group": "control",
+    "source": "data/validation/ocr_alternative_20260923/10390039_0.jpg",
+    "language": "cyrillic",
+    "file": "data/validation/ocr_alternative_20260923/lines/07.png"
+  },
+  {
+    "image": "13168313_0.jpg",
+    "roi": [
+      27,
+      749,
+      191,
+      778
+    ],
+    "expected": "ПОРТВЕЙН БЕЛЫЙ",
+    "group": "control",
+    "source": "data/validation/ocr_alternative_20260923/13168313_0.jpg",
+    "language": "cyrillic",
+    "file": "data/validation/ocr_alternative_20260923/lines/08.png"
+  },
+  {
+    "image": "13168313_0.jpg",
+    "roi": [
+      45,
+      773,
+      177,
+      800
+    ],
+    "expected": "КРЫМСКИЙ",
+    "group": "control",
+    "source": "data/validation/ocr_alternative_20260923/13168313_0.jpg",
+    "language": "cyrillic",
+    "file": "data/validation/ocr_alternative_20260923/lines/09.png"
+  },
+  {
+    "image": "15536279_1.jpg",
+    "roi": [
+      149,
+      124,
+      214,
+      148
+    ],
+    "expected": "BRUT",
+    "group": "control",
+    "source": "data/validation/ocr_alternative_20260923/15536279_1.jpg",
+    "language": "latin",
+    "file": "data/validation/ocr_alternative_20260923/lines/10.png"
+  },
+  {
+    "image": "15536279_1.jpg",
+    "roi": [
+      87,
+      76,
+      269,
+      106
+    ],
+    "expected": "FANAGORIA",
+    "group": "control",
+    "source": "data/validation/ocr_alternative_20260923/15536279_1.jpg",
+    "language": "latin",
+    "file": "data/validation/ocr_alternative_20260923/lines/11.png"
+  },
+  {
+    "image": "7445929_1.jpg",
+    "roi": [
+      230,
+      301,
+      666,
+      366
+    ],
+    "expected": "БАЛАКЛАВА",
+    "group": "control",
+    "source": "data/validation/ocr_alternative_20260923/7445929_1.jpg",
+    "language": "cyrillic",
+    "file": "data/validation/ocr_alternative_20260923/lines/12.png"
+  },
+  {
+    "image": "7445929_1.jpg",
+    "roi": [
+      321,
+      405,
+      585,
+      466
+    ],
+    "expected": "Brut Rose",
+    "group": "control",
+    "source": "data/validation/ocr_alternative_20260923/7445929_1.jpg",
+    "language": "latin",
+    "file": "data/validation/ocr_alternative_20260923/lines/13.png"
+  }
+]

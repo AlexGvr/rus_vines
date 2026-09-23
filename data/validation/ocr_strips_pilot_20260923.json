@@ -1,0 +1,1170 @@
+{
+ "complete": true,
+ "summary": {
+  "before": {
+   "top1": 0,
+   "top3": 3,
+   "top5": 3
+  },
+  "after": {
+   "top1": 0,
+   "top3": 3,
+   "top5": 3
+  },
+  "n": 4,
+  "positives": 4,
+  "fixed": [],
+  "broken": [],
+  "extra_seconds_median": 0.6937278567347676,
+  "extra_seconds_p95": 1.1139952865662053
+ },
+ "results": [
+  {
+   "image": "ir_ochen-vkusnoe-legkoe-vino-dlya-semeinogo_0.jpg",
+   "gold": "fanagoriya-brule-muscat-ottonel-brut-muskat-ottonel-beloe-polusladkoe-12",
+   "findable": true,
+   "before": [
+    "fanagoriya-brule-muscat-ottonel-polusladkoe-muskat-ottonel-beloe-115",
+    "fanagoriya-brule-muscat-ottonel-brut-muskat-ottonel-beloe-polusladkoe-12",
+    "fanagoriya-brule-sauvignon-blanc-brut-sovinon-blan-beloe-bryut-12",
+    "fanagoriya-brule-cuve-brut-rozovoe-merlo-igristoe-bryut-rozovoe-12",
+    "fanagoriya-brule-cabernet-franc-polusuhoe-rozovoe-kaberne-fran-12",
+    "fanagoriya-brule-cabernet-sauvignon-polusladkoe-krasnoe-kaberne-sovinon-125",
+    "zolotoe-pole-legend-of-crimea-muscat-ottonel-muskat-ottonel-beloe-suhoe-14",
+    "usadba-divnomorskoe-muscat-ottonel-muskat-ottonel-beloe-sladkoe-135",
+    "mont-blanc-blanc-de-blancs",
+    "fanagoriya-brule-saperavi-saperavi-igristoe-sladkoe-krasnoe-bryut-125",
+    "mont-blanc-cuvee",
+    "khrustaleva-76-muscat-bryut-beloe",
+    "abrau-dyurso-brut-dor-blanc-de-blancs-shardone-beloe-bryut-12",
+    "shato-taman-par-la-mer-pino-blan",
+    "abrau-dyurso-brut-dor-blanc-de-blancs-shardone-beloe-bryut-125",
+    "shato-taman-bryut",
+    "muskatnoe-shato-taman",
+    "abrau-dyurso-brut-dor-riesling-risling-beloe-bryut-12",
+    "fanagoriya-brule-frizzante-brut-beloe-pino-nuar-bryut-115",
+    "abrau-dyurso-brut-dor-rose-pino-nuar-rozovoe-bryut-12"
+   ],
+   "after": [
+    "fanagoriya-brule-muscat-ottonel-polusladkoe-muskat-ottonel-beloe-115",
+    "fanagoriya-brule-muscat-ottonel-brut-muskat-ottonel-beloe-polusladkoe-12",
+    "fanagoriya-brule-sauvignon-blanc-brut-sovinon-blan-beloe-bryut-12",
+    "fanagoriya-brule-cuve-brut-rozovoe-merlo-igristoe-bryut-rozovoe-12",
+    "fanagoriya-brule-cabernet-franc-polusuhoe-rozovoe-kaberne-fran-12",
+    "fanagoriya-brule-cabernet-sauvignon-polusladkoe-krasnoe-kaberne-sovinon-125",
+    "zolotoe-pole-legend-of-crimea-muscat-ottonel-muskat-ottonel-beloe-suhoe-14",
+    "usadba-divnomorskoe-muscat-ottonel-muskat-ottonel-beloe-sladkoe-135",
+    "mont-blanc-blanc-de-blancs",
+    "fanagoriya-brule-saperavi-saperavi-igristoe-sladkoe-krasnoe-bryut-125",
+    "mont-blanc-cuvee",
+    "khrustaleva-76-muscat-bryut-beloe",
+    "abrau-dyurso-brut-dor-blanc-de-blancs-shardone-beloe-bryut-12",
+    "shato-taman-par-la-mer-pino-blan",
+    "abrau-dyurso-brut-dor-blanc-de-blancs-shardone-beloe-bryut-125",
+    "shato-taman-bryut",
+    "muskatnoe-shato-taman",
+    "abrau-dyurso-brut-dor-riesling-risling-beloe-bryut-12",
+    "fanagoriya-brule-frizzante-brut-beloe-pino-nuar-bryut-115",
+    "abrau-dyurso-brut-dor-rose-pino-nuar-rozovoe-bryut-12"
+   ],
+   "extra_seconds": 0.7892735693603754,
+   "scans": [
+    {
+     "strip": [
+      0.0,
+      0.6
+     ],
+     "angle": -12,
+     "seconds": 0.21269616531208158,
+     "words": []
+    },
+    {
+     "strip": [
+      0.0,
+      0.6
+     ],
+     "angle": 0,
+     "seconds": 0.06741590984165668,
+     "words": []
+    },
+    {
+     "strip": [
+      0.0,
+      0.6
+     ],
+     "angle": 12,
+     "seconds": 0.1025424120016396,
+     "words": []
+    },
+    {
+     "strip": [
+      0.4,
+      1.0
+     ],
+     "angle": -12,
+     "seconds": 0.17997892200946808,
+     "words": [
+      {
+       "text": "BRULЁ",
+       "conf": 0.9940455455918303,
+       "box": [
+        139,
+        362,
+        236,
+        401
+       ]
+      }
+     ]
+    },
+    {
+     "strip": [
+      0.4,
+      1.0
+     ],
+     "angle": 0,
+     "seconds": 0.08486508578062057,
+     "words": [
+      {
+       "text": "BRULЁ",
+       "conf": 0.5457386868664295,
+       "box": [
+        141,
+        363,
+        235,
+        399
+       ]
+      }
+     ]
+    },
+    {
+     "strip": [
+      0.4,
+      1.0
+     ],
+     "angle": 12,
+     "seconds": 0.11997508024796844,
+     "words": [
+      {
+       "text": "BRULЁ",
+       "conf": 0.997662265264472,
+       "box": [
+        139,
+        361,
+        237,
+        401
+       ]
+      },
+      {
+       "text": "оттontъ",
+       "conf": 0.5184948296252321,
+       "box": [
+        182,
+        404,
+        236,
+        418
+       ]
+      },
+      {
+       "text": "MMUSCAт",
+       "conf": 0.3053122106326024,
+       "box": [
+        139,
+        403,
+        187,
+        419
+       ]
+      }
+     ]
+    }
+   ],
+   "admitted_words": [
+    {
+     "text": "BRULЁ",
+     "conf": 0.9940455455918303,
+     "box": [
+      139,
+      362,
+      236,
+      401
+     ]
+    },
+    {
+     "text": "BRULЁ",
+     "conf": 0.997662265264472,
+     "box": [
+      139,
+      361,
+      237,
+      401
+     ]
+    }
+   ]
+  },
+  {
+   "image": "13978352_0.jpg",
+   "gold": "abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12",
+   "findable": true,
+   "before": [
+    "abrau-dyurso-russkoe-igristoe-polusladkoe-shardone-beloe-12",
+    "abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12",
+    "abrau-dyurso-udelnoe-vedomstvo-imperatorskoe-beloe-bryut",
+    "abrau-dyurso-russkoe-igristoe-koshernoe-bryut-shardone-beloe-13",
+    "abrau-dyurso-russkoe-igristoe-polusuhoe-shardone-beloe-12",
+    "abrau-dyurso-russkoe-igristoe-koshernoe-polusladkoe-shardone-beloe-12",
+    "abrau-dyurso-udelnoe-vedomstvo-imperatorskoe-beloe-polusladkoe",
+    "abrau-dyurso-russkoe-igristoe-polusuhoe-rozovoe-pino-nuar-12",
+    "abrau-dyurso-victor-dravigny-krasnoe-polusladkoe-kaberne-sovinon-125",
+    "abrau-dyurso-imperatorskoe-polusuhoe-shardone-beloe-12",
+    "abrau-dyurso-imperatorskoe-bryut-shardone-beloe-12",
+    "abrau-dyurso-abrau-durso-brut-rose-reserve-pino-nuar-beloe-bryut-12",
+    "abrau-dyurso-abrau-durso-reserve-brut-shardone-beloe-bryut-115",
+    "abrau-dyurso-victor-dravigny-brut-rose-pino-nuar-rozovoe-bryut-12",
+    "abrau-dyurso-imperatorskoe-polusladkoe-shardone-beloe-12",
+    "abrau-dyurso-imperial-brut-vintage-shardone-beloe-bryut-12",
+    "abrau-dyurso-victor-dravigny-extra-brut-shardone-beloe-bryut-125",
+    "abrau-dyurso-victor-dravigny-koshernoe-bryut-shardone-beloe-125",
+    "abrau-dyurso-victor-dravigny-polusladkoe-sovinon-blan-beloe-12",
+    "abrau-dyurso-victor-dravigny-polusuhoe-pino-blan-beloe-12"
+   ],
+   "after": [
+    "abrau-dyurso-russkoe-igristoe-polusladkoe-shardone-beloe-12",
+    "abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12",
+    "abrau-dyurso-udelnoe-vedomstvo-imperatorskoe-beloe-bryut",
+    "abrau-dyurso-russkoe-igristoe-koshernoe-bryut-shardone-beloe-13",
+    "abrau-dyurso-russkoe-igristoe-polusuhoe-shardone-beloe-12",
+    "abrau-dyurso-russkoe-igristoe-koshernoe-polusladkoe-shardone-beloe-12",
+    "abrau-dyurso-udelnoe-vedomstvo-imperatorskoe-beloe-polusladkoe",
+    "abrau-dyurso-russkoe-igristoe-polusuhoe-rozovoe-pino-nuar-12",
+    "abrau-dyurso-victor-dravigny-krasnoe-polusladkoe-kaberne-sovinon-125",
+    "abrau-dyurso-imperatorskoe-polusuhoe-shardone-beloe-12",
+    "abrau-dyurso-imperatorskoe-bryut-shardone-beloe-12",
+    "abrau-dyurso-abrau-durso-brut-rose-reserve-pino-nuar-beloe-bryut-12",
+    "abrau-dyurso-abrau-durso-reserve-brut-shardone-beloe-bryut-115",
+    "abrau-dyurso-victor-dravigny-brut-rose-pino-nuar-rozovoe-bryut-12",
+    "abrau-dyurso-imperatorskoe-polusladkoe-shardone-beloe-12",
+    "abrau-dyurso-imperial-brut-vintage-shardone-beloe-bryut-12",
+    "abrau-dyurso-victor-dravigny-extra-brut-shardone-beloe-bryut-125",
+    "abrau-dyurso-victor-dravigny-koshernoe-bryut-shardone-beloe-125",
+    "abrau-dyurso-victor-dravigny-polusladkoe-sovinon-blan-beloe-12",
+    "abrau-dyurso-victor-dravigny-polusuhoe-pino-blan-beloe-12"
+   ],
+   "extra_seconds": 1.171299119014293,
+   "scans": [
+    {
+     "strip": [
+      0.0,
+      0.6
+     ],
+     "angle": -12,
+     "seconds": 0.21303518302738667,
+     "words": [
+      {
+       "text": "[l",
+       "conf": 0.963046156484411,
+       "box": [
+        94,
+        251,
+        143,
+        306
+       ]
+      },
+      {
+       "text": "[",
+       "conf": 0.6306120176267918,
+       "box": [
+        189,
+        185,
+        237,
+        271
+       ]
+      }
+     ]
+    },
+    {
+     "strip": [
+      0.0,
+      0.6
+     ],
+     "angle": 0,
+     "seconds": 0.14236075012013316,
+     "words": [
+      {
+       "text": "Ill",
+       "conf": 0.3812437140102075,
+       "box": [
+        99,
+        253,
+        137,
+        300
+       ]
+      }
+     ]
+    },
+    {
+     "strip": [
+      0.0,
+      0.6
+     ],
+     "angle": 12,
+     "seconds": 0.20765473507344723,
+     "words": [
+      {
+       "text": "[",
+       "conf": 0.9687635681865778,
+       "box": [
+        187,
+        180,
+        238,
+        267
+       ]
+      },
+      {
+       "text": "[il",
+       "conf": 0.7396736478975358,
+       "box": [
+        97,
+        249,
+        140,
+        302
+       ]
+      }
+     ]
+    },
+    {
+     "strip": [
+      0.4,
+      1.0
+     ],
+     "angle": -12,
+     "seconds": 0.22957525588572025,
+     "words": [
+      {
+       "text": "КA",
+       "conf": 0.34865318113262456,
+       "box": [
+        0,
+        769,
+        18,
+        789
+       ]
+      },
+      {
+       "text": "РУСскоЕ",
+       "conf": 0.358512329339861,
+       "box": [
+        55,
+        540,
+        120,
+        579
+       ]
+      },
+      {
+       "text": "1870",
+       "conf": 0.9681495428085327,
+       "box": [
+        93,
+        560,
+        149,
+        587
+       ]
+      }
+     ]
+    },
+    {
+     "strip": [
+      0.4,
+      1.0
+     ],
+     "angle": 0,
+     "seconds": 0.1525194221176207,
+     "words": [
+      {
+       "text": "1870",
+       "conf": 0.5155565087469303,
+       "box": [
+        93,
+        562,
+        149,
+        586
+       ]
+      },
+      {
+       "text": "АБРА9-ДЮРВЮ",
+       "conf": 0.46065393776681995,
+       "box": [
+        32,
+        572,
+        209,
+        632
+       ]
+      },
+      {
+       "text": "'A",
+       "conf": 0.9802515375855074,
+       "box": [
+        0,
+        771,
+        16,
+        788
+       ]
+      },
+      {
+       "text": "РУССКоЕ",
+       "conf": 0.5657610940170537,
+       "box": [
+        54,
+        540,
+        121,
+        580
+       ]
+      }
+     ]
+    },
+    {
+     "strip": [
+      0.4,
+      1.0
+     ],
+     "angle": 12,
+     "seconds": 0.21586923394352198,
+     "words": [
+      {
+       "text": "РУССКОЕ",
+       "conf": 0.7432176832342264,
+       "box": [
+        55,
+        540,
+        119,
+        580
+       ]
+      },
+      {
+       "text": "1870",
+       "conf": 0.7216578125953674,
+       "box": [
+        93,
+        561,
+        150,
+        586
+       ]
+      },
+      {
+       "text": "ДВРА9-ДЮРВМ",
+       "conf": 0.3621790659953539,
+       "box": [
+        32,
+        575,
+        210,
+        630
+       ]
+      }
+     ]
+    }
+   ],
+   "admitted_words": [
+    {
+     "text": "[l",
+     "conf": 0.963046156484411,
+     "box": [
+      94,
+      251,
+      143,
+      306
+     ]
+    },
+    {
+     "text": "[",
+     "conf": 0.9687635681865778,
+     "box": [
+      187,
+      180,
+      238,
+      267
+     ]
+    },
+    {
+     "text": "1870",
+     "conf": 0.9681495428085327,
+     "box": [
+      93,
+      560,
+      149,
+      587
+     ]
+    },
+    {
+     "text": "'A",
+     "conf": 0.9802515375855074,
+     "box": [
+      0,
+      771,
+      16,
+      788
+     ]
+    }
+   ]
+  },
+  {
+   "image": "15598335_0.jpg",
+   "gold": "massandra-portveyn-belyy-krymskiy-kokur-beloe-sladkoe-18",
+   "findable": true,
+   "before": [
+    "massandra-portveyn-krasnyy-alushta-krasnye-sorta-vinograda-krasnoe-sladkoe-17",
+    "massandra-portveyn-belyy-alushta-belye-sorta-vinograda-beloe-sladkoe-17",
+    "massandra-lakrima-kristi-aleatiko-krasnoe-sladkoe-16",
+    "massandra-muskat-belyy-pozdnego-sbora-beloe-sladkoe-10",
+    "massandra-portveyn-krasnyy-livadiya-kaberne-sovinon-krasnoe-sladkoe-185",
+    "massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13",
+    "massandra-muskat-rozovyy-pozdnego-sbora-rozovoe-sladkoe-10",
+    "portvejn-surozh",
+    "massandra-portveyn-belyy-krymskiy-kokur-beloe-sladkoe-18",
+    "kokur-suhoe",
+    "madera-krymskaya",
+    "massandra-muskatel-chernyy-krasnye-sorta-vinograda-krasnoe-sladkoe-16",
+    "muskat-avtorskoe-vino",
+    "massandra-kagor-yuzhnoberezhnyy-saperavi-krasnoe-sladkoe-16",
+    "massandra-muskatel-belyy-belye-sorta-vinograda-beloe-sladkoe-16",
+    "muskat-pozdnego-sbora-rozovyj",
+    "massandra-massandra-heres-oreadna-aligote-beloe-suhoe-16",
+    "massandra-kokur-desertnyy-surozh-beloe-sladkoe-16",
+    "massandra-portveyn-belyy-gurzuf-kokur-belyy-beloe-sladkoe-135",
+    "cira-avtorskoe-vino"
+   ],
+   "after": [
+    "massandra-portveyn-krasnyy-alushta-krasnye-sorta-vinograda-krasnoe-sladkoe-17",
+    "massandra-portveyn-belyy-alushta-belye-sorta-vinograda-beloe-sladkoe-17",
+    "massandra-lakrima-kristi-aleatiko-krasnoe-sladkoe-16",
+    "massandra-muskat-belyy-pozdnego-sbora-beloe-sladkoe-10",
+    "massandra-portveyn-krasnyy-livadiya-kaberne-sovinon-krasnoe-sladkoe-185",
+    "massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13",
+    "massandra-muskat-rozovyy-pozdnego-sbora-rozovoe-sladkoe-10",
+    "portvejn-surozh",
+    "massandra-portveyn-belyy-krymskiy-kokur-beloe-sladkoe-18",
+    "kokur-suhoe",
+    "madera-krymskaya",
+    "massandra-muskatel-chernyy-krasnye-sorta-vinograda-krasnoe-sladkoe-16",
+    "muskat-avtorskoe-vino",
+    "massandra-kagor-yuzhnoberezhnyy-saperavi-krasnoe-sladkoe-16",
+    "massandra-muskatel-belyy-belye-sorta-vinograda-beloe-sladkoe-16",
+    "muskat-pozdnego-sbora-rozovyj",
+    "massandra-massandra-heres-oreadna-aligote-beloe-suhoe-16",
+    "massandra-kokur-desertnyy-surozh-beloe-sladkoe-16",
+    "massandra-portveyn-belyy-gurzuf-kokur-belyy-beloe-sladkoe-135",
+    "cira-avtorskoe-vino"
+   ],
+   "extra_seconds": 0.443545535672456,
+   "scans": [
+    {
+     "strip": [
+      0.0,
+      0.6
+     ],
+     "angle": -12,
+     "seconds": 0.0699144909158349,
+     "words": [
+      {
+       "text": "МАССАНДР",
+       "conf": 0.3208876810541814,
+       "box": [
+        27,
+        218,
+        104,
+        260
+       ]
+      }
+     ]
+    },
+    {
+     "strip": [
+      0.0,
+      0.6
+     ],
+     "angle": 0,
+     "seconds": 0.045190274715423584,
+     "words": [
+      {
+       "text": "МАССАНД}",
+       "conf": 0.3673081154826497,
+       "box": [
+        29,
+        226,
+        101,
+        253
+       ]
+      }
+     ]
+    },
+    {
+     "strip": [
+      0.0,
+      0.6
+     ],
+     "angle": 12,
+     "seconds": 0.06915536895394325,
+     "words": [
+      {
+       "text": "МАССАНАП",
+       "conf": 0.5262606322758486,
+       "box": [
+        30,
+        226,
+        101,
+        253
+       ]
+      }
+     ]
+    },
+    {
+     "strip": [
+      0.4,
+      1.0
+     ],
+     "angle": -12,
+     "seconds": 0.10264910105615854,
+     "words": [
+      {
+       "text": "МАССАНДП",
+       "conf": 0.3334694064446715,
+       "box": [
+        27,
+        218,
+        104,
+        261
+       ]
+      }
+     ]
+    },
+    {
+     "strip": [
+      0.4,
+      1.0
+     ],
+     "angle": 0,
+     "seconds": 0.06180390901863575,
+     "words": [
+      {
+       "text": "МАССАНД",
+       "conf": 0.8699394355062012,
+       "box": [
+        29,
+        226,
+        101,
+        253
+       ]
+      }
+     ]
+    },
+    {
+     "strip": [
+      0.4,
+      1.0
+     ],
+     "angle": 12,
+     "seconds": 0.08840953605249524,
+     "words": [
+      {
+       "text": "[кэнтйн",
+       "conf": 0.367913610503891,
+       "box": [
+        12,
+        308,
+        71,
+        340
+       ]
+      },
+      {
+       "text": "Ш",
+       "conf": 0.6507155435531651,
+       "box": [
+        32,
+        340,
+        47,
+        358
+       ]
+      },
+      {
+       "text": "МАССАНД",
+       "conf": 0.9226022622871607,
+       "box": [
+        30,
+        226,
+        101,
+        253
+       ]
+      }
+     ]
+    }
+   ],
+   "admitted_words": [
+    {
+     "text": "МАССАНД",
+     "conf": 0.8699394355062012,
+     "box": [
+      29,
+      226,
+      101,
+      253
+     ]
+    },
+    {
+     "text": "МАССАНД",
+     "conf": 0.9226022622871607,
+     "box": [
+      30,
+      226,
+      101,
+      253
+     ]
+    }
+   ]
+  },
+  {
+   "image": "16151511_0.jpg",
+   "gold": "abrau-dyurso-russkoe-igristoe-polusuhoe-rozovoe-pino-nuar-12",
+   "findable": true,
+   "before": [
+    "abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12",
+    "abrau-dyurso-russkoe-igristoe-polusuhoe-rozovoe-pino-nuar-12",
+    "abrau-dyurso-russkoe-igristoe-polusladkoe-shardone-beloe-12",
+    "abrau-dyurso-russkoe-igristoe-koshernoe-polusladkoe-shardone-beloe-12",
+    "abrau-dyurso-russkoe-igristoe-koshernoe-bryut-shardone-beloe-13",
+    "abrau-dyurso-russkoe-igristoe-polusuhoe-shardone-beloe-12",
+    "abrau-dyurso-imperatorskoe-polusladkoe-shardone-beloe-12",
+    "abrau-dyurso-imperial-brut-rose-pino-nuar-rozovoe-bryut-12",
+    "abrau-dyurso-victor-dravigny-bryut",
+    "abrau-dyurso-imperatorskoe-bryut-shardone-beloe-12",
+    "abrau-dyurso-imperatorskoe-polusuhoe-shardone-beloe-12",
+    "abrau-dyurso-victor-dravigny-brut-rose-pino-nuar-rozovoe-bryut-12",
+    "abrau-dyurso-victor-dravigny-polusuhoe-pino-blan-beloe-12",
+    "abrau-dyurso-udelnoe-vedomstvo-imperatorskoe-beloe-polusladkoe",
+    "abrau-dyurso-shardone-beloe-suhoe-13",
+    "abrau-dyurso-abrau-dyurso-pino-nuar-krasnoe-suhoe-13",
+    "abrau-dyurso-victor-dravigny-koshernoe-bryut-shardone-beloe-125",
+    "abrau-dyurso-kaberne-sovinon-krasnoe-suhoe-125",
+    "abrau-dyurso-udelnoe-vedomstvo-imperatorskoe-beloe-bryut",
+    "abrau-dyurso-victor-dravigny-krasnoe-polusladkoe-kaberne-sovinon-125"
+   ],
+   "after": [
+    "abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12",
+    "abrau-dyurso-russkoe-igristoe-polusuhoe-rozovoe-pino-nuar-12",
+    "abrau-dyurso-russkoe-igristoe-polusladkoe-shardone-beloe-12",
+    "abrau-dyurso-russkoe-igristoe-koshernoe-polusladkoe-shardone-beloe-12",
+    "abrau-dyurso-russkoe-igristoe-koshernoe-bryut-shardone-beloe-13",
+    "abrau-dyurso-russkoe-igristoe-polusuhoe-shardone-beloe-12",
+    "abrau-dyurso-imperatorskoe-polusladkoe-shardone-beloe-12",
+    "abrau-dyurso-imperial-brut-rose-pino-nuar-rozovoe-bryut-12",
+    "abrau-dyurso-victor-dravigny-bryut",
+    "abrau-dyurso-imperatorskoe-bryut-shardone-beloe-12",
+    "abrau-dyurso-imperatorskoe-polusuhoe-shardone-beloe-12",
+    "abrau-dyurso-victor-dravigny-brut-rose-pino-nuar-rozovoe-bryut-12",
+    "abrau-dyurso-victor-dravigny-polusuhoe-pino-blan-beloe-12",
+    "abrau-dyurso-udelnoe-vedomstvo-imperatorskoe-beloe-polusladkoe",
+    "abrau-dyurso-shardone-beloe-suhoe-13",
+    "abrau-dyurso-abrau-dyurso-pino-nuar-krasnoe-suhoe-13",
+    "abrau-dyurso-victor-dravigny-koshernoe-bryut-shardone-beloe-125",
+    "abrau-dyurso-kaberne-sovinon-krasnoe-suhoe-125",
+    "abrau-dyurso-udelnoe-vedomstvo-imperatorskoe-beloe-bryut",
+    "abrau-dyurso-victor-dravigny-krasnoe-polusladkoe-kaberne-sovinon-125"
+   ],
+   "extra_seconds": 0.5981821441091597,
+   "scans": [
+    {
+     "strip": [
+      0.0,
+      0.6
+     ],
+     "angle": -12,
+     "seconds": 0.09154095407575369,
+     "words": [
+      {
+       "text": "РуССКОЕ",
+       "conf": 0.7047495981448116,
+       "box": [
+        181,
+        127,
+        306,
+        194
+       ]
+      },
+      {
+       "text": "Cc",
+       "conf": 0.5554459218136859,
+       "box": [
+        256,
+        204,
+        274,
+        218
+       ]
+      },
+      {
+       "text": "70 ,",
+       "conf": 0.557817410721724,
+       "box": [
+        304,
+        160,
+        378,
+        216
+       ]
+      },
+      {
+       "text": "ИГРИСТОЕ",
+       "conf": 0.7620586564929184,
+       "box": [
+        296,
+        123,
+        436,
+        197
+       ]
+      },
+      {
+       "text": "18",
+       "conf": 0.997496216142819,
+       "box": [
+        254,
+        169,
+        317,
+        215
+       ]
+      },
+      {
+       "text": "АБРАЯ-ДЮРОО",
+       "conf": 0.43566503035637155,
+       "box": [
+        151,
+        187,
+        462,
+        280
+       ]
+      }
+     ]
+    },
+    {
+     "strip": [
+      0.0,
+      0.6
+     ],
+     "angle": 0,
+     "seconds": 0.08793067373335361,
+     "words": [
+      {
+       "text": "18 70 ,",
+       "conf": 0.9044044714015012,
+       "box": [
+        256,
+        171,
+        379,
+        211
+       ]
+      },
+      {
+       "text": "50",
+       "conf": 0.40339068055020755,
+       "box": [
+        349,
+        206,
+        366,
+        216
+       ]
+      },
+      {
+       "text": "АБРАЯ-ДЮРСФ",
+       "conf": 0.368961253748886,
+       "box": [
+        154,
+        189,
+        459,
+        270
+       ]
+      },
+      {
+       "text": "ИГРИСТОЕ",
+       "conf": 0.9758796332939602,
+       "box": [
+        296,
+        123,
+        435,
+        195
+       ]
+      },
+      {
+       "text": "РусскоЕ",
+       "conf": 0.5671466970982287,
+       "box": [
+        181,
+        129,
+        305,
+        192
+       ]
+      }
+     ]
+    },
+    {
+     "strip": [
+      0.0,
+      0.6
+     ],
+     "angle": 12,
+     "seconds": 0.09741407865658402,
+     "words": [
+      {
+       "text": "ИГРИСТОЕ",
+       "conf": 0.8417138098229803,
+       "box": [
+        297,
+        124,
+        435,
+        194
+       ]
+      },
+      {
+       "text": "18 70 ,",
+       "conf": 0.4264654476538052,
+       "box": [
+        252,
+        165,
+        382,
+        216
+       ]
+      }
+     ]
+    },
+    {
+     "strip": [
+      0.4,
+      1.0
+     ],
+     "angle": -12,
+     "seconds": 0.11624500993639231,
+     "words": [
+      {
+       "text": "0",
+       "conf": 0.6091067401780812,
+       "box": [
+        285,
+        208,
+        296,
+        218
+       ]
+      },
+      {
+       "text": "18 / 0 ,",
+       "conf": 0.5311611605439309,
+       "box": [
+        253,
+        172,
+        378,
+        210
+       ]
+      },
+      {
+       "text": "АБРАЧ-ДЮРОЙ",
+       "conf": 0.4741830001315411,
+       "box": [
+        152,
+        188,
+        462,
+        283
+       ]
+      },
+      {
+       "text": "Уески",
+       "conf": 0.4171959234391152,
+       "box": [
+        249,
+        203,
+        289,
+        219
+       ]
+      },
+      {
+       "text": "РОЗОВОЕ",
+       "conf": 0.38427729114159265,
+       "box": [
+        209,
+        257,
+        299,
+        298
+       ]
+      },
+      {
+       "text": ")@лвавик",
+       "conf": 0.5290805881344897,
+       "box": [
+        476,
+        408,
+        597,
+        438
+       ]
+      }
+     ]
+    },
+    {
+     "strip": [
+      0.4,
+      1.0
+     ],
+     "angle": 0,
+     "seconds": 0.0821210341528058,
+     "words": [
+      {
+       "text": "18 / 0 ,",
+       "conf": 0.7205496837927805,
+       "box": [
+        258,
+        180,
+        377,
+        210
+       ]
+      },
+      {
+       "text": "Yсск",
+       "conf": 0.5479035973548889,
+       "box": [
+        249,
+        205,
+        280,
+        218
+       ]
+      },
+      {
+       "text": "50",
+       "conf": 0.40339068055020755,
+       "box": [
+        349,
+        206,
+        366,
+        216
+       ]
+      },
+      {
+       "text": "@лт=авик",
+       "conf": 0.4152571083937978,
+       "box": [
+        477,
+        410,
+        595,
+        437
+       ]
+      },
+      {
+       "text": "поАусулог",
+       "conf": 0.40916172582346166,
+       "box": [
+        291,
+        263,
+        400,
+        296
+       ]
+      }
+     ]
+    },
+    {
+     "strip": [
+      0.4,
+      1.0
+     ],
+     "angle": 12,
+     "seconds": 0.11488275276497006,
+     "words": [
+      {
+       "text": "1",
+       "conf": 0.6016088273318907,
+       "box": [
+        258,
+        176,
+        291,
+        207
+       ]
+      },
+      {
+       "text": "1",
+       "conf": 0.5336502540565249,
+       "box": [
+        327,
+        206,
+        347,
+        220
+       ]
+      },
+      {
+       "text": "0",
+       "conf": 0.30337416769748415,
+       "box": [
+        285,
+        208,
+        296,
+        218
+       ]
+      },
+      {
+       "text": "АБРАЧ-ДЮРОЙ",
+       "conf": 0.43083557303225517,
+       "box": [
+        151,
+        188,
+        463,
+        283
+       ]
+      },
+      {
+       "text": "поАусухог",
+       "conf": 0.4792297524857888,
+       "box": [
+        292,
+        261,
+        400,
+        298
+       ]
+      },
+      {
+       "text": "@)@аавик",
+       "conf": 0.3223191585947031,
+       "box": [
+        443,
+        405,
+        600,
+        446
+       ]
+      }
+     ]
+    }
+   ],
+   "admitted_words": [
+    {
+     "text": "18",
+     "conf": 0.997496216142819,
+     "box": [
+      254,
+      169,
+      317,
+      215
+     ]
+    },
+    {
+     "text": "18 70 ,",
+     "conf": 0.9044044714015012,
+     "box": [
+      256,
+      171,
+      379,
+      211
+     ]
+    },
+    {
+     "text": "ИГРИСТОЕ",
+     "conf": 0.9758796332939602,
+     "box": [
+      296,
+      123,
+      435,
+      195
+     ]
+    }
+   ]
+  }
+ ],
+ "scope": "pilot",
+ "baseline_sha256": "d424492c8bad0ba369638098c68c88691017e7f40994b9da3af87b576500bc2f",
+ "script_sha256": "be5e15ac248a6e5e26517dc23a4abfc4f8e49a4f6ecf222ff5e777051b911252",
+ "note": "Frozen visual candidates/geometry. Added OCR latency only; no recalibration or HTTP SLA measurement."
+}
