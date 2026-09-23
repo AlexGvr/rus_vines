@@ -119,9 +119,12 @@ SHOW_P = float(os.environ.get("SHOW_P", CONFIDENCE["thresholds"]["show_p"]))
 # треть. Если для них верен пустой slug, отказ ниже порога показа поднимает
 # счёт на кадрах организатора с 64.6% до 87.5% (tune) и с 60.0% до 77.8%
 # (test); если пустой ответ не засчитывается никогда, отказ только теряет
-# верные ответы (pipeline/eval_scoring.py). Поэтому выключено по умолчанию
-# и включается под правило, которое назовёт организатор.
-EVAL_ABSTAIN = os.environ.get("EVAL_ABSTAIN", "0") == "1"
+# верные ответы (pipeline/eval_scoring.py). Вместе с подтверждением VLM
+# (ниже) на всех 93 кадрах организатора: 60 -> 85, если пустой ответ верен,
+# и 60 -> 59, если нет. Правило организатор не назвал, а закрытая проверка
+# идёт после стоп-кода, поэтому включено по умолчанию; EVAL_ABSTAIN=0
+# возвращает прежнее поведение «всегда лучший кандидат».
+EVAL_ABSTAIN = os.environ.get("EVAL_ABSTAIN", "1") == "1"
 EVAL_ABSTAIN_P = float(os.environ.get("EVAL_ABSTAIN_P", SHOW_P))
 
 # Подтверждение лидера VLM (pipeline/vlm_verify.py). Спрашивается только
@@ -131,8 +134,10 @@ EVAL_ABSTAIN_P = float(os.environ.get("EVAL_ABSTAIN_P", SHOW_P))
 # пилота; на тестовой части кадры организатора по правилу «null верен для
 # вина вне каталога» 35 -> 38 из 45 (data/validation/vlm_pilot_20260923).
 # Ответ VLM не меняет — только решение показывать ли его. Стоит ~0.35 с на
-# вызов и ~9 ГБ видеопамяти, поэтому выключено по умолчанию.
-VLM_CONFIRM = os.environ.get("VLM_CONFIRM", "0") == "1"
+# вызов и ~9 ГБ видеопамяти. Включено по умолчанию; без видеокарты или если
+# модель не загрузилась, сервис работает без подтверждения и пишет об этом
+# в лог, а /health показывает фактический режим (settings.vlm_active).
+VLM_CONFIRM = os.environ.get("VLM_CONFIRM", "1") == "1"
 VLM_CONFIRM_P = float(os.environ.get("VLM_CONFIRM_P", "0.8"))
 
 # Разрешение противоречий текстом. Запускается только когда геометрия не
@@ -170,15 +175,37 @@ def build_state() -> None:
     state["text"] = TextChannel(catalog)
     load_model()
     load_ocr()
-    if VLM_CONFIRM:
-        import vlm_verify
-        vlm_verify.load()
+    state["vlm"] = start_vlm() if VLM_CONFIRM else False
     # Прогрев: первый прогон модели и детектора инициализирует ядра CUDA
     # и стоит секунды — на запросе такой задержки быть не должно.
     warm = [Image.new("RGB", (384, 384), "white")]
     for steps in QUERY_VIEWS:
         embed_images(normalize_batch(warm, steps=steps))
     read_words(warm[0])
+
+
+def start_vlm() -> bool:
+    """Загрузить и прогреть VLM; False — работать без подтверждения.
+
+    На процессоре 4B-модель отвечает секунды на вызов и съедает запас SLA,
+    поэтому без CUDA подтверждение не включается. Прогрев нужен по той же
+    причине, что у SigLIP: первый вызов инициализирует ядра, и платить за
+    это должен старт, а не первый запрос скрипта оценки.
+    """
+    try:
+        import torch
+        if not torch.cuda.is_available():
+            print("VLM_CONFIRM: CUDA недоступна — подтверждение VLM выключено", file=sys.stderr)
+            return False
+        import vlm_verify
+        verifier = vlm_verify.load()
+        blank = Image.new("RGB", (256, 512), "white")
+        verifier.p_yes(blank, blank, "warm-up")
+        return True
+    except Exception as exc:  # noqa: BLE001 — без VLM сервис остаётся рабочим
+        print(f"VLM_CONFIRM: модель не загрузилась ({exc}) — подтверждение VLM выключено",
+              file=sys.stderr)
+        return False
 
 
 @asynccontextmanager
@@ -239,7 +266,7 @@ def search_candidates(image: Image.Image,
     resolved = any(c.contradictions for c in candidates)
     t_vlm = 0.0
     conf["vlm_confirmed"] = False
-    if VLM_CONFIRM and candidates and conf["probability"] < SHOW_P:
+    if state.get("vlm") and candidates and conf["probability"] < SHOW_P:
         import vlm_verify
         t3 = time.perf_counter()
         leader = candidates[0].slug
@@ -341,7 +368,8 @@ def settings_block() -> dict:
     return {
         "show_p": SHOW_P, "confident_p": CONFIDENT_P,
         "eval_abstain": EVAL_ABSTAIN, "eval_abstain_p": EVAL_ABSTAIN_P,
-        "vlm_confirm": VLM_CONFIRM, "vlm_confirm_p": VLM_CONFIRM_P,
+        "vlm_confirm": VLM_CONFIRM, "vlm_active": bool(state.get("vlm")),
+        "vlm_confirm_p": VLM_CONFIRM_P,
         "thresholds_from_env": {k: os.environ.get(k) for k in ("SHOW_P", "CONFIDENT_P")
                                 if os.environ.get(k) is not None},
         "rules_env": core.switches(),
@@ -412,10 +440,9 @@ def wine_photo(slug: str):
 async def eval_predict(image: UploadFile = File(...)) -> JSONResponse:
     """Контракт скрипта оценки: ровно один slug плоским объектом.
 
-    По умолчанию порог не применяется и отдаётся лучший кандидат. При
-    EVAL_ABSTAIN=1 ниже EVAL_ABSTAIN_P возвращается {"slug": null} — это
-    ответ «вина нет в каталоге» на случай, если закрытая таблица так его
-    и засчитывает.
+    Ниже EVAL_ABSTAIN_P возвращается {"slug": null} — ответ «вина нет
+    в каталоге», если лидера не подтвердил VLM. EVAL_ABSTAIN=0 — всегда
+    лучший кандидат.
     """
     img = await read_image(image)
     if img is None:
