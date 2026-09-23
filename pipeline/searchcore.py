@@ -17,9 +17,46 @@ from __future__ import annotations
 import math
 import os
 from dataclasses import dataclass, field
+from pathlib import Path
 
 import numpy as np
 from PIL import Image
+
+# Все переключатели окружения, от которых зависит ответ конвейера. Один
+# список на сервис (/health) и отчёты замеров: раньше каждый держал свой,
+# и в обоих не хватало половины правил, так что по отчёту нельзя было
+# проверить, что сервис и замер — один и тот же конвейер.
+RULE_SWITCHES = (
+    "TEXT_ALIASES", "OCR_JOIN", "NAME_FIRST", "LINE_BAND", "PLATFORM_SWEETNESS",
+    "NAME_STRONG", "NAME_TRANSLIT", "GROUP_LEADER", "DEMOTE_GEOMETRY", "DEMOTE_DEPTH",
+    "LABEL_BAND", "KIN_GROUP", "BRAND_FIRST", "GEOM_WEIGHT", "GEOM_WEIGHT_ALPHA",
+    "SIFT_MAX_SIDE", "SIFT_DIR", "YOLO_WEIGHTS", "YOLO_CONF", "YOLO_IMGSZ",
+    "PLATFORM_ADDITIONS",
+)
+
+# Позиции, появившиеся на платформе после выгрузки кейса (sync_platform.py).
+# По умолчанию ищутся вместе с остальными: организатор снимал и такие вина.
+# PLATFORM_ADDITIONS=0 возвращает каталог выгрузки — на случай, если
+# закрытая таблица размечена по ней: строки индекса этих позиций становятся
+# мусором и в шортлист не попадают, пересборка индекса не нужна.
+USE_PLATFORM_ADDITIONS = os.environ.get("PLATFORM_ADDITIONS", "1") != "0"
+_ADDITIONS = (Path(__file__).resolve().parent.parent
+              / "data" / "datapack" / "platform_additions.json")
+
+
+def scope_index(slugs: list[str | None]) -> list[str | None]:
+    """Slug строк индекса с учётом PLATFORM_ADDITIONS."""
+    if USE_PLATFORM_ADDITIONS or not _ADDITIONS.exists():
+        return slugs
+    import json
+    added = {w["slug"] for w in json.loads(_ADDITIONS.read_text(encoding="utf-8"))["wines"]}
+    return [None if s in added else s for s in slugs]
+
+
+def switches() -> dict[str, str | None]:
+    """Значения переключателей из окружения; None — действует умолчание кода."""
+    return {key: os.environ.get(key) for key in RULE_SWITCHES}
+
 
 # Порядок признаков уверенности. Совпадает с порядком весов в артефакте
 # калибровки, поэтому менять его без пересчёта весов нельзя.
@@ -66,7 +103,11 @@ def shortlist(scores: np.ndarray, index_slugs: list[str | None],
     """
     out: list[Candidate] = []
     seen: set[str] = set()
-    for j in np.argsort(-scores)[:depth]:
+    # Устойчивая сортировка: у позиций с общим эталоном косинус равен точно,
+    # и без неё порядок такой ничьей зависел от остального содержимого
+    # массива (у pgvector-варианта, где строки вне первых k равны -1, он
+    # выходил другим). Теперь ничья решается порядком строк индекса.
+    for j in np.argsort(-scores, kind="stable")[:depth]:
         slug = index_slugs[j]
         if slug is None or slug in seen:
             continue

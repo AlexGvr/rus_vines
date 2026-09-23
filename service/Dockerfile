@@ -28,7 +28,8 @@ RUN pip install --no-cache-dir --index-url "$TORCH_INDEX" torch torchvision \
       python-multipart \
       pillow \
       numpy \
-      easyocr
+      easyocr \
+      "psycopg[binary]"
 
 # Веса детектора и OCR кладём в образ: иначе они тянутся при первом запросе,
 # и первый скан ждёт загрузку вместо ответа.
@@ -43,6 +44,7 @@ RUN python -c "import easyocr; easyocr.Reader(['ru','en'], gpu=False, verbose=Fa
 COPY core/ /app/core/
 COPY pipeline/embed.py pipeline/imageprep.py pipeline/ocr.py \
      pipeline/rerank.py pipeline/searchcore.py pipeline/text_match.py \
+     pipeline/vector_store.py pipeline/vlm_verify.py \
      /app/pipeline/
 COPY service/main.py service/recommend.py /app/service/
 

@@ -155,7 +155,7 @@ def main() -> None:
 
     vectors = np.load(INDEX_DIR / f"{args.index}.npy")
     with (INDEX_DIR / f"{args.index}.csv").open(encoding="utf-8") as fh:
-        index_slugs = [row["slug"] or None for row in csv.DictReader(fh)]
+        index_slugs = core.scope_index([row["slug"] or None for row in csv.DictReader(fh)])
     # Папка признаков задаётся снаружи: масштаб признаков эталонов должен
     # совпадать с SIFT_MAX_SIDE запроса, иначе сравниваются разные вещи.
     reranker = PrecomputedReranker(
@@ -468,10 +468,7 @@ def main() -> None:
         "provenance": {"args": vars(args),
                        "sha256": {str(p.relative_to(ROOT)) if p.is_relative_to(ROOT)
                                   else str(p): digest(p) for p in tracked_inputs},
-                       "environment": {key: os.environ.get(key) for key in
-                           ("LABEL_BAND", "KIN_GROUP", "BRAND_FIRST", "SIFT_DIR",
-                            "SIFT_MAX_SIDE", "TEXT_ALIASES", "OCR_JOIN", "NAME_FIRST",
-                            "GEOM_WEIGHT", "GEOM_WEIGHT_ALPHA")},
+                       "environment": core.switches(),
                        "ocr_failures": len(ocr_module.FAILURES),
                        "independent_holdout": False},
         "metrics": metrics,

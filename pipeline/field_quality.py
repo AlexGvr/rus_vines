@@ -9,6 +9,7 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import hashlib
 import json
 import sys
@@ -42,6 +43,22 @@ def main() -> None:
         "false_shows": q["fp"], "absent_n": m["absent_n"],
         "absent_shown_rate": round(m["false_accept_rate"], 4),
     }
+    # Кадры организатора — распределение, ближайшее к закрытой проверке;
+    # отзывы (600×800) — другое, и среднее их смешивает.
+    manifest = {r["image"]: r for r in csv.DictReader(
+        (ROOT / "data/field/manifest.csv").open(encoding="utf-8"))}
+    org = [r for r in data["results"]
+           if manifest.get(r["image"], {}).get("source") == "публичный набор кейса"]
+    if org:
+        pos = [r for r in org if r["gold"]]
+        neg = [r for r in org if not r["gold"]]
+        block["organizer"] = {
+            "frames": len(org), "positives": len(pos),
+            "top1_positives": round(sum(r["correct"] for r in pos) / len(pos), 4) if pos else None,
+            "absent_n": len(neg),
+            "absent_shown_rate": (round(sum(r["probability"] >= show_p for r in neg) / len(neg), 4)
+                                  if neg else None),
+        }
     if args.api:
         api = json.loads(Path(args.api).read_text(encoding="utf-8"))["summary"]
         block["latency_ms"] = api["latency_ms"]

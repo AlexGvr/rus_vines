@@ -32,6 +32,9 @@ ROOT = Path(__file__).resolve().parent.parent
 CSV_PATH = ROOT / "dataset" / "strapi_output0709.csv"
 UPLOADS = next((ROOT / "dataset" / "uploads_root").rglob("uploads"), None)
 SCRAPE = ROOT / "data" / "datapack" / "wines.json"
+# Позиции платформы, которых нет в выгрузке кейса (pipeline/sync_platform.py):
+# добавляются последними, фото сверяется по SHA-256.
+PLATFORM_ADDITIONS = ROOT / "data" / "datapack" / "platform_additions.json"
 RAW_CARDS = ROOT / "data" / "raw" / "cards"     # обход каталога, не в репозитории
 PHOTO_MAP = ROOT / "data" / "datapack" / "photo_map.csv"   # его дистиллят, в репозитории
 # Ручные исправления привязки: проверенные глазами эталоны из официальных
@@ -345,9 +348,41 @@ def main(refresh: bool = False) -> int:
             "strategy": strategy or "none",
         })
 
+    # Позиции, появившиеся на платформе после выгрузки. Slug выгрузки не
+    # перекрываются: выгрузка — официальный источник, дополнение только
+    # добавляет то, чего в ней нет.
+    added = 0
+    if PLATFORM_ADDITIONS.exists():
+        import hashlib
+        for w in json.loads(PLATFORM_ADDITIONS.read_text(encoding="utf-8"))["wines"]:
+            if w["slug"] in positions:
+                continue
+            photo = w.get("photo")
+            if photo:
+                path = ROOT / photo
+                if not path.exists():
+                    sys.exit(f"{PLATFORM_ADDITIONS.name}: для {w['slug']} нет файла {photo}")
+                if hashlib.sha256(path.read_bytes()).hexdigest() != w.get("photo_sha256"):
+                    sys.exit(f"{PLATFORM_ADDITIONS.name}: у {photo} другой SHA-256")
+            catalog.append({
+                "slug": w["slug"], "title": w["title"], "manufacturer": w["manufacturer"],
+                "region": w["region"], "category": w["color"], "color": w["wineColor"],
+                "grapes": w["grapes"], "description": w["description"],
+                "photo": photo, "photo_size": "original" if photo else None,
+                "rating": w.get("rating"), "alcohol": w.get("alcohol"),
+                "temperature": w.get("temperature"), "dishes": w.get("dishes") or [],
+                "source": "platform-sync",
+            })
+            report.append({"slug": w["slug"], "csv_photo": "", "matched_file": photo or "",
+                           "size": "original" if photo else "", "strategy": "platform-sync"})
+            stats["с фото" if photo else "без фото"] += 1
+            stats[f"platform-sync/{'original' if photo else '-'}"] += 1
+            added += 1
+
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     (OUT_DIR / "catalog.json").write_text(json.dumps(
-        {"meta": {"source": "strapi_output0709.csv", "count": len(catalog),
+        {"meta": {"source": "strapi_output0709.csv", "platform_additions": added,
+                  "count": len(catalog),
                   "with_photo": stats["с фото"]},
          "wines": catalog}, ensure_ascii=False), encoding="utf-8")
     with (OUT_DIR / "mapping.csv").open("w", newline="", encoding="utf-8") as fh:

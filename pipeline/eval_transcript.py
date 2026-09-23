@@ -142,7 +142,7 @@ def main() -> None:
     by_slug = {w["slug"]: w for w in wines}
     vectors = np.load(INDEX_DIR / f"{args.index}.npy")
     with (INDEX_DIR / f"{args.index}.csv").open(encoding="utf-8") as fh:
-        index_slugs = [row["slug"] or None for row in csv.DictReader(fh)]
+        index_slugs = core.scope_index([row["slug"] or None for row in csv.DictReader(fh)])
     findable = {s for s in index_slugs if s}
     reranker = PrecomputedReranker(os.environ.get("SIFT_DIR", str(INDEX_DIR / "sift")))
     channel = TextChannel(wines)

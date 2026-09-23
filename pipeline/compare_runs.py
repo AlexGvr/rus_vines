@@ -8,12 +8,14 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from field_metrics import summarize  # noqa: E402
+from stats import fmt_share, mcnemar_exact  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -86,7 +88,25 @@ def main() -> None:
 
     fixed = [i for i in by_a if by_a[i]["gold"] and not by_a[i]["correct"] and by_b[i]["correct"]]
     broken = [i for i in by_a if by_a[i]["gold"] and by_a[i]["correct"] and not by_b[i]["correct"]]
-    print(f"\nисправлено top-1: {len(fixed)}, испорчено: {len(broken)}")
+    print(f"\nисправлено top-1: {len(fixed)}, испорчено: {len(broken)}, "
+          f"точный Мак-Немар p = {mcnemar_exact(len(fixed), len(broken)):.3f}")
+    # Разрез по источнику: кадры организатора ближе всего к закрытой
+    # проверке, отзывы (600×800) — другое распределение, и средний
+    # выигрыш не должен прятать потерю на нужном.
+    manifest = {r["image"]: r for r in csv.DictReader(
+        (ROOT / "data/field/manifest.csv").open(encoding="utf-8"))}
+    origin = lambda i: ("организатор" if manifest.get(i, {}).get("source") == "публичный набор кейса"
+                        else "отзывы")
+    for src in ("организатор", "отзывы"):
+        pos = [i for i in by_a if by_a[i]["gold"] and origin(i) == src]
+        if not pos:
+            continue
+        ka = sum(by_a[i]["correct"] for i in pos)
+        kb = sum(by_b[i]["correct"] for i in pos)
+        f_ = sum(1 for i in fixed if origin(i) == src)
+        b_ = sum(1 for i in broken if origin(i) == src)
+        print(f"  {src:12} top-1 {fmt_share(ka, len(pos)):>24} -> {fmt_share(kb, len(pos)):>24}"
+              f"  +{f_}/-{b_}")
     for label, group in (("исправлено", fixed), ("испорчено", broken)):
         for i in sorted(group):
             a, b = by_a[i], by_b[i]
@@ -99,9 +119,7 @@ def main() -> None:
     if args.by_group:
         # Прирост не должен объясняться одной серией: считаем, сколько разных
         # позиций и фотосерий затронуто, и печатаем каждую.
-        import csv as _csv
-        series = {r["image"]: r["series"] for r in _csv.DictReader(
-            (ROOT / "data/field/manifest.csv").open(encoding="utf-8"))}
+        series = {i: r["series"] for i, r in manifest.items()}
         for label, group in (("исправлено", fixed), ("испорчено", broken)):
             by_slug, by_series = {}, {}
             for i in group:

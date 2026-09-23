@@ -48,11 +48,25 @@ class NameSlugs(unittest.TestCase):
         self.assertEqual(name_slugs(self.slugs, [word("ЛИВАДИА")], self.channel), set())
 
     def test_weak_geometry_owner_is_not_pulled(self):
+        # Порог по точкам проверяется без правила сильного имени: иначе
+        # восьмибуквенное «КРЫМСКИЙ» проходит мимо порога (следующий тест).
+        strong = text_match.USE_NAME_STRONG
+        text_match.USE_NAME_STRONG = False
+        self.addCleanup(setattr, text_match, "USE_NAME_STRONG", strong)
         weight = {"portveyn-belyy-krymskiy": 5.0, "portveyn-krasnyy-livadiya": 60.0,
                   "madera-krymskaya": 10.0, "kagor-gurzuf": 8.0}
         self.assertEqual(name_slugs(self.slugs, [word("КРЫМСКИЙ")], self.channel, weight=weight),
                          set())
         weight["portveyn-belyy-krymskiy"] = 36.0
+        self.assertEqual(name_slugs(self.slugs, [word("КРЫМСКИЙ")], self.channel, weight=weight),
+                         {"portveyn-belyy-krymskiy"})
+
+    def test_strong_name_ignores_geometry_floor(self):
+        strong = text_match.USE_NAME_STRONG
+        text_match.USE_NAME_STRONG = True
+        self.addCleanup(setattr, text_match, "USE_NAME_STRONG", strong)
+        weight = {"portveyn-belyy-krymskiy": 5.0, "portveyn-krasnyy-livadiya": 60.0,
+                  "madera-krymskaya": 10.0, "kagor-gurzuf": 8.0}
         self.assertEqual(name_slugs(self.slugs, [word("КРЫМСКИЙ")], self.channel, weight=weight),
                          {"portveyn-belyy-krymskiy"})
 

@@ -1,0 +1,184 @@
+{
+ "n": {
+  "tune": 187,
+  "test": 203
+ },
+ "rerank": {
+  "d": 0.0,
+  "g": 0.12,
+  "tune": {
+   "before": [
+    134,
+    154
+   ],
+   "after": [
+    137,
+    154
+   ],
+   "fixed": [
+    "15501518_0.jpg",
+    "12083971_0.jpg",
+    "17762210_0.jpg",
+    "org091_0.jpg"
+   ],
+   "broken": [
+    "org004_0.jpg"
+   ]
+  },
+  "test": {
+   "before": [
+    134,
+    177
+   ],
+   "after": [
+    137,
+    177
+   ],
+   "fixed": [
+    "13409943_1.jpg",
+    "15557112_0.jpg",
+    "15586449_0.jpg",
+    "16952274_0.jpg"
+   ],
+   "broken": [
+    "5784977_1.jpg"
+   ]
+  }
+ },
+ "abstain": {
+  "show_p": 0.15,
+  "t": 0.8
+ },
+ "abstain_table": {
+  "без отказа": {
+   "tune/organizer": {
+    "pipeline": [
+     31,
+     48
+    ],
+    "with_vlm": [
+     31,
+     48
+    ]
+   },
+   "tune/all": {
+    "pipeline": [
+     134,
+     187
+    ],
+    "with_vlm": [
+     137,
+     187
+    ]
+   },
+   "test/organizer": {
+    "pipeline": [
+     29,
+     45
+    ],
+    "with_vlm": [
+     29,
+     45
+    ]
+   },
+   "test/all": {
+    "pipeline": [
+     134,
+     203
+    ],
+    "with_vlm": [
+     137,
+     203
+    ]
+   }
+  },
+  "только конвейер 0.12": {
+   "tune/organizer": {
+    "pipeline": [
+     42,
+     48
+    ],
+    "with_vlm": [
+     42,
+     48
+    ]
+   },
+   "tune/all": {
+    "pipeline": [
+     154,
+     187
+    ],
+    "with_vlm": [
+     154,
+     187
+    ]
+   },
+   "test/organizer": {
+    "pipeline": [
+     35,
+     45
+    ],
+    "with_vlm": [
+     35,
+     45
+    ]
+   },
+   "test/all": {
+    "pipeline": [
+     142,
+     203
+    ],
+    "with_vlm": [
+     142,
+     203
+    ]
+   }
+  },
+  "выбрано: конвейер 0.15 и P(yes) 0.8": {
+   "tune/organizer": {
+    "pipeline": [
+     46,
+     48
+    ],
+    "with_vlm": [
+     46,
+     48
+    ]
+   },
+   "tune/all": {
+    "pipeline": [
+     160,
+     187
+    ],
+    "with_vlm": [
+     162,
+     187
+    ]
+   },
+   "test/organizer": {
+    "pipeline": [
+     39,
+     45
+    ],
+    "with_vlm": [
+     38,
+     45
+    ]
+   },
+   "test/all": {
+    "pipeline": [
+     148,
+     203
+    ],
+    "with_vlm": [
+     149,
+     203
+    ]
+   }
+  }
+ },
+ "latency_ms": {
+  "median": 1826,
+  "p95": 3444
+ }
+}

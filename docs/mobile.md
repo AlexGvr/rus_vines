@@ -1,5 +1,11 @@
 # Мобильное приложение (Flutter)
 
+> **Архив.** Документ описывает первый офлайн-MVP (OCR-поиск по тексту,
+> `app/`, `mobile/`), от которого сервис ушёл к поиску по изображению.
+> Из него в работе остались `core/matcher.py` и `core/normalize.py` —
+> нечёткое сравнение токенов в текстовом канале (`pipeline/text_match.py`). Текущая архитектура и замеры —
+> [ARCHITECTURE.md](../ARCHITECTURE.md) и [metrics.md](metrics.md).
+
 Каталог `mobile/` — Flutter-приложение «Своё вино»: полностью офлайновый сканер этикеток российских вин. Тот же продукт, что и PWA в `app/`, но с нативным OCR (ML Kit) вместо Tesseract.js. Проверено end-to-end на Android-эмуляторе; сборка — Flutter 3.44, release APK 97MB (universal).
 
 ## Структура lib/

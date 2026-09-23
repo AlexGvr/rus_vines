@@ -1,0 +1,20 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      # Модульные тесты не трогают данные кейса и веса моделей; torch и
+      # transformers нужны только для импорта модулей замеров.
+      - run: pip install --index-url https://download.pytorch.org/whl/cpu torch
+      - run: pip install numpy pillow opencv-python-headless scipy transformers pytest
+      - run: python -m pytest -q pipeline/

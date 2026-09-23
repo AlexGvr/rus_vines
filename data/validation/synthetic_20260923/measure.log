@@ -1,0 +1,26 @@
+[transformers] Model config: bos_token_id must be `None` or an integer within the vocabulary (between 0 and 31999), got 49406. This may result in unexpected behavior.
+[transformers] Model config: eos_token_id must be `None` or an integer within the vocabulary (between 0 and 31999), got 49407. This may result in unexpected behavior.
+Loading weights:   0%|          | 0/888 [00:00<?, ?it/s]Loading weights:  25%|██▍       | 218/888 [00:00<00:00, 2137.81it/s]Loading weights:  69%|██████▉   | 611/888 [00:00<00:00, 3169.84it/s]Loading weights: 100%|██████████| 888/888 [00:00<00:00, 3300.28it/s]
+  sharp 50/400 13s
+  sharp 100/400 24s
+  sharp 150/400 35s
+  sharp 200/400 45s
+  sharp 250/400 56s
+  sharp 300/400 68s
+  sharp 350/400 79s
+  sharp 400/400 89s
+sharp {"n": 400, "findable": 400, "recall@20": 0.9675, "cosine_top1": 0.805, "m0.25": {"geometry_top1": 0.9175, "top1": 0.9075, "top1_n": 363, "top3": 0.9425, "top5": 0.95, "decisive_share": 0.7775}, "m0.5": {"geometry_top1": 0.885, "top1": 0.875, "top1_n": 350, "top3": 0.94, "top5": 0.9475, "decisive_share": 0.645}, "seconds_per_query": 0.22304145141271875, "ocr_failures": 0}
+  neardup 50/189 12s
+  neardup 100/189 23s
+  neardup 150/189 33s
+neardup {"n": 189, "findable": 189, "recall@20": 0.9894179894179894, "cosine_top1": 0.6349206349206349, "m0.25": {"geometry_top1": 0.9206349206349206, "top1": 0.91005291005291, "top1_n": 172, "top3": 0.9735449735449735, "top5": 0.9841269841269841, "decisive_share": 0.8359788359788359}, "m0.5": {"geometry_top1": 0.8518518518518519, "top1": 0.8412698412698413, "top1_n": 159, "top3": 0.9682539682539683, "top5": 0.9841269841269841, "decisive_share": 0.708994708994709}, "seconds_per_query": 0.21292358919948576, "ocr_failures": 0}
+  hard 50/400 8s
+  hard 100/400 17s
+  hard 150/400 26s
+  hard 200/400 35s
+  hard 250/400 44s
+  hard 300/400 53s
+  hard 350/400 60s
+  hard 400/400 69s
+hard {"n": 400, "findable": 400, "recall@20": 0.95, "cosine_top1": 0.775, "m0.25": {"geometry_top1": 0.89, "top1": 0.8875, "top1_n": 355, "top3": 0.9275, "top5": 0.93, "decisive_share": 0.78}, "m0.5": {"geometry_top1": 0.8725, "top1": 0.87, "top1_n": 348, "top3": 0.9225, "top5": 0.925, "decisive_share": 0.6725}, "seconds_per_query": 0.1715596394171007, "ocr_failures": 0}
+measure done

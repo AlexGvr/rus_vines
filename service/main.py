@@ -35,7 +35,6 @@ import time
 from contextlib import asynccontextmanager
 from pathlib import Path
 
-import numpy as np
 from fastapi import Body, FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
@@ -49,6 +48,7 @@ import searchcore as core  # noqa: E402
 from ocr import load as load_ocr, read_words  # noqa: E402
 from rerank import PrecomputedReranker  # noqa: E402
 from text_match import TextChannel  # noqa: E402
+from vector_store import open_store  # noqa: E402
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from recommend import QUESTIONS, Recommender  # noqa: E402
@@ -114,6 +114,27 @@ OUTCOME_WEIGHTS = CONFIDENCE["outcome_weights"]
 CONFIDENT_P = float(os.environ.get("CONFIDENT_P", CONFIDENCE["thresholds"]["confident_p"]))
 SHOW_P = float(os.environ.get("SHOW_P", CONFIDENCE["thresholds"]["show_p"]))
 
+# Отказ в оценочном эндпоинте. Как закрытая таблица оценивает вино вне
+# каталога, организатор не сообщил, а в его публичном наборе таких кадров
+# треть. Если для них верен пустой slug, отказ ниже порога показа поднимает
+# счёт на кадрах организатора с 64.6% до 87.5% (tune) и с 60.0% до 77.8%
+# (test); если пустой ответ не засчитывается никогда, отказ только теряет
+# верные ответы (pipeline/eval_scoring.py). Поэтому выключено по умолчанию
+# и включается под правило, которое назовёт организатор.
+EVAL_ABSTAIN = os.environ.get("EVAL_ABSTAIN", "0") == "1"
+EVAL_ABSTAIN_P = float(os.environ.get("EVAL_ABSTAIN_P", SHOW_P))
+
+# Подтверждение лидера VLM (pipeline/vlm_verify.py). Спрашивается только
+# ниже порога показа: там верный ответ часто есть, но геометрия спорит
+# с косинусом. P(yes) >= VLM_CONFIRM_P оставляет ответ показанным (и не
+# даёт отказа в оценочном эндпоинте). Порог 0.8 выбран по настроечной части
+# пилота; на тестовой части кадры организатора по правилу «null верен для
+# вина вне каталога» 35 -> 38 из 45 (data/validation/vlm_pilot_20260923).
+# Ответ VLM не меняет — только решение показывать ли его. Стоит ~0.35 с на
+# вызов и ~9 ГБ видеопамяти, поэтому выключено по умолчанию.
+VLM_CONFIRM = os.environ.get("VLM_CONFIRM", "0") == "1"
+VLM_CONFIRM_P = float(os.environ.get("VLM_CONFIRM_P", "0.8"))
+
 # Разрешение противоречий текстом. Запускается только когда геометрия не
 # развела кандидатов: инлаеров у соседа не меньше CLOSE_WINDOW от лидера.
 # Правило одностороннее — уверенно прочитанное слово, принадлежащее ровно
@@ -133,9 +154,10 @@ state: dict = {}
 def build_state() -> None:
     catalog = json.loads(CATALOG_PATH.read_text(encoding="utf-8"))["wines"]
     state["by_slug"] = {w["slug"]: w for w in catalog}
-    state["vectors"] = np.load(INDEX_DIR / f"{INDEX_VARIANT}.npy")
+    # numpy в памяти по умолчанию; VECTOR_BACKEND=pgvector — PostgreSQL (vector_store.py).
+    state["vectors"] = open_store(INDEX_VARIANT)
     with (INDEX_DIR / f"{INDEX_VARIANT}.csv").open(encoding="utf-8") as fh:
-        state["slugs"] = [row["slug"] or None for row in csv.DictReader(fh)]
+        state["slugs"] = core.scope_index([row["slug"] or None for row in csv.DictReader(fh)])
     state["reranker"] = PrecomputedReranker(INDEX_DIR / "sift")
     # ТЗ требует показывать метрику уверенности (F1) для топ-1 и топ-5.
     # Уверенность конкретного ответа сервис считает сам, а F1 — свойство
@@ -148,6 +170,9 @@ def build_state() -> None:
     state["text"] = TextChannel(catalog)
     load_model()
     load_ocr()
+    if VLM_CONFIRM:
+        import vlm_verify
+        vlm_verify.load()
     # Прогрев: первый прогон модели и детектора инициализирует ядра CUDA
     # и стоит секунды — на запросе такой задержки быть не должно.
     warm = [Image.new("RGB", (384, 384), "white")]
@@ -183,7 +208,7 @@ def search_candidates(image: Image.Image,
     queries = embed_images(list(views.values()))
     # Строка индекса получает лучший косинус по видам запроса: видам не нужно
     # совпасть всем сразу, достаточно одной пары «вид запроса — вид эталона».
-    similarity = state["vectors"] @ queries.T
+    similarity = state["vectors"].similarity(queries)
     scores = similarity.max(axis=1)
     prepared = list(views.values())[core.pick_view(list(views.values()), similarity)]
     candidates = core.shortlist(scores, state["slugs"], RERANK_TOPK)
@@ -212,9 +237,21 @@ def search_candidates(image: Image.Image,
     # списке значил бы другое, чем при калибровке.
     conf = confidence(candidates)
     resolved = any(c.contradictions for c in candidates)
+    t_vlm = 0.0
+    conf["vlm_confirmed"] = False
+    if VLM_CONFIRM and candidates and conf["probability"] < SHOW_P:
+        import vlm_verify
+        t3 = time.perf_counter()
+        leader = candidates[0].slug
+        p_yes = vlm_verify.p_yes(views[("detect",)], leader,
+                                 state["by_slug"].get(leader, {}), state["text"])
+        t_vlm = (time.perf_counter() - t3) * 1000
+        conf["vlm_p_yes"] = round(p_yes, 4)
+        conf["vlm_confirmed"] = p_yes >= VLM_CONFIRM_P
     return ([c.as_dict() for c in candidates[:top]], conf,
             {"cv_ms": round(t_cv, 1), "rerank_ms": round(t_rerank, 1),
-             "text_ms": round(t_text, 1), "resolved": resolved})
+             "text_ms": round(t_text, 1), "vlm_ms": round(t_vlm, 1),
+             "resolved": resolved})
 
 
 def confidence(candidates: list) -> dict:
@@ -272,6 +309,7 @@ def quality_block() -> dict:
     measured = (state.get("quality") or {}).get("f1", {}).get("по каталогу", {})
     if not measured:
         return {}
+    report_show = (state.get("quality") or {}).get("show_threshold")
     block = {
         "f1_top1": round(measured["top1"]["f1"], 4),
         "f1_top5": round(measured["top5"]["f1"], 4),
@@ -280,6 +318,10 @@ def quality_block() -> dict:
         "source": "synthetic",
         "source_note": "синтетические запросы из эталонных фото каталога (report_sharp.json); "
                        "не качество на реальной съёмке",
+        # Отчёт пересчитывается отдельно от порога сервиса; расхождение
+        # показывается явно, а не молча выдаётся за текущее качество.
+        "report_show_p": report_show,
+        "matches_service_show_p": report_show is not None and abs(report_show - SHOW_P) < 1e-9,
     }
     if FIELD_QUALITY.exists():
         try:
@@ -296,14 +338,13 @@ def settings_block() -> dict:
     из своего. Без этого блока нельзя проверить, что запущенный сервис и
     последний замер — один и тот же конвейер.
     """
-    switches = ("TEXT_ALIASES", "OCR_JOIN", "NAME_FIRST", "LINE_BAND", "PLATFORM_SWEETNESS",
-                "GROUP_LEADER", "NAME_STRONG", "DEMOTE_GEOMETRY", "DEMOTE_DEPTH",
-                "LABEL_BAND", "KIN_GROUP", "BRAND_FIRST", "SIFT_MAX_SIDE", "SIFT_DIR")
     return {
         "show_p": SHOW_P, "confident_p": CONFIDENT_P,
+        "eval_abstain": EVAL_ABSTAIN, "eval_abstain_p": EVAL_ABSTAIN_P,
+        "vlm_confirm": VLM_CONFIRM, "vlm_confirm_p": VLM_CONFIRM_P,
         "thresholds_from_env": {k: os.environ.get(k) for k in ("SHOW_P", "CONFIDENT_P")
                                 if os.environ.get(k) is not None},
-        "rules_env": {k: os.environ.get(k) for k in switches},
+        "rules_env": core.switches(),
         "rerank_topk": RERANK_TOPK, "close_window": CLOSE_WINDOW, "ocr_min_conf": OCR_MIN_CONF,
     }
 
@@ -313,7 +354,8 @@ def health() -> dict:
     return {
         "status": "ok" if "vectors" in state else "loading",
         "index": INDEX_VARIANT,
-        "vectors": int(state["vectors"].shape[0]) if "vectors" in state else 0,
+        "vectors": len(state["vectors"]) if "vectors" in state else 0,
+        "vector_backend": os.environ.get("VECTOR_BACKEND", "numpy"),
         "catalog": len(state.get("by_slug", {})),
         "quality": quality_block(),
         "rerank_topk": RERANK_TOPK,
@@ -370,14 +412,19 @@ def wine_photo(slug: str):
 async def eval_predict(image: UploadFile = File(...)) -> JSONResponse:
     """Контракт скрипта оценки: ровно один slug плоским объектом.
 
-    Порог отсечки здесь не применяется: скрипт кейсодержателя ждёт лучший
-    ответ, а пустой slug засчитывается как промах в любом случае.
+    По умолчанию порог не применяется и отдаётся лучший кандидат. При
+    EVAL_ABSTAIN=1 ниже EVAL_ABSTAIN_P возвращается {"slug": null} — это
+    ответ «вина нет в каталоге» на случай, если закрытая таблица так его
+    и засчитывает.
     """
     img = await read_image(image)
     if img is None:
         return JSONResponse({"slug": None})
-    candidates, _, _ = search_candidates(img, top=1)
-    return JSONResponse({"slug": candidates[0]["slug"] if candidates else None})
+    candidates, conf, _ = search_candidates(img, top=1)
+    if not candidates or (EVAL_ABSTAIN and conf["probability"] < EVAL_ABSTAIN_P
+                          and not conf["vlm_confirmed"]):
+        return JSONResponse({"slug": None})
+    return JSONResponse({"slug": candidates[0]["slug"]})
 
 
 @app.post("/v1/search")
@@ -389,7 +436,9 @@ async def search(image: UploadFile = File(...)) -> JSONResponse:
     # Десять, а не пять: кейсодержатель просил при неуверенности показывать
     # ближайших кандидатов «как текущая выдача до 10 вин».
     candidates, conf, timings = search_candidates(img, top=10)
-    found = bool(candidates) and conf["probability"] >= SHOW_P
+    # Подтверждённый VLM ответ показывается, но только как спорный:
+    # уверенным его делает лишь совместная оценка конвейера.
+    found = bool(candidates) and (conf["probability"] >= SHOW_P or conf["vlm_confirmed"])
 
     # Три состояния вместо «нашли или нет». Бинарное решение по одному порогу
     # либо прячет треть верных ответов, либо пропускает половину неверных —
@@ -414,5 +463,5 @@ async def search(image: UploadFile = File(...)) -> JSONResponse:
         "quality": quality_block(),
         "latency_ms": {**timings,
                        "total": round(timings["cv_ms"] + timings["rerank_ms"]
-                                      + timings["text_ms"], 1)},
+                                      + timings["text_ms"] + timings["vlm_ms"], 1)},
     })

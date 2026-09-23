@@ -1,0 +1,350 @@
+{
+ "show_p": 0.12,
+ "rules": {
+  "strict": {
+   "threshold_organizer_tune": 0.0,
+   "threshold_all_tune": 0.0,
+   "cells": {
+    "tune/organizer": {
+     "none": {
+      "threshold": 0.0,
+      "credited": 31,
+      "n": 48
+     },
+     "tuned": {
+      "threshold": 0.0,
+      "credited": 31,
+      "n": 48
+     },
+     "show_p": {
+      "threshold": 0.12,
+      "credited": 26,
+      "n": 48
+     }
+    },
+    "tune/reviews": {
+     "none": {
+      "threshold": 0.0,
+      "credited": 103,
+      "n": 139
+     },
+     "tuned": {
+      "threshold": 0.0,
+      "credited": 103,
+      "n": 139
+     },
+     "show_p": {
+      "threshold": 0.12,
+      "credited": 102,
+      "n": 139
+     }
+    },
+    "tune/all": {
+     "none": {
+      "threshold": 0.0,
+      "credited": 134,
+      "n": 187
+     },
+     "tuned": {
+      "threshold": 0.0,
+      "credited": 134,
+      "n": 187
+     },
+     "show_p": {
+      "threshold": 0.12,
+      "credited": 128,
+      "n": 187
+     }
+    },
+    "test/organizer": {
+     "none": {
+      "threshold": 0.0,
+      "credited": 27,
+      "n": 45
+     },
+     "tuned": {
+      "threshold": 0.0,
+      "credited": 27,
+      "n": 45
+     },
+     "show_p": {
+      "threshold": 0.12,
+      "credited": 23,
+      "n": 45
+     }
+    },
+    "test/reviews": {
+     "none": {
+      "threshold": 0.0,
+      "credited": 105,
+      "n": 158
+     },
+     "tuned": {
+      "threshold": 0.0,
+      "credited": 105,
+      "n": 158
+     },
+     "show_p": {
+      "threshold": 0.12,
+      "credited": 99,
+      "n": 158
+     }
+    },
+    "test/all": {
+     "none": {
+      "threshold": 0.0,
+      "credited": 132,
+      "n": 203
+     },
+     "tuned": {
+      "threshold": 0.0,
+      "credited": 132,
+      "n": 203
+     },
+     "show_p": {
+      "threshold": 0.12,
+      "credited": 122,
+      "n": 203
+     }
+    }
+   }
+  },
+  "null_ok": {
+   "threshold_organizer_tune": 0.12,
+   "threshold_all_tune": 0.12,
+   "cells": {
+    "tune/organizer": {
+     "none": {
+      "threshold": 0.0,
+      "credited": 31,
+      "n": 48
+     },
+     "tuned": {
+      "threshold": 0.12,
+      "credited": 42,
+      "n": 48
+     },
+     "show_p": {
+      "threshold": 0.12,
+      "credited": 42,
+      "n": 48
+     }
+    },
+    "tune/reviews": {
+     "none": {
+      "threshold": 0.0,
+      "credited": 103,
+      "n": 139
+     },
+     "tuned": {
+      "threshold": 0.12,
+      "credited": 113,
+      "n": 139
+     },
+     "show_p": {
+      "threshold": 0.12,
+      "credited": 113,
+      "n": 139
+     }
+    },
+    "tune/all": {
+     "none": {
+      "threshold": 0.0,
+      "credited": 134,
+      "n": 187
+     },
+     "tuned": {
+      "threshold": 0.12,
+      "credited": 155,
+      "n": 187
+     },
+     "show_p": {
+      "threshold": 0.12,
+      "credited": 155,
+      "n": 187
+     }
+    },
+    "test/organizer": {
+     "none": {
+      "threshold": 0.0,
+      "credited": 27,
+      "n": 45
+     },
+     "tuned": {
+      "threshold": 0.12,
+      "credited": 35,
+      "n": 45
+     },
+     "show_p": {
+      "threshold": 0.12,
+      "credited": 35,
+      "n": 45
+     }
+    },
+    "test/reviews": {
+     "none": {
+      "threshold": 0.0,
+      "credited": 105,
+      "n": 158
+     },
+     "tuned": {
+      "threshold": 0.12,
+      "credited": 107,
+      "n": 158
+     },
+     "show_p": {
+      "threshold": 0.12,
+      "credited": 107,
+      "n": 158
+     }
+    },
+    "test/all": {
+     "none": {
+      "threshold": 0.0,
+      "credited": 132,
+      "n": 203
+     },
+     "tuned": {
+      "threshold": 0.12,
+      "credited": 142,
+      "n": 203
+     },
+     "show_p": {
+      "threshold": 0.12,
+      "credited": 142,
+      "n": 203
+     }
+    }
+   }
+  },
+  "positives": {
+   "threshold_organizer_tune": 0.0,
+   "threshold_all_tune": 0.0,
+   "cells": {
+    "tune/organizer": {
+     "none": {
+      "threshold": 0.0,
+      "credited": 31,
+      "n": 32
+     },
+     "tuned": {
+      "threshold": 0.0,
+      "credited": 31,
+      "n": 32
+     },
+     "show_p": {
+      "threshold": 0.12,
+      "credited": 26,
+      "n": 32
+     }
+    },
+    "tune/reviews": {
+     "none": {
+      "threshold": 0.0,
+      "credited": 103,
+      "n": 122
+     },
+     "tuned": {
+      "threshold": 0.0,
+      "credited": 103,
+      "n": 122
+     },
+     "show_p": {
+      "threshold": 0.12,
+      "credited": 102,
+      "n": 122
+     }
+    },
+    "tune/all": {
+     "none": {
+      "threshold": 0.0,
+      "credited": 134,
+      "n": 154
+     },
+     "tuned": {
+      "threshold": 0.0,
+      "credited": 134,
+      "n": 154
+     },
+     "show_p": {
+      "threshold": 0.12,
+      "credited": 128,
+      "n": 154
+     }
+    },
+    "test/organizer": {
+     "none": {
+      "threshold": 0.0,
+      "credited": 27,
+      "n": 30
+     },
+     "tuned": {
+      "threshold": 0.0,
+      "credited": 27,
+      "n": 30
+     },
+     "show_p": {
+      "threshold": 0.12,
+      "credited": 23,
+      "n": 30
+     }
+    },
+    "test/reviews": {
+     "none": {
+      "threshold": 0.0,
+      "credited": 105,
+      "n": 145
+     },
+     "tuned": {
+      "threshold": 0.0,
+      "credited": 105,
+      "n": 145
+     },
+     "show_p": {
+      "threshold": 0.12,
+      "credited": 99,
+      "n": 145
+     }
+    },
+    "test/all": {
+     "none": {
+      "threshold": 0.0,
+      "credited": 132,
+      "n": 175
+     },
+     "tuned": {
+      "threshold": 0.0,
+      "credited": 132,
+      "n": 175
+     },
+     "show_p": {
+      "threshold": 0.12,
+      "credited": 122,
+      "n": 175
+     }
+    }
+   }
+  }
+ },
+ "organizer_cost": {
+  "threshold": 0.12,
+  "positives": 62,
+  "correct_lost": [
+   "org004_0.jpg",
+   "org020_0.jpg",
+   "org023_0.jpg",
+   "org039_0.jpg",
+   "org075_0.jpg",
+   "org017_0.jpg",
+   "org026_0.jpg",
+   "org063_0.jpg",
+   "org069_0.jpg"
+  ],
+  "absent": 31,
+  "absent_answered": [
+   "org058_0.jpg",
+   "org067_0.jpg",
+   "org093_0.jpg"
+  ]
+ }
+}

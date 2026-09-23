@@ -25,3 +25,11 @@ data/field/candidates.json
 data/freshness/
 !data/catalog/extra_refs.csv
 !data/catalog/equivalents.csv
+# Кропы полевых кадров — производные тех же чужих фотографий
+data/validation/*/crops
+data/validation/*/lines/
+# Резервные копии каталога и индексов перед пересборкой
+data/index/*_prev*
+data/catalog/*_prev*
+# Кэши эмбеддингов экспериментов
+data/validation/**/*.npz

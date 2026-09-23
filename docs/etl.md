@@ -1,5 +1,12 @@
 # ETL и датапак
 
+> **Частично архив.** Обход платформы (`etl/scrape.py` → `data/raw/cards`,
+> `data/datapack/wines.json`) по-прежнему нужен сборке каталога
+> (`pipeline/build_catalog.py`: доливка полей, `--refresh-map`) и текстовому
+> каналу (сладость из карточки). Доставка датапака в PWA и мобильное
+> приложение относится к первому MVP; текущая архитектура —
+> [ARCHITECTURE.md](../ARCHITECTURE.md).
+
 Конвейер: выгрузка каталога «Своё Вино» → сборка датапака (JSON + SQLite + фото) → доставка в PWA/мобильное приложение. Три файла: [etl/scrape.py](../etl/scrape.py), [etl/build_datapack.py](../etl/build_datapack.py), [etl/update.sh](../etl/update.sh).
 
 ## Источник данных

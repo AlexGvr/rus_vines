@@ -25,6 +25,14 @@ services:
     environment:
       HF_HOME: /root/.cache/huggingface
       YOLO_WEIGHTS: /app/weights/yolo11m.pt
+      # Векторы индекса и карточки — в PostgreSQL с pgvector, как на целевой
+      # платформе; при первом старте сервис сам загружает туда индекс из
+      # data/index и перезагружает его после пересборки (сверка по хешу).
+      VECTOR_BACKEND: pgvector
+      DATABASE_URL: postgresql://wine:wine@db:5432/wine
+    depends_on:
+      db:
+        condition: service_healthy
     deploy:
       resources:
         reservations:
@@ -40,5 +48,22 @@ services:
       retries: 5
       start_period: 300s
 
+  db:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: wine
+      POSTGRES_PASSWORD: wine
+      POSTGRES_DB: wine
+    ports:
+      - "127.0.0.1:5433:5432"
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U wine -d wine"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
 volumes:
   hf-cache:
+  pg-data:

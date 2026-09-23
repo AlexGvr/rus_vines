@@ -1,0 +1,1942 @@
+{
+ "meta": {
+  "date": "2026-09-23",
+  "source": "https://vino-svoe.ru/wines-sitemap.xml",
+  "live": 2105,
+  "dump": 2103,
+  "added": 73,
+  "removed_from_platform": [
+   "abrau-dyurso-abrau-kupazh-svetlyy-suhoe-shardone-beloe-125",
+   "abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13",
+   "abrau-dyurso-russkoe-igristoe-polusuhoe-rozovoe-pino-nuar-12",
+   "abrau-dyurso-victor-dravigny-brut-shardone-beloe-bryut-12",
+   "abrau-dyurso-victor-dravigny-koshernoe-bryut-shardone-beloe-125",
+   "beloe-polusladkoe",
+   "blanc-de-blancs-idolo",
+   "chateau-le-grand-vostock-kyuve-karsov-rezerv-shardone-beloe-suhoe-14",
+   "chateau-le-grand-vostock-pino-nuar-rezerv-krasnoe-suhoe-14",
+   "igristoe-zhemchuzhnoe-vino-polusuhoe-krasnoe-di-kaspiko-fiori-di-mare-di-caspico-fiori-di-mare",
+   "kokur-suhoe-2025",
+   "merlo-litavshhuk",
+   "method-classic-kokur",
+   "ona-skazala-da",
+   "one-barrel-uan-barrel",
+   "pinot-noir-2024-one-barrel-by-dmitry-maslov-pino-nuar-2024-uan-barrel-dmitrij-maslov",
+   "polusladkoe-krasnoe-zb-vajn-frizzante",
+   "polusladkoe-krasnoe-zolotaya-balka",
+   "polusladkoe-rozovoe-zolotaya-balka",
+   "polusuhoe-rozovoe-zb-vajn-frizzante",
+   "rozovoe-polusladkoe-2",
+   "silvaner-pet-nat-2022",
+   "soyuz-vino-el-krusero-blanko-polusladkoe-belye-sorta-vinograda-beloe-11",
+   "soyuz-vino-el-krusero-tinto-polusladkoe-krasnye-sorta-vinograda-krasnoe-11",
+   "soyuz-vino-gloriya-de-luna-byanko-sekko-shardone-beloe-suhoe-11",
+   "soyuz-vino-gloriya-de-luna-byanko-semidolche-shardone-beloe-polusladkoe-11",
+   "soyuz-vino-gloriya-de-luna-rosso-sekko-kaberne-sovinon-krasnoe-suhoe-11",
+   "soyuz-vino-gloriya-de-luna-rosso-semidolche-kaberne-sovinon-krasnoe-polusladkoe-11",
+   "soyuz-vino-izola-del-sole-beloe-v-banke-shardone-suhoe-11",
+   "soyuz-vino-izola-del-sole-roze-v-banke-krasnostop-rozovoe-suhoe-11",
+   "soyuz-vino-kartuli-supris-saperavi-krasnoe-polusladkoe-11",
+   "soyuz-vino-kartuli-supris-saperavi-suhoe-krasnoe-11",
+   "soyuz-vino-kartuli-supris-shereuli-saperavi-krasnoe-polusladkoe-11",
+   "soyuz-vino-kubanskoe-traditsionnoe-beloe-polusladkoe-07-belye-sorta-vinograda-11",
+   "soyuz-vino-kubanskoe-traditsionnoe-beloe-polusladkoe-belye-sorta-vinograda-11",
+   "soyuz-vino-kubanskoe-traditsionnoe-beloe-suhoe-07-belye-sorta-vinograda-11",
+   "soyuz-vino-kubanskoe-traditsionnoe-beloe-suhoe-belye-sorta-vinograda-11",
+   "soyuz-vino-kubanskoe-traditsionnoe-krasnoe-polusladkoe-07-krasnye-sorta-vinograda-11",
+   "soyuz-vino-kubanskoe-traditsionnoe-krasnoe-polusladkoe-krasnye-sorta-vinograda-11",
+   "soyuz-vino-kubanskoe-traditsionnoe-krasnoe-suhoe-07-krasnye-sorta-vinograda-11",
+   "soyuz-vino-kubanskoe-traditsionnoe-krasnoe-suhoe-krasnye-sorta-vinograda-11",
+   "soyuz-vino-lak-dazyur-blan-moellyo-belye-sorta-vinograda-beloe-polusladkoe-11",
+   "soyuz-vino-lak-dazyur-blan-sek-belye-sorta-vinograda-beloe-suhoe-11",
+   "soyuz-vino-lak-dazyur-ruzh-moellyo-belye-sorta-vinograda-krasnoe-polusladkoe-11",
+   "soyuz-vino-lak-dazyur-ruzh-sek-krasnye-sorta-vinograda-krasnoe-suhoe-11",
+   "soyuz-vino-lenty-izabella-krymskaya-krasnoe-polusladkoe-11",
+   "soyuz-vino-lenty-kaberne-krymskoe-kaberne-sovinon-krasnoe-polusladkoe-11",
+   "soyuz-vino-lenty-shardone-krymskoe-beloe-polusladkoe-11",
+   "soyuz-vino-soyuz-vino-izabella-beg-in-boks-krasnoe-polusladkoe-11",
+   "soyuz-vino-soyuz-vino-kaberne-sovinon-beg-in-boks-krasnoe-suhoe-11",
+   "soyuz-vino-soyuz-vino-kaberne-sovinon-polusladkoe-beg-in-boks-krasnoe-12",
+   "soyuz-vino-soyuz-vino-muskat-beg-in-boks-beloe-polusladkoe-11",
+   "soyuz-vino-soyuz-vino-shardone-beloe-polusladkoe-beg-in-boks-12",
+   "soyuz-vino-soyuz-vino-shardone-suhoe-beg-in-boks-beloe-11",
+   "soyuz-vino-zelyonaya-dolina-kaberne-merlo-v-banke-kaberne-sovinon-krasnoe-polusladkoe-12",
+   "soyuz-vino-zelyonaya-dolina-pino-blan-v-banke-beloe-polusladkoe-115",
+   "soyuz-vino-zelyonaya-dolina-pino-nuar-v-banke-krasnoe-suhoe-12",
+   "soyuz-vino-zelyonaya-dolina-shardone-v-banke-beloe-suhoe-12",
+   "suhoe-beloe-zb-vajn-frizzante",
+   "usadba-perovskih-rkatsiteli-beloe-suhoe-13",
+   "vibes-silvaner-2022",
+   "vibes-silvaner-barrel-fermented-2022",
+   "zb-vajn-moskato-polusladkoe-beloe",
+   "zb-vajn-moskato-polusladkoe-rozovoe",
+   "zb-vajn-risling-polusuhoe-beloe",
+   "zb-vajn-roze-suhoe-rozovoe",
+   "zb-vajn-spumante-bryut-beloe",
+   "zb-vajn-spumante-bryut-rozovoe",
+   "zb-vajn-spumante-polusuhoe-beloe",
+   "zb-vajn-vajt-suhoe-beloe",
+   "zhemchuzhnaya-9-merlo-kaberne-sovinon"
+  ],
+  "failed": []
+ },
+ "wines": [
+  {
+   "slug": "135",
+   "title": "135",
+   "manufacturer": "Усадьба Перовских",
+   "region": "Крым",
+   "category": "Красное сухое",
+   "color": "Красное",
+   "sweetness": "Сухое",
+   "wineColor": "Красный",
+   "alcohol": 14,
+   "temperature": "16-18",
+   "rating": 4.67,
+   "description": "Яркий аромат черных ягод, пряностей, перца, ванили и кожи. Вино насыщенное, со зрелыми танинами и продолжительным послевкусием. Вино, выпущенное в честь юбилея винодельни — 135 лет с момента официального основания.\n\nПроизводство: выдержка в новых бочках из французского дуба: Сира 42 месяца, Мурведр 18 месяцев.",
+   "grapes": [
+    "Мурведр",
+    "Сира"
+   ],
+   "dishes": [
+    "Мясо и стейки",
+    "Сыры"
+   ],
+   "image_url": "/uploads/lim_135_8dbef0e498.webp",
+   "photo": "data/refs/platform/135.webp",
+   "photo_sha256": "c256f0e5d56dca0c4a4de37d76a5d0b99c0df46939c6939cf741a016e2051824"
+  },
+  {
+   "slug": "1890-pino-nuar",
+   "title": "1890 Пино Нуар",
+   "manufacturer": "Усадьба Перовских",
+   "region": "Крым",
+   "category": "Красное сухое",
+   "color": "Красное",
+   "sweetness": "Сухое",
+   "wineColor": "Красный",
+   "alcohol": 13,
+   "temperature": "16-18",
+   "rating": 4.75,
+   "description": "В аромате черная смородина, ежевика, ноты красных ягод, специй, пряностей и дуба. Вкус глубокий, полный с мягкими танинами и продолжительным богатым послевкусием.\n\nПроизводство: выдержка в бочках из французского дуба не менее 12 месяцев.\n\n",
+   "grapes": [
+    "Пино Нуар"
+   ],
+   "dishes": [
+    "Овощи гриль",
+    "Сыры"
+   ],
+   "image_url": "/uploads/1890_pinot_noir_c1b74e0064.webp",
+   "photo": "data/refs/platform/1890-pino-nuar.webp",
+   "photo_sha256": "aaee2c866b69d018ba03fda63ee97df619ef32262be1b52e7a0f293a6aec8059"
+  },
+  {
+   "slug": "44-parallel",
+   "title": "44 Параллель",
+   "manufacturer": "Усадьба Перовских",
+   "region": "Крым",
+   "category": "Красное сухое",
+   "color": "Красное",
+   "sweetness": "Сухое",
+   "wineColor": "Красный",
+   "alcohol": 13,
+   "temperature": "16-18",
+   "rating": 4.4,
+   "description": "Аромат богатый, сложный с доминантой черной смородины, вишни, ежевики и легкой перечности. Вино яркое, с мягкими, округлыми танинами, плотным телом и продолжительным послевкусием. Название вина и дизайн этикетки связаны с географическим местонахождением винодельни и виноградников.\n\nПроизводство: выдержка в бочках из французского дуба не менее 18 месяцев.",
+   "grapes": [
+    "Каберне Совиньон",
+    "Мерло"
+   ],
+   "dishes": [
+    "Мясное ассорти",
+    "Мясо и стейки"
+   ],
+   "image_url": "/uploads/lim_44_parallel_9bcf69d5d7.webp",
+   "photo": "data/refs/platform/44-parallel.webp",
+   "photo_sha256": "6f5e2b1c3db1a3be4cb266a213ea410cb554fda5107db5798b4aaea25b92b8a4"
+  },
+  {
+   "slug": "avtorskij-kupazh",
+   "title": "Авторский купаж",
+   "manufacturer": "Усадьба Перовских",
+   "region": "Крым",
+   "category": "Красное сухое",
+   "color": "Красное",
+   "sweetness": "Сухое",
+   "wineColor": "Красный",
+   "alcohol": 12,
+   "temperature": "14-16",
+   "rating": 4.33,
+   "description": "В аромате тона сливы, вишни и кизила. Во вкусе нюансы специй, бархатистые танины и продолжительное фруктовое послевкусие.\n\nПроизводство: брожение и выдержка в емкостях из нержавеющей стали. Добавили 10% Мерло и выдержали в нейтральной емкости 1 год для сглаживания кислотности Пти Вердо.\n\n",
+   "grapes": [
+    "Мерло",
+    "Пти Вердо"
+   ],
+   "dishes": [
+    "Кавказская кухня",
+    "Сыры"
+   ],
+   "image_url": "/uploads/main_avtorsky_kupazh_7274fb041d.webp",
+   "photo": "data/refs/platform/avtorskij-kupazh.webp",
+   "photo_sha256": "bfb4c207324e22d8b178708ee6cb19093e6378f5222e082c6cf22dd7ba453e73"
+  },
+  {
+   "slug": "chardonnay-2024",
+   "title": "Chardonnay 2024",
+   "manufacturer": "One Barrel by Dmitry Maslov (OBDM)",
+   "region": "Крым",
+   "category": "Белое сухое",
+   "color": "Белое",
+   "sweetness": "Сухое",
+   "wineColor": "Золотистый",
+   "alcohol": 12,
+   "temperature": "8-10",
+   "rating": 4.94,
+   "description": "Аромат цитрусовых и мягких ореховых нюансов.\n\nВо вкусе структурированное, с приятно освежающее, с продолжительным фруктовым послевкусием. Среднетелое, фруктовое, с округлой текстурой и сбалансированной кислотностью.\n",
+   "grapes": [
+    "Шардоне"
+   ],
+   "dishes": [
+    "Закуски",
+    "Морепродукты",
+    "Сыры"
+   ],
+   "image_url": "/uploads/IMG_20250829_WA_0033_1_aa1d35a672.webp",
+   "photo": "data/refs/platform/chardonnay-2024.webp",
+   "photo_sha256": "30c8c3f3e3a9d2a7cb52935b3927fcce7e5058bce178a9f072d59d0409bba102"
+  },
+  {
+   "slug": "domashnyaya-gorka",
+   "title": "Домашняя горка",
+   "manufacturer": "Литавщук. Litavshchuk vineyards & winery",
+   "region": "Кубань",
+   "category": "Белое полусладкое",
+   "color": "Белое",
+   "sweetness": "Полусладкое",
+   "wineColor": "Светло-золотистый",
+   "alcohol": 12,
+   "temperature": "10-12",
+   "rating": null,
+   "description": "Свежий, фруктовый аромат с нотами цитрусовых и зелёного яблока, дополненный легкими травянистыми оттенками. Во вкусе хорошо сбалансированная сладость с чистым фруктово-минеральным послевкусием",
+   "grapes": [
+    "Совиньон Блан"
+   ],
+   "dishes": [
+    "Азиатская кухня",
+    "Блюда из птицы",
+    "Блюда из рыбы",
+    "Выпечка и десерты",
+    "Салаты"
+   ],
+   "image_url": "/uploads/MAX_02374_8762420674.webp",
+   "photo": "data/refs/platform/domashnyaya-gorka.webp",
+   "photo_sha256": "5348ea5843ede6bacf31cc7a0b738a4c79785555db58f2e8962ce7be56cf2dde"
+  },
+  {
+   "slug": "gevyurcztraminer-oranzh",
+   "title": "Гевюрцтраминер Оранж",
+   "manufacturer": "Усадьба Перовских",
+   "region": "Крым",
+   "category": "Оранжевое сухое",
+   "color": "Оранжевое",
+   "sweetness": "Сухое",
+   "wineColor": "Золотистый с розовым отливом",
+   "alcohol": 12,
+   "temperature": "10-12",
+   "rating": 4.92,
+   "description": "Брожение на мезге в течение 21 дня.\n\nВинодел: Дмитрий Болотаев\n\nВ аромате благоухающие лепестки роз и цветов. Во вкусе — баланс между яркой фруктовостью и тонкой танинной структурой, с оттенками кураги, айвы и специй.\n \nВино получилось ярким и гастрономичным.",
+   "grapes": [
+    "Гевюрцтраминер"
+   ],
+   "dishes": [
+    "Азиатская кухня",
+    "Запеченные овощи",
+    "Сыры"
+   ],
+   "image_url": "/uploads/Gevyurcztraminer_Oranzh_Usadba_Petovskih_f3d914f332.webp",
+   "photo": "data/refs/platform/gevyurcztraminer-oranzh.webp",
+   "photo_sha256": "5fd97ef3d51792a3625b6e7e75bc49049b89cb10353e219f51a1e78c3892c0e8"
+  },
+  {
+   "slug": "glu-glu-seneth",
+   "title": "Глу-Глу Сенетх",
+   "manufacturer": "Сенетх",
+   "region": "Кубань",
+   "category": "Красное сухое",
+   "color": "Красное",
+   "sweetness": "Сухое",
+   "wineColor": "Гранатово-красное",
+   "alcohol": 13,
+   "temperature": "11-12",
+   "rating": 4.5,
+   "description": "Аромат интенсивный, хорошего качества. Раскрывается тонами лесных ягод: земляники, малины и нюансами специй. Во вкусе полное, согревающее. Достаточно хорошая кислотность и длительность послевкусия. Отличный баланс. \n\nПроисхождение: Участок “Два Дубка” на винограднике “Сенетх” (массив Красная горка, ст-ца Гостагаевская, Анапа. Почвы карбонатные, подпочвы- мергели. \n\nОсобенности производства: Ручной сбор винограда, сортировка на винограднике. Совместная переработка КЗ и ЦЧ. Деликатное дробление. Предферментационная холодная мацерация 21 день при 3-50С. Бережное прессование и брожение при контролируемой температуре. Работа с осадком 8 мес.\n",
+   "grapes": [
+    "Красностоп Золотовский",
+    "Цимлянский черный"
+   ],
+   "dishes": [
+    "Блюда из птицы",
+    "Мясо и стейки"
+   ],
+   "image_url": "/uploads/Pre_R05_3c07d4b3ca.webp",
+   "photo": "data/refs/platform/glu-glu-seneth.webp",
+   "photo_sha256": "145b246245b0fdf6b3143384bc084342c8527305f9b503141a52ae02268f593a"
+  },
+  {
+   "slug": "gran-shen",
+   "title": "Гран Шен",
+   "manufacturer": "Château Le Grand Vostock",
+   "region": "Кубань",
+   "category": "Красное сухое",
+   "color": "Красное",
+   "sweetness": "Сухое",
+   "wineColor": "Темно-рубиновый",
+   "alcohol": 13,
+   "temperature": "16-18",
+   "rating": 4.67,
+   "description": "Аромат: интенсивный, тона красных и черных ягод с многогранными пряными акцентами\n\nВкус: глубокий, сложный, чувствуется многогранная палитра спелых ягод и фруктов с тонкими нюансами специй с долгим послевкусием. Яркая кислотность и мощные танины придают вину исключительный, волевой характер",
+   "grapes": [
+    "Каберне Совиньон",
+    "Каберне Фран",
+    "Мерло"
+   ],
+   "dishes": [
+    "Мясо и стейки",
+    "Сыры"
+   ],
+   "image_url": "/uploads/de95d1a182e537e_343x610_notcrop_5e7e8e6673.webp",
+   "photo": "data/refs/platform/gran-shen.webp",
+   "photo_sha256": "b334b1adb5b2d4ab13621603b2fa239debeab12177e196041dee6e66ecbf6aa3"
+  },
+  {
+   "slug": "grenash",
+   "title": "Гренаш",
+   "manufacturer": "WINEPARK",
+   "region": "Крым",
+   "category": "Красное сухое",
+   "color": "Красное",
+   "sweetness": "Сухое",
+   "wineColor": "Светло-рубиновый",
+   "alcohol": 12,
+   "temperature": "16-18",
+   "rating": 4.67,
+   "description": "В аромате морс из свежих садовых ягод - малина, клубника, красная смородина, шелковица. Ванильный пломбир, украшенный свежей мятой. Вкус легкий,  морсовый. С освежающей кислотностью и едва уловимым танином.",
+   "grapes": [
+    "Гренаш"
+   ],
+   "dishes": [
+    "BBQ",
+    "Закуски",
+    "Кухни народов мира",
+    "Паштеты"
+   ],
+   "image_url": "/uploads/Grenash_3_73073bff16.webp",
+   "photo": "data/refs/platform/grenash.webp",
+   "photo_sha256": "c7e94ebecce9fca090f82c33e506e16a2fcb083afc5a8fa79cd114391970157c"
+  },
+  {
+   "slug": "hihvi-sueta",
+   "title": "Хихви Суета",
+   "manufacturer": "Сенетх",
+   "region": "Кубань",
+   "category": "Белое сухое",
+   "color": "Белое",
+   "sweetness": "Сухое",
+   "wineColor": "Светло-соломенный ",
+   "alcohol": 12,
+   "temperature": "8-10",
+   "rating": 4,
+   "description": "Букет сложный и оригинальный благодаря присутствию нот экзотических фруктов (желтое манго, ананас, сбалансированных дыня, банан) и цветов, свежими цитрусовыми \nароматами, которые делают вино живым и гармоничным. Вкус плотный, гладкий, стойкий, с выраженной солоноватой нотой, с приятным горьковатым послевкусием.\n\nПроисхождение: Участок “Южные клины” на винограднике “Сенетх” (массив Гостагаевская, почвы дерново-карбонатные. Красная горка, ст-ца Анапа.\n \nОсобенности производства: Ручной сбор винограда, с сортировкой гроздей на винограднике. Деликатное дробление и прессование. Стабуляж 7 дней при температуре 3-50С. Холодная ферментация в стальных чанах. Выдержка на грубом и тонком осадках несколько месяцев.",
+   "grapes": [
+    "Хихви"
+   ],
+   "dishes": [
+    "Рыба и морепродукты",
+    "Салаты"
+   ],
+   "image_url": "/uploads/Pre_W01_5a4d8050c2.webp",
+   "photo": "data/refs/platform/hihvi-sueta.webp",
+   "photo_sha256": "59e7bf519160e73ef178b5bea64d7ff8262dda1120398e11f292054ad5b4bfdf"
+  },
+  {
+   "slug": "ii-vino",
+   "title": "ИИ ВИНО",
+   "manufacturer": "WINEPARK",
+   "region": "Крым",
+   "category": "Красное сухое",
+   "color": "Красное",
+   "sweetness": "Сухое",
+   "wineColor": "Насыщенный рубиновый",
+   "alcohol": 13,
+   "temperature": "16-18",
+   "rating": 4.3,
+   "description": "В аромате темные ягоды, табак, кожа. Полнотелое динамичное вино со вкусом темных ягод и пряностей, с ярким танином и сдержанной кислотностью. ",
+   "grapes": [
+    "Каберне Совиньон",
+    "Каберне Фран",
+    "Мерло",
+    "Мурведр"
+   ],
+   "dishes": [
+    "BBQ",
+    "Запеченные овощи",
+    "Мясное ассорти",
+    "Сыры"
+   ],
+   "image_url": "/uploads/ii_edd86afc3f.webp",
+   "photo": "data/refs/platform/ii-vino.webp",
+   "photo_sha256": "4c028f6d0bc7ebd1df5bd1b5cb9d41301d57ca6ac6ca89cec93408891541a164"
+  },
+  {
+   "slug": "ii-vino-1",
+   "title": "ИИ ВИНО",
+   "manufacturer": "WINEPARK",
+   "region": "Крым",
+   "category": "Белое сухое",
+   "color": "Белое",
+   "sweetness": "Сухое",
+   "wineColor": "Светло-соломенный",
+   "alcohol": 14,
+   "temperature": "10-12",
+   "rating": 4.17,
+   "description": "В аромате спелые созревшие фрукты, цветы-медоносы, мармелад в сахарной пудре. Вкус насыщенный фруктовый, тельное, с умеренной кислотностью.",
+   "grapes": [
+    "Кокур",
+    "Пино Блан",
+    "Рислинг",
+    "Совиньон Блан"
+   ],
+   "dishes": [
+    "Блюда из рыбы",
+    "Брускетты",
+    "Легкие закуски",
+    "Сыры"
+   ],
+   "image_url": "/uploads/ii_3_8ac201f314.webp",
+   "photo": "data/refs/platform/ii-vino-1.webp",
+   "photo_sha256": "f0bf06c433d59cd2746925730f9222fb1f0b27f4d1c42c306cf1ff0f7342a848"
+  },
+  {
+   "slug": "integral",
+   "title": "Integral",
+   "manufacturer": "One Barrel by Dmitry Maslov (OBDM)",
+   "region": "Крым",
+   "category": "Красное сухое",
+   "color": "Красное",
+   "sweetness": "Сухое",
+   "wineColor": "Темно-рубиновый",
+   "alcohol": 135,
+   "temperature": "15-18",
+   "rating": 5,
+   "description": "Сочный, пряный Каберне Фран с характером южного виноградника. В аромате темные ягоды и спелая вишня переплетаются с черным перцем, легкой дымностью и древесными оттенками. Во вкусе вино свежее и собранное, с живой кислотностью, мягкими танинами и долгим пряно-ягодным послевкусием.",
+   "grapes": [
+    "Каберне Фран"
+   ],
+   "dishes": [
+    "Брускетты",
+    "Запеченные овощи",
+    "Мясное ассорти",
+    "Мясо и стейки",
+    "Паштеты"
+   ],
+   "image_url": "/uploads/image_17_09_26_05_17_d889dd1070.webp",
+   "photo": "data/refs/platform/integral.webp",
+   "photo_sha256": "b0af56b089f649e9e828c53431a92bbdf473837be02a187f2969b6494d9d7155"
+  },
+  {
+   "slug": "kaberne-fran-gusev",
+   "title": "Каберне Фран Гусевъ",
+   "manufacturer": "Гусевъ",
+   "region": "Нижняя Волга",
+   "category": "Красное сухое",
+   "color": "Красное",
+   "sweetness": "Сухое",
+   "wineColor": "Рубиновый",
+   "alcohol": 14,
+   "temperature": "14-16",
+   "rating": 5,
+   "description": "Аромат: немного застенчивые ноты чайной заварки, зеленого перца, угольной пыли и перезрелой вишни.\n\nВкус: довольно легковесный, но строгий профиль. По мере аэрации все больше проявляется объем, а танины смягчаются, делая вкус более округлым.\n\nТехнология: Выдержка в стали на тонком дрожжевом осадке 6 месяцев. Выдержка 18 месяцев в дубовых бочках объемом 220 и 500 л. Использовалось три вида дуба (французский, кавказский, американский) и бочки разных лет.\n\nНижняя Волга не самый простой регион для красных вин. В поисках подходящих сортов Дмитрий Гусев в 2019 году высадил гектар Каберне Франа. Первые урожаи использовали для производства розе. В 2023 году виноград впервые собрали для изготовления красного вина.\n",
+   "grapes": [
+    "Каберне Фран"
+   ],
+   "dishes": [
+    "Запеченные овощи",
+    "Сыры"
+   ],
+   "image_url": "/uploads/Gusev_butylka_no_bg_preview_carve_photos_0e606714f8.webp",
+   "photo": "data/refs/platform/kaberne-fran-gusev.webp",
+   "photo_sha256": "424585ca4a45bf0f55c205e2255656763b855d5d20b4b897eb47378645237029"
+  },
+  {
+   "slug": "kaberne-fran-limitirovannaya-seriya",
+   "title": "Каберне Фран — лимитированная серия",
+   "manufacturer": "Усадьба Перовских",
+   "region": "Крым",
+   "category": "Красное сухое",
+   "color": "Красное",
+   "sweetness": "Сухое",
+   "wineColor": "Глубокий рубиновый",
+   "alcohol": 14,
+   "temperature": "16-18",
+   "rating": 4.67,
+   "description": "Насыщенный ягодный аромат с тонами специй, граната, зеленого перца. Вкус элегантный, с мягкими танинами и характерными сортовыми особенностями.\n\nПроизводство: выдержка в бочках из французского дуба не менее 18 месяцев.",
+   "grapes": [
+    "Каберне Фран"
+   ],
+   "dishes": [
+    "Мясо и стейки",
+    "Овощи гриль"
+   ],
+   "image_url": "/uploads/lim_cabernet_franc_b8513a1a08.webp",
+   "photo": "data/refs/platform/kaberne-fran-limitirovannaya-seriya.webp",
+   "photo_sha256": "aef5ef066e457ee0dde66f37c1087a3d80ddfcd4f451b3a840b4c19097fe5d98"
+  },
+  {
+   "slug": "kaberne-sovinon-3",
+   "title": "Каберне Совиньон",
+   "manufacturer": "Литавщук. Litavshchuk vineyards & winery",
+   "region": "Кубань",
+   "category": "Красное полусухое",
+   "color": "Красное",
+   "sweetness": "Полусухое",
+   "wineColor": "Темно-рубиновый",
+   "alcohol": 12,
+   "temperature": "15-18",
+   "rating": 5,
+   "description": "Насыщенный аромат с доминирующими тонами черной смородины, вишни, сливы и лесных ягод, с оттенками пряностей, сухих трав и легкой древесной нотой. Во вкусе полнотелое и округлое, с мягкими зрелыми танинами, деликатной сладостью в финале и длительным сбалансированным послевкусием с ягодными и пряными нюансами.\n\n",
+   "grapes": [
+    "Каберне Совиньон"
+   ],
+   "dishes": [
+    "BBQ",
+    "Брускетты",
+    "Кавказская кухня",
+    "Паста",
+    "Паштеты"
+   ],
+   "image_url": "/uploads/MAX_02337_7ecc0a53a9.webp",
+   "photo": "data/refs/platform/kaberne-sovinon-3.webp",
+   "photo_sha256": "b3992583fbf1c154f6ee7ff7b195bf5364112bf393b7131b0d75d865cd49f386"
+  },
+  {
+   "slug": "kaberne-sovinon-4",
+   "title": "Каберне Совиньон",
+   "manufacturer": "Усадьба Перовских",
+   "region": "Крым",
+   "category": "Красное сухое",
+   "color": "Красное",
+   "sweetness": "Сухое",
+   "wineColor": "Красный",
+   "alcohol": 12,
+   "temperature": "16-18",
+   "rating": 4.6,
+   "description": "В аромате преобладают тона черных фруктов, ежевики, черной смородины и легкая перечность. Во рту среднетелое, сбалансированное, с хорошей структурой, дружелюбными танинами и продолжительным послевкусием с нюансами черносмородинового джема и пряностей.\n\nПроизводство: брожение и выдержка в емкостях из нержавеющей стали.\n\n",
+   "grapes": [
+    "Каберне Совиньон"
+   ],
+   "dishes": [
+    "Мясное ассорти",
+    "Мясо и стейки"
+   ],
+   "image_url": "/uploads/main_cabernet_sauvignon_61ca764414.webp",
+   "photo": "data/refs/platform/kaberne-sovinon-4.webp",
+   "photo_sha256": "072eb095dcc88134b48dc8ad04d7b562c33e1fd5786474b13086e1a9bed3ae0b"
+  },
+  {
+   "slug": "kaberne-sovinon-art-vin",
+   "title": "Каберне Совиньон АртВин",
+   "manufacturer": "Артвин",
+   "region": "Крым",
+   "category": "Красное сухое",
+   "color": "Красное",
+   "sweetness": "Сухое",
+   "wineColor": "Темно-гранатовый",
+   "alcohol": 11,
+   "temperature": "16-18",
+   "rating": null,
+   "description": "Аромат: тонкие ноты черной смородины с оттенками фиалки и сливы.\n\nВкус: полнотелый, с ощутимой терпкостью.",
+   "grapes": [
+    "Каберне Совиньон"
+   ],
+   "dishes": [
+    "Мясо и стейки",
+    "Сыры"
+   ],
+   "image_url": "/uploads/wine_caberne_sow2_no_bg_preview_carve_photos_3723abf9d6.webp",
+   "photo": "data/refs/platform/kaberne-sovinon-art-vin.webp",
+   "photo_sha256": "0321ce1a486474e8f34df377486c6c3a44a1c122567ce585062f5c09bf056446"
+  },
+  {
+   "slug": "kaberne-sovinon-i-saperavi-limitirovannaya-seriya",
+   "title": "Каберне Совиньон и Саперави — лимитированная серия",
+   "manufacturer": "Усадьба Перовских",
+   "region": "Крым",
+   "category": "Красное сухое",
+   "color": "Красное",
+   "sweetness": "Сухое",
+   "wineColor": "Красное",
+   "alcohol": 14,
+   "temperature": "16-18",
+   "rating": 4.8,
+   "description": "Яркий аромат черных ягод — смородины, ежевики, спелой вишни — с мягкими сливочными оттенками. Вкус полный, интенсивный, с приятной терпкой бархатистостью и длительным сортовым послевкусием.\n\nПроизводство: выдержка каждого сорта в отдельных бочках из американского дуба не менее 18 месяцев.",
+   "grapes": [
+    "Каберне Совиньон",
+    "Саперави"
+   ],
+   "dishes": [
+    "Мясо и стейки",
+    "Овощи гриль",
+    "Сыры"
+   ],
+   "image_url": "/uploads/lim_cs_saperavi_63126ea067.webp",
+   "photo": "data/refs/platform/kaberne-sovinon-i-saperavi-limitirovannaya-seriya.webp",
+   "photo_sha256": "942e327ad8882ca1fd9363fe77089fa18ec163c10f689aa1a3f0d2f734bca179"
+  },
+  {
+   "slug": "kaberne-sovinon-merlo-kaberne-fran",
+   "title": "Каберне Совиньон, Мерло, Каберне Фран",
+   "manufacturer": "Усадьба Перовских",
+   "region": "Крым",
+   "category": "Красное сухое",
+   "color": "Красное",
+   "sweetness": "Сухое",
+   "wineColor": "Красный",
+   "alcohol": 12,
+   "temperature": "16-18",
+   "rating": 4.6,
+   "description": "Аромат с тонами черной смородины, ежевики и лакрицы. Вкус округлый и полный, с нежными оттенками черных ягод. Зрелые танины гармонично сочетаются с согревающим и долгим послевкусием.\n\nПроизводство: брожение и выдержка в емкостях из нержавеющей стали.",
+   "grapes": [
+    "Каберне Совиньон",
+    "Каберне Фран",
+    "Мерло"
+   ],
+   "dishes": [
+    "Мясо и стейки",
+    "Сыры"
+   ],
+   "image_url": "/uploads/main_cs_merlot_cf_bc24bec533.webp",
+   "photo": "data/refs/platform/kaberne-sovinon-merlo-kaberne-fran.webp",
+   "photo_sha256": "af05fbf37416d98ec0be96bfc6e75389f6ade481ef49fc5ea92322fa3c900c2d"
+  },
+  {
+   "slug": "kaberne-sovinon-rezerv",
+   "title": "Каберне Совиньон Резерв",
+   "manufacturer": "Усадьба Перовских",
+   "region": "Крым",
+   "category": "Красное сухое",
+   "color": "Красное",
+   "sweetness": "Сухое",
+   "wineColor": "Красный",
+   "alcohol": 13,
+   "temperature": "16-18",
+   "rating": 4.75,
+   "description": "В аромате тона джема из черной смородины, ежевики, черного перца и ванили. Во рту полнотелое, мощное, с хорошей структурой и зрелыми танинами.\n\nПроизводство: частичная выдержка в бочках из американского дуба.\n\n",
+   "grapes": [
+    "Каберне Совиньон"
+   ],
+   "dishes": [
+    "Блюда из рыбы",
+    "Сыры"
+   ],
+   "image_url": "/uploads/res_cabernet_sauvignon_15f38a164b.webp",
+   "photo": "data/refs/platform/kaberne-sovinon-rezerv.webp",
+   "photo_sha256": "481abfab2f0ce1ab67530bed1ee5c7c4d5f60b230b8651ae611058b4b327bb02"
+  },
+  {
+   "slug": "krasnostop-dva-dubka",
+   "title": "Красностоп ДВА ДУБКА",
+   "manufacturer": "Сенетх",
+   "region": "Кубань",
+   "category": "Красное сухое",
+   "color": "Красное",
+   "sweetness": "Сухое",
+   "wineColor": "Тёмно - рубиновый",
+   "alcohol": 13,
+   "temperature": "16-18",
+   "rating": 4,
+   "description": "Аромат: комплексный, превосходного качества: тёрн, кофе, заспиртованная вишня, в развитии чернослив, бальзамические ноты. Вкус свежий, интенсивный. Среднее тело, округлые танины. Послевкусие продолжительное. Каждая бутылка имеет индивидуальный номер.\n\nПроисхождение: Участок “Два дубка” на винограднике “Сенетх” (массив Красная горка, ст-ца Гостагаевская, Анапа. Почвы карбонатные, подпочвы- мергели. Особенности производства: Ручной сбор, сортировка на винограднике. Холодная мацерация 22 сут. при 3-50С. Брожение при контролируемой температуре 14 дн., ремонтажи. ЯМБ на мезге 14 дн.. Общее \nвремя мацерации на мезге 50 дн.. \n\nВыдержка: франц. дуб 500 л., первый пассаж, 12 мес. Бутылочная выдержка 24 мес.",
+   "grapes": [
+    "Красностоп Золотовский"
+   ],
+   "dishes": [
+    "BBQ",
+    "Кавказская кухня"
+   ],
+   "image_url": "/uploads/Pre_BR_01_bb6b50b52e.webp",
+   "photo": "data/refs/platform/krasnostop-dva-dubka.webp",
+   "photo_sha256": "3dfd621b7dd229002237c311fb2a3ebe6a9a36a5135e9d0f4d49aa783d55cbfa"
+  },
+  {
+   "slug": "krymskij-blend",
+   "title": "Крымский бленд",
+   "manufacturer": "Усадьба Перовских",
+   "region": "Крым",
+   "category": "Белое сухое",
+   "color": "Белое",
+   "sweetness": "Сухое",
+   "wineColor": "Золотисто-соломенный",
+   "alcohol": 12,
+   "temperature": "10-12",
+   "rating": 4.6,
+   "description": "В аромате раскрываются тона спелого сочного персика и цитрусовых, обрамленные тонкими цветочными штрихами. Во вкусе хороший баланс кислотности. Оттенки экзотических плодов гармонично переплетаются с нотами ванили, создавая долгое послевкусие.\n\nПроизводство: брожение и выдержка в емкостях из нержавеющей стали.",
+   "grapes": [
+    "Ркацители",
+    "Шардоне"
+   ],
+   "dishes": [
+    "Рыба и морепродукты",
+    "Салаты",
+    "Сыры"
+   ],
+   "image_url": "/uploads/main_crimean_blend_2_5647edf21a.webp",
+   "photo": "data/refs/platform/krymskij-blend.webp",
+   "photo_sha256": "f56945d8acd8f09c2696f7978f8a101f0229e4761961e655538b788975b1f235"
+  },
+  {
+   "slug": "krymskij-blend-1",
+   "title": "Крымский бленд",
+   "manufacturer": "Усадьба Перовских",
+   "region": "Крым",
+   "category": "Красное сухое",
+   "color": "Красное",
+   "sweetness": "Сухое",
+   "wineColor": "Красный",
+   "alcohol": 12,
+   "temperature": "14-16",
+   "rating": 4.33,
+   "description": "В аромате переплетаются тона спелых ягод, оттенки подлеска, листья табака и тонкие нюансы трюфелей. Вкус тонкий, элегантный и фруктовый, с мелкозернистыми танинами и долгим пряным послевкусием.\n\nПроизводство: брожение и выдержка в емкостях из нержавеющей стали.",
+   "grapes": [
+    "Каберне Совиньон",
+    "Каберне Фран"
+   ],
+   "dishes": [
+    "Мясо и стейки",
+    "Сыры"
+   ],
+   "image_url": "/uploads/main_crimean_blend_3_1d7c16d04e.webp",
+   "photo": "data/refs/platform/krymskij-blend-1.webp",
+   "photo_sha256": "f036d786198a6f0d8e93e573e57e802642f7b1f0dfc39cb6bbf309e94ebb5595"
+  },
+  {
+   "slug": "kupazh-13",
+   "title": "Купаж 13",
+   "manufacturer": "Усадьба Перовских",
+   "region": "Кубань",
+   "category": "Красное сухое",
+   "color": "Красное",
+   "sweetness": "Сухое",
+   "wineColor": "Красный",
+   "alcohol": 13,
+   "temperature": "16-18",
+   "rating": 4.6,
+   "description": "Во вкусе смородиновый джем, нюансы ежевики, ваниль. Полнотелое, спелое с хорошей структурой и зрелыми танинами. Послевкусие длительное, яркое, обволакивающее.\n\nПроизводство: выдержка в дубовых бочках в течение 24 месяцев.",
+   "grapes": [
+    "Бастардо Магарачский",
+    "Каберне Совиньон",
+    "Мерло",
+    "Саперави"
+   ],
+   "dishes": [
+    "Мясо и стейки",
+    "Сыры"
+   ],
+   "image_url": "/uploads/lim_kupazh_13_b6480ece84.webp",
+   "photo": "data/refs/platform/kupazh-13.webp",
+   "photo_sha256": "cddc5bad01ff3fbabe8a1dfef6974f41f7d71502315bd45a93cc4780a9efd606"
+  },
+  {
+   "slug": "mczvane-sueta",
+   "title": "Мцване Суета",
+   "manufacturer": "Сенетх",
+   "region": "Кубань",
+   "category": "Белое сухое",
+   "color": "Белое",
+   "sweetness": "Сухое",
+   "wineColor": "Зеленовато-соломенный",
+   "alcohol": 12,
+   "temperature": "8-12",
+   "rating": 4.5,
+   "description": "Аромат раскрывается в первом носе тонами экзотических цветов, перги, молодого фундука и восковыми нюансами, в развитии- зеленые оливки, свежескошенный газон. Во вкусе полное, округлое, слегка маслянистое, с сочной кислотностью и устойчивым послевкусием с нюансами цедры. Потенциал развития в бутылке 3-5 лет.\n\nПроисхождение: Участок “Южные клины” на винограднике “Сенетх” (массив Гостагаевская, Почвы дерново-карбонатные. Красная горка, ст-ца Анапа. \n\nОсобенности производства: Ручной сбор винограда, с сортировкой гроздей на винограднике. Деликатное дробление и прессование. Стабуляж 7 дней при температуре 3-50С. Холодная ферментация в стальных чанах. Выдержка на грубом и тонком осадках несколько месяцев.",
+   "grapes": [
+    "Мцване"
+   ],
+   "dishes": [
+    "Блюда из рыбы",
+    "Салаты",
+    "Сыры"
+   ],
+   "image_url": "/uploads/Pre_W03_3d7437416c.webp",
+   "photo": "data/refs/platform/mczvane-sueta.webp",
+   "photo_sha256": "d784b19acb7cd0f4d36eb8824a9d2a3c1634d78138ab2de8fc22cf3cc552589e"
+  },
+  {
+   "slug": "merlo-2",
+   "title": "Мерло",
+   "manufacturer": "Литавщук. Litavshchuk vineyards & winery",
+   "region": "Кубань",
+   "category": "Красное сухое",
+   "color": "Красное",
+   "sweetness": "Сухое",
+   "wineColor": "Темно-рубиновый",
+   "alcohol": 14,
+   "temperature": "15-18",
+   "rating": null,
+   "description": "Обладает гармоничным, округлым ароматом с доминирующими тонами спелой вишни, сливы, черной смородины и красных ягод, с нюансами пряностей, подлеска и легкими древесными оттенками. Во вкусе  мягкое и сбалансированное, с бархатистыми танинами, сочной фруктовой основой и длительным сухим послевкусием с ягодными и пряными нюансами.",
+   "grapes": [
+    "Мерло"
+   ],
+   "dishes": [
+    "BBQ",
+    "Брускетты",
+    "Кавказская кухня",
+    "Мясное ассорти",
+    "Сыры"
+   ],
+   "image_url": "/uploads/MAX_02299_1_9c99c57b86.webp",
+   "photo": "data/refs/platform/merlo-2.webp",
+   "photo_sha256": "9a51dc364313e56ee29e0178467c32a869709a1f41ac18a6486915cad79cb1bc"
+  },
+  {
+   "slug": "merlo-and-kaberne-sovinon",
+   "title": "Мерло & Каберне Совиньон",
+   "manufacturer": "Усадьба Перовских",
+   "region": "Крым",
+   "category": "Красное сухое",
+   "color": "Красное",
+   "sweetness": "Сухое",
+   "wineColor": "Красный",
+   "alcohol": 12,
+   "temperature": "16-18",
+   "rating": 4.75,
+   "description": "В аромате тона вишни, черносмородинового мармелада и сушеного чернослива. Тона гвоздики ярко ощущаются в длительном и запоминающемся послевкусии.\n\nПроизводство: брожение и выдержка в емкостях из нержавеющей стали.\n\n",
+   "grapes": [
+    "Каберне Совиньон",
+    "Мерло"
+   ],
+   "dishes": [
+    "Мясо и стейки",
+    "Сыры"
+   ],
+   "image_url": "/uploads/main_merlot_cabernet_6a1c78f0df.webp",
+   "photo": "data/refs/platform/merlo-and-kaberne-sovinon.webp",
+   "photo_sha256": "0e0c6897fe15c5c7b6f2965ca78860571019f5c1374b1fb4cf65514b82b66354"
+  },
+  {
+   "slug": "merlo-limitirovannaya-seriya",
+   "title": "Мерло — лимитированная серия",
+   "manufacturer": "Усадьба Перовских",
+   "region": "Крым",
+   "category": "Красное сухое",
+   "color": "Красное",
+   "sweetness": "Сухое",
+   "wineColor": "Красный",
+   "alcohol": 13,
+   "temperature": "16-18",
+   "rating": 4.67,
+   "description": "Благородный аромат черных ягод и спелой вишни. Легкий, сбалансированный вкус с преобладающей вишней и округлыми танинами. Продолжительное послевкусие с джемовыми оттенками.\n\nПроизводство: выдержка в бочках из американского дуба не менее 18 месяцев.",
+   "grapes": [
+    "Мерло"
+   ],
+   "dishes": [
+    "Мясо и стейки",
+    "Сыры"
+   ],
+   "image_url": "/uploads/lim_merlot_455ff5ee23.webp",
+   "photo": "data/refs/platform/merlo-limitirovannaya-seriya.webp",
+   "photo_sha256": "8a5f9cc97d191877be1e4d7538db79625be9814a0b209599b1ab8a95785dad53"
+  },
+  {
+   "slug": "muskat",
+   "title": "Мускат",
+   "manufacturer": "Литавщук. Litavshchuk vineyards & winery",
+   "region": "Кубань",
+   "category": "Белое полусухое",
+   "color": "Белое",
+   "sweetness": "Полусухое",
+   "wineColor": "Светло-соломенный",
+   "alcohol": 12,
+   "temperature": "10-12",
+   "rating": 5,
+   "description": "Яркий, цветочно-фруктовый аромат с доминирующими нотами белого цвета, розы, апельсинового цвета, спелого винограда, персика и абрикоса, с медовыми и цитрусовыми оттенками. Во вкусе мягкое и гармоничное, с нежной фруктовой сладостью, сбалансированной освежающей кислотностью, и длительным свежим послевкусием, дополненным цветочными и медовыми нюансами.",
+   "grapes": [
+    "Мускат"
+   ],
+   "dishes": [
+    "Выпечка и десерты",
+    "Закуски",
+    "Морепродукты",
+    "Пицца",
+    "Сыры"
+   ],
+   "image_url": "/uploads/MAX_02198_1_c52c0cfeec.webp",
+   "photo": "data/refs/platform/muskat.webp",
+   "photo_sha256": "aaac7b932eef8619a89bed039413307186d22833627d917f4e0b8429f6a11bd9"
+  },
+  {
+   "slug": "peti-shen",
+   "title": "Пети Шен",
+   "manufacturer": "Château Le Grand Vostock",
+   "region": "Кубань",
+   "category": "Красное сухое",
+   "color": "Красное",
+   "sweetness": "Сухое",
+   "wineColor": "Ярко-красный",
+   "alcohol": 13,
+   "temperature": "16-18",
+   "rating": 4.5,
+   "description": "Аромат: интенсивный, яркий, доминируют фруктовые и ягодные тона: слива, чернослив, вишня, черноплодная рябина, с оттенками душистого перца и прочих специй\n\nВкус: насыщенный, концентрированный, яркая кислотность и выразительные танины. Сочные фруктово-ягодные оттенки: слива, чернослив, вишня, черная черноплодная рябина, долгое и сочное послевкусие",
+   "grapes": [
+    "Каберне Совиньон",
+    "Мерло"
+   ],
+   "dishes": [
+    "Мясо и стейки",
+    "Сыры"
+   ],
+   "image_url": "/uploads/eb2a98b25333de7_343x610_notcrop_a78e076070.webp",
+   "photo": "data/refs/platform/peti-shen.webp",
+   "photo_sha256": "078058d711781882721221d6ed02bff2eebd9a3d46b90ec7d2c55d1b70e1b2ac"
+  },
+  {
+   "slug": "pino-blan-art-vin",
+   "title": "Пино Блан АртВин",
+   "manufacturer": "Артвин",
+   "region": "Крым",
+   "category": "Белое сухое",
+   "color": "Белое",
+   "sweetness": "Сухое",
+   "wineColor": "Светло-соломенный",
+   "alcohol": 10,
+   "temperature": "10-12",
+   "rating": null,
+   "description": "Аромат: деликатный, сдержанный, с оттенками белых цветов.\n\nВкус: тонкий, легкий, с гармоничной кислотностью.",
+   "grapes": [
+    "Пино Блан"
+   ],
+   "dishes": [
+    "Рыба и морепродукты",
+    "Устрицы"
+   ],
+   "image_url": "/uploads/pino_white2_no_bg_preview_carve_photos_d4f30395c7.webp",
+   "photo": "data/refs/platform/pino-blan-art-vin.webp",
+   "photo_sha256": "8e6836bd376116104e39375b51eceb2d21ab562290a92d5eba3739efe5a2e26b"
+  },
+  {
+   "slug": "pino-nuar-1",
+   "title": "Пино Нуар",
+   "manufacturer": "Усадьба Перовских",
+   "region": "Крым",
+   "category": "Красное сухое",
+   "color": "Красное",
+   "sweetness": "Сухое",
+   "wineColor": "Красный",
+   "alcohol": 12,
+   "temperature": "14-16",
+   "rating": 4.5,
+   "description": "В аромате мощное, фруктовое, в букете ярко выражены красные ягоды и спелая малина. Вкус легкий, элегантный, ягодный, с мягкими танинами и длительным послевкусием.\n\nПроизводство: брожение и выдержка в емкостях из нержавеющей стали.\n\n",
+   "grapes": [
+    "Пино Нуар"
+   ],
+   "dishes": [
+    "Легкие закуски",
+    "Сыры"
+   ],
+   "image_url": "/uploads/main_pinot_noir_e71d7a6a67.webp",
+   "photo": "data/refs/platform/pino-nuar-1.webp",
+   "photo_sha256": "031aec97b63eb668cb60834679c3052d9bc12070ba24d988910320e4f407acae"
+  },
+  {
+   "slug": "pinot-noir-2024",
+   "title": "Pinot Noir 2024",
+   "manufacturer": "One Barrel by Dmitry Maslov (OBDM)",
+   "region": "Крым",
+   "category": "Белое сухое",
+   "color": "Белое",
+   "sweetness": "Сухое",
+   "wineColor": "Рубиновый",
+   "alcohol": 12,
+   "temperature": "10-12",
+   "rating": 5,
+   "description": "Преобладает элегантный и яркий фруктовый аромат красных ягод брусники и кизила. Легкотелое, мягкое с лёгким и спелым танином. Средняя кислотность.  Pinot Noir One Barrel 2024, тираж 1956 бутылок.\n\nУ вина «южный профиль в северной упаковке», кислотность выше среднего, тело среднее минус, в основе элегантный и яркий фруктовый аромат красных ягод брусники и кизила, мягкая  танинная структура, длина, и возможность потребления молодым, а также отличный потенциал. \n\nФирменная этикетка из обоев выпуска 1988 года Пермского целлюлозно-бумажного комбината. Оттенок 65. На обоях тоже попадаются в тему мелкие ягодки.\n",
+   "grapes": [
+    "Пино Нуар"
+   ],
+   "dishes": [
+    "Легкие закуски",
+    "Мясное ассорти",
+    "Паштеты",
+    "Сыры"
+   ],
+   "image_url": "/uploads/Shardone_uan_barrel_2024_e4ec3db7cd.webp",
+   "photo": "data/refs/platform/pinot-noir-2024.webp",
+   "photo_sha256": "b4bbcb8274659a5e1996dfad6cd0e39ccecf74f3bdfbe25debb98f4832cf1b20"
+  },
+  {
+   "slug": "pinoy-noir",
+   "title": "Pinoy Noir",
+   "manufacturer": "Литавщук. Litavshchuk vineyards & winery",
+   "region": "Кубань",
+   "category": "Красное сухое",
+   "color": "Красное",
+   "sweetness": "Сухое",
+   "wineColor": "Рубиновый",
+   "alcohol": 12,
+   "temperature": "10-12",
+   "rating": 5,
+   "description": "Элегантный, утонченный аромат с доминирующими тонами вишни, малины, клубники и красной смородины, с нюансами розы, подлеска, специй и легкими древесными оттенками. Во вкусе оно легкое или среднетелое, с шелковистыми танинами, яркой кислотностью и сбалансированным ягодным профилем, завершающимся длительным изящным послевкусием.",
+   "grapes": [
+    "Пино Нуар"
+   ],
+   "dishes": [
+    "Закуски",
+    "Мясное ассорти",
+    "Паста",
+    "Сыры"
+   ],
+   "image_url": "/uploads/MAX_02261_50b6c31b32.webp",
+   "photo": "data/refs/platform/pinoy-noir.webp",
+   "photo_sha256": "ae695cdd59140f0dfb2c0a1689033e17f0c2d665afa096f06207d0f50cd29278"
+  },
+  {
+   "slug": "priboj-marchenko-beloe-polusuhoe",
+   "title": "Прибой Марченко белое полусухое",
+   "manufacturer": "Винодельня Марченко",
+   "region": "Кубань",
+   "category": "Белое полусухое",
+   "color": "Белое",
+   "sweetness": "Полусухое",
+   "wineColor": "Соломенный с золотистыми переливами",
+   "alcohol": 13,
+   "temperature": "10-12",
+   "rating": 2.71,
+   "description": "Аромат: яркие цветочные ноты с оттенками цитрусовых, дюшеса.\n\nВкус: нежный, освежающая кислотность гармонично сочетается с хорошо ощутимой сладостью, раскрывается оттенками персика, яблок, цедры.\n\nВозраст лоз: 35 лет\n \nТехнология: ручной сбор при максимальной фенольной зрелости, брожение при температуре 16С остановка брожения холодом и фильтрация, выдержка в нержавеющей стали 4 месяца.",
+   "grapes": [
+    "Первенец Магарача"
+   ],
+   "dishes": [
+    "Блюда из птицы",
+    "Легкие закуски"
+   ],
+   "image_url": "/uploads/priboj_Marchenko_beloe_no_bg_preview_carve_photos_de18758756.webp",
+   "photo": "data/refs/platform/priboj-marchenko-beloe-polusuhoe.webp",
+   "photo_sha256": "2d15cfc217cdb22afbd212b05ad3ee51ab1c542ad8eb0f8ae734bd30e6d4023a"
+  },
+  {
+   "slug": "priboj-marchenko-krasnoe-polusuhoe",
+   "title": "Прибой Марченко красное полусухое",
+   "manufacturer": "Винодельня Марченко",
+   "region": "Кубань",
+   "category": "Красное полусухое",
+   "color": "Красное",
+   "sweetness": "Полусухое",
+   "wineColor": "Глубокий рубиновый",
+   "alcohol": 13,
+   "temperature": "14-16",
+   "rating": 5,
+   "description": "Аромат: фруктово-ягодный, проявляется нотами смородины, вишни, сливы.\n\nВкус: яркий, насыщенный, текстура сбалансированная, танины гармонично сочетаются с кислотностью и природной сладостью, в послевкусии оттенки чернослива, шоколада, специй.\n\nВозраст лоз: 15 лет\n\nТехнология: ручной сбор при достижении фенольной зрелости, дробление с гребнеотделением, брожение при контролируемой температуре, снятие с мезги через 10 дней с последующим продолжением брожения, яблочно-молочное брожение одновременно со спиртовым, при достижении целевого уровня остаточных сахаров остановка брожения холодом, прессование, фильтрация, выдержка до розлива в емкостях из нержавеющей стали",
+   "grapes": [
+    "Каберне АЗОС"
+   ],
+   "dishes": [
+    "BBQ",
+    "Сыры"
+   ],
+   "image_url": "/uploads/Priboj_Marchenko_krasnoe_no_bg_preview_carve_photos_6e051269ba.webp",
+   "photo": "data/refs/platform/priboj-marchenko-krasnoe-polusuhoe.webp",
+   "photo_sha256": "ed3e72cfab639e29fba1c87c8180d477e59de80e93e5259fcc1f13b12b44580d"
+  },
+  {
+   "slug": "priboj-marchenko-rozovoe-polusuhoe",
+   "title": "Прибой Марченко розовое полусухое",
+   "manufacturer": "Винодельня Марченко",
+   "region": "Кубань",
+   "category": "Розовое полусухое",
+   "color": "Розовое",
+   "sweetness": "Полусухое",
+   "wineColor": "Розовый",
+   "alcohol": 13,
+   "temperature": "8-10",
+   "rating": 4,
+   "description": "Аромат: яркий, ягодный, сочетает ноты земляники, барбариса и малины.\n\nВкус: нежный, приятная кислотность, аккуратная, чуть заметная сладость, ярко проявляются фруктовые и ягодные оттенки.\n\nВозраст лоз: 35 лет, 12 лет\n\nТехнология: ручной сбор, дробление с гребнеотделением и быстрое прессование, отбор сусла до появления интенсивной окраски, брожение при температуре 14-16 С, остановка брожения холодом, фильтрация.",
+   "grapes": [
+    "Антей магарачский",
+    "Мерло"
+   ],
+   "dishes": [
+    "Азиатская кухня",
+    "Блюда из птицы",
+    "Легкие закуски"
+   ],
+   "image_url": "/uploads/Priboj_Marchenko_rozovoe_no_bg_preview_carve_photos_a85f40aeb6.webp",
+   "photo": "data/refs/platform/priboj-marchenko-rozovoe-polusuhoe.webp",
+   "photo_sha256": "0fcded29be5044ee510e7e9722daf1da7426c8b335689932549fb5678b838c15"
+  },
+  {
+   "slug": "risling-2",
+   "title": "Рислинг",
+   "manufacturer": "Литавщук. Litavshchuk vineyards & winery",
+   "region": "Кубань",
+   "category": "Белое полусухое",
+   "color": "Белое",
+   "sweetness": "Полусухое",
+   "wineColor": "Светло-золотистый",
+   "alcohol": 12,
+   "temperature": "6-8",
+   "rating": 3.33,
+   "description": "Свежий, чистый аромат с нотами зеленого яблока, цитрусовых, груши, белых цветов и легкими минеральными или медовыми оттенками. Во вкусе оно легкое и гармоничное, с яркой кислотностью, деликатной сладостью и сбалансированным фруктово-минеральным послевкусием.",
+   "grapes": [
+    "Рислинг"
+   ],
+   "dishes": [
+    "Блюда из рыбы",
+    "Закуски",
+    "Кухни народов мира",
+    "Морепродукты"
+   ],
+   "image_url": "/uploads/MAX_02346_1_edcbff60a1.webp",
+   "photo": "data/refs/platform/risling-2.webp",
+   "photo_sha256": "dc4170022527eb975b51d444545ee729d8f32c62a4b9c6353151ffc6af5e069f"
+  },
+  {
+   "slug": "risling-dva-dubka",
+   "title": "Рислинг ДВА ДУБКА",
+   "manufacturer": "Сенетх",
+   "region": "Кубань",
+   "category": "Белое сухое",
+   "color": "Белое",
+   "sweetness": "Сухое",
+   "wineColor": "Зеленовато-соломенный",
+   "alcohol": 12,
+   "temperature": "8-12",
+   "rating": 3.67,
+   "description": "Аромат яркий: лайм, цитрусы, желтые цветы. Вкус полный, соответствует аромату. Послевкусие продолжительное, с нюансом лимонной корочки. Потенциал развития в бутылке 3-5 лет. \nКаждая бутылка имеет индивидуальный номер.\n\nПроисхождение: Массив “Красная горка”, ст-ца Гостагаевская, Анапа. Почвы дерново-карбонатные. Подпочвы мергели.\n\nОсобенности производства: Ручной сбор винограда, с сортировкой гроздей на винограднике. Деликатное дробление и прессование. Стабуляж 10 дней при температуре 3-50С. Брожение при контролируемой температуре в стали (84%) и ферментация и выдержка в тонно из акации (500 л.) с батоннажами 8 мес. (16%).",
+   "grapes": [
+    "Рислинг Рейнский"
+   ],
+   "dishes": [
+    "Мясное ассорти",
+    "Салаты"
+   ],
+   "image_url": "/uploads/S_01_Ris_25_ab1a7a7aec.webp",
+   "photo": "data/refs/platform/risling-dva-dubka.webp",
+   "photo_sha256": "a0d6050ea384858cc0e9b6d3dac1f2a0cb3cb2d7b95d8a9ed2da70c0b01ec24c"
+  },
+  {
+   "slug": "risling-rezerv",
+   "title": "Рислинг Резерв",
+   "manufacturer": "Усадьба Перовских",
+   "region": "Крым",
+   "category": "Белое полусухое",
+   "color": "Белое",
+   "sweetness": "Полусухое",
+   "wineColor": "Светло-соломенный ",
+   "alcohol": 12,
+   "temperature": "10-12",
+   "rating": 4.86,
+   "description": "В аромате тона яблок, цитрусов и белых цветов. Богатый, насыщенный вкус с нотками желтых фруктов. Сбалансированная, мягкая кислотность.\n\nПроизводство: выдержка в бочках из французского дуба в течение 6 месяцев.",
+   "grapes": [
+    "Рислинг"
+   ],
+   "dishes": [
+    "Азиатская кухня",
+    "Рыба и морепродукты",
+    "Сыры"
+   ],
+   "image_url": "/uploads/res_riesling_e367652923.webp",
+   "photo": "data/refs/platform/risling-rezerv.webp",
+   "photo_sha256": "9200ea38c21e85073dc43a6164d853eef17184fdede392436dc9e4c04d98592a"
+  },
+  {
+   "slug": "rkacziteli-i-muskat-oranzh",
+   "title": "Ркацители и Мускат Оранж",
+   "manufacturer": "Усадьба Перовских",
+   "region": "Крым",
+   "category": "Белое сухое",
+   "color": "Белое",
+   "sweetness": "Сухое",
+   "wineColor": "Золотистый",
+   "alcohol": 12,
+   "temperature": "10-12",
+   "rating": 4.67,
+   "description": "Аромат нежный деликатный, запоминающийся. Вино свежее, экспрессивное, с округлым, хорошо сбалансированным телом и мягким длительным послевкусием.\n\nПроизводство: Ркацители изготовлен по классической технологии производства белого вина. Мускат изготовлен по технологии оранжевых вин путем контакта вина с мезгой в течение 21 дня.",
+   "grapes": [
+    "Мускат Оттонель",
+    "Ркацители"
+   ],
+   "dishes": [
+    "Рыба и морепродукты",
+    "Салаты"
+   ],
+   "image_url": "/uploads/main_rkatsiteli_muskat_orange_10c5cf3d2f.webp",
+   "photo": "data/refs/platform/rkacziteli-i-muskat-oranzh.webp",
+   "photo_sha256": "345a9f0919a33761c57c604b3cd87c82451ed0a6dc5cd5368e2cf321fd7336f7"
+  },
+  {
+   "slug": "rkacziteli-kvevri",
+   "title": "Ркацители Квеври",
+   "manufacturer": "Усадьба Перовских",
+   "region": "Крым",
+   "category": "Белое сухое",
+   "color": "Белое",
+   "sweetness": "Сухое",
+   "wineColor": "Золотистый",
+   "alcohol": 12,
+   "temperature": "12-14",
+   "rating": 4.5,
+   "description": "В аромате —фруктово-медовая палитра, высокоэкстрактивный, насыщенный, бархатистый вкус, с тонами увяленных сладких фруктов.\n\nПроизводство: произведено по уникальной грузинской технологии брожения и выдержки в течение 6 месяцев на мезге в глиняных сосудах —квеври.",
+   "grapes": [
+    "Ркацители"
+   ],
+   "dishes": [
+    "Блюда из птицы",
+    "Кавказская кухня",
+    "Рыба и морепродукты",
+    "Сыры"
+   ],
+   "image_url": "/uploads/ge_rkatsiteli_2b9412517f.webp",
+   "photo": "data/refs/platform/rkacziteli-kvevri.webp",
+   "photo_sha256": "83070868a3d426ec1b7e7d5b4200fbcc6bb80d702f2ed6d216fd37a7c3b72599"
+  },
+  {
+   "slug": "rozovoe-polusuhoe",
+   "title": "Розовое полусухое",
+   "manufacturer": "Усадьба Перовских",
+   "region": "Крым",
+   "category": "Розовое полусухое",
+   "color": "Розовое",
+   "sweetness": "Полусухое",
+   "wineColor": "Нежно-розовый",
+   "alcohol": 11,
+   "temperature": "10-12",
+   "rating": 4.67,
+   "description": "В аромате свежие ноты малины, вишни, дыни и цитрусовых. Вино освежающее во вкусе, со свежей кислотностью и долгим ягодным послевкусием.\n\nПроизводство: краткосрочная мацерация и прямое прессование.",
+   "grapes": [
+    "Мерло"
+   ],
+   "dishes": [
+    "Мясное ассорти",
+    "Салаты",
+    "Сыры"
+   ],
+   "image_url": "/uploads/main_rose_semidry_6e540b96e9.webp",
+   "photo": "data/refs/platform/rozovoe-polusuhoe.webp",
+   "photo_sha256": "71da01252d118d2a9695db1de897b61ff86d11abd1ebfbaf5c871eef09061fa2"
+  },
+  {
+   "slug": "rozovoe-suhoe",
+   "title": "Розовое сухое",
+   "manufacturer": "Усадьба Перовских",
+   "region": "Крым",
+   "category": "Розовое сухое",
+   "color": "Розовое",
+   "sweetness": "Сухое",
+   "wineColor": "Нежно-розовое",
+   "alcohol": 11,
+   "temperature": "10-12",
+   "rating": 4.75,
+   "description": "Аромат нежных красных ягод с цитрусовыми нотами. Вторыми голосами звучат минеральные оттенки с намеком на пикантную горчинку. Вкус гармоничный, развитый, сочный с деликатной кислинкой.\n\nПроизводство: краткосрочная мацерация и прямое прессование.\n\n",
+   "grapes": [
+    "Мерло"
+   ],
+   "dishes": [
+    "Рыба и морепродукты",
+    "Салаты",
+    "Сыры"
+   ],
+   "image_url": "/uploads/main_rose_dry_daef1d0a86.webp",
+   "photo": "data/refs/platform/rozovoe-suhoe.webp",
+   "photo_sha256": "481f0d61280c1984170db41c14ac6099c4afe65b739493b0097287271a782f38"
+  },
+  {
+   "slug": "saperavi",
+   "title": "Саперави",
+   "manufacturer": "Литавщук. Litavshchuk vineyards & winery",
+   "region": "Кубань",
+   "category": "Красное сухое",
+   "color": "Красное",
+   "sweetness": "Сухое",
+   "wineColor": "Темно-гранатовый",
+   "alcohol": 14,
+   "temperature": "16-18",
+   "rating": 4.5,
+   "description": "Насыщенное, полнотелое, с бархатными танинами и яркой кислотностью, в аромате доминируют ноты черных ягод: ежевика, черная смородина, слива, вишня, часто с оттенками специй, табака и земли. Во вкусе плотное и терпкое, с выраженной структурой, длительным послевкусием и характерными тонами темных фруктов, черного перца, кожи.",
+   "grapes": [
+    "Мерло"
+   ],
+   "dishes": [
+    "BBQ",
+    "Брускетты",
+    "Кавказская кухня",
+    "Овощи гриль"
+   ],
+   "image_url": "/uploads/MAX_02309_5b49a2088a.webp",
+   "photo": "data/refs/platform/saperavi.webp",
+   "photo_sha256": "6056b573f89ea11ab39aa295a1d032114745984549ddaeb259169b42c8c3e23d"
+  },
+  {
+   "slug": "saperavi-dva-dubka",
+   "title": "Саперави ДВА ДУБКА",
+   "manufacturer": "Сенетх",
+   "region": "Кубань",
+   "category": "Красное сухое",
+   "color": "Красное",
+   "sweetness": "Сухое",
+   "wineColor": "Пурпурно-красный",
+   "alcohol": 13,
+   "temperature": "16-18",
+   "rating": 4,
+   "description": "Аромат яркий, сложный: кожа, тёрн, черные ягоды, мясо, кровь. В развитии бузина, сладкие  восточные пряности, шоколад. Вкус свежий, очень интенсивный. Вино умеренно округлое, слегка греющее. Тело среднее плюс, суховатые танины. Живая кислотность, послевкусие продолжительное.\n\nУчасток “Два дубка” на винограднике “Сенетх” (массив Красная горка, ст-ца Гостагаевская, Анапа. Почвы карбонатные, подпочвы- мергели. Особенности производства: Ручной сбор, сортировка на винограднике. Холодная мацерация 22 сут. при 3-50С. Брожение при контролируемой температуре 14 дн., ремонтажи. ЯМБ на мезге 14 дн.. Общее время мацерации на мезге 50 дн.. \n\nВыдержка в кавк. дубе 600 л., второй пассаж 14 мес. Бутылочная выдержка 24 мес.",
+   "grapes": [
+    "Саперави"
+   ],
+   "dishes": [
+    "BBQ",
+    "Мясо и стейки"
+   ],
+   "image_url": "/uploads/Pre_BR_02_a7144bac06.webp",
+   "photo": "data/refs/platform/saperavi-dva-dubka.webp",
+   "photo_sha256": "0cd3e19281f904b594c43c9d9d2ea706675ab2074b8bcfb68fba7263ef1de023"
+  },
+  {
+   "slug": "saperavi-kvevri",
+   "title": "Саперави Квеври",
+   "manufacturer": "Усадьба Перовских",
+   "region": "Крым",
+   "category": "Красное сухое",
+   "color": "Красное",
+   "sweetness": "Сухое",
+   "wineColor": "Красный",
+   "alcohol": 14,
+   "temperature": "16-18",
+   "rating": 4.75,
+   "description": "Яркий фруктовый аромат с нотками черной смородины, шелковицы и вишни. Вкус гармоничный, сбалансированный, с умеренной терпкостью, тонами спелых фруктов и вишни, с долгим послевкусием.\n\nПроизводство: произведено по уникальной грузинской технологии брожения и выдержки в течение 6 месяцев на мезге в глиняных сосудах —квеври.\n\n",
+   "grapes": [
+    "Саперави"
+   ],
+   "dishes": [
+    "Кавказская кухня",
+    "Мясо и стейки",
+    "Сыры"
+   ],
+   "image_url": "/uploads/ge_saperavi_3fc34b52d4.webp",
+   "photo": "data/refs/platform/saperavi-kvevri.webp",
+   "photo_sha256": "b0701cccc12f3951040523a758f5988b2fac4d78b82c4a2483f67d621d6bad8b"
+  },
+  {
+   "slug": "saperavi-limitirovannaya-seriya",
+   "title": "Саперави — лимитированная серия",
+   "manufacturer": "Усадьба Перовских",
+   "region": "Крым",
+   "category": "Красное сухое",
+   "color": "Красное",
+   "sweetness": "Сухое",
+   "wineColor": "Красный",
+   "alcohol": 14,
+   "temperature": "16-18",
+   "rating": 4.6,
+   "description": "Аромат вина богатый и щедрый, соткан из ноток темных ягод, черной смородины, вишни, специй. Во вкусе тона спелых фруктов гармонично переплетаются с легкими нюансами дуба и специй, формируя длительное приятное послевкусие.\n\nПроизводство: выдержка в бочках из американского дуба не менее 18 месяцев.",
+   "grapes": [
+    "Саперави"
+   ],
+   "dishes": [
+    "Мясное ассорти",
+    "Мясо и стейки"
+   ],
+   "image_url": "/uploads/lim_saperavi_0777d3f30f.webp",
+   "photo": "data/refs/platform/saperavi-limitirovannaya-seriya.webp",
+   "photo_sha256": "1d87db5e0de7222f289a1f21281a747416d2b3cbd4a79cf944f710eda529aded"
+  },
+  {
+   "slug": "simbioz",
+   "title": "Симбиоз",
+   "manufacturer": "WINEPARK",
+   "region": "Крым",
+   "category": "Красное сухое",
+   "color": "Красное",
+   "sweetness": "Сухое",
+   "wineColor": "Темно-рубиновый",
+   "alcohol": 135,
+   "temperature": "15-18",
+   "rating": 4.22,
+   "description": "В аромате красные и темные спелые ягоды (смородина, слива, вишня, ежевика, черника), специи (гвоздика, кардамон, мускатный орех).  Элегантное тельное вино с хорошей кислотностью, с оттенком ягод и специй во вкусе, продолжительным сочным послевкусием.",
+   "grapes": [
+    "Каберне Совиньон"
+   ],
+   "dishes": [
+    "BBQ",
+    "Запеченные овощи",
+    "Мясное ассорти",
+    "Мясо и стейки",
+    "Сыры"
+   ],
+   "image_url": "/uploads/simbioz_2021_975b321bc5.webp",
+   "photo": "data/refs/platform/simbioz.webp",
+   "photo_sha256": "0bd03a394b905d6b283124434ca838008860f85686a9de77d789f48657ec600f"
+  },
+  {
+   "slug": "sira-1",
+   "title": "Сира",
+   "manufacturer": "Усадьба Перовских",
+   "region": "Крым",
+   "category": "Красное сухое",
+   "color": "Красное",
+   "sweetness": "Сухое",
+   "wineColor": "Красный",
+   "alcohol": 12,
+   "temperature": "16-18",
+   "rating": 4.75,
+   "description": "В аромате мощное, фруктовое, в букете ярко выражены красные ягоды и спелая малина. Вкус легкий, элегантный, ягодный, с мягкими танинами и длительным послевкусием.\n\nПроизводство: брожение и выдержка в емкостях из нержавеющей стали.\n\n",
+   "grapes": [
+    "Сира"
+   ],
+   "dishes": [
+    "Мясо и стейки",
+    "Сыры"
+   ],
+   "image_url": "/uploads/main_syrah_8ba571ae21.webp",
+   "photo": "data/refs/platform/sira-1.webp",
+   "photo_sha256": "3be22da71b430f239cc07ad6d0017b52f8a13122044e286f9da8d45e19b23635"
+  },
+  {
+   "slug": "sira-limitirovannaya-seriya",
+   "title": "Сира — лимитированная серия",
+   "manufacturer": "Усадьба Перовских",
+   "region": "Крым",
+   "category": "Красное сухое",
+   "color": "Красное",
+   "sweetness": "Сухое",
+   "wineColor": "Красный",
+   "alcohol": 13,
+   "temperature": "16-18",
+   "rating": 4.8,
+   "description": "Аромат интенсивный, сложный, с тонами ягодного джема, сушеных трав и перца. Во вкусе глубокое, сбалансированное, со спелой танинностью.\n\nПроизводство: выдержка в бочках из американского дуба не менее 18 месяцев.",
+   "grapes": [
+    "Сира"
+   ],
+   "dishes": [
+    "Мясо и стейки"
+   ],
+   "image_url": "/uploads/lim_syrah_26570c7f18.webp",
+   "photo": "data/refs/platform/sira-limitirovannaya-seriya.webp",
+   "photo_sha256": "e390d02fe2a1bffa18fc804952ef56febe86d0d798213dea6a1c6d4f5b16a5f1"
+  },
+  {
+   "slug": "sovinon",
+   "title": "Совиньон",
+   "manufacturer": "Усадьба Перовских",
+   "region": "Крым",
+   "category": "Белое сухое",
+   "color": "Белое",
+   "sweetness": "Сухое",
+   "wineColor": "Светло-соломенный ",
+   "alcohol": 12,
+   "temperature": "10-12",
+   "rating": 4.86,
+   "description": "Насыщенный аромат смородинового листа и крыжовника. Во вкусе зеленый крыжовник, маракуйя. Типичные сортовые ноты.\n\nПроизводство: брожение и выдержка в емкостях из нержавеющей стали.",
+   "grapes": [
+    "Совиньон"
+   ],
+   "dishes": [
+    "Рыба и морепродукты",
+    "Салаты"
+   ],
+   "image_url": "/uploads/main_sauvignon_d3d8e795e1.webp",
+   "photo": "data/refs/platform/sovinon.webp",
+   "photo_sha256": "350ae1e986b456de8a1fa4ed21b87ec2739f33e7c56c43445eba4538ab8e804e"
+  },
+  {
+   "slug": "sovinon-blan",
+   "title": "Совиньон Блан",
+   "manufacturer": "Литавщук. Litavshchuk vineyards & winery",
+   "region": "Кубань",
+   "category": "Белое полусладкое",
+   "color": "Белое",
+   "sweetness": "Полусладкое",
+   "wineColor": "Золотистый",
+   "alcohol": 12,
+   "temperature": "10-12",
+   "rating": 3,
+   "description": "Обладает свежим, фруктовым ароматом с нотами крыжовника, цитрусовых, зеленого яблока и легкими травянистыми оттенками, с тонами тропических фруктов. Во вкусе  мягкое и гармоничное, с хорошо сбалансированной сладостью, яркой кислотностью и чистым фруктово-минеральным послевкусием.",
+   "grapes": [
+    "Совиньон Блан"
+   ],
+   "dishes": [
+    "Азиатская кухня",
+    "Блюда из рыбы",
+    "Десерты",
+    "Закуски",
+    "Пицца",
+    "Сыры"
+   ],
+   "image_url": "/uploads/MAX_02320_d56a1a6d6d.webp",
+   "photo": "data/refs/platform/sovinon-blan.webp",
+   "photo_sha256": "c8cda06bff7c53eac146078f6d820cabcf568d320036ae2e82ec06ae80e54693"
+  },
+  {
+   "slug": "sovinon-blan-2",
+   "title": "Совиньон Блан",
+   "manufacturer": "Литавщук. Litavshchuk vineyards & winery",
+   "region": "Кубань",
+   "category": "Белое сухое",
+   "color": "Белое",
+   "sweetness": "Сухое",
+   "wineColor": "Светло-соломенный",
+   "alcohol": 12,
+   "temperature": "6-8",
+   "rating": 4.5,
+   "description": "Яркий, свежий аромат с доминирующими нотами крыжовника, смородинового листа, цитрусовых и зеленого яблока, с травянистыми и минеральными оттенками. Во вкусе оно легкое и сбалансированное, с выраженной кислотностью, чистой фруктовой основой и длительным освежающим послевкусием.\n\n",
+   "grapes": [
+    "Совиньон Блан"
+   ],
+   "dishes": [
+    "Блюда из рыбы",
+    "Брускетты",
+    "Морепродукты",
+    "Сыры"
+   ],
+   "image_url": "/uploads/MAX_02232_b4e3ff9ae5.webp",
+   "photo": "data/refs/platform/sovinon-blan-2.webp",
+   "photo_sha256": "df5518b8aea233f7f209cd56ad72f2339acf4b9ec57156b64ee1b8e4e76a1f55"
+  },
+  {
+   "slug": "ulybka-vetra-kaberne-sovinon",
+   "title": "Улыбка ветра, Каберне Совиньон",
+   "manufacturer": "Дом Крымских Вин",
+   "region": "Крым",
+   "category": "Красное сухое",
+   "color": "Красное",
+   "sweetness": "Сухое",
+   "wineColor": "Темно-рубиновый",
+   "alcohol": 13,
+   "temperature": "16-18",
+   "rating": null,
+   "description": "Аромат сложный и насыщенный с доминирующей нотой спелых черных ягод и засахаренных красных фруктов. На финише\nпроявляются нюансы темного шоколада. Вкус средней плотности, хорошо структурированное, с бархатным округлым танином. В послевкусии раскрывается тонами спелой вишни и табака.",
+   "grapes": [
+    "Каберне Совиньон"
+   ],
+   "dishes": [
+    "BBQ",
+    "Брускетты",
+    "Мясное ассорти",
+    "Мясо и стейки",
+    "Паштеты"
+   ],
+   "image_url": "/uploads/H4119_Ulybka_Vetra_Kaberne_Sovinon_2024_DKV_eba5b4df62.webp",
+   "photo": "data/refs/platform/ulybka-vetra-kaberne-sovinon.webp",
+   "photo_sha256": "2479728d0db6376fea19708ba9c2a801e8d862ab9895ba8e9171414680f47c32"
+  },
+  {
+   "slug": "ulybka-vetra-merlo",
+   "title": "Улыбка ветра, Мерло",
+   "manufacturer": "Дом Крымских Вин",
+   "region": "Крым",
+   "category": "Красное сухое",
+   "color": "Красное",
+   "sweetness": "Сухое",
+   "wineColor": "Рубиновый",
+   "alcohol": 13,
+   "temperature": "16-18",
+   "rating": null,
+   "description": "Аромат интенсивный и многослойный. Ноты переспелых темных ягод переплетаются с нюансами сладких специй -\nлакрицы и гвоздики. Вкус полнотелое, с выраженным бархатистым танином и сбалансированной кислотностью. Раскрывается сладостью спелой ежевики и черной сливы. В послевкусии доминирует пьяная вишневая косточка.",
+   "grapes": [
+    "Мерло"
+   ],
+   "dishes": [
+    "BBQ",
+    "Мясное ассорти",
+    "Мясо и стейки",
+    "Сыры"
+   ],
+   "image_url": "/uploads/H4120_Ulybka_vetra_Merlo_2024_DKV_426a5f1726.webp",
+   "photo": "data/refs/platform/ulybka-vetra-merlo.webp",
+   "photo_sha256": "0da8e47de3ed1d32f5413dd85fa7086e9525dc4df5d31e2d370d0e53adff1e65"
+  },
+  {
+   "slug": "ulybka-vetra-shardone",
+   "title": "Улыбка ветра, Шардоне",
+   "manufacturer": "Дом Крымских Вин",
+   "region": "Крым",
+   "category": "Белое сухое",
+   "color": "Белое",
+   "sweetness": "Сухое",
+   "wineColor": "Светло-золотистый",
+   "alcohol": 12,
+   "temperature": "10-12",
+   "rating": null,
+   "description": "Аромат свежий и минеральный, с нотами сочных косточковых фруктов, спелой айвы и цитрусовым шлейфом. Вкус структурированный и освежающий. Раскрывается тонами спелого садового яблока и груши, припудренной лесным орехом\nс лимонным тартом в послевкусии.",
+   "grapes": [
+    "Шардоне"
+   ],
+   "dishes": [
+    "Блюда из птицы",
+    "Блюда из рыбы",
+    "Запеченные овощи",
+    "Легкие закуски",
+    "Сыры"
+   ],
+   "image_url": "/uploads/H4118_Ulybka_vetra_Shardone_2024_DKV_6f148eb928.webp",
+   "photo": "data/refs/platform/ulybka-vetra-shardone.webp",
+   "photo_sha256": "2271385ad24f353798ca1b8ca2f6684c8b93c993e5e7de76c2985052be1ccf06"
+  },
+  {
+   "slug": "ulybka-vetra-sovinon-blan",
+   "title": "Улыбка ветра, Совиньон Блан",
+   "manufacturer": "Дом Крымских Вин",
+   "region": "Крым",
+   "category": "Белое сухое",
+   "color": "Белое",
+   "sweetness": "Сухое",
+   "wineColor": "Светло-соломенный",
+   "alcohol": 12,
+   "temperature": "10-12",
+   "rating": null,
+   "description": "Аромат яркий, но деликатный, с хорошо угадываемой нотой крыжовника, тонами зеленых фруктов и ненавязчивым шлейфом\nцветочного меда. Вкус минеральный, хорошо структурированное вино, с освежающей кислотностью и легкой сладостью белых фруктов. Длительное и сбалансированное послевкусие с нюансами тропических фруктов на финише.",
+   "grapes": [
+    "Совиньон Блан"
+   ],
+   "dishes": [
+    "Блюда из птицы",
+    "Блюда из рыбы",
+    "Брускетты",
+    "Паста",
+    "Сыры"
+   ],
+   "image_url": "/uploads/H4117_Ulybka_vetra_Sovinon_Blan_2024_DKV_9223d656b0.webp",
+   "photo": "data/refs/platform/ulybka-vetra-sovinon-blan.webp",
+   "photo_sha256": "4f7c40eaf57fd6ff9a6d42e5847a60997a1bd33b07d598e28b6fe093cb5064b8"
+  },
+  {
+   "slug": "veselaya-gorka",
+   "title": "Веселая горка",
+   "manufacturer": "Литавщук. Litavshchuk vineyards & winery",
+   "region": "Кубань",
+   "category": "Красное полусладкое",
+   "color": "Красное",
+   "sweetness": "Полусладкое",
+   "wineColor": "Рубиновый",
+   "alcohol": 12,
+   "temperature": "15-18",
+   "rating": null,
+   "description": "Аромат насыщенный , гармоничный с доминирующими тонами спелой вишни, сливы, черной смородины и красных ягод, с легкими нюансами специй, шоколада или древесных оттенков. Во вкусе мягкое, с бархатистыми танинами, выразительной фруктовой основой и сбалансированным сладковато-пряным послевкусием.\n\n\n",
+   "grapes": [
+    "Мерло"
+   ],
+   "dishes": [
+    "BBQ",
+    "Запеченные овощи",
+    "Кавказская кухня",
+    "Легкие закуски"
+   ],
+   "image_url": "/uploads/MAX_02353_297cd6e851.webp",
+   "photo": "data/refs/platform/veselaya-gorka.webp",
+   "photo_sha256": "5b54c305a8b14f78b2317ee345ee25be527e9cd74a14026bee18d3822d10b7d0"
+  },
+  {
+   "slug": "vinnye-kraski-kaberne-sovinon",
+   "title": "Винные краски, Каберне Совиньон",
+   "manufacturer": "Дом Крымских Вин",
+   "region": "Крым",
+   "category": "Красное сухое",
+   "color": "Красное",
+   "sweetness": "Сухое",
+   "wineColor": "Рубиновый",
+   "alcohol": 13,
+   "temperature": "16-18",
+   "rating": null,
+   "description": "Густая ароматика черных ягод и красных фруктов-спелой вишни, черноплодной рябины и легкой сладостью\nтемного шоколада в шлейфе. Среднетелое, со сложенной структурой, бархатистым танином и глубоким вкусом вишневой косточки в окончании.",
+   "grapes": [
+    "Каберне Совиньон"
+   ],
+   "dishes": [
+    "BBQ",
+    "Мясное ассорти",
+    "Пицца",
+    "Сыры"
+   ],
+   "image_url": "/uploads/H4123_Vinnye_kraski_Kaberne_Sovinon_2024_DKV_06462e2b91.webp",
+   "photo": "data/refs/platform/vinnye-kraski-kaberne-sovinon.webp",
+   "photo_sha256": "a53a263b6030fa4b2cd97d93e6b6810f3a1764d1ac17152dcc3fb818b3bd8f81"
+  },
+  {
+   "slug": "vinnye-kraski-merlo",
+   "title": "Винные краски, Мерло",
+   "manufacturer": "Дом Крымских Вин",
+   "region": "Крым",
+   "category": "Красное сухое",
+   "color": "Красное",
+   "sweetness": "Сухое",
+   "wineColor": "Темно-гранатовый",
+   "alcohol": 13,
+   "temperature": "16-18",
+   "rating": null,
+   "description": "В аромате экспрессия спелых красных фруктов и сладких специй. В бокале тона вишни мараскино, сливы, легкая сладость лакрицы\nи пряность гвоздики. На вкус тельное, с выраженным красиво балансирующим танином. Хорошая кислотность, насыщенный ягодный вкус на финише изящно звучит вишневой косточкой.",
+   "grapes": [
+    "Мерло"
+   ],
+   "dishes": [
+    "BBQ",
+    "Запеченные овощи",
+    "Кавказская кухня",
+    "Мясное ассорти",
+    "Сыры"
+   ],
+   "image_url": "/uploads/H4124_Vinnye_kraski_Merlo_2024_DKV_1_3a6f83c9be.webp",
+   "photo": "data/refs/platform/vinnye-kraski-merlo.webp",
+   "photo_sha256": "6187cbd54ed4c9abf9e9edbc08f2553facf6ea180648a8650bd97232cfd9944c"
+  },
+  {
+   "slug": "vinnye-kraski-shardone",
+   "title": "Винные краски, Шардоне",
+   "manufacturer": "Дом Крымских Вин",
+   "region": "Крым",
+   "category": "Белое сухое",
+   "color": "Белое",
+   "sweetness": "Сухое",
+   "wineColor": "Светло-золотистый",
+   "alcohol": 12,
+   "temperature": "10-12",
+   "rating": null,
+   "description": "Тонкий аромат белых фруктов, цедры лимона и миндальный крошки с деликатной сливочной округлостью\nи свежестью скошенной травы в шлейфе. Вкус звонкий и легкий, с яркой кислотностью, сочностью спелых яблок и груш, ненавязчивой дыней в послевкусии и продолжительным финишем.",
+   "grapes": [
+    "Шардоне"
+   ],
+   "dishes": [
+    "Азиатская кухня",
+    "Блюда из птицы",
+    "Закуски",
+    "Легкие закуски",
+    "Сыры"
+   ],
+   "image_url": "/uploads/H4122_Vinnye_kraski_Shardone_2024_DKV_aa038d6d04.webp",
+   "photo": "data/refs/platform/vinnye-kraski-shardone.webp",
+   "photo_sha256": "f8c78ac9f4b47a199a99030b68c0d3cf1275c7cf65f3174415b3ffc6749abdd4"
+  },
+  {
+   "slug": "vinnye-kraski-sovinon-blan",
+   "title": "Винные краски, Совиньон Блан",
+   "manufacturer": "Дом Крымских Вин",
+   "region": "Крым",
+   "category": "Белое сухое",
+   "color": "Белое",
+   "sweetness": "Сухое",
+   "wineColor": "Светло-соломенный",
+   "alcohol": 12,
+   "temperature": "10-12",
+   "rating": null,
+   "description": "Экспрессивная, но нежная ароматика крыжовника, дополненная тонами зеленого яблока и груши, с тонкой и пряной\nсладостью липового цвета в шлейфе. Легкое, хорошо структурированное вино, со свежей продолжительной кислотностью. Финиш длительный с оттенками цедры лайма и ненавязчивой сладостью маракуйи.",
+   "grapes": [
+    "Совиньон Блан"
+   ],
+   "dishes": [
+    "Блюда из птицы",
+    "Блюда из рыбы",
+    "Брускетты",
+    "Морепродукты",
+    "Сыры"
+   ],
+   "image_url": "/uploads/H4121_Vinnye_kraski_Sovinon_Blan_2024_DKV_c067db407c.webp",
+   "photo": "data/refs/platform/vinnye-kraski-sovinon-blan.webp",
+   "photo_sha256": "1cbc651998a180a74b16d1df40e07c057441edca970ce49fa38d85ab63da1972"
+  },
+  {
+   "slug": "vione-dva-dubka",
+   "title": "Вионье ДВА ДУБКА",
+   "manufacturer": "Сенетх",
+   "region": "Кубань",
+   "category": "Белое сухое",
+   "color": "Белое",
+   "sweetness": "Сухое",
+   "wineColor": "Зеленовато-соломенный",
+   "alcohol": 12,
+   "temperature": "8-12",
+   "rating": 4,
+   "description": "Аромат яркий: абрикос, жимолость, косточковые фрукты. Вкус полный, соответствует аромату. Послевкусие продолжительное. Потенциал развития в бутылке 3-5 лет. Каждая бутылка имеет индивидуальный номер.\n\nПроисхождение: Участок “Два дубка” на винограднике “Сенетх” (массив Красная горка, ст-ца Гостагаевская, Анапа. Почвы карбонатные, подпочвы- мергели.\n\nОсобенности производства: Ручной сбор винограда, с сортировкой гроздей на винограднике. Деликатное дробление и прессование. Стабуляж 10 дней при температуре 3-50С. Брожение при контролируемой температуре в стали (77%) и ферментация и выдержка в кавк. дуб (600 л.) с батоннажами 8 мес. (23%).\n",
+   "grapes": [
+    "Вионье"
+   ],
+   "dishes": [
+    "Блюда из рыбы",
+    "Паста"
+   ],
+   "image_url": "/uploads/Pre_W04_2c44fe8ecb.webp",
+   "photo": "data/refs/platform/vione-dva-dubka.webp",
+   "photo_sha256": "de07dbdf3987e1b891053e7fe7891641db6041fdea039f0cf8ef7c6b85878f53"
+  },
+  {
+   "slug": "vione-nyuazh-zero-dozazh",
+   "title": "Вионье Нюаж Зеро Дозаж",
+   "manufacturer": "Сенетх",
+   "region": "Кубань",
+   "category": "Белое экстра брют",
+   "color": "Белое",
+   "sweetness": "Экстра брют",
+   "wineColor": "Светло-соломенный ",
+   "alcohol": 11,
+   "temperature": "6-8",
+   "rating": 4.5,
+   "description": "Нежный перляж с облаком мелких изящных пузырьков. Аромат вина тонкий, с нотами крем-соды, сливочной помадки, косточковых фруктов: абрикосов, белого персика. Во вкусе минеральность и чистота, с первыми нюансами намечающейся сливочности.\n\nПроисхождение: Участок “Два дубка” на винограднике “Сенетх” (массив Красная горка, ст-ца Гостагаевская, Анапа. Почвы карбонатные, подпочвы- мергели.\n\nОсобенности производства: Ручной сбор винограда, сортировка гроздей на винограднике. Деликатное дробление, бережное прессование, осветление, холодное брожение. Классическая шампанизации. Вторичное технология брожение и выдержка на осадке в бутылке не менее 18 мес. Без дозажа (ZERO DOSAGE).",
+   "grapes": [
+    "Вионье"
+   ],
+   "dishes": [
+    "Легкие закуски",
+    "Рыба и морепродукты",
+    "Устрицы"
+   ],
+   "image_url": "/uploads/Spark_02_736d569163.webp",
+   "photo": "data/refs/platform/vione-nyuazh-zero-dozazh.webp",
+   "photo_sha256": "9345844ef5564795945f7f8922389bf4765439fb13f4827699bdddfb3985393a"
+  },
+  {
+   "slug": "vostok-krasnoe",
+   "title": "Восток красное",
+   "manufacturer": "Château Le Grand Vostock",
+   "region": "Кубань",
+   "category": "Красное сухое",
+   "color": "Красное",
+   "sweetness": "Сухое",
+   "wineColor": "Рубиново-красный",
+   "alcohol": 14,
+   "temperature": "16-18",
+   "rating": 4.5,
+   "description": "Аромат: с нотами вишни, малины, сливы и кизила, тонами лаврового листа\n\nВкус: бархатистый с тонами черных фруктов и малины, в послевкусии ноты специй и перца",
+   "grapes": [
+    "Каберне Совиньон",
+    "Каберне Фран",
+    "Красностоп",
+    "Мерло",
+    "Пино Нуар",
+    "Саперави"
+   ],
+   "dishes": [
+    "Блюда из птицы",
+    "Мясо и стейки"
+   ],
+   "image_url": "/uploads/dcd2ef1e8df2868_343x610_notcrop_34fb594f72.webp",
+   "photo": "data/refs/platform/vostok-krasnoe.webp",
+   "photo_sha256": "7409269f97a1e95b76aefe23506fac938868ed3bbd267ca7690d7f7396db8445"
+  },
+  {
+   "slug": "vostok-roze",
+   "title": "Восток розе",
+   "manufacturer": "Château Le Grand Vostock",
+   "region": "Кубань",
+   "category": "Розовое сухое",
+   "color": "Розовое",
+   "sweetness": "Сухое",
+   "wineColor": "Розовый",
+   "alcohol": 13,
+   "temperature": "10–12",
+   "rating": 4,
+   "description": "Аромат: яркий букет с нежной вишневой ароматикой, с тонами цедры грейпфрута, красной смородины и клубники.\n\nВкус: интенсивный и объемный, с оттенками грейпфрута, вишни и красной смородины, послевкусие свежее, заполненное вишнево-цитрусовыми нотами",
+   "grapes": [
+    "Мерло"
+   ],
+   "dishes": [
+    "Легкие закуски",
+    "Рыба и морепродукты",
+    "Салаты"
+   ],
+   "image_url": "/uploads/c5bc5ded2f2bc7b_343x610_notcrop_2c484caa6b.webp",
+   "photo": "data/refs/platform/vostok-roze.webp",
+   "photo_sha256": "e5ded0e29d99e9f5e89d2bbde657d704104397d307f8a315a702969f235aa3ba"
+  },
+  {
+   "slug": "vyderzhannoe-ekstra-bryut-blan-de-blan-bryut-natyur",
+   "title": "Выдержанное Экстра Брют Блан де Блан Брют Натюр",
+   "manufacturer": "Усадьба Перовских",
+   "region": "Крым",
+   "category": "Белое экстра брют",
+   "color": "Белое",
+   "sweetness": "Экстра брют",
+   "wineColor": "Зеленовато-соломенный",
+   "alcohol": 11,
+   "temperature": "6-8",
+   "rating": 4.6,
+   "description": "Нежный фруктовый аромат с нотами экзотических фруктов и цитрусовых, выпечки, белых цветов и минеральной свежести. Во вкусе лёгкое, живое, со сбалансированной кислотностью, нотами яблок, легким косточковым тоном и минеральными оттенками. Свежее и длительное послевкусие.\n\nПроизводство: вторичное брожение в бутылке и выдержка на осадке не менее 24 месяцев.",
+   "grapes": [
+    "Шардоне"
+   ],
+   "dishes": [
+    "Рыба и морепродукты",
+    "Сыры"
+   ],
+   "image_url": "/uploads/sp_brut_blanc_de_blancs_312964b5f5.webp",
+   "photo": "data/refs/platform/vyderzhannoe-ekstra-bryut-blan-de-blan-bryut-natyur.webp",
+   "photo_sha256": "582c62a33df42d223725b6f4dc7108eb0af407fb20a79d5ed1203bd100a5a2eb"
+  },
+  {
+   "slug": "vyderzhannoe-ekstra-bryut-red-bryut-natyur",
+   "title": "Выдержанное Экстра Брют Ред Брют Натюр",
+   "manufacturer": "Усадьба Перовских",
+   "region": "Крым",
+   "category": "Красное экстра брют",
+   "color": "Красное",
+   "sweetness": "Экстра брют",
+   "wineColor": "Красное",
+   "alcohol": 11,
+   "temperature": "6-8",
+   "rating": 4.6,
+   "description": "В аромате красные ягоды, смородина, кизил. Вкус гармоничный, полный, сочные ягоды, танин легкий, едва заметный. Послевкусие приятное, средней продолжительности.\n\nПроизводство: вторичное брожение в бутылке и выдержка на осадке не менее 24 месяцев.",
+   "grapes": [
+    "Каберне Совиньон"
+   ],
+   "dishes": [
+    "Мясное ассорти",
+    "Несладкая выпечка"
+   ],
+   "image_url": "/uploads/sp_red_brut_nature_052f929076.webp",
+   "photo": "data/refs/platform/vyderzhannoe-ekstra-bryut-red-bryut-natyur.webp",
+   "photo_sha256": "516f987a0f70ddd1e089ab0cafc158cd5211c3dfc7a67a69ae5509f67764732d"
+  },
+  {
+   "slug": "vyderzhannoe-ekstra-bryut-risling-bryut-natyur",
+   "title": "Выдержанное Экстра Брют Рислинг Брют Натюр",
+   "manufacturer": "Усадьба Перовских",
+   "region": "Крым",
+   "category": "Белое экстра брют",
+   "color": "Белое",
+   "sweetness": "Экстра брют",
+   "wineColor": "Светло-соломенный",
+   "alcohol": 11,
+   "temperature": "6-8",
+   "rating": 4.57,
+   "description": "Интенсивный букет с доминантами зеленого яблока, лайма и белых цветов, дополнен легким ароматом дрожжей и цитрусовой цедры.\n\nПроизводство: вторичное брожение в бутылке и выдержка на осадке не менее 12 месяцев\n\n",
+   "grapes": [
+    "Рислинг"
+   ],
+   "dishes": [
+    "Азиатская кухня",
+    "Рыба и морепродукты",
+    "Устрицы"
+   ],
+   "image_url": "/uploads/sp_riesling_brut_nature_cf7fa86914.webp",
+   "photo": "data/refs/platform/vyderzhannoe-ekstra-bryut-risling-bryut-natyur.webp",
+   "photo_sha256": "a2ef1e755ae6aa29db4dea2b6568282e7f2aa4276ba6983e22a8c89bacc60601"
+  },
+  {
+   "slug": "vyderzhannoe-ekstra-bryut-roze-bryut-natyur",
+   "title": "Выдержанное Экстра Брют Розе Брют Натюр",
+   "manufacturer": "Усадьба Перовских",
+   "region": "Крым",
+   "category": "Розовое экстра брют",
+   "color": "Розовое",
+   "sweetness": "Экстра брют",
+   "wineColor": "Розовый",
+   "alcohol": 11,
+   "temperature": "6-8",
+   "rating": 4.4,
+   "description": "В аромате раскрываются ноты красной смородины, спелой вишни и терпкой клюквы, украшенные тонкими оттенками цветов, свежих трав и нежным шлейфом молотого розового перца. Во вкусе тонкое и деликатное. Открывается нюансами клубники, вишни и цедры красного грейпфрута. Вино с высокой минеральностью и продолжительным послевкусием.\n\nПроизводство: вторичное брожение в бутылке и выдержка на осадке не менее 24 месяцев.",
+   "grapes": [
+    "Пино Нуар"
+   ],
+   "dishes": [
+    "Несладкая выпечка",
+    "Рыба и морепродукты"
+   ],
+   "image_url": "/uploads/sp_brut_rose_48a093c302.webp",
+   "photo": "data/refs/platform/vyderzhannoe-ekstra-bryut-roze-bryut-natyur.webp",
+   "photo_sha256": "9e02e7665986b813dc20cbe8e54b86c6ff6c03173d435fe40ef01d83a16bf3e3"
+  }
+ ]
+}

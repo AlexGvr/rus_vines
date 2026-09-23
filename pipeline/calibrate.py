@@ -129,7 +129,7 @@ def collect(subset: str, index: str, views: list[tuple[str, ...]], topk: int,
 
     vectors = np.load(INDEX_DIR / f"{index}.npy")
     with (INDEX_DIR / f"{index}.csv").open(encoding="utf-8") as fh:
-        index_slugs = [row["slug"] or None for row in csv.DictReader(fh)]
+        index_slugs = core.scope_index([row["slug"] or None for row in csv.DictReader(fh)])
 
     per_view = [embed_paths(paths, batch_size=32, progress_every=0, steps=steps)
                 for steps in views]

@@ -30,6 +30,9 @@ VERIFIED_ATTRIBUTES = ROOT / "data" / "datapack" / "verified_attributes.json"
 # расходятся в 11 (брют против экстра брют и подобное); у 386 позиций slug
 # сладости не содержит, и для 355 из них её знает карточка.
 PLATFORM_CARDS = ROOT / "data" / "datapack" / "wines.json"
+# Позиции, появившиеся на платформе после выгрузки кейса (sync_platform.py):
+# в CSV их нет вовсе, и сладость знает только карточка.
+PLATFORM_ADDITIONS = ROOT / "data" / "datapack" / "platform_additions.json"
 USE_PLATFORM_SWEETNESS = os.environ.get("PLATFORM_SWEETNESS", "1") != "0"
 
 # Категория и цвет пишутся на контрэтикетке почти всегда — это самые
@@ -173,6 +176,9 @@ class TextChannel:
         # Проверенные по этикетке факты (ниже) перекрывают и то, и другое.
         if USE_PLATFORM_SWEETNESS and platform_cards is not None and platform_cards.exists():
             cards = json.loads(platform_cards.read_text(encoding="utf-8"))["wines"]
+            if PLATFORM_ADDITIONS.exists():
+                cards = cards + json.loads(
+                    PLATFORM_ADDITIONS.read_text(encoding="utf-8"))["wines"]
             for card in cards:
                 attrs = self.attributes_of.get(card.get("slug"))
                 value = clean(card.get("sweetness") or "")

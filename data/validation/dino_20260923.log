@@ -1,0 +1,27 @@
+Loading weights:   0%|          | 0/439 [00:00<?, ?it/s]Loading weights: 100%|██████████| 439/439 [00:00<00:00, 5144.11it/s]
+  index 0/4364
+  index 640/4364
+  index 1280/4364
+  index 1920/4364
+  index 2560/4364
+  index 3200/4364
+  index 3840/4364
+Loading weights:   0%|          | 0/439 [00:00<?, ?it/s]Loading weights: 100%|██████████| 439/439 [00:00<00:00, 5527.05it/s]
+[transformers] Model config: bos_token_id must be `None` or an integer within the vocabulary (between 0 and 31999), got 49406. This may result in unexpected behavior.
+[transformers] Model config: eos_token_id must be `None` or an integer within the vocabulary (between 0 and 31999), got 49407. This may result in unexpected behavior.
+Loading weights:   0%|          | 0/888 [00:00<?, ?it/s]Loading weights:  33%|███▎      | 294/888 [00:00<00:00, 2901.34it/s]Loading weights:  80%|███████▉  | 707/888 [00:00<00:00, 3593.02it/s]Loading weights: 100%|██████████| 888/888 [00:00<00:00, 3652.63it/s]
+siglip           tune: top1  126/154 = 81.8% [75–87] r@20  148/154 = 96.1% [92–98]  test: top1  124/177 = 70.1% [63–76] r@20  173/177 = 97.7% [94–99]
+dino_cls         tune: top1    17/154 = 11.0% [7–17] r@20   64/154 = 41.6% [34–49]  test: top1     14/177 = 7.9% [5–13] r@20   57/177 = 32.2% [26–39]
+dino_gem         tune: top1     12/154 = 7.8% [5–13] r@20   47/154 = 30.5% [24–38]  test: top1     14/177 = 7.9% [5–13] r@20   52/177 = 29.4% [23–36]
+siglip+0.5*cls   tune: top1   92/154 = 59.7% [52–67] r@20  144/154 = 93.5% [88–96]  test: top1   91/177 = 51.4% [44–59] r@20  161/177 = 91.0% [86–94]
+siglip+0.5*gem   tune: top1  127/154 = 82.5% [76–88] r@20  148/154 = 96.1% [92–98]  test: top1  121/177 = 68.4% [61–75] r@20  171/177 = 96.6% [93–98]
+siglip+1.0*cls   tune: top1   54/154 = 35.1% [28–43] r@20  130/154 = 84.4% [78–89]  test: top1   46/177 = 26.0% [20–33] r@20  143/177 = 80.8% [74–86]
+siglip+1.0*gem   tune: top1  127/154 = 82.5% [76–88] r@20  148/154 = 96.1% [92–98]  test: top1  120/177 = 67.8% [61–74] r@20  171/177 = 96.6% [93–98]
+
+внутри пятёрки конвейера (верный есть в пятёрке):
+  current    tune:  134/142 = 94.4% [89–97]  test:  134/157 = 85.4% [79–90]
+  siglip     tune:  128/142 = 90.1% [84–94]  test:  127/157 = 80.9% [74–86]
+  dino_cls   tune:   64/142 = 45.1% [37–53]  test:   61/157 = 38.9% [32–47]
+  dino_gem   tune:   64/142 = 45.1% [37–53]  test:   60/157 = 38.2% [31–46]
+записано: data/validation/dino_20260923/summary.json
+chain done
