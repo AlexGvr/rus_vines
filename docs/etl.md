@@ -5,7 +5,9 @@
 > (`pipeline/build_catalog.py`: доливка полей, `--refresh-map`) и текстовому
 > каналу (сладость из карточки). Доставка датапака в PWA и мобильное
 > приложение относится к первому MVP; текущая архитектура —
-> [ARCHITECTURE.md](../ARCHITECTURE.md).
+> [ARCHITECTURE.md](../ARCHITECTURE.md). Фото в `app/photos` и
+> `mobile/assets/photos` с 2026-09-23 собираются из эталонов датасета кейса
+> (`etl/photos_from_dataset.py`), а не скачиваются с платформы.
 
 Конвейер: выгрузка каталога «Своё Вино» → сборка датапака (JSON + SQLite + фото) → доставка в PWA/мобильное приложение. Три файла: [etl/scrape.py](../etl/scrape.py), [etl/build_datapack.py](../etl/build_datapack.py), [etl/update.sh](../etl/update.sh).
 
