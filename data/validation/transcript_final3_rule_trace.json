@@ -1,0 +1,150 @@
+[
+ {
+  "image": "12083971_0.jpg",
+  "gold": "abrau-dyurso-victor-dravigny-polusladkoe-sovinon-blan-beloe-12",
+  "geometry_top": "abrau-dyurso-victor-dravigny-extra-brut-shardone-beloe-bryut-125",
+  "gold_name_tokens": [
+   "виктор",
+   "дравигни"
+  ],
+  "name_owners": [],
+  "normal_top": "abrau-dyurso-victor-dravigny-krasnoe-polusladkoe-kaberne-sovinon-125",
+  "diagnostic_intervention": "DEMOTE_GEOMETRY=1 with manually transcribed text",
+  "intervention_top": "abrau-dyurso-victor-dravigny-polusladkoe-sovinon-blan-beloe-12",
+  "top_candidates": [
+   {
+    "slug": "abrau-dyurso-victor-dravigny-polusladkoe-sovinon-blan-beloe-12",
+    "inliers": 47,
+    "conflicts": []
+   },
+   {
+    "slug": "abrau-dyurso-victor-dravigny-krasnoe-polusladkoe-kaberne-sovinon-125",
+    "inliers": 5,
+    "conflicts": []
+   },
+   {
+    "slug": "abrau-dyurso-victor-dravigny-koshernoe-bryut-shardone-beloe-125",
+    "inliers": 44,
+    "conflicts": [
+     "сладость полусладкое против брют"
+    ]
+   },
+   {
+    "slug": "abrau-dyurso-victor-dravigny-extra-brut-shardone-beloe-bryut-125",
+    "inliers": 6,
+    "conflicts": [
+     "сладость полусладкое против экстра брют"
+    ]
+   },
+   {
+    "slug": "abrau-dyurso-victor-dravigny-polusuhoe-pino-blan-beloe-12",
+    "inliers": 44,
+    "conflicts": [
+     "сладость полусладкое против полусухое"
+    ]
+   },
+   {
+    "slug": "abrau-dyurso-victor-dravigny-brut-shardone-beloe-bryut-12",
+    "inliers": 70,
+    "conflicts": [
+     "сладость полусладкое против брют"
+    ]
+   }
+  ]
+ },
+ {
+  "image": "6182553_0.jpg",
+  "gold": "abrau-dyurso-russkoe-igristoe-polusuhoe-rozovoe-pino-nuar-12",
+  "geometry_top": "abrau-dyurso-udelnoe-vedomstvo-imperatorskoe-beloe-bryut",
+  "gold_name_tokens": [
+   "игристое",
+   "русское"
+  ],
+  "name_owners": [],
+  "normal_top": "abrau-dyurso-russkoe-igristoe-koshernoe-bryut-shardone-beloe-13",
+  "diagnostic_intervention": "continue hard-conflict demotion with depth=20 and manually transcribed text",
+  "intervention_top": "abrau-dyurso-victor-dravigny-brut-rose-pino-nuar-rozovoe-bryut-12",
+  "top_candidates": [
+   {
+    "slug": "abrau-dyurso-victor-dravigny-brut-rose-pino-nuar-rozovoe-bryut-12",
+    "inliers": 5,
+    "conflicts": []
+   },
+   {
+    "slug": "abrau-dyurso-udelnoe-vedomstvo-imperatorskoe-beloe-polusladkoe",
+    "inliers": 7,
+    "conflicts": [
+     "цвет розовое против «белое»"
+    ]
+   },
+   {
+    "slug": "abrau-dyurso-russkoe-igristoe-polusladkoe-krasnoe-kaberne-sovinon-12",
+    "inliers": 41,
+    "conflicts": [
+     "цвет розовое против «красное»"
+    ]
+   },
+   {
+    "slug": "abrau-dyurso-russkoe-igristoe-koshernoe-bryut-shardone-beloe-13",
+    "inliers": 31,
+    "conflicts": [
+     "цвет розовое против «белое»"
+    ]
+   },
+   {
+    "slug": "abrau-dyurso-russkoe-igristoe-polusladkoe-shardone-beloe-12",
+    "inliers": 35,
+    "conflicts": [
+     "цвет розовое против «белое»"
+    ]
+   },
+   {
+    "slug": "abrau-dyurso-abrau-durso-reserve-brut-shardone-beloe-bryut-115",
+    "inliers": 10,
+    "conflicts": [
+     "цвет розовое против «белое»"
+    ]
+   }
+  ]
+ },
+ {
+  "image": "org091_0.jpg",
+  "gold": "oleg",
+  "geometry_top": "pobeda",
+  "gold_name_tokens": [],
+  "name_owners": [],
+  "normal_top": "pobeda",
+  "top_candidates": [
+   {
+    "slug": "pobeda",
+    "inliers": 29,
+    "conflicts": []
+   },
+   {
+    "slug": "oleg",
+    "inliers": 12,
+    "conflicts": []
+   },
+   {
+    "slug": "rozovoe-zoloto",
+    "inliers": 11,
+    "conflicts": []
+   },
+   {
+    "slug": "czitronnyj-magaracha",
+    "inliers": 9,
+    "conflicts": []
+   },
+   {
+    "slug": "risling-1",
+    "inliers": 9,
+    "conflicts": []
+   },
+   {
+    "slug": "roze-2",
+    "inliers": 8,
+    "conflicts": []
+   }
+  ]
+ }
+]

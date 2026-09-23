@@ -1,0 +1,100 @@
+{
+  "baseline": "final3_tune.json",
+  "diagnostic_only": true,
+  "groups": {
+    "ocr_recoverable": [
+      "ir_ochen-vkusnoe-legkoe-vino-dlya-semeinogo_0.jpg",
+      "13978352_0.jpg",
+      "15598335_0.jpg",
+      "16151511_0.jpg"
+    ],
+    "matching_with_readable_text": [
+      "12083971_0.jpg",
+      "org091_0.jpg"
+    ],
+    "partial_text_and_matching": [
+      "6182553_0.jpg"
+    ],
+    "insufficient_discriminating_text": [
+      "15501518_0.jpg",
+      "13918558_1.jpg",
+      "16151511_1.jpg",
+      "17762210_0.jpg",
+      "6310320_0.jpg"
+    ],
+    "nonfront_partial_transcription": [
+      "11406313_1.jpg",
+      "12101221_2.jpg",
+      "13978352_1.jpg",
+      "13795944_1.jpg",
+      "15598335_1.jpg",
+      "6522615_1.jpg",
+      "7193178_1.jpg"
+    ],
+    "missing_reference": [
+      "7579301_0.jpg"
+    ]
+  },
+  "audited_summary": {
+    "n": 20,
+    "scored": 12,
+    "correct_ocr": 0,
+    "correct_typed": 4,
+    "fixed": [
+      "ir_ochen-vkusnoe-legkoe-vino-dlya-semeinogo_0.jpg",
+      "13978352_0.jpg",
+      "15598335_0.jpg",
+      "16151511_0.jpg"
+    ],
+    "broken": [],
+    "stayed": {
+      "15501518_0.jpg": "текст не переставил (различие: цвет, сорт)",
+      "12083971_0.jpg": "текстовое сравнение (различие: цвет, сорт)",
+      "13918558_1.jpg": "текст не переставил (различие: имя, сорт)",
+      "16151511_1.jpg": "текст не переставил (различие: сладость, цвет, сорт)",
+      "6182553_0.jpg": "текстовое сравнение (различие: сладость, цвет, имя, сорт)",
+      "17762210_0.jpg": "текст не переставил (различие: имя, сорт)",
+      "6310320_0.jpg": "текст не переставил (различие: имя, сорт)",
+      "org091_0.jpg": "текст не переставил (различие: цвет, имя, сорт)"
+    }
+  },
+  "legacy_control_summary": {
+    "n": 22,
+    "scored": 21,
+    "correct_ocr": 11,
+    "correct_typed": 14,
+    "fixed": [
+      "ir_ochen-vkusnoe-legkoe-vino-dlya-semeinogo_0.jpg",
+      "13978352_0.jpg",
+      "15598335_0.jpg"
+    ],
+    "broken": [],
+    "stayed": {
+      "15501518_0.jpg": "текст не переставил (различие: цвет, сорт)",
+      "12083971_0.jpg": "текстовое сравнение (различие: цвет, сорт)",
+      "13918558_1.jpg": "текст не переставил (различие: имя, сорт)",
+      "6182553_0.jpg": "текстовое сравнение (различие: сладость, цвет, имя, сорт)",
+      "17762210_0.jpg": "текст не переставил (различие: имя, сорт)",
+      "6310320_0.jpg": "текст не переставил (различие: имя, сорт)",
+      "org091_0.jpg": "текст не переставил (различие: цвет, имя, сорт)"
+    }
+  },
+  "baseline_prediction_mismatches": 0,
+  "limitations": [
+    "Current errors selected using baseline predictions; this is not an independent evaluation.",
+    "Transcriptions of seven nonfront cases contain identifying text only, not full back-label copy.",
+    "No regression check of a new OCR system or production ranking change was performed.",
+    "Unreadable text was not reconstructed from another image or catalog.",
+    "Manual text plus coordinates is not a universal upper bound on all future OCR and ranking systems."
+  ],
+  "hashes": {
+    "data/field/manifest.csv": "f4dc5e396474f0bef3d11a0712f34f43c0eab23323e7b066b62acce9946404cb",
+    "data/field/transcripts_final3_audited.json": "eb6a5c896ce8507cc502af406a7f39a1a31196ebdf7769b50812d8611c6b41c2",
+    "data/validation/final3_tune.json": "d424492c8bad0ba369638098c68c88691017e7f40994b9da3af87b576500bc2f",
+    "data/index/clean_mv.npy": "f8d17b0845cbe81163eef6cb517b9e2cdff75785c7c7b61964538c3070103dca",
+    "data/index/sift/desc.npy": "9ab9b7d917eaa1854638e19ef7fce0c6ca6d7d133e3145798d75b52313147efb",
+    "pipeline/searchcore.py": "cd2e3f074ca04b2a7542357610c1de65355515999c6a58e35b15ea31f058de39",
+    "pipeline/text_match.py": "da468b129963ba414a0830b85a2503b12eac148add10a97c05facb7768318838",
+    "pipeline/rerank.py": "c000fab407c4411a6b13eb6448274e7686411b93b11e761ddb8eac0f3e6c7dcf"
+  }
+}
