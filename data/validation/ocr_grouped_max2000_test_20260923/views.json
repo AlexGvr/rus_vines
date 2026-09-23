@@ -1,0 +1,1829 @@
+[
+  {
+    "image": "11164638_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/000.png",
+    "view": 0,
+    "size": [
+      600,
+      927
+    ]
+  },
+  {
+    "image": "13153768_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/001.png",
+    "view": 0,
+    "size": [
+      600,
+      579
+    ]
+  },
+  {
+    "image": "13153768_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/002.png",
+    "view": 0,
+    "size": [
+      600,
+      462
+    ]
+  },
+  {
+    "image": "13409943_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/003.png",
+    "view": 1,
+    "size": [
+      191,
+      792
+    ]
+  },
+  {
+    "image": "13409943_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/004.png",
+    "view": 1,
+    "size": [
+      361,
+      800
+    ]
+  },
+  {
+    "image": "14029896_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/005.png",
+    "view": 0,
+    "size": [
+      600,
+      800
+    ]
+  },
+  {
+    "image": "14029896_2.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/006.png",
+    "view": 0,
+    "size": [
+      600,
+      800
+    ]
+  },
+  {
+    "image": "5784977_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/007.png",
+    "view": 1,
+    "size": [
+      195,
+      846
+    ]
+  },
+  {
+    "image": "5784977_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/008.png",
+    "view": 0,
+    "size": [
+      600,
+      904
+    ]
+  },
+  {
+    "image": "9417887_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/009.png",
+    "view": 0,
+    "size": [
+      600,
+      1066
+    ]
+  },
+  {
+    "image": "ir_etiketka-zashla-vot-vino-net-tot-sluchai_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/010.png",
+    "view": 0,
+    "size": [
+      596,
+      594
+    ]
+  },
+  {
+    "image": "ir_etiketka-zashla-vot-vino-net-tot-sluchai_2.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/011.png",
+    "view": 1,
+    "size": [
+      209,
+      720
+    ]
+  },
+  {
+    "image": "ir_mozhet-li-deshevoe-vino-byt-khoroshim-ya_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/012.png",
+    "view": 1,
+    "size": [
+      145,
+      600
+    ]
+  },
+  {
+    "image": "ir_mozhet-li-deshevoe-vino-byt-khoroshim-ya_2.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/013.png",
+    "view": 0,
+    "size": [
+      159,
+      600
+    ]
+  },
+  {
+    "image": "ir_podderzhivaem-otechestvennykh-proizvodit_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/014.png",
+    "view": 0,
+    "size": [
+      252,
+      950
+    ]
+  },
+  {
+    "image": "ir_podderzhivaem-otechestvennykh-proizvodit_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/015.png",
+    "view": 1,
+    "size": [
+      110,
+      400
+    ]
+  },
+  {
+    "image": "ir_podderzhivaem-otechestvennykh-proizvodit_2.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/016.png",
+    "view": 0,
+    "size": [
+      450,
+      600
+    ]
+  },
+  {
+    "image": "ir_prekrasnyi-aperitiv-na-leto-interesnaya-_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/017.png",
+    "view": 0,
+    "size": [
+      660,
+      1326
+    ]
+  },
+  {
+    "image": "ir_prekrasnyi-aperitiv-na-leto-interesnaya-_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/018.png",
+    "view": 1,
+    "size": [
+      388,
+      1448
+    ]
+  },
+  {
+    "image": "ir_prekrasnyi-aperitiv-na-leto-interesnaya-_2.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/019.png",
+    "view": 1,
+    "size": [
+      117,
+      441
+    ]
+  },
+  {
+    "image": "02eef911.webp",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/020.png",
+    "view": 0,
+    "size": [
+      3024,
+      4032
+    ]
+  },
+  {
+    "image": "096ca74e.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/021.png",
+    "view": 0,
+    "size": [
+      3024,
+      4032
+    ]
+  },
+  {
+    "image": "10777167_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/022.png",
+    "view": 1,
+    "size": [
+      179,
+      752
+    ]
+  },
+  {
+    "image": "11122332_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/023.png",
+    "view": 1,
+    "size": [
+      199,
+      800
+    ]
+  },
+  {
+    "image": "11813420_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/024.png",
+    "view": 1,
+    "size": [
+      206,
+      800
+    ]
+  },
+  {
+    "image": "11813420_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/025.png",
+    "view": 1,
+    "size": [
+      355,
+      800
+    ]
+  },
+  {
+    "image": "11813420_2.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/026.png",
+    "view": 0,
+    "size": [
+      600,
+      800
+    ]
+  },
+  {
+    "image": "12161711_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/027.png",
+    "view": 1,
+    "size": [
+      257,
+      873
+    ]
+  },
+  {
+    "image": "14095313_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/028.png",
+    "view": 1,
+    "size": [
+      234,
+      960
+    ]
+  },
+  {
+    "image": "11865288_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/029.png",
+    "view": 1,
+    "size": [
+      169,
+      706
+    ]
+  },
+  {
+    "image": "12271541_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/030.png",
+    "view": 1,
+    "size": [
+      166,
+      707
+    ]
+  },
+  {
+    "image": "12980895_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/031.png",
+    "view": 1,
+    "size": [
+      211,
+      800
+    ]
+  },
+  {
+    "image": "12980895_2.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/032.png",
+    "view": 0,
+    "size": [
+      600,
+      800
+    ]
+  },
+  {
+    "image": "15839246_2.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/033.png",
+    "view": 1,
+    "size": [
+      171,
+      750
+    ]
+  },
+  {
+    "image": "12876444_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/034.png",
+    "view": 1,
+    "size": [
+      226,
+      788
+    ]
+  },
+  {
+    "image": "16117580_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/035.png",
+    "view": 1,
+    "size": [
+      465,
+      800
+    ]
+  },
+  {
+    "image": "16117580_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/036.png",
+    "view": 1,
+    "size": [
+      447,
+      800
+    ]
+  },
+  {
+    "image": "17368513_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/037.png",
+    "view": 1,
+    "size": [
+      174,
+      659
+    ]
+  },
+  {
+    "image": "17368513_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/038.png",
+    "view": 1,
+    "size": [
+      378,
+      588
+    ]
+  },
+  {
+    "image": "5921004_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/039.png",
+    "view": 1,
+    "size": [
+      283,
+      772
+    ]
+  },
+  {
+    "image": "10615250_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/040.png",
+    "view": 1,
+    "size": [
+      168,
+      668
+    ]
+  },
+  {
+    "image": "10615250_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/041.png",
+    "view": 1,
+    "size": [
+      180,
+      706
+    ]
+  },
+  {
+    "image": "11064469_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/042.png",
+    "view": 1,
+    "size": [
+      208,
+      800
+    ]
+  },
+  {
+    "image": "11064469_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/043.png",
+    "view": 0,
+    "size": [
+      600,
+      674
+    ]
+  },
+  {
+    "image": "11313721_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/044.png",
+    "view": 1,
+    "size": [
+      240,
+      1006
+    ]
+  },
+  {
+    "image": "14098525_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/045.png",
+    "view": 1,
+    "size": [
+      193,
+      600
+    ]
+  },
+  {
+    "image": "14098525_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/046.png",
+    "view": 0,
+    "size": [
+      600,
+      450
+    ]
+  },
+  {
+    "image": "14555232_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/047.png",
+    "view": 1,
+    "size": [
+      297,
+      1034
+    ]
+  },
+  {
+    "image": "14583333_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/048.png",
+    "view": 1,
+    "size": [
+      150,
+      681
+    ]
+  },
+  {
+    "image": "14635986_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/049.png",
+    "view": 1,
+    "size": [
+      153,
+      586
+    ]
+  },
+  {
+    "image": "14732673_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/050.png",
+    "view": 1,
+    "size": [
+      190,
+      523
+    ]
+  },
+  {
+    "image": "14732673_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/051.png",
+    "view": 1,
+    "size": [
+      339,
+      600
+    ]
+  },
+  {
+    "image": "14842757_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/052.png",
+    "view": 0,
+    "size": [
+      423,
+      1595
+    ]
+  },
+  {
+    "image": "14842757_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/053.png",
+    "view": 0,
+    "size": [
+      440,
+      1665
+    ]
+  },
+  {
+    "image": "15517452_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/054.png",
+    "view": 1,
+    "size": [
+      311,
+      1056
+    ]
+  },
+  {
+    "image": "15517452_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/055.png",
+    "view": 0,
+    "size": [
+      600,
+      640
+    ]
+  },
+  {
+    "image": "15557112_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/056.png",
+    "view": 1,
+    "size": [
+      367,
+      800
+    ]
+  },
+  {
+    "image": "15586449_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/057.png",
+    "view": 1,
+    "size": [
+      369,
+      1066
+    ]
+  },
+  {
+    "image": "15586449_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/058.png",
+    "view": 1,
+    "size": [
+      600,
+      838
+    ]
+  },
+  {
+    "image": "15763089_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/059.png",
+    "view": 1,
+    "size": [
+      332,
+      600
+    ]
+  },
+  {
+    "image": "15881383_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/060.png",
+    "view": 1,
+    "size": [
+      289,
+      575
+    ]
+  },
+  {
+    "image": "15881383_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/061.png",
+    "view": 0,
+    "size": [
+      600,
+      800
+    ]
+  },
+  {
+    "image": "1642455_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/062.png",
+    "view": 1,
+    "size": [
+      203,
+      747
+    ]
+  },
+  {
+    "image": "16831661_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/063.png",
+    "view": 1,
+    "size": [
+      331,
+      870
+    ]
+  },
+  {
+    "image": "16831661_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/064.png",
+    "view": 0,
+    "size": [
+      600,
+      1066
+    ]
+  },
+  {
+    "image": "16952274_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/065.png",
+    "view": 1,
+    "size": [
+      212,
+      757
+    ]
+  },
+  {
+    "image": "17164427_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/066.png",
+    "view": 1,
+    "size": [
+      203,
+      553
+    ]
+  },
+  {
+    "image": "17164427_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/067.png",
+    "view": 1,
+    "size": [
+      247,
+      672
+    ]
+  },
+  {
+    "image": "17397266_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/068.png",
+    "view": 1,
+    "size": [
+      174,
+      731
+    ]
+  },
+  {
+    "image": "2663600_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/069.png",
+    "view": 0,
+    "size": [
+      600,
+      398
+    ]
+  },
+  {
+    "image": "2663600_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/070.png",
+    "view": 0,
+    "size": [
+      600,
+      398
+    ]
+  },
+  {
+    "image": "4303475_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/071.png",
+    "view": 1,
+    "size": [
+      198,
+      800
+    ]
+  },
+  {
+    "image": "5401549_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/072.png",
+    "view": 1,
+    "size": [
+      313,
+      1400
+    ]
+  },
+  {
+    "image": "5401549_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/073.png",
+    "view": 0,
+    "size": [
+      600,
+      1038
+    ]
+  },
+  {
+    "image": "5464419_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/074.png",
+    "view": 1,
+    "size": [
+      206,
+      786
+    ]
+  },
+  {
+    "image": "5861895_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/075.png",
+    "view": 1,
+    "size": [
+      353,
+      1223
+    ]
+  },
+  {
+    "image": "6531253_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/076.png",
+    "view": 1,
+    "size": [
+      100,
+      375
+    ]
+  },
+  {
+    "image": "6682735_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/077.png",
+    "view": 1,
+    "size": [
+      217,
+      900
+    ]
+  },
+  {
+    "image": "10043731_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/078.png",
+    "view": 1,
+    "size": [
+      544,
+      1082
+    ]
+  },
+  {
+    "image": "10133023_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/079.png",
+    "view": 1,
+    "size": [
+      544,
+      2000
+    ]
+  },
+  {
+    "image": "10206801_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/080.png",
+    "view": 1,
+    "size": [
+      621,
+      1928
+    ]
+  },
+  {
+    "image": "10520335_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/081.png",
+    "view": 0,
+    "size": [
+      1500,
+      2000
+    ]
+  },
+  {
+    "image": "10575655_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/082.png",
+    "view": 1,
+    "size": [
+      664,
+      1625
+    ]
+  },
+  {
+    "image": "10602595_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/083.png",
+    "view": 1,
+    "size": [
+      898,
+      3253
+    ]
+  },
+  {
+    "image": "10678155_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/084.png",
+    "view": 1,
+    "size": [
+      449,
+      1930
+    ]
+  },
+  {
+    "image": "10697703_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/085.png",
+    "view": 0,
+    "size": [
+      1500,
+      2666
+    ]
+  },
+  {
+    "image": "10802080_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/086.png",
+    "view": 1,
+    "size": [
+      706,
+      2470
+    ]
+  },
+  {
+    "image": "10802080_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/087.png",
+    "view": 0,
+    "size": [
+      1500,
+      2666
+    ]
+  },
+  {
+    "image": "11151869_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/088.png",
+    "view": 1,
+    "size": [
+      680,
+      1588
+    ]
+  },
+  {
+    "image": "11171408_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/089.png",
+    "view": 1,
+    "size": [
+      819,
+      762
+    ]
+  },
+  {
+    "image": "11250710_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/090.png",
+    "view": 1,
+    "size": [
+      984,
+      2077
+    ]
+  },
+  {
+    "image": "11254800_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/091.png",
+    "view": 1,
+    "size": [
+      712,
+      1595
+    ]
+  },
+  {
+    "image": "12025482_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/092.png",
+    "view": 1,
+    "size": [
+      360,
+      1125
+    ]
+  },
+  {
+    "image": "12444550_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/093.png",
+    "view": 1,
+    "size": [
+      584,
+      1716
+    ]
+  },
+  {
+    "image": "13160324_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/094.png",
+    "view": 1,
+    "size": [
+      866,
+      3058
+    ]
+  },
+  {
+    "image": "13261288_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/095.png",
+    "view": 1,
+    "size": [
+      554,
+      1744
+    ]
+  },
+  {
+    "image": "13314222_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/096.png",
+    "view": 1,
+    "size": [
+      824,
+      2970
+    ]
+  },
+  {
+    "image": "13421617_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/097.png",
+    "view": 0,
+    "size": [
+      1500,
+      2000
+    ]
+  },
+  {
+    "image": "13455548_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/098.png",
+    "view": 1,
+    "size": [
+      487,
+      1973
+    ]
+  },
+  {
+    "image": "13481814_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/099.png",
+    "view": 1,
+    "size": [
+      658,
+      1565
+    ]
+  },
+  {
+    "image": "13481814_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/100.png",
+    "view": 1,
+    "size": [
+      466,
+      843
+    ]
+  },
+  {
+    "image": "13626115_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/101.png",
+    "view": 0,
+    "size": [
+      1500,
+      5571
+    ]
+  },
+  {
+    "image": "13718989_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/102.png",
+    "view": 1,
+    "size": [
+      491,
+      1707
+    ]
+  },
+  {
+    "image": "13718989_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/103.png",
+    "view": 1,
+    "size": [
+      554,
+      2000
+    ]
+  },
+  {
+    "image": "13792493_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/104.png",
+    "view": 1,
+    "size": [
+      957,
+      2000
+    ]
+  },
+  {
+    "image": "13981139_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/105.png",
+    "view": 1,
+    "size": [
+      466,
+      2000
+    ]
+  },
+  {
+    "image": "14120545_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/106.png",
+    "view": 1,
+    "size": [
+      871,
+      2338
+    ]
+  },
+  {
+    "image": "14134121_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/107.png",
+    "view": 1,
+    "size": [
+      786,
+      2666
+    ]
+  },
+  {
+    "image": "14705904_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/108.png",
+    "view": 1,
+    "size": [
+      608,
+      2000
+    ]
+  },
+  {
+    "image": "14807880_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/109.png",
+    "view": 1,
+    "size": [
+      437,
+      1679
+    ]
+  },
+  {
+    "image": "15598111_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/110.png",
+    "view": 1,
+    "size": [
+      696,
+      2000
+    ]
+  },
+  {
+    "image": "15620151_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/111.png",
+    "view": 0,
+    "size": [
+      1500,
+      2000
+    ]
+  },
+  {
+    "image": "15622872_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/112.png",
+    "view": 1,
+    "size": [
+      957,
+      1125
+    ]
+  },
+  {
+    "image": "15632542_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/113.png",
+    "view": 1,
+    "size": [
+      608,
+      1978
+    ]
+  },
+  {
+    "image": "15763954_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/114.png",
+    "view": 1,
+    "size": [
+      353,
+      1274
+    ]
+  },
+  {
+    "image": "15769591_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/115.png",
+    "view": 0,
+    "size": [
+      1500,
+      2000
+    ]
+  },
+  {
+    "image": "15848046_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/116.png",
+    "view": 1,
+    "size": [
+      1500,
+      487
+    ]
+  },
+  {
+    "image": "16026698_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/117.png",
+    "view": 1,
+    "size": [
+      535,
+      1790
+    ]
+  },
+  {
+    "image": "16448738_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/118.png",
+    "view": 1,
+    "size": [
+      272,
+      1048
+    ]
+  },
+  {
+    "image": "16448738_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/119.png",
+    "view": 0,
+    "size": [
+      960,
+      1280
+    ]
+  },
+  {
+    "image": "16470672_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/120.png",
+    "view": 1,
+    "size": [
+      280,
+      1275
+    ]
+  },
+  {
+    "image": "16552967_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/121.png",
+    "view": 0,
+    "size": [
+      1152,
+      3678
+    ]
+  },
+  {
+    "image": "16552967_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/122.png",
+    "view": 0,
+    "size": [
+      1500,
+      1997
+    ]
+  },
+  {
+    "image": "16612700_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/123.png",
+    "view": 1,
+    "size": [
+      251,
+      887
+    ]
+  },
+  {
+    "image": "16612700_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/124.png",
+    "view": 1,
+    "size": [
+      283,
+      1097
+    ]
+  },
+  {
+    "image": "16655658_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/125.png",
+    "view": 1,
+    "size": [
+      339,
+      1280
+    ]
+  },
+  {
+    "image": "16827903_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/126.png",
+    "view": 1,
+    "size": [
+      283,
+      1012
+    ]
+  },
+  {
+    "image": "16827903_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/127.png",
+    "view": 1,
+    "size": [
+      324,
+      1219
+    ]
+  },
+  {
+    "image": "16850389_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/128.png",
+    "view": 1,
+    "size": [
+      552,
+      1773
+    ]
+  },
+  {
+    "image": "16895037_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/129.png",
+    "view": 0,
+    "size": [
+      1500,
+      3250
+    ]
+  },
+  {
+    "image": "17489139_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/130.png",
+    "view": 1,
+    "size": [
+      606,
+      1992
+    ]
+  },
+  {
+    "image": "17636747_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/131.png",
+    "view": 0,
+    "size": [
+      960,
+      1280
+    ]
+  },
+  {
+    "image": "17650567_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/132.png",
+    "view": 1,
+    "size": [
+      413,
+      1798
+    ]
+  },
+  {
+    "image": "17711736_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/133.png",
+    "view": 1,
+    "size": [
+      488,
+      1972
+    ]
+  },
+  {
+    "image": "17711736_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/134.png",
+    "view": 1,
+    "size": [
+      744,
+      2000
+    ]
+  },
+  {
+    "image": "4574044_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/135.png",
+    "view": 1,
+    "size": [
+      316,
+      1252
+    ]
+  },
+  {
+    "image": "5439331_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/136.png",
+    "view": 1,
+    "size": [
+      480,
+      1931
+    ]
+  },
+  {
+    "image": "5751651_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/137.png",
+    "view": 1,
+    "size": [
+      326,
+      1350
+    ]
+  },
+  {
+    "image": "6106288_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/138.png",
+    "view": 0,
+    "size": [
+      836,
+      2404
+    ]
+  },
+  {
+    "image": "6321414_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/139.png",
+    "view": 1,
+    "size": [
+      374,
+      1500
+    ]
+  },
+  {
+    "image": "6358887_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/140.png",
+    "view": 0,
+    "size": [
+      1500,
+      2397
+    ]
+  },
+  {
+    "image": "6407984_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/141.png",
+    "view": 1,
+    "size": [
+      1129,
+      2000
+    ]
+  },
+  {
+    "image": "6489532_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/142.png",
+    "view": 0,
+    "size": [
+      1500,
+      2666
+    ]
+  },
+  {
+    "image": "7475798_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/143.png",
+    "view": 0,
+    "size": [
+      1500,
+      1125
+    ]
+  },
+  {
+    "image": "8192349_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/144.png",
+    "view": 0,
+    "size": [
+      1500,
+      2666
+    ]
+  },
+  {
+    "image": "8192349_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/145.png",
+    "view": 0,
+    "size": [
+      1500,
+      2666
+    ]
+  },
+  {
+    "image": "8606051_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/146.png",
+    "view": 1,
+    "size": [
+      212,
+      919
+    ]
+  },
+  {
+    "image": "9408720_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/147.png",
+    "view": 1,
+    "size": [
+      483,
+      2000
+    ]
+  },
+  {
+    "image": "9408720_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/148.png",
+    "view": 0,
+    "size": [
+      1500,
+      2000
+    ]
+  },
+  {
+    "image": "9864036_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/149.png",
+    "view": 1,
+    "size": [
+      1180,
+      2666
+    ]
+  },
+  {
+    "image": "9919870_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/150.png",
+    "view": 0,
+    "size": [
+      1297,
+      2498
+    ]
+  },
+  {
+    "image": "ir_khoroshee-kaberne-po-dostupnoi-tsene_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/151.png",
+    "view": 1,
+    "size": [
+      659,
+      1200
+    ]
+  },
+  {
+    "image": "ir_na-kazhdyi-den-n11563956_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/152.png",
+    "view": 1,
+    "size": [
+      144,
+      543
+    ]
+  },
+  {
+    "image": "ir_na-kazhdyi-den-n11563956_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/153.png",
+    "view": 1,
+    "size": [
+      170,
+      634
+    ]
+  },
+  {
+    "image": "ir_ne-otravilis-i-ne-oslepli-i-na-tom-spasi_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/154.png",
+    "view": 1,
+    "size": [
+      206,
+      691
+    ]
+  },
+  {
+    "image": "ir_odobreno-moim-ottsom-znachit-vino-pravil_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/155.png",
+    "view": 1,
+    "size": [
+      308,
+      1060
+    ]
+  },
+  {
+    "image": "ir_odobreno-moim-ottsom-znachit-vino-pravil_1.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/156.png",
+    "view": 1,
+    "size": [
+      371,
+      897
+    ]
+  },
+  {
+    "image": "ir_otlichnoe-krasnoe-sukhoe-ot-shato-taman_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/157.png",
+    "view": 1,
+    "size": [
+      594,
+      1200
+    ]
+  },
+  {
+    "image": "ir_proverennaya-klassika-n11666006_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/158.png",
+    "view": 1,
+    "size": [
+      546,
+      1200
+    ]
+  },
+  {
+    "image": "ir_vino-nasyshchennoe-po-svoemu-terpkoe-bru_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/159.png",
+    "view": 1,
+    "size": [
+      374,
+      1200
+    ]
+  },
+  {
+    "image": "org002_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/160.png",
+    "view": 0,
+    "size": [
+      3024,
+      4032
+    ]
+  },
+  {
+    "image": "org007_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/161.png",
+    "view": 1,
+    "size": [
+      1713,
+      3719
+    ]
+  },
+  {
+    "image": "org008_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/162.png",
+    "view": 0,
+    "size": [
+      3024,
+      4032
+    ]
+  },
+  {
+    "image": "org009_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/163.png",
+    "view": 0,
+    "size": [
+      3024,
+      4032
+    ]
+  },
+  {
+    "image": "org014_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/164.png",
+    "view": 0,
+    "size": [
+      3024,
+      4032
+    ]
+  },
+  {
+    "image": "org017_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/165.png",
+    "view": 0,
+    "size": [
+      3024,
+      4032
+    ]
+  },
+  {
+    "image": "org019_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/166.png",
+    "view": 0,
+    "size": [
+      3000,
+      4000
+    ]
+  },
+  {
+    "image": "org025_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/167.png",
+    "view": 1,
+    "size": [
+      1448,
+      3638
+    ]
+  },
+  {
+    "image": "org026_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/168.png",
+    "view": 1,
+    "size": [
+      1285,
+      4032
+    ]
+  },
+  {
+    "image": "org027_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/169.png",
+    "view": 1,
+    "size": [
+      1113,
+      2870
+    ]
+  },
+  {
+    "image": "org033_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/170.png",
+    "view": 1,
+    "size": [
+      1431,
+      2967
+    ]
+  },
+  {
+    "image": "org035_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/171.png",
+    "view": 1,
+    "size": [
+      1340,
+      4032
+    ]
+  },
+  {
+    "image": "org038_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/172.png",
+    "view": 1,
+    "size": [
+      980,
+      3745
+    ]
+  },
+  {
+    "image": "org040_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/173.png",
+    "view": 1,
+    "size": [
+      1723,
+      3708
+    ]
+  },
+  {
+    "image": "org041_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/174.png",
+    "view": 1,
+    "size": [
+      1531,
+      4608
+    ]
+  },
+  {
+    "image": "org044_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/175.png",
+    "view": 0,
+    "size": [
+      3024,
+      4032
+    ]
+  },
+  {
+    "image": "org047_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/176.png",
+    "view": 1,
+    "size": [
+      1789,
+      4025
+    ]
+  },
+  {
+    "image": "org048_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/177.png",
+    "view": 0,
+    "size": [
+      3024,
+      4032
+    ]
+  },
+  {
+    "image": "org050_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/178.png",
+    "view": 1,
+    "size": [
+      935,
+      3476
+    ]
+  },
+  {
+    "image": "org053_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/179.png",
+    "view": 1,
+    "size": [
+      1469,
+      3794
+    ]
+  },
+  {
+    "image": "org054_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/180.png",
+    "view": 0,
+    "size": [
+      3024,
+      4032
+    ]
+  },
+  {
+    "image": "org055_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/181.png",
+    "view": 1,
+    "size": [
+      1436,
+      4032
+    ]
+  },
+  {
+    "image": "org056_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/182.png",
+    "view": 0,
+    "size": [
+      3024,
+      4032
+    ]
+  },
+  {
+    "image": "org058_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/183.png",
+    "view": 1,
+    "size": [
+      1243,
+      3494
+    ]
+  },
+  {
+    "image": "org059_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/184.png",
+    "view": 1,
+    "size": [
+      1460,
+      4085
+    ]
+  },
+  {
+    "image": "org063_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/185.png",
+    "view": 1,
+    "size": [
+      784,
+      3169
+    ]
+  },
+  {
+    "image": "org064_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/186.png",
+    "view": 1,
+    "size": [
+      1283,
+      4032
+    ]
+  },
+  {
+    "image": "org065_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/187.png",
+    "view": 1,
+    "size": [
+      1558,
+      4032
+    ]
+  },
+  {
+    "image": "org067_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/188.png",
+    "view": 1,
+    "size": [
+      1070,
+      3974
+    ]
+  },
+  {
+    "image": "org069_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/189.png",
+    "view": 1,
+    "size": [
+      924,
+      2864
+    ]
+  },
+  {
+    "image": "org072_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/190.png",
+    "view": 1,
+    "size": [
+      540,
+      1080
+    ]
+  },
+  {
+    "image": "org074_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/191.png",
+    "view": 1,
+    "size": [
+      1606,
+      4032
+    ]
+  },
+  {
+    "image": "org078_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/192.png",
+    "view": 1,
+    "size": [
+      1702,
+      4007
+    ]
+  },
+  {
+    "image": "org079_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/193.png",
+    "view": 1,
+    "size": [
+      2305,
+      4201
+    ]
+  },
+  {
+    "image": "org080_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/194.png",
+    "view": 1,
+    "size": [
+      1293,
+      4032
+    ]
+  },
+  {
+    "image": "org081_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/195.png",
+    "view": 1,
+    "size": [
+      1258,
+      3814
+    ]
+  },
+  {
+    "image": "org082_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/196.png",
+    "view": 1,
+    "size": [
+      1169,
+      4032
+    ]
+  },
+  {
+    "image": "org084_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/197.png",
+    "view": 0,
+    "size": [
+      3024,
+      4032
+    ]
+  },
+  {
+    "image": "org085_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/198.png",
+    "view": 0,
+    "size": [
+      3024,
+      4032
+    ]
+  },
+  {
+    "image": "org088_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/199.png",
+    "view": 1,
+    "size": [
+      1433,
+      3531
+    ]
+  },
+  {
+    "image": "org092_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/200.png",
+    "view": 1,
+    "size": [
+      1166,
+      2870
+    ]
+  },
+  {
+    "image": "org093_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/201.png",
+    "view": 1,
+    "size": [
+      1070,
+      3823
+    ]
+  },
+  {
+    "image": "org098_0.jpg",
+    "source": "data/validation/ocr_grouped_max2000_test_20260923/crops/202.png",
+    "view": 1,
+    "size": [
+      1446,
+      3739
+    ]
+  }
+]

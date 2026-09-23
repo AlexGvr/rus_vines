@@ -1,0 +1,37 @@
+{
+ "n": 187,
+ "gpu": {
+  "median": 0.18,
+  "p95": 0.8,
+  "max": 1.19,
+  "total_min": 0.8
+ },
+ "cpu": {
+  "median": 8.62,
+  "p95": 25.53,
+  "max": 27.12,
+  "total_min": 31.7
+ },
+ "gpu_over_2000px": {
+  "median": 0.47,
+  "p95": 1.0,
+  "max": 1.19,
+  "total_min": 0.6
+ },
+ "gpu_upto_2000px": {
+  "median": 0.07,
+  "p95": 0.34,
+  "max": 0.47,
+  "total_min": 0.2
+ },
+ "gpu_first_frame_s": 0.47,
+ "gpu_excluding_first": {
+  "median": 0.17,
+  "p95": 0.8,
+  "max": 1.19,
+  "total_min": 0.8
+ },
+ "identical_boxes": 157,
+ "identical_words": 173,
+ "identical_admitted_text": 186
+}

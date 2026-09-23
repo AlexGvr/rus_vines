@@ -1,0 +1,81 @@
+{
+ "checks": {
+  "observations": 203,
+  "unique_images": 203,
+  "views_match": true,
+  "sha_match": true,
+  "complete_json": true,
+  "log_tracebacks": 0,
+  "log_memory_errors": 0,
+  "log_done_lines": 203,
+  "launches": 1
+ },
+ "metrics": {
+  "all_positives": {
+   "before": {
+    "top1": "132/175 = 75.4%",
+    "top3": "152/175 = 86.9%",
+    "top5": "155/175 = 88.6%"
+   },
+   "after": {
+    "top1": "131/175 = 74.9%",
+    "top3": "151/175 = 86.3%",
+    "top5": "154/175 = 88.0%"
+   }
+  },
+  "findable": {
+   "before": {
+    "top1": "132/166 = 79.5%",
+    "top3": "149/166 = 89.8%",
+    "top5": "152/166 = 91.6%"
+   },
+   "after": {
+    "top1": "131/166 = 78.9%",
+    "top3": "148/166 = 89.2%",
+    "top5": "151/166 = 91.0%"
+   }
+  }
+ },
+ "fixed": [],
+ "broken": [
+  {
+   "image": "13261288_0.jpg",
+   "gold": "AGORA Мускат",
+   "before": "AGORA Мускат",
+   "after": "AGORA Совиньон",
+   "admitted": 1,
+   "admitted_words": [
+    "SWEET WINE"
+   ]
+  }
+ ],
+ "wrong_to_wrong": [],
+ "negative_leader_changes": [],
+ "sku_with_leader_changes": {
+  "AGORA Мускат": {
+   "frames": 4,
+   "correct_before": 4,
+   "correct_after": 3,
+   "leader_changed": 1
+  }
+ },
+ "series_with_fixed_or_broken": {
+  "13261288": 1
+ },
+ "timing": {
+  "median_s": 7.23,
+  "p95_s": 25.66,
+  "max_s": 31.32,
+  "total_min": 30.3,
+  "median_s_frames_over_2000px": 14.21,
+  "median_s_frames_upto_2000px": 3.74,
+  "n_over_2000px": 63
+ },
+ "words": {
+  "frames_with_admitted": 60,
+  "admitted_total": 97,
+  "grouped_total": 267,
+  "frames_with_any_group": 107,
+  "boxes_median": 9.0
+ }
+}

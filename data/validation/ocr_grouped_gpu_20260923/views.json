@@ -1,0 +1,1685 @@
+[
+  {
+    "image": "ir_luchshee-iz-dostupnykh-vin-na-segodnya-m_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/000.png",
+    "view": 0,
+    "size": [
+      252,
+      950
+    ]
+  },
+  {
+    "image": "ir_luchshee-iz-dostupnykh-vin-na-segodnya-m_2.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/001.png",
+    "view": 0,
+    "size": [
+      319,
+      1200
+    ]
+  },
+  {
+    "image": "ir_myagkoe-s-priyatnym-agodnym-vkusom-i-per_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/002.png",
+    "view": 1,
+    "size": [
+      165,
+      600
+    ]
+  },
+  {
+    "image": "ir_myagkoe-s-priyatnym-agodnym-vkusom-i-per_1.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/003.png",
+    "view": 0,
+    "size": [
+      500,
+      500
+    ]
+  },
+  {
+    "image": "ir_myagkoe-s-priyatnym-agodnym-vkusom-i-per_2.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/004.png",
+    "view": 1,
+    "size": [
+      132,
+      475
+    ]
+  },
+  {
+    "image": "ir_pei-da-raduisya_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/005.png",
+    "view": 0,
+    "size": [
+      220,
+      950
+    ]
+  },
+  {
+    "image": "ir_pei-da-raduisya_2.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/006.png",
+    "view": 1,
+    "size": [
+      100,
+      454
+    ]
+  },
+  {
+    "image": "ir_ochen-vkusnoe-legkoe-vino-dlya-semeinogo_1.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/007.png",
+    "view": 0,
+    "size": [
+      302,
+      950
+    ]
+  },
+  {
+    "image": "ir_ochen-vkusnoe-legkoe-vino-dlya-semeinogo_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/008.png",
+    "view": 0,
+    "size": [
+      375,
+      500
+    ]
+  },
+  {
+    "image": "ir_pei-da-raduisya_1.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/009.png",
+    "view": 1,
+    "size": [
+      966,
+      1500
+    ]
+  },
+  {
+    "image": "019c68d0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/010.png",
+    "view": 1,
+    "size": [
+      1797,
+      4032
+    ]
+  },
+  {
+    "image": "16409233_1.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/011.png",
+    "view": 1,
+    "size": [
+      520,
+      800
+    ]
+  },
+  {
+    "image": "10314919_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/012.png",
+    "view": 1,
+    "size": [
+      528,
+      800
+    ]
+  },
+  {
+    "image": "11406313_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/013.png",
+    "view": 1,
+    "size": [
+      221,
+      800
+    ]
+  },
+  {
+    "image": "11406313_1.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/014.png",
+    "view": 1,
+    "size": [
+      277,
+      788
+    ]
+  },
+  {
+    "image": "11751350_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/015.png",
+    "view": 0,
+    "size": [
+      600,
+      450
+    ]
+  },
+  {
+    "image": "11751350_1.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/016.png",
+    "view": 1,
+    "size": [
+      179,
+      682
+    ]
+  },
+  {
+    "image": "11751350_2.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/017.png",
+    "view": 1,
+    "size": [
+      152,
+      605
+    ]
+  },
+  {
+    "image": "12101221_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/018.png",
+    "view": 0,
+    "size": [
+      600,
+      1604
+    ]
+  },
+  {
+    "image": "12101221_2.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/019.png",
+    "view": 0,
+    "size": [
+      600,
+      800
+    ]
+  },
+  {
+    "image": "13918721_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/020.png",
+    "view": 0,
+    "size": [
+      600,
+      800
+    ]
+  },
+  {
+    "image": "14692624_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/021.png",
+    "view": 1,
+    "size": [
+      232,
+      883
+    ]
+  },
+  {
+    "image": "14692624_2.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/022.png",
+    "view": 1,
+    "size": [
+      275,
+      774
+    ]
+  },
+  {
+    "image": "14907980_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/023.png",
+    "view": 1,
+    "size": [
+      210,
+      761
+    ]
+  },
+  {
+    "image": "14907980_2.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/024.png",
+    "view": 0,
+    "size": [
+      600,
+      800
+    ]
+  },
+  {
+    "image": "17031076_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/025.png",
+    "view": 1,
+    "size": [
+      209,
+      794
+    ]
+  },
+  {
+    "image": "17760897_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/026.png",
+    "view": 1,
+    "size": [
+      264,
+      800
+    ]
+  },
+  {
+    "image": "10390039_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/027.png",
+    "view": 1,
+    "size": [
+      237,
+      784
+    ]
+  },
+  {
+    "image": "13978352_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/028.png",
+    "view": 1,
+    "size": [
+      238,
+      789
+    ]
+  },
+  {
+    "image": "13978352_1.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/029.png",
+    "view": 1,
+    "size": [
+      496,
+      737
+    ]
+  },
+  {
+    "image": "15501518_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/030.png",
+    "view": 0,
+    "size": [
+      600,
+      429
+    ]
+  },
+  {
+    "image": "15501518_1.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/031.png",
+    "view": 0,
+    "size": [
+      600,
+      618
+    ]
+  },
+  {
+    "image": "3284063_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/032.png",
+    "view": 1,
+    "size": [
+      547,
+      1995
+    ]
+  },
+  {
+    "image": "3284063_1.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/033.png",
+    "view": 0,
+    "size": [
+      600,
+      913
+    ]
+  },
+  {
+    "image": "5881591_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/034.png",
+    "view": 1,
+    "size": [
+      316,
+      1231
+    ]
+  },
+  {
+    "image": "12083971_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/035.png",
+    "view": 1,
+    "size": [
+      179,
+      694
+    ]
+  },
+  {
+    "image": "17303290_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/036.png",
+    "view": 1,
+    "size": [
+      305,
+      983
+    ]
+  },
+  {
+    "image": "10729273_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/037.png",
+    "view": 1,
+    "size": [
+      189,
+      794
+    ]
+  },
+  {
+    "image": "10729273_1.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/038.png",
+    "view": 0,
+    "size": [
+      600,
+      1085
+    ]
+  },
+  {
+    "image": "11585211_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/039.png",
+    "view": 1,
+    "size": [
+      384,
+      800
+    ]
+  },
+  {
+    "image": "12176352_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/040.png",
+    "view": 1,
+    "size": [
+      261,
+      1067
+    ]
+  },
+  {
+    "image": "13168313_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/041.png",
+    "view": 1,
+    "size": [
+      210,
+      996
+    ]
+  },
+  {
+    "image": "13168313_1.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/042.png",
+    "view": 1,
+    "size": [
+      441,
+      1067
+    ]
+  },
+  {
+    "image": "13795944_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/043.png",
+    "view": 1,
+    "size": [
+      124,
+      472
+    ]
+  },
+  {
+    "image": "13795944_1.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/044.png",
+    "view": 1,
+    "size": [
+      159,
+      521
+    ]
+  },
+  {
+    "image": "13918558_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/045.png",
+    "view": 1,
+    "size": [
+      333,
+      1342
+    ]
+  },
+  {
+    "image": "13918558_1.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/046.png",
+    "view": 0,
+    "size": [
+      600,
+      704
+    ]
+  },
+  {
+    "image": "14544567_1.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/047.png",
+    "view": 1,
+    "size": [
+      240,
+      836
+    ]
+  },
+  {
+    "image": "15536279_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/048.png",
+    "view": 1,
+    "size": [
+      128,
+      422
+    ]
+  },
+  {
+    "image": "15536279_1.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/049.png",
+    "view": 1,
+    "size": [
+      315,
+      256
+    ]
+  },
+  {
+    "image": "15598335_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/050.png",
+    "view": 1,
+    "size": [
+      104,
+      424
+    ]
+  },
+  {
+    "image": "15598335_1.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/051.png",
+    "view": 0,
+    "size": [
+      600,
+      450
+    ]
+  },
+  {
+    "image": "15619693_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/052.png",
+    "view": 1,
+    "size": [
+      303,
+      970
+    ]
+  },
+  {
+    "image": "15678756_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/053.png",
+    "view": 1,
+    "size": [
+      202,
+      894
+    ]
+  },
+  {
+    "image": "16151511_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/054.png",
+    "view": 0,
+    "size": [
+      600,
+      450
+    ]
+  },
+  {
+    "image": "16151511_1.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/055.png",
+    "view": 1,
+    "size": [
+      164,
+      425
+    ]
+  },
+  {
+    "image": "16729787_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/056.png",
+    "view": 0,
+    "size": [
+      600,
+      1800
+    ]
+  },
+  {
+    "image": "16729787_1.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/057.png",
+    "view": 1,
+    "size": [
+      364,
+      1089
+    ]
+  },
+  {
+    "image": "16787831_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/058.png",
+    "view": 0,
+    "size": [
+      600,
+      1066
+    ]
+  },
+  {
+    "image": "16813195_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/059.png",
+    "view": 1,
+    "size": [
+      233,
+      744
+    ]
+  },
+  {
+    "image": "16813195_1.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/060.png",
+    "view": 1,
+    "size": [
+      348,
+      367
+    ]
+  },
+  {
+    "image": "17125435_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/061.png",
+    "view": 1,
+    "size": [
+      185,
+      800
+    ]
+  },
+  {
+    "image": "6182553_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/062.png",
+    "view": 1,
+    "size": [
+      198,
+      757
+    ]
+  },
+  {
+    "image": "6321068_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/063.png",
+    "view": 1,
+    "size": [
+      340,
+      1024
+    ]
+  },
+  {
+    "image": "6522615_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/064.png",
+    "view": 1,
+    "size": [
+      209,
+      790
+    ]
+  },
+  {
+    "image": "6522615_1.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/065.png",
+    "view": 1,
+    "size": [
+      343,
+      800
+    ]
+  },
+  {
+    "image": "7193178_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/066.png",
+    "view": 1,
+    "size": [
+      225,
+      941
+    ]
+  },
+  {
+    "image": "7193178_1.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/067.png",
+    "view": 1,
+    "size": [
+      391,
+      800
+    ]
+  },
+  {
+    "image": "7579301_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/068.png",
+    "view": 1,
+    "size": [
+      243,
+      849
+    ]
+  },
+  {
+    "image": "9448391_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/069.png",
+    "view": 1,
+    "size": [
+      186,
+      606
+    ]
+  },
+  {
+    "image": "9465984_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/070.png",
+    "view": 1,
+    "size": [
+      180,
+      747
+    ]
+  },
+  {
+    "image": "9465984_1.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/071.png",
+    "view": 1,
+    "size": [
+      209,
+      842
+    ]
+  },
+  {
+    "image": "10413627_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/072.png",
+    "view": 1,
+    "size": [
+      510,
+      2000
+    ]
+  },
+  {
+    "image": "10434058_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/073.png",
+    "view": 1,
+    "size": [
+      495,
+      1999
+    ]
+  },
+  {
+    "image": "11179082_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/074.png",
+    "view": 0,
+    "size": [
+      1500,
+      3360
+    ]
+  },
+  {
+    "image": "11258546_1.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/075.png",
+    "view": 0,
+    "size": [
+      1500,
+      2288
+    ]
+  },
+  {
+    "image": "11489505_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/076.png",
+    "view": 1,
+    "size": [
+      488,
+      1776
+    ]
+  },
+  {
+    "image": "11708583_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/077.png",
+    "view": 0,
+    "size": [
+      1500,
+      2623
+    ]
+  },
+  {
+    "image": "11876113_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/078.png",
+    "view": 0,
+    "size": [
+      965,
+      1280
+    ]
+  },
+  {
+    "image": "11913153_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/079.png",
+    "view": 1,
+    "size": [
+      489,
+      1987
+    ]
+  },
+  {
+    "image": "11918966_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/080.png",
+    "view": 1,
+    "size": [
+      921,
+      4042
+    ]
+  },
+  {
+    "image": "11918966_1.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/081.png",
+    "view": 0,
+    "size": [
+      1500,
+      3195
+    ]
+  },
+  {
+    "image": "12189057_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/082.png",
+    "view": 1,
+    "size": [
+      772,
+      2666
+    ]
+  },
+  {
+    "image": "12256845_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/083.png",
+    "view": 1,
+    "size": [
+      826,
+      2947
+    ]
+  },
+  {
+    "image": "12980229_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/084.png",
+    "view": 1,
+    "size": [
+      756,
+      3186
+    ]
+  },
+  {
+    "image": "13327626_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/085.png",
+    "view": 0,
+    "size": [
+      1500,
+      1997
+    ]
+  },
+  {
+    "image": "13330615_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/086.png",
+    "view": 1,
+    "size": [
+      1071,
+      1733
+    ]
+  },
+  {
+    "image": "13345236_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/087.png",
+    "view": 1,
+    "size": [
+      861,
+      2007
+    ]
+  },
+  {
+    "image": "13541223_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/088.png",
+    "view": 0,
+    "size": [
+      1500,
+      2000
+    ]
+  },
+  {
+    "image": "13546111_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/089.png",
+    "view": 1,
+    "size": [
+      524,
+      1280
+    ]
+  },
+  {
+    "image": "13563755_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/090.png",
+    "view": 1,
+    "size": [
+      515,
+      1997
+    ]
+  },
+  {
+    "image": "13847459_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/091.png",
+    "view": 1,
+    "size": [
+      665,
+      2250
+    ]
+  },
+  {
+    "image": "13891914_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/092.png",
+    "view": 1,
+    "size": [
+      365,
+      1644
+    ]
+  },
+  {
+    "image": "14230309_1.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/093.png",
+    "view": 0,
+    "size": [
+      1500,
+      1205
+    ]
+  },
+  {
+    "image": "14299958_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/094.png",
+    "view": 1,
+    "size": [
+      966,
+      2000
+    ]
+  },
+  {
+    "image": "14428988_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/095.png",
+    "view": 1,
+    "size": [
+      630,
+      2250
+    ]
+  },
+  {
+    "image": "14428988_1.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/096.png",
+    "view": 0,
+    "size": [
+      1500,
+      2250
+    ]
+  },
+  {
+    "image": "14523359_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/097.png",
+    "view": 1,
+    "size": [
+      633,
+      2466
+    ]
+  },
+  {
+    "image": "14523359_1.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/098.png",
+    "view": 0,
+    "size": [
+      1500,
+      2000
+    ]
+  },
+  {
+    "image": "14574490_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/099.png",
+    "view": 1,
+    "size": [
+      514,
+      2000
+    ]
+  },
+  {
+    "image": "14629551_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/100.png",
+    "view": 1,
+    "size": [
+      669,
+      2000
+    ]
+  },
+  {
+    "image": "14714932_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/101.png",
+    "view": 1,
+    "size": [
+      798,
+      2943
+    ]
+  },
+  {
+    "image": "14794445_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/102.png",
+    "view": 1,
+    "size": [
+      534,
+      1903
+    ]
+  },
+  {
+    "image": "15302501_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/103.png",
+    "view": 0,
+    "size": [
+      1500,
+      2522
+    ]
+  },
+  {
+    "image": "15354460_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/104.png",
+    "view": 1,
+    "size": [
+      609,
+      2000
+    ]
+  },
+  {
+    "image": "15867534_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/105.png",
+    "view": 1,
+    "size": [
+      558,
+      1748
+    ]
+  },
+  {
+    "image": "15892757_1.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/106.png",
+    "view": 1,
+    "size": [
+      1287,
+      2319
+    ]
+  },
+  {
+    "image": "15950811_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/107.png",
+    "view": 0,
+    "size": [
+      1500,
+      2666
+    ]
+  },
+  {
+    "image": "16058818_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/108.png",
+    "view": 1,
+    "size": [
+      938,
+      1992
+    ]
+  },
+  {
+    "image": "16103021_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/109.png",
+    "view": 1,
+    "size": [
+      1346,
+      2212
+    ]
+  },
+  {
+    "image": "16103021_1.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/110.png",
+    "view": 1,
+    "size": [
+      843,
+      2826
+    ]
+  },
+  {
+    "image": "16159809_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/111.png",
+    "view": 0,
+    "size": [
+      1500,
+      1125
+    ]
+  },
+  {
+    "image": "16422830_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/112.png",
+    "view": 1,
+    "size": [
+      388,
+      1196
+    ]
+  },
+  {
+    "image": "16422830_1.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/113.png",
+    "view": 1,
+    "size": [
+      616,
+      1270
+    ]
+  },
+  {
+    "image": "16431007_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/114.png",
+    "view": 1,
+    "size": [
+      293,
+      1091
+    ]
+  },
+  {
+    "image": "16431591_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/115.png",
+    "view": 1,
+    "size": [
+      278,
+      938
+    ]
+  },
+  {
+    "image": "16431591_1.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/116.png",
+    "view": 1,
+    "size": [
+      343,
+      1228
+    ]
+  },
+  {
+    "image": "16524370_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/117.png",
+    "view": 1,
+    "size": [
+      401,
+      1248
+    ]
+  },
+  {
+    "image": "16662579_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/118.png",
+    "view": 1,
+    "size": [
+      489,
+      1918
+    ]
+  },
+  {
+    "image": "17094708_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/119.png",
+    "view": 0,
+    "size": [
+      972,
+      2160
+    ]
+  },
+  {
+    "image": "17094708_1.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/120.png",
+    "view": 1,
+    "size": [
+      972,
+      1672
+    ]
+  },
+  {
+    "image": "17502638_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/121.png",
+    "view": 1,
+    "size": [
+      559,
+      2367
+    ]
+  },
+  {
+    "image": "17552421_1.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/122.png",
+    "view": 1,
+    "size": [
+      901,
+      3167
+    ]
+  },
+  {
+    "image": "17637471_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/123.png",
+    "view": 1,
+    "size": [
+      685,
+      1984
+    ]
+  },
+  {
+    "image": "17637471_1.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/124.png",
+    "view": 0,
+    "size": [
+      1500,
+      1125
+    ]
+  },
+  {
+    "image": "17656401_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/125.png",
+    "view": 1,
+    "size": [
+      579,
+      2000
+    ]
+  },
+  {
+    "image": "17656401_1.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/126.png",
+    "view": 1,
+    "size": [
+      820,
+      1123
+    ]
+  },
+  {
+    "image": "17762210_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/127.png",
+    "view": 1,
+    "size": [
+      607,
+      1980
+    ]
+  },
+  {
+    "image": "17805154_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/128.png",
+    "view": 1,
+    "size": [
+      549,
+      1737
+    ]
+  },
+  {
+    "image": "3124666_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/129.png",
+    "view": 1,
+    "size": [
+      447,
+      1911
+    ]
+  },
+  {
+    "image": "4456929_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/130.png",
+    "view": 0,
+    "size": [
+      1500,
+      1125
+    ]
+  },
+  {
+    "image": "5313368_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/131.png",
+    "view": 1,
+    "size": [
+      516,
+      2000
+    ]
+  },
+  {
+    "image": "5921626_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/132.png",
+    "view": 1,
+    "size": [
+      482,
+      2000
+    ]
+  },
+  {
+    "image": "6310320_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/133.png",
+    "view": 1,
+    "size": [
+      783,
+      2523
+    ]
+  },
+  {
+    "image": "6422982_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/134.png",
+    "view": 1,
+    "size": [
+      345,
+      1125
+    ]
+  },
+  {
+    "image": "6731712_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/135.png",
+    "view": 1,
+    "size": [
+      249,
+      1080
+    ]
+  },
+  {
+    "image": "7000197_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/136.png",
+    "view": 0,
+    "size": [
+      1500,
+      2000
+    ]
+  },
+  {
+    "image": "7445929_1.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/137.png",
+    "view": 0,
+    "size": [
+      900,
+      827
+    ]
+  },
+  {
+    "image": "8061283_1.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/138.png",
+    "view": 0,
+    "size": [
+      1500,
+      1817
+    ]
+  },
+  {
+    "image": "8136759_1.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/139.png",
+    "view": 1,
+    "size": [
+      1098,
+      1593
+    ]
+  },
+  {
+    "image": "8140183_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/140.png",
+    "view": 1,
+    "size": [
+      826,
+      3224
+    ]
+  },
+  {
+    "image": "8743598_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/141.png",
+    "view": 1,
+    "size": [
+      951,
+      3186
+    ]
+  },
+  {
+    "image": "9268703_1.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/142.png",
+    "view": 1,
+    "size": [
+      1034,
+      2000
+    ]
+  },
+  {
+    "image": "9873195_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/143.png",
+    "view": 1,
+    "size": [
+      1056,
+      3666
+    ]
+  },
+  {
+    "image": "9873195_1.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/144.png",
+    "view": 1,
+    "size": [
+      1209,
+      2604
+    ]
+  },
+  {
+    "image": "org003_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/145.png",
+    "view": 0,
+    "size": [
+      3024,
+      4032
+    ]
+  },
+  {
+    "image": "org004_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/146.png",
+    "view": 0,
+    "size": [
+      3024,
+      4032
+    ]
+  },
+  {
+    "image": "org010_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/147.png",
+    "view": 1,
+    "size": [
+      1876,
+      4032
+    ]
+  },
+  {
+    "image": "org011_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/148.png",
+    "view": 0,
+    "size": [
+      3024,
+      4032
+    ]
+  },
+  {
+    "image": "org013_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/149.png",
+    "view": 0,
+    "size": [
+      3072,
+      4080
+    ]
+  },
+  {
+    "image": "org016_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/150.png",
+    "view": 1,
+    "size": [
+      2993,
+      4032
+    ]
+  },
+  {
+    "image": "org018_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/151.png",
+    "view": 1,
+    "size": [
+      1118,
+      3727
+    ]
+  },
+  {
+    "image": "org020_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/152.png",
+    "view": 0,
+    "size": [
+      3024,
+      4032
+    ]
+  },
+  {
+    "image": "org021_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/153.png",
+    "view": 1,
+    "size": [
+      2080,
+      3544
+    ]
+  },
+  {
+    "image": "org022_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/154.png",
+    "view": 0,
+    "size": [
+      3024,
+      4032
+    ]
+  },
+  {
+    "image": "org023_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/155.png",
+    "view": 1,
+    "size": [
+      1948,
+      3200
+    ]
+  },
+  {
+    "image": "org024_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/156.png",
+    "view": 0,
+    "size": [
+      3024,
+      4032
+    ]
+  },
+  {
+    "image": "org028_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/157.png",
+    "view": 0,
+    "size": [
+      3072,
+      4096
+    ]
+  },
+  {
+    "image": "org029_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/158.png",
+    "view": 0,
+    "size": [
+      2252,
+      4000
+    ]
+  },
+  {
+    "image": "org030_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/159.png",
+    "view": 1,
+    "size": [
+      1930,
+      3673
+    ]
+  },
+  {
+    "image": "org031_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/160.png",
+    "view": 0,
+    "size": [
+      3024,
+      4032
+    ]
+  },
+  {
+    "image": "org034_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/161.png",
+    "view": 1,
+    "size": [
+      1612,
+      2921
+    ]
+  },
+  {
+    "image": "org036_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/162.png",
+    "view": 0,
+    "size": [
+      3024,
+      4032
+    ]
+  },
+  {
+    "image": "org037_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/163.png",
+    "view": 1,
+    "size": [
+      1877,
+      4032
+    ]
+  },
+  {
+    "image": "org039_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/164.png",
+    "view": 1,
+    "size": [
+      2245,
+      4032
+    ]
+  },
+  {
+    "image": "org042_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/165.png",
+    "view": 1,
+    "size": [
+      1988,
+      3724
+    ]
+  },
+  {
+    "image": "org045_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/166.png",
+    "view": 0,
+    "size": [
+      3024,
+      4032
+    ]
+  },
+  {
+    "image": "org046_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/167.png",
+    "view": 0,
+    "size": [
+      3000,
+      4000
+    ]
+  },
+  {
+    "image": "org049_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/168.png",
+    "view": 1,
+    "size": [
+      2252,
+      3563
+    ]
+  },
+  {
+    "image": "org051_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/169.png",
+    "view": 1,
+    "size": [
+      1760,
+      3493
+    ]
+  },
+  {
+    "image": "org057_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/170.png",
+    "view": 1,
+    "size": [
+      1758,
+      3624
+    ]
+  },
+  {
+    "image": "org060_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/171.png",
+    "view": 0,
+    "size": [
+      3000,
+      4000
+    ]
+  },
+  {
+    "image": "org061_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/172.png",
+    "view": 1,
+    "size": [
+      1678,
+      4032
+    ]
+  },
+  {
+    "image": "org062_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/173.png",
+    "view": 1,
+    "size": [
+      550,
+      1242
+    ]
+  },
+  {
+    "image": "org066_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/174.png",
+    "view": 1,
+    "size": [
+      2364,
+      3837
+    ]
+  },
+  {
+    "image": "org068_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/175.png",
+    "view": 1,
+    "size": [
+      2479,
+      3987
+    ]
+  },
+  {
+    "image": "org070_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/176.png",
+    "view": 1,
+    "size": [
+      1542,
+      4032
+    ]
+  },
+  {
+    "image": "org073_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/177.png",
+    "view": 0,
+    "size": [
+      3024,
+      4032
+    ]
+  },
+  {
+    "image": "org075_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/178.png",
+    "view": 1,
+    "size": [
+      2175,
+      4032
+    ]
+  },
+  {
+    "image": "org077_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/179.png",
+    "view": 1,
+    "size": [
+      2119,
+      3367
+    ]
+  },
+  {
+    "image": "org086_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/180.png",
+    "view": 1,
+    "size": [
+      1045,
+      3708
+    ]
+  },
+  {
+    "image": "org087_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/181.png",
+    "view": 1,
+    "size": [
+      1394,
+      3848
+    ]
+  },
+  {
+    "image": "org091_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/182.png",
+    "view": 1,
+    "size": [
+      1169,
+      3726
+    ]
+  },
+  {
+    "image": "org094_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/183.png",
+    "view": 1,
+    "size": [
+      1393,
+      4000
+    ]
+  },
+  {
+    "image": "org095_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/184.png",
+    "view": 1,
+    "size": [
+      1558,
+      4096
+    ]
+  },
+  {
+    "image": "org096_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/185.png",
+    "view": 1,
+    "size": [
+      927,
+      3226
+    ]
+  },
+  {
+    "image": "org099_0.jpg",
+    "source": "data/validation/ocr_grouped_tune_20260923/crops/186.png",
+    "view": 1,
+    "size": [
+      1676,
+      3044
+    ]
+  }
+]

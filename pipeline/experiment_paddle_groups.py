@@ -44,6 +44,7 @@ def main():
     ap.add_argument('--det-limit-type', choices=['min', 'max'], default=None,
                     help='detector input limit; default: PaddleOCR defaults (native size, max side 4000)')
     ap.add_argument('--det-limit-side', type=int, default=None)
+    ap.add_argument('--device', default='cpu', help="'cpu' (default) or 'gpu' — timing only, same models")
     args = ap.parse_args()
     rows = json.loads(Path(args.views).read_text())
     det_kwargs = {}
@@ -64,10 +65,10 @@ def main():
     detector = PaddleOCR(text_detection_model_name='PP-OCRv5_server_det',
                          text_recognition_model_name='cyrillic_PP-OCRv5_mobile_rec',
                          use_doc_orientation_classify=False, use_doc_unwarping=False,
-                         use_textline_orientation=False, device='cpu',
+                         use_textline_orientation=False, device=args.device,
                          enable_mkldnn=False, cpu_threads=4)
     recognizer = TextRecognition(model_name='cyrillic_PP-OCRv5_mobile_rec',
-                                 device='cpu',enable_mkldnn=False,cpu_threads=4)
+                                 device=args.device,enable_mkldnn=False,cpu_threads=4)
     with output.open('a' if args.resume else 'w') as fh:
         for i, row in enumerate(rows[len(completed):], start=len(completed)):
             print(f'Start {i+1}/{len(rows)} {row["image"]}', flush=True)
@@ -98,6 +99,7 @@ def main():
         'n':len(rows),'script_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         'views_sha256':hashlib.sha256(Path(args.views).read_bytes()).hexdigest(),
         'detector_limit':det_kwargs,
+        'device':args.device,
         'note':'CPU offline experiment. Only automatically grouped fragments emitted; no manual ROIs.'},indent=2)+'\n')
 
 
