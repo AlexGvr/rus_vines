@@ -5,11 +5,12 @@ type Option = { value: string; label: string }
 type Question = { id: string; title: string; options: Option[] }
 
 const questions = ref<Question[]>([])
-const answers = reactive<Record<string, string>>({})
-const picks = ref<any[]>([])
-const relaxed = ref(false)
+// Ответы и подборка переживают переход на страницу вина и возврат назад.
+const answers = useState<Record<string, string>>('sommelier-answers', () => ({}))
+const picks = useState<any[]>('sommelier-picks', () => [])
+const relaxed = useState('sommelier-relaxed', () => false)
+const asked = useState('sommelier-asked', () => false)
 const loading = ref(false)
-const asked = ref(false)
 
 onMounted(async () => {
   try {
@@ -23,14 +24,14 @@ onMounted(async () => {
 
 const ready = computed(() =>
   questions.value.length > 0 &&
-  questions.value.every((q) => answers[q.id] !== undefined))
+  questions.value.every((q) => answers.value[q.id] !== undefined))
 
 async function recommend() {
   loading.value = true
   asked.value = true
   try {
     const data = await $fetch<{ recommendations: any[]; relaxed: boolean }>(
-      `${props.apiBase}/v1/sommelier`, { method: 'POST', body: { ...answers } })
+      `${props.apiBase}/v1/sommelier`, { method: 'POST', body: { ...answers.value } })
     picks.value = data.recommendations
     relaxed.value = data.relaxed
   } catch {
@@ -76,6 +77,7 @@ async function recommend() {
         :wine="pick.wine"
         :reasons="pick.reasons"
         :api-base="apiBase"
+        :to="`/wine/${pick.wine.slug}`"
       />
     </div>
   </section>
