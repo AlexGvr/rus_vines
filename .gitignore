@@ -33,3 +33,21 @@ data/index/*_prev*
 data/catalog/*_prev*
 # Кэши эмбеддингов экспериментов
 data/validation/**/*.npz
+# Локальные настройки агентов и IDE
+.codex/
+.claude/
+# Артефакты обучения catboost
+catboost_info/
+# Материалы, не нужные для запуска: шаблон и материалы кейса, заметки к питчу
+ЛЦТ2026 Шаблон презентации.pptx
+10. РСХБ.Цифра.pdf
+docs/pitch.md
+# История экспериментов, вынесенная из ARCHITECTURE.md, — локальная
+docs/experiments_history.md
+# Снимки организатора и собственные снимки — не изображения репозитория
+Реальные фото/
+data/organizers/
+my_photo/
+output/
+data/validation/ocr_alternative_*/*.jpg
+data/validation/transcript_final3_assets/

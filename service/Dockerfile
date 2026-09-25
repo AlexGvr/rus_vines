@@ -29,7 +29,8 @@ RUN pip install --no-cache-dir --index-url "$TORCH_INDEX" torch torchvision \
       pillow \
       numpy \
       easyocr \
-      "psycopg[binary]"
+      "psycopg[binary]" \
+      pgvector
 
 # Веса детектора и OCR кладём в образ: иначе они тянутся при первом запросе,
 # и первый скан ждёт загрузку вместо ответа.
@@ -38,6 +39,8 @@ RUN python -c "from ultralytics import YOLO; YOLO('yolo11m.pt')" \
 ENV YOLO_WEIGHTS=/app/weights/yolo11m.pt
 RUN python -c "import easyocr; easyocr.Reader(['ru','en'], gpu=False, verbose=False)"
 
+# pgvector — адаптер типа vector для psycopg. Без него индекс в базу
+# загружается, а первый же поиск падает с ModuleNotFoundError.
 # Состав должен повторять импорты service/main.py. Проверка сборки —
 # `docker compose run --rm api python -c "import service.main"`: раньше
 # образ собирался без ocr.py и падал на старте с ModuleNotFoundError.

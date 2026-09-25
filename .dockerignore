@@ -1,0 +1,8 @@
+# Контекст сборки — только то, что копирует service/Dockerfile. Без этого
+# в демон уходят дамп кейса, .venv и node_modules — гигабайты.
+# Каталог, индексы и дамп монтируются томами (docker-compose.yml).
+*
+!core/
+!pipeline/
+!service/
+**/__pycache__
