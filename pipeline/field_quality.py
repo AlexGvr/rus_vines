@@ -26,22 +26,25 @@ def main() -> None:
     ap.add_argument("report", help="отчёт eval_field.py по регрессионной части")
     ap.add_argument("--api", default="", help="отчёт api_check.py (латентность, /v1/search)")
     ap.add_argument("--output", default=str(ROOT / "data" / "index" / "field_quality.json"))
-    ap.add_argument("--source", choices=["all", "organizer"], default="organizer",
-                    help="organizer — только кадры публичного набора кейса (изображения "
-                         "датасета; по рекомендации организатора другие не используются)")
+    ap.add_argument("--source", choices=["all", "organizer", "photos"], default="photos",
+                    help="organizer — кадры публичного набора кейса (изображения датасета; "
+                         "по рекомендации организатора другие не используются); photos — "
+                         "только 100 снимков организатора, без примеров из eval.zip")
     args = ap.parse_args()
     data = json.loads(Path(args.report).read_text(encoding="utf-8"))
-    if args.source == "organizer":
+    if args.source in ("organizer", "photos"):
         src = {r["image"]: r.get("source") for r in csv.DictReader(
             (ROOT / "data/field/manifest.csv").open(encoding="utf-8"))}
         data["results"] = [r for r in data["results"]
-                           if src.get(r["image"]) == "публичный набор кейса"]
+                           if src.get(r["image"]) == "публичный набор кейса"
+                           and (args.source == "organizer" or r["image"].startswith("org"))]
     show_p = json.loads((ROOT / "data/index/confidence.json").read_text())["thresholds"]["show_p"]
     m = summarize(data["results"], show_p)
     p, f, q = m["all_positives"], m["findable_diagnostic"], m["with_rejection_all_queries"]["1"]
     block = {
-        "set": ("кадры организатора (публичный набор кейса), регрессионная часть"
-                if args.source == "organizer" else "полевой набор, регрессионная часть")
+        "set": {"photos": "100 снимков организатора, регрессионная часть",
+                "organizer": "кадры организатора (публичный набор кейса), регрессионная часть",
+                "all": "полевой набор, регрессионная часть"}[args.source]
                + " (development, не независимая приёмка)",
         "independent_holdout": False,
         "report": str(Path(args.report).relative_to(ROOT)) if Path(args.report).is_absolute() else args.report,

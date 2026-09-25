@@ -1,0 +1,92 @@
+{
+ "set": "photos",
+ "show_p": 0.1,
+ "vlm_p": 0.8,
+ "parts": {
+  "tune": {
+   "metrics": {
+    "positives": 33,
+    "absent": 21,
+    "top1": 26,
+    "top3": 28,
+    "top5": 28,
+    "f1_top1": 0.7666666666666667,
+    "f1_top5": 0.8,
+    "absent_shown": 2,
+    "predict_null_ok": [
+     44,
+     54
+    ],
+    "predict_strict": [
+     25,
+     54
+    ],
+    "predict_positives": [
+     25,
+     33
+    ],
+    "always_answer": [
+     26,
+     54
+    ]
+   }
+  },
+  "test": {
+   "metrics": {
+    "positives": 29,
+    "absent": 14,
+    "top1": 27,
+    "top3": 28,
+    "top5": 28,
+    "f1_top1": 0.8666666666666667,
+    "f1_top5": 0.9,
+    "absent_shown": 4,
+    "predict_null_ok": [
+     36,
+     43
+    ],
+    "predict_strict": [
+     26,
+     43
+    ],
+    "predict_positives": [
+     26,
+     29
+    ],
+    "always_answer": [
+     27,
+     43
+    ]
+   }
+  },
+  "all": {
+   "metrics": {
+    "positives": 62,
+    "absent": 35,
+    "top1": 53,
+    "top3": 56,
+    "top5": 56,
+    "f1_top1": 0.8166666666666667,
+    "f1_top5": 0.85,
+    "absent_shown": 6,
+    "predict_null_ok": [
+     80,
+     97
+    ],
+    "predict_strict": [
+     51,
+     97
+    ],
+    "predict_positives": [
+     51,
+     62
+    ],
+    "always_answer": [
+     53,
+     97
+    ]
+   }
+  }
+ },
+ "missing_vlm": []
+}
