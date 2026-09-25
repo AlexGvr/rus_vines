@@ -345,7 +345,7 @@ class PrecomputedReranker:
         self.offsets = np.load(index_dir / "offsets.npy")
         # Цвет вокруг совпавших точек считается только по запросу: в порядок
         # кандидатов он не идёт. Замер показал, что мешает, а не помогает
-        # (pipeline/eval_rank.py, ARCHITECTURE.md). Оставлен для разбора:
+        # (pipeline/eval_rank.py, docs/metrics.md). Оставлен для разбора:
         # «Victor Dravigny. Красное» он отводит уверенно, а соседей по
         # «Русскому Игристому» — нет, и видно почему.
         colors = index_dir / "colors.npy"

@@ -32,7 +32,7 @@ RULE_SWITCHES = (
     "LABEL_BAND", "KIN_GROUP", "BRAND_FIRST", "GEOM_WEIGHT", "GEOM_WEIGHT_ALPHA",
     "SIFT_MAX_SIDE", "SIFT_DIR", "YOLO_WEIGHTS", "YOLO_CONF", "YOLO_IMGSZ",
     "PLATFORM_ADDITIONS", "GEOMETRY_MARGIN", "SIFT_ONE_TO_ONE",
-    "SIFT_UNIQUE_INLIERS",
+    "SIFT_UNIQUE_INLIERS", "TEXT_VOTE",
 )
 
 # Позиции, появившиеся на платформе после выгрузки кейса (sync_platform.py).
@@ -600,6 +600,66 @@ def demote_contradicted(candidates: list[Candidate], channel, words,
                 candidates.insert(0, ranked[0])
 
 
+# Голосование словами этикетки (TEXT_VOTE=θ, пусто — выключено): лидером
+# становится кандидат, в карточке которого нашлось строго больше
+# прочитанных слов, чем у текущего лидера, и не меньше VOTE_MIN_WORDS.
+# θ — допуск на ошибку чтения, расстояние Дамерау–Левенштейна на длину слова.
+VOTE_MIN_WORDS = 2
+
+
+def vote_by_text(candidates: list[Candidate], words, channel, min_conf: float) -> None:
+    """Порог θ из TEXT_VOTE; без него шаг ничего не делает.
+
+    Разбор, откуда правило: «Портвейн белый Алушта» Массандры. Гравюра дворца,
+    шапка и год основания у новых этикеток линейки общие, и геометрия отдаёт
+    121 точку «Гурзуфу» против 59 у «Алушты». OCR при этом читает ПОРТВЕЙН,
+    БЕАЫЙ и АУШТА, но прежние правила слово берут только точным и только
+    если оно принадлежит одному кандидату, а «Алушта» есть у белого и
+    красного портвейна. Различает их лишь сочетание слов.
+    """
+    theta = os.environ.get("TEXT_VOTE", "")
+    if not theta or len(candidates) < 2:
+        return
+    from text_match import text_votes
+    votes = text_votes([c.slug for c in candidates], words, channel, float(theta), min_conf)
+    best = max(votes.values())
+    winners = [c for c in candidates if votes[c.slug] == best]
+    leader = candidates[0]
+    if (len(winners) == 1 and winners[0] is not leader and best >= VOTE_MIN_WORDS
+            and best > votes[leader.slug]):
+        candidates.remove(winners[0])
+        candidates.insert(0, winners[0])
+
+
+CONTRA_THETA = 0.2      # допуск на ошибку чтения, как у TEXT_VOTE
+CONTRA_CONF = 0.85      # слово должно быть прочитано уверенно
+CONTRA_LEN = 5
+
+
+def text_contradiction(candidates: list[Candidate], words, channel) -> list[str]:
+    """Кандидаты, чьё слово уверенно прочитано на этикетке, а у лидера его нет.
+
+    Само по себе ответа не меняет — это повод спросить арбитра (VLM_CONTRA
+    в сервисе). «Портвейн белый Алушта»: прочитано АУШТА с уверенностью
+    0.96, у лидера «Гурзуфа» такого слова нет, у двух «Алушт» — есть.
+    Порядок — порядок кандидатов.
+    """
+    from text_match import (GENERIC_WORDS, STOPWORDS, card_vocabulary, central_words,
+                            clean, near)
+    if len(candidates) < 2:
+        return []
+    read = {t for w in central_words(words, 0.60) if w.conf >= CONTRA_CONF
+            for t in clean(w.text).split()
+            if len(t) >= CONTRA_LEN and t not in GENERIC_WORDS and t not in STOPWORDS}
+    leader = card_vocabulary(candidates[0].slug, channel)
+    foreign = [t for t in read if not any(near(t, v, CONTRA_THETA) for v in leader)]
+    if not foreign:
+        return []
+    return [c.slug for c in candidates[1:]
+            if any(near(t, v, CONTRA_THETA) for t in foreign
+                   for v in card_vocabulary(c.slug, channel))]
+
+
 def settle(candidates: list[Candidate], crop: Image.Image, channel,
            read_words, window: float, min_conf: float,
            by_slug: dict | None = None) -> list[Candidate]:
@@ -619,6 +679,7 @@ def settle(candidates: list[Candidate], crop: Image.Image, channel,
     words = read_words(crop)
     prefer_brand(candidates, words, channel, min_conf)
     resolve(candidates, crop, channel, read_words, window, min_conf, by_slug)
+    vote_by_text(candidates, words, channel, min_conf)
     if candidates:
         demote_contradicted(candidates, channel, read_words(crop), min_conf)
     return candidates

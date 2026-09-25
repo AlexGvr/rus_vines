@@ -140,6 +140,34 @@ EVAL_ABSTAIN_P = float(os.environ.get("EVAL_ABSTAIN_P", SHOW_P))
 VLM_CONFIRM = os.environ.get("VLM_CONFIRM", "1") == "1"
 VLM_CONFIRM_P = float(os.environ.get("VLM_CONFIRM_P", "0.8"))
 
+# VLM как арбитр, а не только подтверждение лидера. Правила текста и цвета,
+# переставлявшие лидера сами, ломали соседние кадры: внутри линейки с общей
+# этикеткой любое слабое свидетельство чаще ошибается, чем помогает. Здесь
+# свидетельство только указывает, где ответ сомнителен, а решает VLM.
+#   VLM_FALLBACK=k — лидер не подтверждён, ответ ушёл бы в отказ: VLM
+#     проверяет ещё k следующих кандидатов, первый подтверждённый становится
+#     ответом (Victor Dravigny Брют: Экстра Брют отвергнут, Брют третий).
+#   VLM_CONTRA=1 — ответ показан, но уверенно прочитано слово чужой карточки,
+#     которого у лидера нет (text_contradiction): если VLM отвергает лидера
+#     (P(yes) < VLM_REJECT_P), проверяются владельцы слова.
+VLM_FALLBACK = int(os.environ.get("VLM_FALLBACK", "2"))
+VLM_CONTRA = os.environ.get("VLM_CONTRA", "1") == "1"
+VLM_REJECT_P = 0.5
+# Порог подтверждения в пути противоречия ниже общего: к нему приходят
+# с двумя независимыми сигналами — OCR уверенно прочитал слово владельца,
+# VLM отвергла лидера. На 402 кадрах у владельцев слова P(yes) либо ниже
+# 0.2, либо 0.99, в полосе 0.5-0.8 нет ни одного случая, так что порог
+# выбран по разобранному снимку («Алушта», 0.75) и замеру не противоречит.
+VLM_CONTRA_P = float(os.environ.get("VLM_CONTRA_P", "0.7"))
+# Бюджет времени на дополнительные вызовы VLM (VLM_BUDGET_MS, 0 — без
+# ограничения, по умолчанию). На снимке 3024×4032 поиск без них идёт до 2 с,
+# а каждая проверка кандидата — ещё 0.3-0.7 с (до трёх эталонов). Замер на
+# 402 кадрах: без бюджета +5 верных, p95 2.2 с, 7 запросов дольше 3 с
+# (5 из 97 снимков организатора); с бюджетом 2000 мс за SLA не выходит
+# ничего, но теряется «Цитрон» org076 — +4. Выбрано качество.
+VLM_BUDGET_MS = float(os.environ.get("VLM_BUDGET_MS", "0"))
+VLM_CALL_GUESS_MS = 400.0
+
 # Разрешение противоречий текстом. Запускается только когда геометрия не
 # развела кандидатов: инлаеров у соседа не меньше CLOSE_WINDOW от лидера.
 # Правило одностороннее — уверенно прочитанное слово, принадлежащее ровно
@@ -266,15 +294,62 @@ def search_candidates(image: Image.Image,
     resolved = any(c.contradictions for c in candidates)
     t_vlm = 0.0
     conf["vlm_confirmed"] = False
-    if state.get("vlm") and candidates and conf["probability"] < SHOW_P:
+    if state.get("vlm") and candidates:
         import vlm_verify
         t3 = time.perf_counter()
-        leader = candidates[0].slug
-        p_yes = vlm_verify.p_yes(views[("detect",)], leader,
-                                 state["by_slug"].get(leader, {}), state["text"])
+
+        checked: dict[str, float] = {}
+        last_call = [VLM_CALL_GUESS_MS]
+
+        def verify(candidate) -> float:
+            started = time.perf_counter()
+            p_yes = vlm_verify.p_yes(views[("detect",)], candidate.slug,
+                                     state["by_slug"].get(candidate.slug, {}), state["text"])
+            last_call[0] = (time.perf_counter() - started) * 1000
+            checked[candidate.slug] = round(p_yes, 4)
+            return p_yes
+
+        def affordable() -> bool:
+            """Успеет ли ещё один вызов VLM в бюджет времени ответа."""
+            spent = (time.perf_counter() - t0) * 1000
+            if VLM_BUDGET_MS <= 0 or spent + last_call[0] <= VLM_BUDGET_MS:
+                return True
+            conf["vlm_budget_hit"] = True
+            return False
+
+        def arbitrate(pool: list, threshold: float) -> dict | None:
+            """Первый подтверждённый VLM кандидат из pool становится лидером."""
+            for candidate in pool:
+                if not affordable():
+                    return None
+                p_yes = verify(candidate)
+                if p_yes >= threshold:
+                    previous = candidates[0].slug
+                    candidates.remove(candidate)
+                    candidates.insert(0, candidate)
+                    switched = confidence(candidates)
+                    switched.update(vlm_p_yes=round(p_yes, 4), vlm_confirmed=True,
+                                    vlm_switched_from=previous)
+                    return switched
+            return None
+
+        if conf["probability"] < SHOW_P:
+            p_yes = verify(candidates[0])
+            conf["vlm_p_yes"] = round(p_yes, 4)
+            conf["vlm_confirmed"] = p_yes >= VLM_CONFIRM_P
+            if not conf["vlm_confirmed"] and VLM_FALLBACK:
+                conf = arbitrate(candidates[1:1 + VLM_FALLBACK], VLM_CONFIRM_P) or conf
+        elif VLM_CONTRA:
+            owners = core.text_contradiction(candidates, label(prepared), state["text"])
+            if owners and affordable():
+                p_yes = verify(candidates[0])
+                conf["vlm_p_yes"] = round(p_yes, 4)
+                if p_yes < VLM_REJECT_P:
+                    pool = [c for c in candidates if c.slug in owners][:max(VLM_FALLBACK, 2)]
+                    conf = arbitrate(pool, VLM_CONTRA_P) or conf
+        if checked:
+            conf["vlm_checked"] = checked
         t_vlm = (time.perf_counter() - t3) * 1000
-        conf["vlm_p_yes"] = round(p_yes, 4)
-        conf["vlm_confirmed"] = p_yes >= VLM_CONFIRM_P
     return ([c.as_dict() for c in candidates[:top]], conf,
             {"cv_ms": round(t_cv, 1), "rerank_ms": round(t_rerank, 1),
              "text_ms": round(t_text, 1), "vlm_ms": round(t_vlm, 1),
@@ -369,6 +444,8 @@ def settings_block() -> dict:
         "show_p": SHOW_P, "confident_p": CONFIDENT_P,
         "eval_abstain": EVAL_ABSTAIN, "eval_abstain_p": EVAL_ABSTAIN_P,
         "vlm_confirm": VLM_CONFIRM, "vlm_active": bool(state.get("vlm")),
+        "vlm_fallback": VLM_FALLBACK, "vlm_contra": VLM_CONTRA, "vlm_contra_p": VLM_CONTRA_P,
+        "vlm_budget_ms": VLM_BUDGET_MS,
         "vlm_confirm_p": VLM_CONFIRM_P,
         "thresholds_from_env": {k: os.environ.get(k) for k in ("SHOW_P", "CONFIDENT_P")
                                 if os.environ.get(k) is not None},

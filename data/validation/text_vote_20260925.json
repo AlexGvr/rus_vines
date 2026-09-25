@@ -1,0 +1,725 @@
+{
+ "pick": 0.0,
+ "grid": {
+  "0.0": {
+   "cells": {
+    "tune/org": {
+     "gain": 0,
+     "loss": 0,
+     "absent_shown": 0,
+     "top1": 26,
+     "n": 31
+    },
+    "tune/other": {
+     "gain": 0,
+     "loss": 0,
+     "absent_shown": 0,
+     "top1": 100,
+     "n": 118
+    },
+    "test/org": {
+     "gain": 0,
+     "loss": 1,
+     "absent_shown": 0,
+     "top1": 26,
+     "n": 29
+    },
+    "test/other": {
+     "gain": 2,
+     "loss": 3,
+     "absent_shown": 0,
+     "top1": 95,
+     "n": 137
+    }
+   },
+   "changed": [
+    [
+     "test",
+     "11064469_1.jpg",
+     "muskat-avtorskoe-vino",
+     "massandra-muskat",
+     "muskat-avtorskoe-vino"
+    ],
+    [
+     "test",
+     "14732673_1.jpg",
+     "massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13",
+     "massandra-muskatel-chernyy-krasnye-sorta-vinograda-krasnoe-sladkoe-16",
+     "massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13"
+    ],
+    [
+     "test",
+     "14120545_0.jpg",
+     "massandra-muskatel-rozovyy-belye-sorta-vinograda-rozovoe-sladkoe-16",
+     "massandra-muskatel-rozovyy-belye-sorta-vinograda-rozovoe-sladkoe-16",
+     "massandra-rozovoe-suhoe"
+    ],
+    [
+     "test",
+     "16612700_1.jpg",
+     "shato-taman-saperavi",
+     "shato-taman-saperavi",
+     "kuban-vino-shato-tamane-terruar-krasnostop-saperavi-2022-krasnoe-suhoe-125"
+    ],
+    [
+     "test",
+     "16827903_1.jpg",
+     "shato-taman-saperavi",
+     "shato-taman-saperavi",
+     "kuban-vino-shato-tamane-ruzh-2023-tsvaygelt-krasnoe-suhoe-12"
+    ],
+    [
+     "test",
+     "org079_0.jpg",
+     "novyy-svet-dom-shampanskih-vin-novyy-svet-polusladkoe-roze-shardone-rozovoe-115",
+     "novyy-svet-dom-shampanskih-vin-novyy-svet-polusladkoe-roze-shardone-rozovoe-115",
+     "novyy-svet-dom-shampanskih-vin-rossiyskoe-shampanskoe-vyderzhannoe-polusladkoe-rozovoe-novyy-svet-shardone-125"
+    ]
+   ]
+  },
+  "0.1": {
+   "cells": {
+    "tune/org": {
+     "gain": 0,
+     "loss": 0,
+     "absent_shown": 0,
+     "top1": 26,
+     "n": 31
+    },
+    "tune/other": {
+     "gain": 0,
+     "loss": 0,
+     "absent_shown": 0,
+     "top1": 100,
+     "n": 118
+    },
+    "test/org": {
+     "gain": 0,
+     "loss": 1,
+     "absent_shown": 0,
+     "top1": 26,
+     "n": 29
+    },
+    "test/other": {
+     "gain": 2,
+     "loss": 3,
+     "absent_shown": 0,
+     "top1": 95,
+     "n": 137
+    }
+   },
+   "changed": [
+    [
+     "test",
+     "11064469_1.jpg",
+     "muskat-avtorskoe-vino",
+     "massandra-muskat",
+     "muskat-avtorskoe-vino"
+    ],
+    [
+     "test",
+     "14732673_1.jpg",
+     "massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13",
+     "massandra-muskatel-chernyy-krasnye-sorta-vinograda-krasnoe-sladkoe-16",
+     "massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13"
+    ],
+    [
+     "test",
+     "14120545_0.jpg",
+     "massandra-muskatel-rozovyy-belye-sorta-vinograda-rozovoe-sladkoe-16",
+     "massandra-muskatel-rozovyy-belye-sorta-vinograda-rozovoe-sladkoe-16",
+     "massandra-rozovoe-suhoe"
+    ],
+    [
+     "test",
+     "16612700_1.jpg",
+     "shato-taman-saperavi",
+     "shato-taman-saperavi",
+     "kuban-vino-shato-tamane-terruar-krasnostop-saperavi-2022-krasnoe-suhoe-125"
+    ],
+    [
+     "test",
+     "16827903_1.jpg",
+     "shato-taman-saperavi",
+     "shato-taman-saperavi",
+     "kuban-vino-shato-tamane-ruzh-2023-tsvaygelt-krasnoe-suhoe-12"
+    ],
+    [
+     "test",
+     "org079_0.jpg",
+     "novyy-svet-dom-shampanskih-vin-novyy-svet-polusladkoe-roze-shardone-rozovoe-115",
+     "novyy-svet-dom-shampanskih-vin-novyy-svet-polusladkoe-roze-shardone-rozovoe-115",
+     "novyy-svet-dom-shampanskih-vin-rossiyskoe-shampanskoe-vyderzhannoe-polusladkoe-rozovoe-novyy-svet-shardone-125"
+    ]
+   ]
+  },
+  "0.15": {
+   "cells": {
+    "tune/org": {
+     "gain": 0,
+     "loss": 0,
+     "absent_shown": 0,
+     "top1": 26,
+     "n": 31
+    },
+    "tune/other": {
+     "gain": 0,
+     "loss": 0,
+     "absent_shown": 0,
+     "top1": 100,
+     "n": 118
+    },
+    "test/org": {
+     "gain": 0,
+     "loss": 1,
+     "absent_shown": 0,
+     "top1": 26,
+     "n": 29
+    },
+    "test/other": {
+     "gain": 2,
+     "loss": 4,
+     "absent_shown": 0,
+     "top1": 94,
+     "n": 137
+    }
+   },
+   "changed": [
+    [
+     "test",
+     "11064469_1.jpg",
+     "muskat-avtorskoe-vino",
+     "massandra-muskat",
+     "muskat-avtorskoe-vino"
+    ],
+    [
+     "test",
+     "14732673_1.jpg",
+     "massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13",
+     "massandra-muskatel-chernyy-krasnye-sorta-vinograda-krasnoe-sladkoe-16",
+     "massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13"
+    ],
+    [
+     "test",
+     "14120545_0.jpg",
+     "massandra-muskatel-rozovyy-belye-sorta-vinograda-rozovoe-sladkoe-16",
+     "massandra-muskatel-rozovyy-belye-sorta-vinograda-rozovoe-sladkoe-16",
+     "massandra-rozovoe-suhoe"
+    ],
+    [
+     "test",
+     "16612700_1.jpg",
+     "shato-taman-saperavi",
+     "shato-taman-saperavi",
+     "kuban-vino-shato-tamane-terruar-krasnostop-saperavi-2022-krasnoe-suhoe-125"
+    ],
+    [
+     "test",
+     "16827903_1.jpg",
+     "shato-taman-saperavi",
+     "shato-taman-saperavi",
+     "kuban-vino-shato-tamane-ruzh-2023-tsvaygelt-krasnoe-suhoe-12"
+    ],
+    [
+     "test",
+     "ir_na-kazhdyi-den-n11563956_1.jpg",
+     "shato-taman-kaberne",
+     "shato-taman-kaberne",
+     "chateau-tamagne-signature-kaberne"
+    ],
+    [
+     "test",
+     "org079_0.jpg",
+     "novyy-svet-dom-shampanskih-vin-novyy-svet-polusladkoe-roze-shardone-rozovoe-115",
+     "novyy-svet-dom-shampanskih-vin-novyy-svet-polusladkoe-roze-shardone-rozovoe-115",
+     "novyy-svet-dom-shampanskih-vin-rossiyskoe-shampanskoe-vyderzhannoe-polusladkoe-rozovoe-novyy-svet-shardone-125"
+    ]
+   ]
+  },
+  "0.2": {
+   "cells": {
+    "tune/org": {
+     "gain": 0,
+     "loss": 1,
+     "absent_shown": 0,
+     "top1": 25,
+     "n": 31
+    },
+    "tune/other": {
+     "gain": 0,
+     "loss": 0,
+     "absent_shown": 0,
+     "top1": 100,
+     "n": 118
+    },
+    "test/org": {
+     "gain": 0,
+     "loss": 1,
+     "absent_shown": 0,
+     "top1": 26,
+     "n": 29
+    },
+    "test/other": {
+     "gain": 3,
+     "loss": 5,
+     "absent_shown": 0,
+     "top1": 94,
+     "n": 137
+    }
+   },
+   "changed": [
+    [
+     "tune",
+     "org016_0.jpg",
+     "czitronnyj-magaracha-sovinon-blan",
+     "czitronnyj-magaracha-sovinon-blan",
+     "aratti-sovinon-blan-beloe-polusuhoe"
+    ],
+    [
+     "test",
+     "5784977_1.jpg",
+     "abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13",
+     "abrau-dyurso-abrau-dyurso-pino-nuar-krasnoe-suhoe-13",
+     "abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13"
+    ],
+    [
+     "test",
+     "11064469_1.jpg",
+     "muskat-avtorskoe-vino",
+     "massandra-muskat",
+     "muskat-avtorskoe-vino"
+    ],
+    [
+     "test",
+     "14732673_1.jpg",
+     "massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13",
+     "massandra-muskatel-chernyy-krasnye-sorta-vinograda-krasnoe-sladkoe-16",
+     "massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13"
+    ],
+    [
+     "test",
+     "14120545_0.jpg",
+     "massandra-muskatel-rozovyy-belye-sorta-vinograda-rozovoe-sladkoe-16",
+     "massandra-muskatel-rozovyy-belye-sorta-vinograda-rozovoe-sladkoe-16",
+     "massandra-rozovoe-suhoe"
+    ],
+    [
+     "test",
+     "16612700_1.jpg",
+     "shato-taman-saperavi",
+     "shato-taman-saperavi",
+     "kuban-vino-shato-tamane-terruar-krasnostop-saperavi-2022-krasnoe-suhoe-125"
+    ],
+    [
+     "test",
+     "16827903_1.jpg",
+     "shato-taman-saperavi",
+     "shato-taman-saperavi",
+     "kuban-vino-shato-tamane-ruzh-2023-tsvaygelt-krasnoe-suhoe-12"
+    ],
+    [
+     "test",
+     "9408720_1.jpg",
+     "fanagoriya-ledyanoe-vino-muskat-muskat-ottonel-beloe-sladkoe-11",
+     "fanagoriya-ledyanoe-vino-muskat-muskat-ottonel-beloe-sladkoe-11",
+     "inkerman-muskatnoe-beloe"
+    ],
+    [
+     "test",
+     "ir_na-kazhdyi-den-n11563956_1.jpg",
+     "shato-taman-kaberne",
+     "shato-taman-kaberne",
+     "chateau-tamagne-signature-kaberne"
+    ],
+    [
+     "test",
+     "org079_0.jpg",
+     "novyy-svet-dom-shampanskih-vin-novyy-svet-polusladkoe-roze-shardone-rozovoe-115",
+     "novyy-svet-dom-shampanskih-vin-novyy-svet-polusladkoe-roze-shardone-rozovoe-115",
+     "novyy-svet-dom-shampanskih-vin-rossiyskoe-shampanskoe-vyderzhannoe-polusladkoe-rozovoe-novyy-svet-shardone-125"
+    ]
+   ]
+  },
+  "0.25": {
+   "cells": {
+    "tune/org": {
+     "gain": 0,
+     "loss": 1,
+     "absent_shown": 0,
+     "top1": 25,
+     "n": 31
+    },
+    "tune/other": {
+     "gain": 0,
+     "loss": 0,
+     "absent_shown": 0,
+     "top1": 100,
+     "n": 118
+    },
+    "test/org": {
+     "gain": 0,
+     "loss": 1,
+     "absent_shown": 0,
+     "top1": 26,
+     "n": 29
+    },
+    "test/other": {
+     "gain": 3,
+     "loss": 4,
+     "absent_shown": 0,
+     "top1": 95,
+     "n": 137
+    }
+   },
+   "changed": [
+    [
+     "tune",
+     "org016_0.jpg",
+     "czitronnyj-magaracha-sovinon-blan",
+     "czitronnyj-magaracha-sovinon-blan",
+     "aratti-sovinon-blan-beloe-polusuhoe"
+    ],
+    [
+     "test",
+     "5784977_1.jpg",
+     "abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13",
+     "abrau-dyurso-abrau-dyurso-pino-nuar-krasnoe-suhoe-13",
+     "abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13"
+    ],
+    [
+     "test",
+     "11064469_1.jpg",
+     "muskat-avtorskoe-vino",
+     "massandra-muskat",
+     "muskat-avtorskoe-vino"
+    ],
+    [
+     "test",
+     "14732673_1.jpg",
+     "massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13",
+     "massandra-muskatel-chernyy-krasnye-sorta-vinograda-krasnoe-sladkoe-16",
+     "massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13"
+    ],
+    [
+     "test",
+     "13981139_0.jpg",
+     "zmv-koktebel-kagor-vysshego-kachestva-kaberne-sovinon-krasnoe-sladkoe-16",
+     "zmv-koktebel-kagor-vysshego-kachestva-kaberne-sovinon-krasnoe-sladkoe-16",
+     "zmv-koktebel-traminer-desertnoe-beloe-sladkoe-16"
+    ],
+    [
+     "test",
+     "14120545_0.jpg",
+     "massandra-muskatel-rozovyy-belye-sorta-vinograda-rozovoe-sladkoe-16",
+     "massandra-muskatel-rozovyy-belye-sorta-vinograda-rozovoe-sladkoe-16",
+     "massandra-rozovoe-suhoe"
+    ],
+    [
+     "test",
+     "9408720_1.jpg",
+     "fanagoriya-ledyanoe-vino-muskat-muskat-ottonel-beloe-sladkoe-11",
+     "fanagoriya-ledyanoe-vino-muskat-muskat-ottonel-beloe-sladkoe-11",
+     "inkerman-muskatnoe-beloe"
+    ],
+    [
+     "test",
+     "ir_na-kazhdyi-den-n11563956_1.jpg",
+     "shato-taman-kaberne",
+     "shato-taman-kaberne",
+     "chateau-tamagne-signature-kaberne"
+    ],
+    [
+     "test",
+     "org079_0.jpg",
+     "novyy-svet-dom-shampanskih-vin-novyy-svet-polusladkoe-roze-shardone-rozovoe-115",
+     "novyy-svet-dom-shampanskih-vin-novyy-svet-polusladkoe-roze-shardone-rozovoe-115",
+     "novyy-svet-dom-shampanskih-vin-rossiyskoe-shampanskoe-vyderzhannoe-polusladkoe-rozovoe-novyy-svet-shardone-125"
+    ]
+   ]
+  },
+  "0.3": {
+   "cells": {
+    "tune/org": {
+     "gain": 0,
+     "loss": 1,
+     "absent_shown": 0,
+     "top1": 25,
+     "n": 31
+    },
+    "tune/other": {
+     "gain": 0,
+     "loss": 0,
+     "absent_shown": 0,
+     "top1": 100,
+     "n": 118
+    },
+    "test/org": {
+     "gain": 0,
+     "loss": 1,
+     "absent_shown": 0,
+     "top1": 26,
+     "n": 29
+    },
+    "test/other": {
+     "gain": 3,
+     "loss": 3,
+     "absent_shown": 0,
+     "top1": 96,
+     "n": 137
+    }
+   },
+   "changed": [
+    [
+     "tune",
+     "org016_0.jpg",
+     "czitronnyj-magaracha-sovinon-blan",
+     "czitronnyj-magaracha-sovinon-blan",
+     "aratti-sovinon-blan-beloe-polusuhoe"
+    ],
+    [
+     "test",
+     "5784977_1.jpg",
+     "abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13",
+     "abrau-dyurso-abrau-dyurso-pino-nuar-krasnoe-suhoe-13",
+     "abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13"
+    ],
+    [
+     "test",
+     "11064469_1.jpg",
+     "muskat-avtorskoe-vino",
+     "massandra-muskat",
+     "muskat-avtorskoe-vino"
+    ],
+    [
+     "test",
+     "14732673_1.jpg",
+     "massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13",
+     "massandra-muskatel-chernyy-krasnye-sorta-vinograda-krasnoe-sladkoe-16",
+     "massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13"
+    ],
+    [
+     "test",
+     "13981139_0.jpg",
+     "zmv-koktebel-kagor-vysshego-kachestva-kaberne-sovinon-krasnoe-sladkoe-16",
+     "zmv-koktebel-kagor-vysshego-kachestva-kaberne-sovinon-krasnoe-sladkoe-16",
+     "zmv-koktebel-traminer-desertnoe-beloe-sladkoe-16"
+    ],
+    [
+     "test",
+     "9408720_1.jpg",
+     "fanagoriya-ledyanoe-vino-muskat-muskat-ottonel-beloe-sladkoe-11",
+     "fanagoriya-ledyanoe-vino-muskat-muskat-ottonel-beloe-sladkoe-11",
+     "inkerman-muskatnoe-beloe"
+    ],
+    [
+     "test",
+     "ir_na-kazhdyi-den-n11563956_1.jpg",
+     "shato-taman-kaberne",
+     "shato-taman-kaberne",
+     "chateau-tamagne-signature-kaberne"
+    ],
+    [
+     "test",
+     "org079_0.jpg",
+     "novyy-svet-dom-shampanskih-vin-novyy-svet-polusladkoe-roze-shardone-rozovoe-115",
+     "novyy-svet-dom-shampanskih-vin-novyy-svet-polusladkoe-roze-shardone-rozovoe-115",
+     "novyy-svet-dom-shampanskih-vin-rossiyskoe-shampanskoe-vyderzhannoe-polusladkoe-rozovoe-novyy-svet-shardone-125"
+    ]
+   ]
+  },
+  "0.35": {
+   "cells": {
+    "tune/org": {
+     "gain": 0,
+     "loss": 1,
+     "absent_shown": 0,
+     "top1": 25,
+     "n": 31
+    },
+    "tune/other": {
+     "gain": 0,
+     "loss": 0,
+     "absent_shown": 0,
+     "top1": 100,
+     "n": 118
+    },
+    "test/org": {
+     "gain": 0,
+     "loss": 1,
+     "absent_shown": 0,
+     "top1": 26,
+     "n": 29
+    },
+    "test/other": {
+     "gain": 3,
+     "loss": 4,
+     "absent_shown": 0,
+     "top1": 95,
+     "n": 137
+    }
+   },
+   "changed": [
+    [
+     "tune",
+     "org016_0.jpg",
+     "czitronnyj-magaracha-sovinon-blan",
+     "czitronnyj-magaracha-sovinon-blan",
+     "aratti-sovinon-blan-beloe-polusuhoe"
+    ],
+    [
+     "test",
+     "5784977_1.jpg",
+     "abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13",
+     "abrau-dyurso-abrau-dyurso-pino-nuar-krasnoe-suhoe-13",
+     "abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13"
+    ],
+    [
+     "test",
+     "11064469_1.jpg",
+     "muskat-avtorskoe-vino",
+     "massandra-muskat",
+     "muskat-avtorskoe-vino"
+    ],
+    [
+     "test",
+     "14098525_1.jpg",
+     "massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13",
+     "massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13",
+     "massandra-muskatel-belyy-belye-sorta-vinograda-beloe-sladkoe-16"
+    ],
+    [
+     "test",
+     "14732673_1.jpg",
+     "massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13",
+     "massandra-muskatel-chernyy-krasnye-sorta-vinograda-krasnoe-sladkoe-16",
+     "massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13"
+    ],
+    [
+     "test",
+     "13981139_0.jpg",
+     "zmv-koktebel-kagor-vysshego-kachestva-kaberne-sovinon-krasnoe-sladkoe-16",
+     "zmv-koktebel-kagor-vysshego-kachestva-kaberne-sovinon-krasnoe-sladkoe-16",
+     "zmv-koktebel-traminer-desertnoe-beloe-sladkoe-16"
+    ],
+    [
+     "test",
+     "9408720_1.jpg",
+     "fanagoriya-ledyanoe-vino-muskat-muskat-ottonel-beloe-sladkoe-11",
+     "fanagoriya-ledyanoe-vino-muskat-muskat-ottonel-beloe-sladkoe-11",
+     "inkerman-muskatnoe-beloe"
+    ],
+    [
+     "test",
+     "ir_na-kazhdyi-den-n11563956_1.jpg",
+     "shato-taman-kaberne",
+     "shato-taman-kaberne",
+     "chateau-tamagne-signature-kaberne"
+    ],
+    [
+     "test",
+     "org079_0.jpg",
+     "novyy-svet-dom-shampanskih-vin-novyy-svet-polusladkoe-roze-shardone-rozovoe-115",
+     "novyy-svet-dom-shampanskih-vin-novyy-svet-polusladkoe-roze-shardone-rozovoe-115",
+     "novyy-svet-dom-shampanskih-vin-rossiyskoe-shampanskoe-vyderzhannoe-polusladkoe-rozovoe-novyy-svet-shardone-125"
+    ]
+   ]
+  },
+  "0.4": {
+   "cells": {
+    "tune/org": {
+     "gain": 0,
+     "loss": 1,
+     "absent_shown": 0,
+     "top1": 25,
+     "n": 31
+    },
+    "tune/other": {
+     "gain": 0,
+     "loss": 0,
+     "absent_shown": 0,
+     "top1": 100,
+     "n": 118
+    },
+    "test/org": {
+     "gain": 0,
+     "loss": 1,
+     "absent_shown": 0,
+     "top1": 26,
+     "n": 29
+    },
+    "test/other": {
+     "gain": 3,
+     "loss": 4,
+     "absent_shown": 0,
+     "top1": 95,
+     "n": 137
+    }
+   },
+   "changed": [
+    [
+     "tune",
+     "org016_0.jpg",
+     "czitronnyj-magaracha-sovinon-blan",
+     "czitronnyj-magaracha-sovinon-blan",
+     "aratti-sovinon-blan-beloe-polusuhoe"
+    ],
+    [
+     "test",
+     "5784977_1.jpg",
+     "abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13",
+     "abrau-dyurso-abrau-dyurso-pino-nuar-krasnoe-suhoe-13",
+     "abrau-dyurso-abrau-kupazh-tyomnyy-suhoe-kaberne-sovinon-krasnoe-13"
+    ],
+    [
+     "test",
+     "11064469_1.jpg",
+     "muskat-avtorskoe-vino",
+     "massandra-muskat",
+     "muskat-avtorskoe-vino"
+    ],
+    [
+     "test",
+     "14732673_1.jpg",
+     "massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13",
+     "massandra-muskatel-chernyy-krasnye-sorta-vinograda-krasnoe-sladkoe-16",
+     "massandra-muskat-belyy-krasnogo-kamnya-beloe-sladkoe-13"
+    ],
+    [
+     "test",
+     "13981139_0.jpg",
+     "zmv-koktebel-kagor-vysshego-kachestva-kaberne-sovinon-krasnoe-sladkoe-16",
+     "zmv-koktebel-kagor-vysshego-kachestva-kaberne-sovinon-krasnoe-sladkoe-16",
+     "zmv-koktebel-traminer-desertnoe-beloe-sladkoe-16"
+    ],
+    [
+     "test",
+     "16612700_1.jpg",
+     "shato-taman-saperavi",
+     "shato-taman-saperavi",
+     "kuban-vino-shato-tamane-terruar-krasnostop-saperavi-2022-krasnoe-suhoe-125"
+    ],
+    [
+     "test",
+     "ir_odobreno-moim-ottsom-znachit-vino-pravil_1.jpg",
+     "shato-taman-kaberne",
+     "shato-taman-kaberne",
+     "kuban-vino-shato-tamane-rezerv-red-blend-kaberne-sovinon-krasnoe-suhoe-125"
+    ],
+    [
+     "test",
+     "ir_proverennaya-klassika-n11666006_0.jpg",
+     "shato-taman-kaberne",
+     "shato-taman-kaberne",
+     "kuban-vino-shato-tamane-rezerv-red-blend-kaberne-sovinon-krasnoe-suhoe-125"
+    ],
+    [
+     "test",
+     "org079_0.jpg",
+     "novyy-svet-dom-shampanskih-vin-novyy-svet-polusladkoe-roze-shardone-rozovoe-115",
+     "novyy-svet-dom-shampanskih-vin-novyy-svet-polusladkoe-roze-shardone-rozovoe-115",
+     "novyy-svet-dom-shampanskih-vin-rossiyskoe-shampanskoe-vyderzhannoe-polusladkoe-rozovoe-novyy-svet-shardone-125"
+    ]
+   ]
+  }
+ }
+}

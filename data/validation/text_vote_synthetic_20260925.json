@@ -1,0 +1,29 @@
+{
+ "без правила": {
+  "present": 400,
+  "absent": 400,
+  "top1": 348,
+  "top5": 379,
+  "f1_top1_strict": 0.6641148325358852,
+  "f1_top1_catalog": 0.8978007761966365,
+  "f1_top5_strict": 0.7023923444976077,
+  "f1_top5_catalog": 0.9495472186287193,
+  "absent_shown": 272
+ },
+ "TEXT_VOTE=0.2": {
+  "present": 400,
+  "absent": 400,
+  "top1": 346,
+  "top5": 380,
+  "f1_top1_strict": 0.6634615384615384,
+  "f1_top1_catalog": 0.8937823834196891,
+  "f1_top5_strict": 0.7038461538461539,
+  "f1_top5_catalog": 0.9481865284974094,
+  "absent_shown": 268
+ },
+ "paired": {
+  "gain": 3,
+  "loss": 5,
+  "mcnemar_p": 0.7265625
+ }
+}

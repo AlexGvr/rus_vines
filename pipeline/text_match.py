@@ -943,6 +943,66 @@ def strong_name_slugs(slugs: list[str], words, channel: "TextChannel",
     return found
 
 
+def osa_distance(a: str, b: str) -> int:
+    """Расстояние Дамерау–Левенштейна (оптимальное выравнивание строк).
+
+    Кроме вставки, удаления и замены одной правкой считается перестановка
+    соседних букв — типичная ошибка чтения мелкого шрифта.
+    """
+    prev2: list[int] = []
+    prev = list(range(len(b) + 1))
+    for i, ca in enumerate(a, 1):
+        cur = [i]
+        for j, cb in enumerate(b, 1):
+            cost = ca != cb
+            value = min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + cost)
+            if i > 1 and j > 1 and ca == b[j - 2] and a[i - 2] == cb:
+                value = min(value, prev2[j - 2] + 1)
+            cur.append(value)
+        prev2, prev = prev, cur
+    return prev[-1]
+
+
+def near(token: str, word: str, theta: float) -> bool:
+    """Прочитанный токен совпал со словом карточки с точностью θ.
+
+    Расстояние нормируется на длину более длинного слова: одна ошибка
+    в шестибуквенном «алушта» и две в десятибуквенном «российского» — одно
+    и то же качество чтения.
+    """
+    return any(osa_distance(variant, word) <= theta * max(len(variant), len(word))
+               for variant in alphabet_variants(token))
+
+
+VOTE_MIN_LEN = 4
+
+
+def card_vocabulary(slug: str, channel: "TextChannel") -> set[str]:
+    """Слова карточки, которыми её можно узнать: название, сорта, винодельня."""
+    wine = channel.by_slug.get(slug) or {}
+    text = " ".join([wine.get("title") or "", " ".join(wine.get("grapes") or []),
+                     wine.get("manufacturer") or ""])
+    return {t for t in clean(text).split()
+            if len(t) >= VOTE_MIN_LEN and t not in GENERIC_WORDS and t not in STOPWORDS}
+
+
+def text_votes(slugs: list[str], words, channel: "TextChannel", theta: float,
+               min_conf: float = 0.60) -> dict[str, int]:
+    """Сколько уверенно прочитанных слов этикетки нашлось в карточке кандидата.
+
+    Каждое прочитанное слово даёт кандидату не больше одного очка. Слова
+    цвета и сладости тоже считаются: «белый» отличает белый портвейн от
+    красного той же линейки так же, как название — «Алушту» от «Гурзуфа».
+    """
+    read = {t for w in central_words(words, min_conf) for t in clean(w.text).split()
+            if len(t) >= VOTE_MIN_LEN and t not in GENERIC_WORDS and t not in STOPWORDS}
+    votes = {}
+    for slug in slugs:
+        vocab = card_vocabulary(slug, channel)
+        votes[slug] = sum(1 for t in read if any(near(t, v, theta) for v in vocab))
+    return votes
+
+
 def resolve_close(candidates: list[tuple[str, float]], words,
                   channel: "TextChannel", window: float = 0.80,
                   min_conf: float = 0.60, extra: set[str] | None = None,
