@@ -34,7 +34,38 @@ import os
 MAX_SIDE = int(os.environ.get("SIFT_MAX_SIDE", "700"))
 RATIO = 0.75            # тест Лоу: отсечь неоднозначные соответствия
 MIN_MATCHES = 8
+# Одна точка эталона — одно соответствие (SIFT_ONE_TO_ONE). Без этого
+# несколько точек запроса могут сойтись на одну точку эталона, и RANSAC
+# принимает вырожденную гомографию, стягивающую область в точку: на
+# org076 у «Вионье» Усадьбы Мезыбь 117 инлаеров приходятся на три точки
+# эталона (определитель 0.004), у верного «Цитрона» честных 7.
+ONE_TO_ONE = os.environ.get("SIFT_ONE_TO_ONE", "0") == "1"
+# Мягкий вариант (SIFT_UNIQUE_INLIERS): модель RANSAC та же, но инлаером
+# считается точка эталона, а не точка запроса. Обычное совпадение почти
+# не меняется — там соответствия и так взаимно однозначны, — а стянутое
+# в точку падает до числа реально задетых точек эталона (117 -> 3).
+UNIQUE_INLIERS = os.environ.get("SIFT_UNIQUE_INLIERS", "0") == "1"
 _sift: dict = {}
+
+
+def inlier_total(good, mask) -> int:
+    """Число инлаеров: точек запроса или, при UNIQUE_INLIERS, точек эталона."""
+    if not UNIQUE_INLIERS:
+        return int(mask.sum())
+    return len({m.trainIdx for m, keep in zip(good, mask.ravel()) if keep})
+
+
+def good_matches(pairs) -> list:
+    """Соответствия после теста Лоу; при ONE_TO_ONE — лучшее на точку эталона."""
+    good = [m for m, n in (p for p in pairs if len(p) == 2)
+            if m.distance < RATIO * n.distance]
+    if not ONE_TO_ONE:
+        return good
+    best: dict[int, object] = {}
+    for m in good:
+        if m.trainIdx not in best or m.distance < best[m.trainIdx].distance:
+            best[m.trainIdx] = m
+    return sorted(best.values(), key=lambda m: m.queryIdx)
 
 
 def detector():
@@ -118,13 +149,13 @@ def inlier_count(query_kp, query_desc, ref_kp, ref_desc) -> int:
         return 0
     _, bf = detector()
     pairs = bf.knnMatch(query_desc, ref_desc, k=2)
-    good = [m for m, n in (p for p in pairs if len(p) == 2) if m.distance < RATIO * n.distance]
+    good = good_matches(pairs)
     if len(good) < MIN_MATCHES:
         return len(good)
     src = np.float32([query_kp[m.queryIdx].pt for m in good]).reshape(-1, 1, 2)
     dst = np.float32([ref_kp[m.trainIdx].pt for m in good]).reshape(-1, 1, 2)
     _, mask = cv2.findHomography(src, dst, cv2.RANSAC, 5.0)
-    return int(mask.sum()) if mask is not None else 0
+    return inlier_total(good, mask) if mask is not None else 0
 
 
 @dataclass(frozen=True)
@@ -185,8 +216,7 @@ def match_stats(query_kp, query_desc, ref_kp, ref_desc,
         return empty
     _, bf = detector()
     pairs = bf.knnMatch(query_desc, ref_desc, k=2)
-    good = [m for m, n in (p for p in pairs if len(p) == 2)
-            if m.distance < RATIO * n.distance]
+    good = good_matches(pairs)
     if len(good) < MIN_MATCHES:
         return MatchStats(len(good), len(good), 0.0, 0.0)
     src = np.float32([query_kp[m.queryIdx].pt for m in good]).reshape(-1, 1, 2)
@@ -198,7 +228,7 @@ def match_stats(query_kp, query_desc, ref_kp, ref_desc,
     coverage, spread, normalized = _layout(ref_points, mask, ref_kp)
     kept = [(m.queryIdx, m.trainIdx)
             for m, keep in zip(good, mask.ravel()) if keep]
-    return MatchStats(int(mask.sum()), len(good), coverage, spread, normalized,
+    return MatchStats(inlier_total(good, mask), len(good), coverage, spread, normalized,
                       color_agreement(query_colors, ref_colors, kept))
 
 
@@ -214,8 +244,7 @@ def match_points(query_kp, query_desc, ref_kp, ref_desc):
         return frozenset(), 0, 0.0
     _, bf = detector()
     pairs = bf.knnMatch(query_desc, ref_desc, k=2)
-    good = [m for m, n in (p for p in pairs if len(p) == 2)
-            if m.distance < RATIO * n.distance]
+    good = good_matches(pairs)
     if len(good) < MIN_MATCHES:
         return frozenset(), len(good), 0.0
     src = np.float32([query_kp[m.queryIdx].pt for m in good]).reshape(-1, 1, 2)
@@ -242,8 +271,7 @@ def inlier_pairs(query_kp, query_desc, ref_kp, ref_desc):
         return []
     _, bf = detector()
     pairs = bf.knnMatch(query_desc, ref_desc, k=2)
-    good = [m for m, n in (p for p in pairs if len(p) == 2)
-            if m.distance < RATIO * n.distance]
+    good = good_matches(pairs)
     if len(good) < MIN_MATCHES:
         return []
     src = np.float32([query_kp[m.queryIdx].pt for m in good]).reshape(-1, 1, 2)
