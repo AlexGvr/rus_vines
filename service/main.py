@@ -171,6 +171,21 @@ VLM_CONTRA_P = float(os.environ.get("VLM_CONTRA_P", "0.7"))
 # Замер через HTTP на 402 кадрах: изменился один кадр (отказ -> верный
 # ответ), потерь и новых показов вин вне каталога нет, время то же.
 VLM_GEO_FALLBACK = os.environ.get("VLM_GEO_FALLBACK", "1") == "1"
+# Проверка лидера в полосе «скорее всего» (VLM_BAND_VETO): уверенность
+# между SHOW_P и CONFIDENT_P, ответ показан бы без VLM. Если VLM явно
+# отвергает лидера (P(yes) < VLM_VETO_P), кадр идёт тем же путём, что
+# отказ: проверка следующих, второй проход, спасение по этикетке; никто не
+# подтверждён — отказ. Вина вне каталога с оформлением линейки из каталога
+# (Дивноморское «Вторая линия» против «Холодного Тумана») показывались в
+# этой полосе без проверки. Через HTTP на 402 кадрах: снимки организатора
+# 85 -> 88/97 (+3/-0, три вина вне каталога), при строгом подсчёте 56 без
+# изменений; ответов вину вне каталога 17 -> 9. На остальных кадрах +7/-3,
+# из трёх потерь две — ошибки разметки отзывов (на этикетке Шираз, а не
+# Мерло Black Out; Траминер «Планерское», а не «Высокий Берег»). Цена —
+# вызов VLM на каждом кадре полосы: медиана на снимках организатора
+# 927 -> 1295 мс, дольше 3 с — 28 -> 31 из 97. VLM_BAND_VETO=0 выключает.
+VLM_BAND_VETO = os.environ.get("VLM_BAND_VETO", "1") == "1"
+VLM_VETO_P = float(os.environ.get("VLM_VETO_P", "0.05"))
 # Бюджет времени на дополнительные вызовы VLM (VLM_BUDGET_MS, 0 — без
 # ограничения, по умолчанию). На снимке 3024×4032 поиск без них идёт до 2 с,
 # а каждая проверка кандидата — ещё 0.3-0.7 с (до трёх эталонов). Замер на
@@ -347,6 +362,8 @@ def search_candidates(image: Image.Image,
         last_call = [VLM_CALL_GUESS_MS]
 
         def verify(candidate) -> float:
+            if candidate.slug in checked:
+                return checked[candidate.slug]
             started = time.perf_counter()
             p_yes = vlm_verify.p_yes(views[("detect",)], candidate.slug,
                                      state["by_slug"].get(candidate.slug, {}), state["text"])
@@ -447,6 +464,18 @@ def search_candidates(image: Image.Image,
                 if p_yes < VLM_REJECT_P:
                     pool = [c for c in candidates if c.slug in owners][:max(VLM_FALLBACK, 2)]
                     conf = arbitrate(pool, VLM_CONTRA_P) or conf
+        if (VLM_BAND_VETO and not conf["vlm_confirmed"]
+                and SHOW_P <= conf["probability"] < CONFIDENT_P and affordable()):
+            p_yes = verify(candidates[0])
+            conf["vlm_p_yes"] = round(p_yes, 4)
+            if p_yes < VLM_VETO_P:
+                conf["vlm_vetoed"] = True
+                if VLM_FALLBACK:
+                    conf = arbitrate(candidates[1:1 + VLM_FALLBACK], VLM_CONFIRM_P) or conf
+                if not conf["vlm_confirmed"] and VLM_GEO_FALLBACK:
+                    conf = geo_second_pass() or conf
+                if not conf["vlm_confirmed"] and LABEL_RESCUE:
+                    conf = label_rescue() or conf
         if checked:
             conf["vlm_checked"] = checked
         t_vlm = (time.perf_counter() - t3) * 1000
@@ -546,6 +575,7 @@ def settings_block() -> dict:
         "vlm_confirm": VLM_CONFIRM, "vlm_active": bool(state.get("vlm")),
         "vlm_fallback": VLM_FALLBACK, "vlm_contra": VLM_CONTRA, "vlm_contra_p": VLM_CONTRA_P,
         "vlm_geo_fallback": VLM_GEO_FALLBACK,
+        "vlm_band_veto": VLM_BAND_VETO, "vlm_veto_p": VLM_VETO_P,
         "label_rescue": LABEL_RESCUE, "label_rescue_budget_ms": LABEL_RESCUE_BUDGET_MS,
         "vlm_budget_ms": VLM_BUDGET_MS,
         "vlm_confirm_p": VLM_CONFIRM_P,
@@ -687,8 +717,8 @@ async def eval_predict(image: UploadFile = File(...)) -> JSONResponse:
         return JSONResponse({"slug": None})
     with GPU_LOCK:
         candidates, conf, _ = search_candidates(img, top=1)
-    if not candidates or (EVAL_ABSTAIN and conf["probability"] < EVAL_ABSTAIN_P
-                          and not conf["vlm_confirmed"]):
+    if not candidates or (EVAL_ABSTAIN and not conf["vlm_confirmed"]
+                          and (conf["probability"] < EVAL_ABSTAIN_P or conf.get("vlm_vetoed"))):
         return JSONResponse({"slug": None})
     return JSONResponse({"slug": candidates[0]["slug"]})
 
@@ -705,7 +735,8 @@ async def search(image: UploadFile = File(...)) -> JSONResponse:
         candidates, conf, timings = search_candidates(img, top=10)
     # Подтверждённый VLM ответ показывается, но только как спорный:
     # уверенным его делает лишь совместная оценка конвейера.
-    found = bool(candidates) and (conf["probability"] >= SHOW_P or conf["vlm_confirmed"])
+    found = bool(candidates) and (conf["vlm_confirmed"] or (conf["probability"] >= SHOW_P
+                                                            and not conf.get("vlm_vetoed")))
 
     # Три состояния вместо «нашли или нет». Бинарное решение по одному порогу
     # либо прячет треть верных ответов, либо пропускает половину неверных —

@@ -34,6 +34,9 @@ services:
       # LABEL_RESCUE=0 docker compose up — выключить.
       LABEL_RESCUE: ${LABEL_RESCUE:-1}
       LABEL_RESCUE_BUDGET_MS: ${LABEL_RESCUE_BUDGET_MS:-0}
+      # Проверка лидера VLM в полосе «скорее всего» (service/main.py, README):
+      # включена; VLM_BAND_VETO=0 docker compose up — выключить.
+      VLM_BAND_VETO: ${VLM_BAND_VETO:-1}
     depends_on:
       db:
         condition: service_healthy
