@@ -159,6 +159,14 @@ VLM_REJECT_P = 0.5
 # 0.2, либо 0.99, в полосе 0.5-0.8 нет ни одного случая, так что порог
 # выбран по разобранному снимку («Алушта», 0.75) и замеру не противоречит.
 VLM_CONTRA_P = float(os.environ.get("VLM_CONTRA_P", "0.7"))
+# Второй проход при отказе (VLM_GEO_FALLBACK): VLM отвергла лидера
+# (P(yes) < VLM_REJECT_P), никто из проверенных не дотянул до 0.8, но
+# у кого-то P(yes) > VLM_REJECT_P и геометрия за него
+# (searchcore.geometry_backs). Новых вызовов VLM нет — берутся уже
+# посчитанные P(yes). Из прошедших — с наибольшим P(yes).
+# Замер через HTTP на 402 кадрах: изменился один кадр (отказ -> верный
+# ответ), потерь и новых показов вин вне каталога нет, время то же.
+VLM_GEO_FALLBACK = os.environ.get("VLM_GEO_FALLBACK", "1") == "1"
 # Бюджет времени на дополнительные вызовы VLM (VLM_BUDGET_MS, 0 — без
 # ограничения, по умолчанию). На снимке 3024×4032 поиск без них идёт до 2 с,
 # а каждая проверка кандидата — ещё 0.3-0.7 с (до трёх эталонов). Замер на
@@ -333,12 +341,32 @@ def search_candidates(image: Image.Image,
                     return switched
             return None
 
+        def geo_second_pass() -> dict | None:
+            """Проверенный кандидат с P(yes) > VLM_REJECT_P, за которого геометрия."""
+            leader = candidates[0]
+            if checked.get(leader.slug, 1.0) >= VLM_REJECT_P:
+                return None
+            backed = [c for c in candidates[1:]
+                      if checked.get(c.slug, 0.0) > VLM_REJECT_P
+                      and core.geometry_backs(c, leader, candidates, CLOSE_WINDOW)]
+            if not backed:
+                return None
+            best = max(backed, key=lambda c: checked[c.slug])
+            candidates.remove(best)
+            candidates.insert(0, best)
+            switched = confidence(candidates)
+            switched.update(vlm_p_yes=checked[best.slug], vlm_confirmed=True,
+                            vlm_switched_from=leader.slug, vlm_geo_corroborated=True)
+            return switched
+
         if conf["probability"] < SHOW_P:
             p_yes = verify(candidates[0])
             conf["vlm_p_yes"] = round(p_yes, 4)
             conf["vlm_confirmed"] = p_yes >= VLM_CONFIRM_P
             if not conf["vlm_confirmed"] and VLM_FALLBACK:
                 conf = arbitrate(candidates[1:1 + VLM_FALLBACK], VLM_CONFIRM_P) or conf
+            if not conf["vlm_confirmed"] and VLM_GEO_FALLBACK:
+                conf = geo_second_pass() or conf
         elif VLM_CONTRA:
             owners = core.text_contradiction(candidates, label(prepared), state["text"])
             if owners and affordable():
@@ -445,6 +473,7 @@ def settings_block() -> dict:
         "eval_abstain": EVAL_ABSTAIN, "eval_abstain_p": EVAL_ABSTAIN_P,
         "vlm_confirm": VLM_CONFIRM, "vlm_active": bool(state.get("vlm")),
         "vlm_fallback": VLM_FALLBACK, "vlm_contra": VLM_CONTRA, "vlm_contra_p": VLM_CONTRA_P,
+        "vlm_geo_fallback": VLM_GEO_FALLBACK,
         "vlm_budget_ms": VLM_BUDGET_MS,
         "vlm_confirm_p": VLM_CONFIRM_P,
         "thresholds_from_env": {k: os.environ.get(k) for k in ("SHOW_P", "CONFIDENT_P")

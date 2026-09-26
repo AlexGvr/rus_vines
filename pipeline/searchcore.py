@@ -660,6 +660,26 @@ def text_contradiction(candidates: list[Candidate], words, channel) -> list[str]
                    for v in card_vocabulary(c.slug, channel))]
 
 
+def geometry_backs(candidate: Candidate, leader: Candidate, candidates: list[Candidate],
+                   window: float = 0.80, margin: float = GEOMETRY_MARGIN) -> bool:
+    """Геометрия за кандидата против отвергнутого лидера.
+
+    Второе, независимое от VLM свидетельство для её «скорее да» (P(yes)
+    от 0.5 до порога подтверждения): кандидат в группе лучших по точкам
+    (не меньше window от максимума) и решающе обходит лидера по точкам
+    (в 1 + margin раза). Пороги — те же, что у разрешения близких
+    и у решающего отрыва геометрии, новых нет.
+
+    Victor Dravigny Брют: лидер Экстра Брют — 16 точек, Брют — 45 при
+    лучших 48; P(yes) Брюта 0.756, чуть ниже 0.8. Одна VLM в полосе
+    0.6–0.8 на 402 кадрах спасала только неверных соседей по линейке,
+    поэтому без геометрии этой полосе не доверяем.
+    """
+    best = max((c.inliers for c in candidates), default=0)
+    return (best > 0 and candidate.inliers >= window * best
+            and candidate.inliers >= (1.0 + margin) * leader.inliers)
+
+
 def settle(candidates: list[Candidate], crop: Image.Image, channel,
            read_words, window: float, min_conf: float,
            by_slug: dict | None = None) -> list[Candidate]:
