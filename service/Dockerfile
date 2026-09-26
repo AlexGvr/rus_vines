@@ -47,7 +47,7 @@ RUN python -c "import easyocr; easyocr.Reader(['ru','en'], gpu=False, verbose=Fa
 COPY core/ /app/core/
 COPY pipeline/embed.py pipeline/imageprep.py pipeline/ocr.py \
      pipeline/rerank.py pipeline/searchcore.py pipeline/text_match.py \
-     pipeline/vector_store.py pipeline/vlm_verify.py \
+     pipeline/vector_store.py pipeline/vlm_verify.py pipeline/vlm_label.py \
      /app/pipeline/
 COPY service/main.py service/recommend.py /app/service/
 

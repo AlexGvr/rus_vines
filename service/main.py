@@ -6,6 +6,8 @@
                            multipart-поле image, ответ {"slug": "..."}
   POST /v1/search        — полный ответ для фронтенда: карточка, уверенность
                            top-1 и top-5, запасные варианты
+  POST /v1/analogs       — вино не найдено: стиль с этикетки и аналоги
+                           из каталога (вызывается после /v1/search)
   GET  /health           — готовность модели и индекса
 
 Поиск трёхступенчатый:
@@ -31,11 +33,13 @@ import io
 import json
 import os
 import sys
+import threading
 import time
 from contextlib import asynccontextmanager
 from pathlib import Path
 
 from fastapi import Body, FastAPI, File, UploadFile
+from fastapi.concurrency import run_in_threadpool
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
 from PIL import Image, ImageFile
@@ -47,7 +51,7 @@ from imageprep import normalize_batch  # noqa: E402
 import searchcore as core  # noqa: E402
 from ocr import load as load_ocr, read_words  # noqa: E402
 from rerank import PrecomputedReranker  # noqa: E402
-from text_match import TextChannel  # noqa: E402
+from text_match import TextChannel, confident_attributes  # noqa: E402
 from vector_store import open_store  # noqa: E402
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -176,6 +180,26 @@ VLM_GEO_FALLBACK = os.environ.get("VLM_GEO_FALLBACK", "1") == "1"
 VLM_BUDGET_MS = float(os.environ.get("VLM_BUDGET_MS", "0"))
 VLM_CALL_GUESS_MS = 400.0
 
+# Спасение отказа по этикетке (LABEL_RESCUE). Поиск не нашёл вино, VLM не
+# подтвердила никого из шортлиста, но с этикетки читаются винодельня и
+# название (vlm_label.read_name), и по ним в каталоге находится позиция
+# (Recommender.by_label_name: среди вин этой винодельни, иначе во всём
+# каталоге; сходство названия >= LABEL_RESCUE_CLOSE). Ответом она становится,
+# только если её подтвердил тот же верификатор с тем же порогом
+# VLM_CONFIRM_P: без этой проверки правило отвечало бы на половину вин вне
+# каталога (15 из 30 кадров организатора). Пилот —
+# pipeline/experiment_label_rescue.py, замер через HTTP — README и
+# docs/metrics.md: на 97 снимках организатора 82 -> 85 (53 -> 56 при строгом
+# подсчёте), ложных ответов нет. Цена — около 1.2 с чтения и 0.4 с проверки
+# на каждом отказе: дольше 3 с отвечают 28 снимков из 97 вместо 5. Выбрано
+# качество, как и для VLM_BUDGET_MS; LABEL_RESCUE=0 выключает, а
+# LABEL_RESCUE_BUDGET_MS > 0 не начинает спасение, если ответ из него не
+# уложится в бюджет.
+LABEL_RESCUE = os.environ.get("LABEL_RESCUE", "1") == "1"
+LABEL_RESCUE_CLOSE = 0.6
+LABEL_RESCUE_BUDGET_MS = float(os.environ.get("LABEL_RESCUE_BUDGET_MS", "0"))
+LABEL_READ_GUESS_MS = 1300.0
+
 # Разрешение противоречий текстом. Запускается только когда геометрия не
 # развела кандидатов: инлаеров у соседа не меньше CLOSE_WINDOW от лидера.
 # Правило одностороннее — уверенно прочитанное слово, принадлежащее ровно
@@ -191,6 +215,11 @@ CONFLICT_GATE = 0.05
 
 state: dict = {}
 
+# Видеокарта одна, и VLM держит состояние между вызовами. Чтение этикетки
+# (/v1/analogs) идёт в пуле потоков и не должно пересечься с поиском;
+# скрипт оценки аналоги не вызывает, так что замок для него всегда свободен.
+GPU_LOCK = threading.Lock()
+
 
 def build_state() -> None:
     catalog = json.loads(CATALOG_PATH.read_text(encoding="utf-8"))["wines"]
@@ -199,6 +228,12 @@ def build_state() -> None:
     state["vectors"] = open_store(INDEX_VARIANT)
     with (INDEX_DIR / f"{INDEX_VARIANT}.csv").open(encoding="utf-8") as fh:
         state["slugs"] = core.scope_index([row["slug"] or None for row in csv.DictReader(fh)])
+    # Строки индекса по slug: кандидату, найденному по этикетке вне
+    # шортлиста, нужен его косинус.
+    state["rows_of"] = {}
+    for j, slug in enumerate(state["slugs"]):
+        if slug:
+            state["rows_of"].setdefault(slug, []).append(j)
     state["reranker"] = PrecomputedReranker(INDEX_DIR / "sift")
     # ТЗ требует показывать метрику уверенности (F1) для топ-1 и топ-5.
     # Уверенность конкретного ответа сервис считает сам, а F1 — свойство
@@ -207,8 +242,10 @@ def build_state() -> None:
     report = INDEX_DIR / "report_sharp.json"
     state["quality"] = (json.loads(report.read_text(encoding="utf-8"))
                         if report.exists() else {})
-    state["recommender"] = Recommender(catalog)
     state["text"] = TextChannel(catalog)
+    # Сладость для аналогов и сомелье — та же, что знает распознавание.
+    state["recommender"] = Recommender(
+        catalog, {slug: attrs.sweetness for slug, attrs in state["text"].attributes_of.items()})
     load_model()
     load_ocr()
     state["vlm"] = start_vlm() if VLM_CONFIRM else False
@@ -359,6 +396,39 @@ def search_candidates(image: Image.Image,
                             vlm_switched_from=leader.slug, vlm_geo_corroborated=True)
             return switched
 
+        def label_rescue() -> dict | None:
+            """Позиция по винодельне и названию с этикетки, если VLM за неё."""
+            spent = (time.perf_counter() - t0) * 1000
+            if LABEL_RESCUE_BUDGET_MS > 0 and (spent + LABEL_READ_GUESS_MS + VLM_CALL_GUESS_MS
+                                               > LABEL_RESCUE_BUDGET_MS):
+                conf["label_rescue"] = {"skipped": "budget"}
+                return None
+            import vlm_label
+            read = vlm_label.read_name(views[("detect",)]) or {}
+            slug, close = state["recommender"].by_label_name(read)
+            info = {"read": {k: read.get(k) for k in ("producer", "producer_ru", "name")},
+                    "slug": slug, "close": round(close, 3)}
+            conf["label_rescue"] = info
+            if slug is None or close < LABEL_RESCUE_CLOSE:
+                return None
+            candidate = next((c for c in candidates if c.slug == slug), None)
+            if candidate is None:
+                rows = state["rows_of"].get(slug, [])
+                candidate = core.Candidate(
+                    slug=slug, cv=float(max((scores[j] for j in rows), default=0.0)))
+            p_yes = checked[slug] if slug in checked else verify(candidate)
+            info["p_yes"] = round(p_yes, 4)
+            if p_yes < VLM_CONFIRM_P:
+                return None
+            previous = candidates[0].slug
+            if candidate in candidates:
+                candidates.remove(candidate)
+            candidates.insert(0, candidate)
+            switched = confidence(candidates)
+            switched.update(vlm_p_yes=round(p_yes, 4), vlm_confirmed=True,
+                            vlm_switched_from=previous, label_rescue=info)
+            return switched
+
         if conf["probability"] < SHOW_P:
             p_yes = verify(candidates[0])
             conf["vlm_p_yes"] = round(p_yes, 4)
@@ -367,6 +437,8 @@ def search_candidates(image: Image.Image,
                 conf = arbitrate(candidates[1:1 + VLM_FALLBACK], VLM_CONFIRM_P) or conf
             if not conf["vlm_confirmed"] and VLM_GEO_FALLBACK:
                 conf = geo_second_pass() or conf
+            if not conf["vlm_confirmed"] and LABEL_RESCUE:
+                conf = label_rescue() or conf
         elif VLM_CONTRA:
             owners = core.text_contradiction(candidates, label(prepared), state["text"])
             if owners and affordable():
@@ -474,6 +546,7 @@ def settings_block() -> dict:
         "vlm_confirm": VLM_CONFIRM, "vlm_active": bool(state.get("vlm")),
         "vlm_fallback": VLM_FALLBACK, "vlm_contra": VLM_CONTRA, "vlm_contra_p": VLM_CONTRA_P,
         "vlm_geo_fallback": VLM_GEO_FALLBACK,
+        "label_rescue": LABEL_RESCUE, "label_rescue_budget_ms": LABEL_RESCUE_BUDGET_MS,
         "vlm_budget_ms": VLM_BUDGET_MS,
         "vlm_confirm_p": VLM_CONFIRM_P,
         "thresholds_from_env": {k: os.environ.get(k) for k in ("SHOW_P", "CONFIDENT_P")
@@ -504,8 +577,67 @@ def wine_card(slug: str) -> JSONResponse:
         return JSONResponse({"error": "позиция не найдена"}, status_code=404)
     return JSONResponse({
         "wine": wine,
+        # Сладость и игристость: в выгрузке отдельных полей нет, они собраны
+        # из slug, названия и карточек платформы (recommend.facets_of).
+        "style": state["recommender"].style(slug),
         "pairings": state["recommender"].pairings(wine),
         "similar": state["recommender"].similar(slug),
+    })
+
+
+def read_label(img: Image.Image) -> tuple[dict, str]:
+    """Стиль вина с этикетки: VLM, а без неё — OCR (цвет и сладость)."""
+    with GPU_LOCK:
+        crop = normalize_batch([img], steps=("detect",))[0]
+        if state.get("vlm"):
+            import vlm_label
+            try:
+                label = vlm_label.read(crop)
+                if label is not None:
+                    return label, "vlm"
+            except Exception as exc:  # noqa: BLE001 — без чтения остаётся OCR
+                print(f"/v1/analogs: VLM не прочитала этикетку ({exc})", file=sys.stderr)
+        attrs = confident_attributes(read_words(crop), OCR_MIN_CONF)
+    return {"producer": None, "producer_ru": None, "name": None, "color": attrs.color,
+            "sweetness": attrs.sweetness,
+            "sparkling": True if attrs.sweetness in {"брют", "экстра брют"} else None,
+            "grapes": [], "region": None, "country": None}, "ocr"
+
+
+@app.post("/v1/analogs")
+async def analogs(image: UploadFile = File(...)) -> JSONResponse:
+    """Аналоги для вина, которое поиск не нашёл: стиль читается с этикетки.
+
+    Фронтенд вызывает его после ответа /v1/search со статусом unsure, так
+    что на время поиска и на оценочный эндпоинт он не влияет. Чтение идёт
+    в пуле потоков, чтобы фото вариантов грузились, пока модель читает,
+    а GPU_LOCK не даёт ему пересечься с поиском.
+
+    Стиль читает VLM (pipeline/vlm_label.py). Без неё — OCR: цвет и
+    сладость из уверенно прочитанных слов, без сортов и винодельни.
+    """
+    img = await read_image(image)
+    if img is None:
+        return JSONResponse({"error": "не удалось прочитать изображение"}, status_code=400)
+    t0 = time.perf_counter()
+    label, source = await run_in_threadpool(read_label, img)
+    recommender = state["recommender"]
+    facets = recommender.label_facets(label)
+    seed = f"{label.get('producer') or ''}|{label.get('name') or ''}"
+    # Без цвета и сорта подбирать не по чему: аналоги были бы случайными.
+    found = (recommender.analogs(facets, seed=seed)
+             if (facets.color or facets.grapes) else [])
+    # Этого вина нет, но винодельня в каталоге есть — её вина тоже подсказка.
+    own = (recommender.from_maker(facets.manufacturer, facets.color, label.get("name") or "")
+           if facets.manufacturer else [])
+    return JSONResponse({
+        "label": label,
+        "source": source,
+        "maker": facets.manufacturer and next(
+            (w["wine"]["manufacturer"] for w in own), None),
+        "maker_wines": own,
+        "analogs": found,
+        "latency_ms": round((time.perf_counter() - t0) * 1000, 1),
     })
 
 
@@ -553,7 +685,8 @@ async def eval_predict(image: UploadFile = File(...)) -> JSONResponse:
     img = await read_image(image)
     if img is None:
         return JSONResponse({"slug": None})
-    candidates, conf, _ = search_candidates(img, top=1)
+    with GPU_LOCK:
+        candidates, conf, _ = search_candidates(img, top=1)
     if not candidates or (EVAL_ABSTAIN and conf["probability"] < EVAL_ABSTAIN_P
                           and not conf["vlm_confirmed"]):
         return JSONResponse({"slug": None})
@@ -568,7 +701,8 @@ async def search(image: UploadFile = File(...)) -> JSONResponse:
 
     # Десять, а не пять: кейсодержатель просил при неуверенности показывать
     # ближайших кандидатов «как текущая выдача до 10 вин».
-    candidates, conf, timings = search_candidates(img, top=10)
+    with GPU_LOCK:
+        candidates, conf, timings = search_candidates(img, top=10)
     # Подтверждённый VLM ответ показывается, но только как спорный:
     # уверенным его делает лишь совместная оценка конвейера.
     found = bool(candidates) and (conf["probability"] >= SHOW_P or conf["vlm_confirmed"])

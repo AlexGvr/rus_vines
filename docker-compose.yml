@@ -30,6 +30,10 @@ services:
       # data/index и перезагружает его после пересборки (сверка по хешу).
       VECTOR_BACKEND: pgvector
       DATABASE_URL: postgresql://wine:wine@db:5432/wine
+      # Спасение отказа по этикетке (service/main.py, README): включено;
+      # LABEL_RESCUE=0 docker compose up — выключить.
+      LABEL_RESCUE: ${LABEL_RESCUE:-1}
+      LABEL_RESCUE_BUDGET_MS: ${LABEL_RESCUE_BUDGET_MS:-0}
     depends_on:
       db:
         condition: service_healthy
