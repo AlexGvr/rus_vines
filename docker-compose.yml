@@ -46,7 +46,10 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
-      start_period: 300s
+      # Первый старт скачивает в том hf-cache веса SigLIP 2 и Qwen3-VL
+      # (около 13 ГБ) — это до десяти минут; раньше контейнер на это время
+      # помечался нездоровым. Повторные старты — около минуты.
+      start_period: 1800s
 
   db:
     image: pgvector/pgvector:pg16
