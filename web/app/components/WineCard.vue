@@ -6,37 +6,58 @@ const props = defineProps<{
   reasons?: string[]
   // Куда ведёт карточка: страница вина. Без него карточка не ссылка.
   to?: string
+  // Сладость и игристость из /v1/wines: в выгрузке отдельных полей нет.
+  styleInfo?: WineStyle
 }>()
 
 const NuxtLink = resolveComponent('NuxtLink')
 const zoomed = ref(false)
-const missing = ref(false)
+const failed = ref(false)
+watch(() => props.wine.slug, () => { failed.value = false })
+// У дюжины позиций в дампе нет фото: вместо пустого места — силуэт бутылки.
+const missing = computed(() => !props.wine.photo || failed.value)
 const photo = computed(() => `${props.apiBase}/v1/photo/${props.wine.slug}`)
+const title = computed(() => cleanTitle(props.wine.title))
+// «Сочетания: …» показывает блок «К чему подать» рядом с карточкой.
+const description = computed(() => splitDescription(props.wine.description).body)
 
-const facts = computed(() => [
-  props.wine.category,
-  props.wine.alcohol ? `${props.wine.alcohol}% алк.` : null,
-  props.wine.temperature ? `подача ${props.wine.temperature}` : null,
-  ...(props.wine.grapes || []),
-].filter(Boolean))
+const facts = computed(() => {
+  const sweetness = props.styleInfo?.sweetness
+  const sparkling = props.styleInfo?.sparkling
+    && !['брют', 'экстра брют'].includes(sweetness || '')
+  return [
+    props.wine.category,
+    sparkling ? 'игристое' : null,
+    sweetness,
+    props.wine.alcohol ? `${props.wine.alcohol}% алк.` : null,
+    props.wine.temperature ? `подача ${props.wine.temperature}` : null,
+    ...(props.wine.grapes || []),
+  ].filter(Boolean)
+})
 </script>
 
 <template>
   <article :class="['card', { compact, link: !!to }]">
+    <div v-if="missing" class="photo placeholder" role="img" aria-label="Фото нет в каталоге">
+      <svg viewBox="0 0 40 110" aria-hidden="true">
+        <path d="M16 4h8v26c0 4 8 8 8 20v52a4 4 0 0 1-4 4H12a4 4 0 0 1-4-4V50c0-12 8-16 8-20z" />
+      </svg>
+      <span v-if="!compact">Фото нет в каталоге</span>
+    </div>
     <button
+      v-else
       type="button"
       class="photo"
-      :disabled="missing"
-      :aria-label="`Увеличить фото: ${wine.title}`"
+      :aria-label="`Увеличить фото: ${title}`"
       @click="zoomed = true"
     >
       <img
         :src="photo"
-        :alt="wine.title"
+        :alt="title"
         loading="lazy"
-        @error="missing = true"
+        @error="failed = true"
       >
-      <span v-if="!compact && !missing" class="zoom-hint" aria-hidden="true">
+      <span v-if="!compact" class="zoom-hint" aria-hidden="true">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="11" cy="11" r="6.5" /><path d="M16 16l4.5 4.5M11 8v6M8 11h6" />
         </svg>
@@ -44,7 +65,7 @@ const facts = computed(() => [
     </button>
     <component :is="to ? NuxtLink : 'div'" :to="to" class="go">
       <div class="body">
-        <h2 class="title">{{ wine.title }}</h2>
+        <h2 class="title">{{ title }}</h2>
         <p class="origin">{{ [wine.manufacturer, wine.region].filter(Boolean).join(' · ') }}</p>
 
         <p v-if="wine.rating" class="rating">★ {{ wine.rating }} <span class="muted">рейтинг платформы</span></p>
@@ -54,11 +75,11 @@ const facts = computed(() => [
         <div v-if="!compact" class="chips facts">
           <span v-for="fact in facts" :key="fact" class="chip">{{ fact }}</span>
         </div>
-        <p v-if="!compact && wine.description" class="description">{{ wine.description }}</p>
+        <p v-if="!compact && description" class="description">{{ description }}</p>
       </div>
       <span v-if="to" class="chevron" aria-hidden="true">›</span>
     </component>
-    <PhotoZoom v-model="zoomed" :src="photo" :alt="wine.title" />
+    <PhotoZoom v-if="!missing" v-model="zoomed" :src="photo" :alt="title" />
   </article>
 </template>
 
@@ -80,8 +101,25 @@ const facts = computed(() => [
   background: none;
   cursor: zoom-in;
 }
-.photo:disabled { cursor: default; visibility: hidden; }
 .photo img { display: block; }
+.placeholder {
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.placeholder svg { fill: #ece4df; }
+.card:not(.compact) .placeholder {
+  height: 220px;
+  background: linear-gradient(180deg, #fbf7f4 0%, #fff 100%);
+}
+.card:not(.compact) .placeholder svg { height: 150px; }
+.card.compact .placeholder { width: 58px; height: 78px; }
+.card.compact .placeholder svg { height: 70px; }
 
 .card:not(.compact) { text-align: center; }
 .card:not(.compact) .photo { width: 100%; }

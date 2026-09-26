@@ -6,12 +6,6 @@ const apiBase = useApiBase()
 const route = useRoute()
 const router = useRouter()
 
-type WineDetails = {
-  wine: Record<string, any>
-  pairings: string[]
-  similar: { wine: Record<string, any>; reasons: string[] }[]
-}
-
 const { data, pending, error } = await useFetch<WineDetails>(
   () => `${apiBase}/v1/wines/${encodeURIComponent(String(route.params.slug))}`,
   { key: () => `wine-${route.params.slug}`, server: false },
@@ -36,28 +30,13 @@ function back() {
     </p>
 
     <template v-else>
-      <WineCard :wine="data.wine" :api-base="apiBase" />
+      <WineCard :wine="data.wine" :style-info="data.style" :api-base="apiBase" />
 
-      <div v-if="data.pairings?.length" class="block">
-        <h3>К чему подать</h3>
-        <div class="chips">
-          <span v-for="dish in data.pairings" :key="dish" class="chip">{{ dish }}</span>
-        </div>
-      </div>
+      <Pairings :dishes="data.pairings" :text="splitDescription(data.wine.description).pairing" />
 
       <div v-if="data.similar?.length" class="block">
         <h3>Похожие вина других виноделен</h3>
-        <div class="list">
-          <WineCard
-            v-for="item in data.similar"
-            :key="item.wine.slug"
-            compact
-            :wine="item.wine"
-            :reasons="item.reasons"
-            :api-base="apiBase"
-            :to="`/wine/${item.wine.slug}`"
-          />
-        </div>
+        <WineList :items="data.similar" :api-base="apiBase" :initial="6" />
       </div>
     </template>
 
@@ -80,7 +59,6 @@ function back() {
 .state { text-align: center; margin-top: 10dvh; }
 .block { margin-top: 26px; }
 .block h3 { font-size: 18px; margin-bottom: 11px; }
-.list { display: flex; flex-direction: column; gap: 9px; }
 .again {
   display: block;
   width: fit-content;
