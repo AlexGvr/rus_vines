@@ -29,6 +29,7 @@
 from __future__ import annotations
 
 import csv
+import hashlib
 import io
 import json
 import os
@@ -38,6 +39,7 @@ import time
 from contextlib import asynccontextmanager
 from pathlib import Path
 
+from anyio import CapacityLimiter, to_thread
 from fastapi import Body, FastAPI, File, UploadFile
 from fastapi.concurrency import run_in_threadpool
 from fastapi.middleware.cors import CORSMiddleware
@@ -251,10 +253,22 @@ CONFLICT_GATE = 0.05
 
 state: dict = {}
 
-# Видеокарта одна, и VLM держит состояние между вызовами. Чтение этикетки
-# (/v1/analogs) идёт в пуле потоков и не должно пересечься с поиском;
-# скрипт оценки аналоги не вызывает, так что замок для него всегда свободен.
+# Видеокарта одна, и VLM держит состояние между вызовами. Поиск и чтение
+# этикетки (/v1/analogs) идут в рабочем потоке, а не в цикле событий: пока
+# один запрос держит видеокарту, остальные (карточки, фото, /health)
+# отвечают сразу. Очередь к видеокарте — свой ограничитель на один поток:
+# ждущие запросы стоят в цикле событий и не занимают общий пул потоков, из
+# которого обслуживаются лёгкие эндпоинты (40 потоков у anyio). Замок —
+# страховка на случай вызова мимо ограничителя; скрипт оценки аналоги не
+# вызывает, так что для него очередь всегда пуста.
 GPU_LOCK = threading.Lock()
+GPU_LIMITER = CapacityLimiter(1)
+
+# Какой вид кадра выбран для VLM (vlm_view) на последних снимках, по хешу
+# файла: /v1/analogs приходит с тем же снимком после /v1/search и читает
+# этикетку там же, где её проверяла VLM, не повторяя поиск.
+VIEW_MEMORY: dict[str, bool] = {}
+VIEW_MEMORY_SIZE = 64
 
 
 def build_state() -> None:
@@ -331,13 +345,43 @@ app.add_middleware(
     CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
 
-def search_candidates(image: Image.Image,
-                      top: int = 5) -> tuple[list[dict], dict, dict]:
-    """Поиск целиком: кандидаты, уверенность и тайминги по ступеням.
+def vlm_view(image: Image.Image, views: dict, prepared: Image.Image,
+             leader_slug: str) -> Image.Image:
+    """Какой вид кадра видит VLM (VLM_VIEW) — одна логика для проверки
+    кандидатов, спасения по этикетке и /v1/analogs."""
+    detect = views[("detect",)]
+    if VLM_VIEW == "prepared":
+        return prepared
+    if VLM_VIEW != "auto" or prepared is not views[()] or prepared is detect:
+        return detect
+    # Та же коробка, из которой вырезан вид detect: детектор детерминирован.
+    # Инлаеры лидера — на целом кадре.
+    box = detect_bottles([image])[0]
+    if box is None:
+        return detect
+    x1, y1, x2, y2 = crop_bounds(image, box)
+    pts = state["reranker"].inlier_points(prepared, leader_slug)
+    inside = sum(x1 <= x <= x2 and y1 <= y <= y2 for x, y in pts)
+    if len(pts) >= VLM_VIEW_MIN_INLIERS and inside < VLM_VIEW_INSIDE * len(pts):
+        return prepared
+    return detect
 
-    Все шаги берутся из pipeline/searchcore.py — того же модуля, которым
-    считает калибровка. Иначе пороги подбираются для одного конвейера,
-    а работает другой.
+
+def remember_view(image: Image.Image, full_frame: bool) -> None:
+    digest = image.info.get("sha1")
+    if not digest:
+        return
+    VIEW_MEMORY.pop(digest, None)
+    VIEW_MEMORY[digest] = full_frame
+    while len(VIEW_MEMORY) > VIEW_MEMORY_SIZE:
+        VIEW_MEMORY.pop(next(iter(VIEW_MEMORY)))
+
+
+def retrieve(image: Image.Image) -> tuple:
+    """Шаги 1–5 без VLM: виды кадра, шортлист, геометрия и текст.
+
+    Возвращает виды, вид для геометрии (prepared), кандидатов, косинусы
+    строк индекса, прочитанную этикетку и тайминги ступеней.
     """
     t0 = time.perf_counter()
     views = {steps: normalize_batch([image], steps=steps)[0] for steps in QUERY_VIEWS}
@@ -367,6 +411,21 @@ def search_candidates(image: Image.Image,
         core.check_leader(candidates, prepared, state["text"], label,
                           OCR_MIN_CONF, CLOSE_WINDOW, state["by_slug"])
     t_text = (time.perf_counter() - t2) * 1000
+    return views, prepared, candidates, scores, label, {
+        "cv_ms": t_cv, "rerank_ms": t_rerank, "text_ms": t_text}
+
+
+def search_candidates(image: Image.Image,
+                      top: int = 5) -> tuple[list[dict], dict, dict]:
+    """Поиск целиком: кандидаты, уверенность и тайминги по ступеням.
+
+    Все шаги берутся из pipeline/searchcore.py — того же модуля, которым
+    считает калибровка. Иначе пороги подбираются для одного конвейера,
+    а работает другой.
+    """
+    t0 = time.perf_counter()
+    views, prepared, candidates, scores, label, stage_ms = retrieve(image)
+    t_cv, t_rerank, t_text = stage_ms["cv_ms"], stage_ms["rerank_ms"], stage_ms["text_ms"]
 
     # Уверенность считается по всему шортлисту, а не по видимой пятёрке:
     # признак «превышение над шумом» смотрит на его хвост, и на усечённом
@@ -383,25 +442,10 @@ def search_candidates(image: Image.Image,
 
         def vlm_image() -> Image.Image:
             """Вид для VLM; выбирается один раз, при первом вызове VLM."""
-            if chosen_view:
-                return chosen_view[0]
-            view = views[("detect",)]
-            if VLM_VIEW == "prepared":
-                view = prepared
-            elif (VLM_VIEW == "auto" and prepared is views[()]
-                  and prepared is not views[("detect",)]):
-                # Та же коробка, из которой вырезан вид detect: детектор
-                # детерминирован. Инлаеры лидера — на целом кадре.
-                box = detect_bottles([image])[0]
-                if box is not None:
-                    x1, y1, x2, y2 = crop_bounds(image, box)
-                    pts = state["reranker"].inlier_points(prepared, leader_slug)
-                    inside = sum(x1 <= x <= x2 and y1 <= y <= y2 for x, y in pts)
-                    if (len(pts) >= VLM_VIEW_MIN_INLIERS
-                            and inside < VLM_VIEW_INSIDE * len(pts)):
-                        view = prepared
-            chosen_view.append(view)
-            return view
+            if not chosen_view:
+                chosen_view.append(vlm_view(image, views, prepared, leader_slug))
+                remember_view(image, chosen_view[0] is not views[("detect",)])
+            return chosen_view[0]
 
         checked: dict[str, float] = {}
         last_call = [VLM_CALL_GUESS_MS]
@@ -558,12 +602,25 @@ def confidence(candidates: list) -> dict:
     }
 
 
-async def read_image(upload: UploadFile) -> Image.Image | None:
+def decode_image(raw: bytes) -> Image.Image | None:
     try:
-        raw = await upload.read()
-        return Image.open(io.BytesIO(raw)).convert("RGB")
+        img = Image.open(io.BytesIO(raw)).convert("RGB")
     except Exception:
         return None
+    # По хешу /v1/analogs узнаёт снимок, который только что искали.
+    img.info["sha1"] = hashlib.sha1(raw).hexdigest()
+    return img
+
+
+async def read_image(upload: UploadFile) -> Image.Image | None:
+    raw = await upload.read()
+    return await run_in_threadpool(decode_image, raw)
+
+
+def locked_search(img: Image.Image, top: int) -> tuple[list[dict], dict, dict]:
+    """Поиск в рабочем потоке: ожидание видеокарты не держит цикл событий."""
+    with GPU_LOCK:
+        return search_candidates(img, top=top)
 
 
 def card(candidate: dict) -> dict:
@@ -667,13 +724,18 @@ def wine_card(slug: str) -> JSONResponse:
 def read_label(img: Image.Image) -> tuple[dict, str]:
     """Стиль вина с этикетки: VLM, а без неё — OCR (цвет и сладость)."""
     with GPU_LOCK:
-        if VLM_VIEW == "prepared":
-            # Тот же вид, что выбрал бы поиск: вырезка без этикетки не читается.
-            views = [normalize_batch([img], steps=s)[0] for s in QUERY_VIEWS]
-            crop = views[core.pick_view(
-                views, state["vectors"].similarity(embed_images(views)))]
+        # Та же область, что видела VLM при поиске (vlm_view): вырезка
+        # детектора может быть соседней бутылкой или плечиками без этикетки.
+        # Снимка нет в памяти (прямой вызов без поиска) — выбор повторяется;
+        # без VLM или при VLM_VIEW=detect выбирать нечего, это вырезка.
+        full_frame = VIEW_MEMORY.get(img.info.get("sha1", ""))
+        if full_frame is None and state.get("vlm") and VLM_VIEW != "detect":
+            views, prepared, candidates, _, _, _ = retrieve(img)
+            crop = (vlm_view(img, views, prepared, candidates[0].slug)
+                    if candidates else views[("detect",)])
+            remember_view(img, crop is not views[("detect",)])
         else:
-            crop = normalize_batch([img], steps=("detect",))[0]
+            crop = img if full_frame else normalize_batch([img], steps=("detect",))[0]
         if state.get("vlm"):
             import vlm_label
             try:
@@ -696,7 +758,7 @@ async def analogs(image: UploadFile = File(...)) -> JSONResponse:
     Фронтенд вызывает его после ответа /v1/search со статусом unsure, так
     что на время поиска и на оценочный эндпоинт он не влияет. Чтение идёт
     в пуле потоков, чтобы фото вариантов грузились, пока модель читает,
-    а GPU_LOCK не даёт ему пересечься с поиском.
+    а очередь к видеокарте (GPU_LIMITER) не даёт ему пересечься с поиском.
 
     Стиль читает VLM (pipeline/vlm_label.py). Без неё — OCR: цвет и
     сладость из уверенно прочитанных слов, без сортов и винодельни.
@@ -705,7 +767,7 @@ async def analogs(image: UploadFile = File(...)) -> JSONResponse:
     if img is None:
         return JSONResponse({"error": "не удалось прочитать изображение"}, status_code=400)
     t0 = time.perf_counter()
-    label, source = await run_in_threadpool(read_label, img)
+    label, source = await to_thread.run_sync(read_label, img, limiter=GPU_LIMITER)
     recommender = state["recommender"]
     facets = recommender.label_facets(label)
     seed = f"{label.get('producer') or ''}|{label.get('name') or ''}"
@@ -770,8 +832,7 @@ async def eval_predict(image: UploadFile = File(...)) -> JSONResponse:
     img = await read_image(image)
     if img is None:
         return JSONResponse({"slug": None})
-    with GPU_LOCK:
-        candidates, conf, _ = search_candidates(img, top=1)
+    candidates, conf, _ = await to_thread.run_sync(locked_search, img, 1, limiter=GPU_LIMITER)
     if not candidates or (EVAL_ABSTAIN and not conf["vlm_confirmed"]
                           and (conf["probability"] < EVAL_ABSTAIN_P or conf.get("vlm_vetoed"))):
         return JSONResponse({"slug": None})
@@ -786,8 +847,8 @@ async def search(image: UploadFile = File(...)) -> JSONResponse:
 
     # Десять, а не пять: кейсодержатель просил при неуверенности показывать
     # ближайших кандидатов «как текущая выдача до 10 вин».
-    with GPU_LOCK:
-        candidates, conf, timings = search_candidates(img, top=10)
+    candidates, conf, timings = await to_thread.run_sync(locked_search, img, 10,
+                                                         limiter=GPU_LIMITER)
     # Подтверждённый VLM ответ показывается, но только как спорный:
     # уверенным его делает лишь совместная оценка конвейера.
     found = bool(candidates) and (conf["vlm_confirmed"] or (conf["probability"] >= SHOW_P

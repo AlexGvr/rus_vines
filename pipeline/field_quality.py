@@ -74,6 +74,9 @@ def main() -> None:
         }
     if args.api:
         api = json.loads(Path(args.api).read_text(encoding="utf-8"))["summary"]
+        if api.get("http_failures"):
+            sys.exit(f"{args.api}: {api['http_failures']} запросов без ответа — "
+                     f"время и отказы по такому прогону в /health не пишутся")
         block["latency_ms"] = api["latency_ms"]
         if "search" in api:
             block["search"] = api["search"]

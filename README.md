@@ -261,7 +261,10 @@ TORCH_INDEX=https://download.pytorch.org/whl/cpu docker compose up --build
 Проверено 2026-09-26 на RTX 5060 Ti (`nvidia-container-toolkit`, Docker
 Compose v2): через `docker compose up` ответы совпали с сервисом вне
 контейнера на всех 402 кадрах, на снимках организатора медиана ответа
-1454 мс, p95 4.8 с (`data/validation/api_docker_vlm_view_auto_20260927.json`).
+1519 мс, p95 4.9 с (`data/validation/api_docker_gpu_limiter_20260927.json`).
+Под 50 одновременными запросами к поиску карточки, фото и `/health`
+отвечают не дольше 0.1 с: поиск идёт в рабочем потоке через общую очередь
+к видеокарте.
 
 В compose сервис хранит векторы индекса и карточки в PostgreSQL с pgvector
 (сервис `db`, как рекомендует ТЗ): при старте индекс из `data/index`
