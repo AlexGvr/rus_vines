@@ -37,6 +37,9 @@ services:
       # Проверка лидера VLM в полосе «скорее всего» (service/main.py, README):
       # включена; VLM_BAND_VETO=0 docker compose up — выключить.
       VLM_BAND_VETO: ${VLM_BAND_VETO:-1}
+      # Какой вид кадра видит VLM: auto — целый кадр, если вырезка детектора
+      # разминулась с точками лидера; detect — всегда вырезка.
+      VLM_VIEW: ${VLM_VIEW:-auto}
     depends_on:
       db:
         condition: service_healthy

@@ -151,11 +151,18 @@ def query_crops(image: Image.Image, limit: int = 3) -> list[Image.Image]:
     return crops
 
 
-def crop_box(im: Image.Image, box: Box, pad: float = 0.04) -> Image.Image:
+def crop_bounds(im: Image.Image, box: Box, pad: float = 0.04) -> tuple[int, int, int, int]:
+    """Прямоугольник кропа в координатах кадра: коробка с полями, обрезанная
+    по краям. Нужен отдельно от самого кропа, чтобы проверить, попадают ли
+    в вырезку точки, найденные на целом кадре."""
     width, height = im.size
     dx, dy = int((box.x2 - box.x1) * pad), int((box.y2 - box.y1) * pad)
-    return im.crop((max(0, box.x1 - dx), max(0, box.y1 - dy),
-                    min(width, box.x2 + dx), min(height, box.y2 + dy)))
+    return (max(0, box.x1 - dx), max(0, box.y1 - dy),
+            min(width, box.x2 + dx), min(height, box.y2 + dy))
+
+
+def crop_box(im: Image.Image, box: Box, pad: float = 0.04) -> Image.Image:
+    return im.crop(crop_bounds(im, box, pad))
 
 
 def find_label_band(im: Image.Image, min_frac: float = 0.32) -> Image.Image:

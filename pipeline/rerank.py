@@ -405,6 +405,25 @@ class PrecomputedReranker:
                             "n": len(query_kp)}
         return out
 
+    def inlier_points(self, query: Image.Image, slug: str) -> list[tuple[float, float]]:
+        """Точки запроса, выжившие в RANSAC с лучшим эталоном позиции,
+        в пикселях query.
+
+        Сопоставление то же, что в stats (тест Лоу, гомография RANSAC), но
+        считается заново и только по требованию: горячий путь поиска
+        координат не хранит. Нужно, чтобы понять, где на кадре лежат улики
+        лидера, — например, попали ли они в вырезку детектора.
+        """
+        query_kp, query_desc = descriptors(query)
+        s = min(1.0, MAX_SIDE / max(query.size))
+        best: list = []
+        for idx in self.positions.get(slug, []):
+            ref_kp, ref_desc, _ = self.entry(idx)
+            pairs = inlier_pairs(query_kp, query_desc, ref_kp, ref_desc)
+            if len(pairs) > len(best):
+                best = pairs
+        return [(q[0] / s, q[1] / s) for q, _ in best]
+
     def stats(self, query: Image.Image, slugs: list[str]) -> dict[str, MatchStats]:
         """Инлаеры вместе с раскладкой совпадений — цена та же.
 

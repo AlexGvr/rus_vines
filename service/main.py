@@ -47,7 +47,7 @@ from PIL import Image, ImageFile
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "pipeline"))
 from embed import embed_images, load as load_model  # noqa: E402
-from imageprep import normalize_batch  # noqa: E402
+from imageprep import crop_bounds, detect_bottles, normalize_batch  # noqa: E402
 import searchcore as core  # noqa: E402
 from ocr import load as load_ocr, read_words  # noqa: E402
 from rerank import PrecomputedReranker  # noqa: E402
@@ -186,6 +186,27 @@ VLM_GEO_FALLBACK = os.environ.get("VLM_GEO_FALLBACK", "1") == "1"
 # 927 -> 1295 мс, дольше 3 с — 28 -> 31 из 97. VLM_BAND_VETO=0 выключает.
 VLM_BAND_VETO = os.environ.get("VLM_BAND_VETO", "1") == "1"
 VLM_VETO_P = float(os.environ.get("VLM_VETO_P", "0.05"))
+# Какой вид кадра видит VLM (VLM_VIEW). Раньше это всегда была вырезка
+# детектора, а поиск мог взять весь кадр (core.pick_view: у кого косинус
+# к каталогу выше). Тогда вырезка может не содержать этикетки вовсе: на двух
+# снимках из магазина это размытая бутылка на заднем плане и плечики бутылок
+# без этикетки, ни одного инлаера лидера внутри. VLM проверяла лидера на
+# картинке без улик, по которым он выбран, и сомневалась (0.50 и 0.15)
+# вместо явного «нет» (0.0003 и 0.017 на целом кадре), а вина вне каталога
+# показывались как соседи по линейке.
+# auto (по умолчанию) — целый кадр только там, где геометрия показывает, что
+# вырезка разминулась с совпадением: поиск взял весь кадр, у лидера не меньше
+# VLM_VIEW_MIN_INLIERS инлаеров (тот же порог, что rerank.MIN_MATCHES), и
+# внутри коробки детектора их меньше VLM_VIEW_INSIDE. Тот же вид читает
+# спасение по этикетке. Через HTTP на 402 кадрах ни одного изменённого ответа
+# (срабатывает на 5 кадрах с вызовом VLM, у верного лидера P(yes) растёт:
+# org060 0.62 -> 0.999), медиана на снимках организатора +44 мс.
+# detect — вырезка всегда, как раньше. prepared — всегда вид поиска:
+# отвергнуто, на 5784977_1 VLM на целом кадре подтвердила соседа (Пино Нуар
+# вместо «Купажа тёмного») и медиана +205 мс.
+VLM_VIEW = os.environ.get("VLM_VIEW", "auto")
+VLM_VIEW_MIN_INLIERS = 8
+VLM_VIEW_INSIDE = 0.5
 # Бюджет времени на дополнительные вызовы VLM (VLM_BUDGET_MS, 0 — без
 # ограничения, по умолчанию). На снимке 3024×4032 поиск без них идёт до 2 с,
 # а каждая проверка кандидата — ещё 0.3-0.7 с (до трёх эталонов). Замер на
@@ -357,6 +378,30 @@ def search_candidates(image: Image.Image,
     if state.get("vlm") and candidates:
         import vlm_verify
         t3 = time.perf_counter()
+        leader_slug = candidates[0].slug
+        chosen_view: list = []
+
+        def vlm_image() -> Image.Image:
+            """Вид для VLM; выбирается один раз, при первом вызове VLM."""
+            if chosen_view:
+                return chosen_view[0]
+            view = views[("detect",)]
+            if VLM_VIEW == "prepared":
+                view = prepared
+            elif (VLM_VIEW == "auto" and prepared is views[()]
+                  and prepared is not views[("detect",)]):
+                # Та же коробка, из которой вырезан вид detect: детектор
+                # детерминирован. Инлаеры лидера — на целом кадре.
+                box = detect_bottles([image])[0]
+                if box is not None:
+                    x1, y1, x2, y2 = crop_bounds(image, box)
+                    pts = state["reranker"].inlier_points(prepared, leader_slug)
+                    inside = sum(x1 <= x <= x2 and y1 <= y <= y2 for x, y in pts)
+                    if (len(pts) >= VLM_VIEW_MIN_INLIERS
+                            and inside < VLM_VIEW_INSIDE * len(pts)):
+                        view = prepared
+            chosen_view.append(view)
+            return view
 
         checked: dict[str, float] = {}
         last_call = [VLM_CALL_GUESS_MS]
@@ -365,7 +410,7 @@ def search_candidates(image: Image.Image,
             if candidate.slug in checked:
                 return checked[candidate.slug]
             started = time.perf_counter()
-            p_yes = vlm_verify.p_yes(views[("detect",)], candidate.slug,
+            p_yes = vlm_verify.p_yes(vlm_image(), candidate.slug,
                                      state["by_slug"].get(candidate.slug, {}), state["text"])
             last_call[0] = (time.perf_counter() - started) * 1000
             checked[candidate.slug] = round(p_yes, 4)
@@ -421,7 +466,7 @@ def search_candidates(image: Image.Image,
                 conf["label_rescue"] = {"skipped": "budget"}
                 return None
             import vlm_label
-            read = vlm_label.read_name(views[("detect",)]) or {}
+            read = vlm_label.read_name(vlm_image()) or {}
             slug, close = state["recommender"].by_label_name(read)
             info = {"read": {k: read.get(k) for k in ("producer", "producer_ru", "name")},
                     "slug": slug, "close": round(close, 3)}
@@ -478,6 +523,10 @@ def search_candidates(image: Image.Image,
                     conf = label_rescue() or conf
         if checked:
             conf["vlm_checked"] = checked
+        if (VLM_VIEW == "auto" and chosen_view and chosen_view[0] is prepared
+                and prepared is not views[("detect",)]):
+            # Только под флагом: при detect ответ JSON прежний.
+            conf["vlm_view"] = "prepared"
         t_vlm = (time.perf_counter() - t3) * 1000
     return ([c.as_dict() for c in candidates[:top]], conf,
             {"cv_ms": round(t_cv, 1), "rerank_ms": round(t_rerank, 1),
@@ -575,7 +624,7 @@ def settings_block() -> dict:
         "vlm_confirm": VLM_CONFIRM, "vlm_active": bool(state.get("vlm")),
         "vlm_fallback": VLM_FALLBACK, "vlm_contra": VLM_CONTRA, "vlm_contra_p": VLM_CONTRA_P,
         "vlm_geo_fallback": VLM_GEO_FALLBACK,
-        "vlm_band_veto": VLM_BAND_VETO, "vlm_veto_p": VLM_VETO_P,
+        "vlm_band_veto": VLM_BAND_VETO, "vlm_veto_p": VLM_VETO_P, "vlm_view": VLM_VIEW,
         "label_rescue": LABEL_RESCUE, "label_rescue_budget_ms": LABEL_RESCUE_BUDGET_MS,
         "vlm_budget_ms": VLM_BUDGET_MS,
         "vlm_confirm_p": VLM_CONFIRM_P,
@@ -618,7 +667,13 @@ def wine_card(slug: str) -> JSONResponse:
 def read_label(img: Image.Image) -> tuple[dict, str]:
     """Стиль вина с этикетки: VLM, а без неё — OCR (цвет и сладость)."""
     with GPU_LOCK:
-        crop = normalize_batch([img], steps=("detect",))[0]
+        if VLM_VIEW == "prepared":
+            # Тот же вид, что выбрал бы поиск: вырезка без этикетки не читается.
+            views = [normalize_batch([img], steps=s)[0] for s in QUERY_VIEWS]
+            crop = views[core.pick_view(
+                views, state["vectors"].similarity(embed_images(views)))]
+        else:
+            crop = normalize_batch([img], steps=("detect",))[0]
         if state.get("vlm"):
             import vlm_label
             try:
