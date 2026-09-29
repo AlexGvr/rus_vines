@@ -5,14 +5,17 @@
 # Процессорная сборка torch и без резервирования GPU. Подтверждение VLM на
 # процессоре не включается, снимок телефона обрабатывается около 10 с —
 # на пределе таймаута скрипта оценки (curl --max-time 10); метрики README
-# сняты на видеокарте.
+# сняты на видеокарте. Образ собирается под своим тегом rus_vines-api-cpu
+# и не заменяет образ для видеокарты.
 services:
   indexer:
+    image: rus_vines-api-cpu
     build:
       args:
         TORCH_INDEX: https://download.pytorch.org/whl/cpu
     deploy: !reset {}
   api:
+    image: rus_vines-api-cpu
     build:
       args:
         TORCH_INDEX: https://download.pytorch.org/whl/cpu

@@ -1,14 +1,17 @@
 #!/usr/bin/env bash
 # Установка с нуля на хосте: датасет → окружение → каталог и индексы.
 #
-#   scripts/setup.sh            # видеокарта NVIDIA (torch cu128, драйвер 570+)
-#   TORCH=cpu scripts/setup.sh  # без видеокарты
+#   scripts/setup.sh              # видеокарта NVIDIA (torch cu128, драйвер 570+)
+#   TORCH=cpu scripts/setup.sh    # без видеокарты
 #   TORCH=cu126 scripts/setup.sh  # старый драйвер NVIDIA
+#   scripts/setup.sh --data-only  # только датасет — для запуска в Docker
 #
 # Датасет кейса кладётся в корень репозитория как выдан (Датасет.zip)
 # или уже распакованным в dataset/. После установки — scripts/run.sh.
 set -euo pipefail
 cd "$(dirname "$0")/.."
+DATA_ONLY=0
+[ "${1:-}" = "--data-only" ] && DATA_ONLY=1
 
 # --- 1. Датасет
 if [ ! -f dataset/strapi_output0709.csv ] && [ -f Датасет.zip ]; then
@@ -24,7 +27,7 @@ if [ ! -f dataset/strapi_output0709.csv ]; then
   exit 1
 fi
 if [ ! -d dataset/eval ] && [ -f dataset/eval.zip ]; then
-  unzip -q dataset/eval.zip -d dataset/eval
+  unzip -q dataset/eval.zip -d dataset/eval -x '__MACOSX/*'
 fi
 if ! find dataset/uploads_root -type d -name uploads -print -quit 2>/dev/null | grep -q .; then
   echo "== распаковка дампа Strapi (RAR5, 2.2 ГБ) в dataset/uploads_root"
@@ -34,8 +37,9 @@ if ! find dataset/uploads_root -type d -name uploads -print -quit 2>/dev/null | 
     unrar x -idq "$rar" dataset/uploads_root/
   elif command -v docker >/dev/null; then
     # unrar на хосте нет — берём его из контейнера Ubuntu (multiverse).
+    # Файлы возвращаются владельцу репозитория, иначе они останутся root.
     docker run --rm -v "$PWD/dataset:/d" ubuntu:24.04 sh -c \
-      "apt-get update -qq && apt-get install -y -qq --no-install-recommends unrar >/dev/null && unrar x -idq /d/prod-svoe-vino-strapi.part1.rar /d/uploads_root/"
+      "apt-get update -qq && apt-get install -y -qq --no-install-recommends unrar >/dev/null 2>&1 && unrar x -idq /d/prod-svoe-vino-strapi.part1.rar /d/uploads_root/ && chown -R $(id -u):$(id -g) /d/uploads_root"
   elif command -v 7zz >/dev/null; then
     7zz x -y -bso0 "$rar" -odataset/uploads_root
   else
@@ -50,7 +54,13 @@ if ! find dataset/uploads_root -type d -name uploads -print -quit 2>/dev/null | 
   fi
 fi
 
+if [ "$DATA_ONLY" = 1 ]; then
+  echo "датасет готов: dataset/. Дальше — docker compose up --build"
+  exit 0
+fi
+
 # --- 2. Окружение
+echo "== окружение .venv: torch ${TORCH:-cu128} и зависимости (несколько минут, вывод pip скрыт)"
 if [ ! -x .venv/bin/python ]; then
   python3 -m venv .venv
 fi

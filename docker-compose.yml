@@ -11,6 +11,10 @@
 # Без видеокарты — процессорная сборка без резервирования GPU:
 #   docker compose -f docker-compose.yml -f docker-compose.cpu.yml up --build
 
+# Имя проекта фиксировано: тома hf-cache (веса моделей, около 13 ГБ) и
+# pg-data не зависят от имени папки клона.
+name: rus_vines
+
 x-gpu: &gpu
   resources:
     reservations:
@@ -96,6 +100,8 @@ services:
       POSTGRES_USER: wine
       POSTGRES_PASSWORD: wine
       POSTGRES_DB: wine
+    # Порт 5433 на хосте — только для отладки (pipeline/vector_store.py --check);
+    # api ходит в базу по внутренней сети compose.
     ports:
       - "127.0.0.1:5433:5432"
     volumes:

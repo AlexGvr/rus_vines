@@ -39,4 +39,9 @@ if need data/index/sift/desc.npy; then
   echo "== признаки SIFT эталонов (CPU, несколько минут)"
   "$PY" pipeline/build_rerank_index.py
 fi
+# В контейнере indexer скрипт работает от root: собранное возвращаем
+# владельцу папки data/ на хосте, чтобы её можно было пересобрать и удалить.
+if [ "$(id -u)" = 0 ]; then
+  chown -R "$(stat -c %u:%g data)" data/catalog data/index
+fi
 echo "каталог и индексы готовы"
