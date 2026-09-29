@@ -51,3 +51,5 @@ my_photo/
 output/
 data/validation/ocr_alternative_*/*.jpg
 data/validation/transcript_final3_assets/
+# Исходник записи демо (с окном OBS); в репозитории — обрезанное видео
+*.orig.mp4
