@@ -1,0 +1,19 @@
+# Запуск без видеокарты NVIDIA:
+#
+#   docker compose -f docker-compose.yml -f docker-compose.cpu.yml up --build
+#
+# Процессорная сборка torch и без резервирования GPU. Подтверждение VLM на
+# процессоре не включается, снимок телефона обрабатывается около 10 с —
+# на пределе таймаута скрипта оценки (curl --max-time 10); метрики README
+# сняты на видеокарте.
+services:
+  indexer:
+    build:
+      args:
+        TORCH_INDEX: https://download.pytorch.org/whl/cpu
+    deploy: !reset {}
+  api:
+    build:
+      args:
+        TORCH_INDEX: https://download.pytorch.org/whl/cpu
+    deploy: !reset {}

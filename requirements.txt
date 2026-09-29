@@ -1,0 +1,20 @@
+# Зависимости сервиса и сборки индексов. Версии — те, на которых сняты
+# метрики README (Python 3.12).
+#
+# torch и torchvision ставятся отдельно, с индексом под своё железо:
+#   pip install --index-url https://download.pytorch.org/whl/cu128 torch==2.11.0 torchvision==0.26.0
+#   (без видеокарты — https://download.pytorch.org/whl/cpu)
+# scripts/setup.sh и service/Dockerfile делают это сами.
+transformers==5.17.0
+huggingface_hub==1.31.0
+ultralytics==8.4.152
+opencv-python-headless==5.0.0.93
+easyocr==1.7.2
+fastapi==0.141.1
+uvicorn[standard]==0.53.0
+python-multipart==0.0.32
+pillow==12.3.0
+numpy==2.5.2
+# Нужны только с VECTOR_BACKEND=pgvector (так работает docker compose)
+psycopg[binary]==3.3.6
+pgvector==0.5.0

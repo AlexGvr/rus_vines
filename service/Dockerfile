@@ -18,19 +18,10 @@ RUN apt-get update \
  && apt-get install -y --no-install-recommends libgl1 libglib2.0-0 \
  && rm -rf /var/lib/apt/lists/*
 
-RUN pip install --no-cache-dir --index-url "$TORCH_INDEX" torch torchvision \
- && pip install --no-cache-dir \
-      transformers \
-      ultralytics \
-      opencv-python-headless \
-      fastapi \
-      "uvicorn[standard]" \
-      python-multipart \
-      pillow \
-      numpy \
-      easyocr \
-      "psycopg[binary]" \
-      pgvector
+# Версии — из requirements.txt, на них сняты метрики README.
+COPY requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir --index-url "$TORCH_INDEX" torch==2.11.0 torchvision==0.26.0 \
+ && pip install --no-cache-dir -r /app/requirements.txt
 
 # Веса детектора и OCR кладём в образ: иначе они тянутся при первом запросе,
 # и первый скан ждёт загрузку вместо ответа.
@@ -49,6 +40,10 @@ COPY pipeline/embed.py pipeline/imageprep.py pipeline/ocr.py \
      pipeline/rerank.py pipeline/searchcore.py pipeline/text_match.py \
      pipeline/vector_store.py pipeline/vlm_verify.py pipeline/vlm_label.py \
      /app/pipeline/
+# Сборка каталога и индексов из датасета — сервис indexer в docker-compose.yml
+COPY pipeline/build_catalog.py pipeline/build_index.py pipeline/build_rerank_index.py \
+     /app/pipeline/
+COPY scripts/build_artifacts.sh /app/scripts/
 COPY service/main.py service/recommend.py /app/service/
 
 EXPOSE 8080

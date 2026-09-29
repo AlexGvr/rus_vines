@@ -48,7 +48,7 @@ def collect(variant: str) -> tuple[list[str], list[str | None]]:
     оставила бы от такой пары один slug, и вторая позиция выпала бы из
     поиска целиком. Поэтому путь в списке может повторяться.
     """
-    catalog = json.loads(CATALOG.read_text())["wines"]
+    catalog = json.loads(CATALOG.read_text(encoding="utf-8"))["wines"]
     updir = uploads_dir()
 
     if variant == "clean":

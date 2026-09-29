@@ -11,6 +11,8 @@
 Детали и обоснование решений —
 в [ARCHITECTURE.md](ARCHITECTURE.md).
 
+Сдаваемая версия — тег `v2.0`. Запуск с нуля — раздел «Быстрый старт».
+
 ## Презентация
 
 Актуальная версия: [PPTX](<ЛЦТ2026 Сканер российских вин.pptx>) и [PDF](<ЛЦТ2026 Сканер российских вин.pdf>). 13 основных слайдов: обязательные слайды шаблона с исходными названиями (решение и команда, команда, задача и команда, коротко о решении), затем концепция, архитектура, почему две ступени, живое демо, метрики, функция после поиска, что дальше, выводы; ещё 4 слайда приложения для вопросов. Термины на слайдах поясняются сносками.
@@ -144,38 +146,87 @@ p95 4.8 с, максимум 5.3 с, дольше 3000 мс — 31 кадр; н�
 
 ## Требования
 
-- Python 3.12, около 13 ГБ свободной видеопамяти с подтверждением VLM
-  (по умолчанию) или около 6 ГБ без него (`VLM_CONFIRM=0`); проверялось на
-  RTX 5060 Ti 16 ГБ. Сервис работает и на процессоре, но медленнее: снимок
-  телефона 3024×4032 — около 10 с, подтверждение VLM на процессоре
-  не включается.
+- Видеокарта NVIDIA: около 13 ГБ свободной видеопамяти с подтверждением VLM
+  (по умолчанию) или около 6 ГБ без него (`VLM_CONFIRM=0`); драйвер 570+
+  для сборки torch под CUDA 12.8 (на старом драйвере — `TORCH=cu126`).
+  Проверялось на RTX 5060 Ti 16 ГБ.
+- Python 3.12 для запуска на хосте или Docker Compose v2.24+ с
+  `nvidia-container-toolkit`.
+- Без видеокарты сервис работает, но медленнее: снимок телефона 3024×4032 —
+  около 10 с, подтверждение VLM на процессоре не включается. Скрипт оценки
+  ждёт ответ не дольше 10 с (`curl --max-time 10`), поэтому контрольный
+  прогон — на видеокарте; перед ним `/health` должен показать
+  `settings.vlm_active: true`.
+- Около 20 ГБ на диске: веса моделей около 13 ГБ (SigLIP 2 — 4.5 ГБ,
+  Qwen3-VL-4B — 8.3 ГБ, YOLO11m и EasyOCR — около 0.15 ГБ), датасет кейса
+  с распакованным дампом — около 4.5 ГБ, окружение с torch.
+- Интернет при первом запуске: huggingface.co (SigLIP 2, Qwen3-VL),
+  github.com (YOLO11m, EasyOCR), download.pytorch.org и pypi.org.
 - Node.js 20+ — только для интерфейса.
-- Около 5 ГБ на диске под каталог, индексы и веса моделей.
-- Данные кейса: `strapi_output0709.csv` и дамп Strapi с фотографиями.
+- Данные кейса: `Датасет.zip` (`strapi_output0709.csv`, дамп Strapi с
+  фотографиями в трёх томах RAR, `eval.zip` со скриптом оценки).
 
 ## Запуск
 
+### Быстрый старт
+
+Положите `Датасет.zip` кейса в корень репозитория (или распакуйте его в
+`dataset/`, см. «Данные») и выполните одно из двух.
+
+На хосте:
+
+```bash
+scripts/setup.sh    # датасет, окружение .venv, каталог и индексы (TORCH=cpu — без видеокарты)
+scripts/run.sh      # сервис на http://127.0.0.1:8080
+```
+
+В Docker (`scripts/setup.sh` не нужен, но датасет должен лежать в `dataset/`):
+
+```bash
+docker compose up --build
+```
+
+Проверка — скриптом кейсодержателя (раздел «Проверка») или
+`curl -F image=@фото.jpg http://127.0.0.1:8080/v1/eval/predict`.
+
+Каталог и индексы в репозиторий не входят: они производные от дампа и
+собираются из него одинаково на любой машине (привязка фото к позициям
+лежит в `data/datapack/photo_map.csv`). Ниже — те же шаги вручную.
+
 ### 1. Данные
 
-Распакуйте дамп кейса так, чтобы получилось:
+Нужная раскладка:
 
 ```
 dataset/
   strapi_output0709.csv
-  uploads_root/**/strapi/uploads/*.webp
+  uploads_root/prod-svoe-vino-strapi/prod-svoe-vino/strapi/uploads/*.webp
   eval/                      # публичный датасет со скриптом оценки
 ```
 
-Многотомный RAR распаковывается штатным `unrar x prod-svoe-vino-strapi.part1.rar`.
+Из архива кейса:
+
+```bash
+unzip Датасет.zip && mv Датасет dataset
+unzip dataset/eval.zip -d dataset/eval
+unrar x dataset/prod-svoe-vino-strapi.part1.rar dataset/uploads_root/
+# или официальный 7-Zip: 7zz x dataset/prod-svoe-vino-strapi.part1.rar -odataset/uploads_root
+```
+
+Дамп — многотомный RAR5, его надёжно распаковывает `unrar`
+(`sudo apt install unrar`); `unar` и 7-Zip без кодека RAR оставляют часть
+файлов пустыми. Если `unrar` на хосте нет, `scripts/setup.sh` берёт его из
+контейнера `ubuntu:24.04`.
 
 ### 2. Окружение
 
 ```bash
 python3 -m venv .venv
-.venv/bin/pip install --index-url https://download.pytorch.org/whl/cu128 torch torchvision
-.venv/bin/pip install transformers ultralytics opencv-python-headless \
-    fastapi uvicorn python-multipart pillow numpy easyocr
+.venv/bin/pip install --index-url https://download.pytorch.org/whl/cu128 torch==2.11.0 torchvision==0.26.0
+.venv/bin/pip install -r requirements.txt
 ```
+
+Версии в `requirements.txt` — те, на которых сняты метрики README.
 
 Без видеокарты замените индекс на `https://download.pytorch.org/whl/cpu`.
 
@@ -205,13 +256,17 @@ python3 -m venv .venv
 .venv/bin/python pipeline/build_rerank_index.py  # признаки эталонов
 ```
 
-Первый запуск скачает веса SigLIP 2 (около 3.5 ГБ), YOLO11m и
-Qwen3-VL-4B-Instruct (около 9 ГБ, для подтверждения ответа).
+Все три шага делает `scripts/build_artifacts.sh`, пропуская уже собранное
+(`FORCE=1` — пересобрать). Результат — `data/catalog/catalog.json`,
+`data/index/clean_mv.npy` и `data/index/sift/*.npy`. Сборка скачивает веса
+SigLIP 2 (около 4.5 ГБ) и YOLO11m; первый старт сервиса —
+Qwen3-VL-4B-Instruct (около 8.3 ГБ, для подтверждения ответа) и модели
+EasyOCR.
 
 ### 4. Сервис
 
 ```bash
-.venv/bin/python -m uvicorn service.main:app --host 127.0.0.1 --port 8080
+.venv/bin/python -m uvicorn service.main:app --host 127.0.0.1 --port 8080   # или scripts/run.sh
 curl http://127.0.0.1:8080/health
 ```
 
@@ -253,17 +308,28 @@ npm run dev --prefix web        # http://localhost:3300
 docker compose up --build
 ```
 
-Для доступа к видеокарте нужен `nvidia-container-toolkit`. Без него уберите
-секцию `deploy.resources` из `docker-compose.yml` и соберите процессорный
-вариант:
+Датасет раскладывается так же, как в «Данные». Перед сервисом `api`
+одноразовый сервис `indexer` собирает в `data/` каталог и индексы
+(`scripts/build_artifacts.sh`), если их там ещё нет; повторные старты его
+пропускают. Для доступа к видеокарте нужен `nvidia-container-toolkit`.
+Без видеокарты — процессорная сборка без резервирования GPU:
 
 ```bash
-TORCH_INDEX=https://download.pytorch.org/whl/cpu docker compose up --build
+docker compose -f docker-compose.yml -f docker-compose.cpu.yml up --build
 ```
 
-Каталог, индексы и дамп монтируются в контейнер из репозитория, веса моделей
-кэшируются в томе `hf-cache` — пересборка образа их не теряет. Первый старт
-скачивает около 13 ГБ весов и занимает до десяти минут.
+Каталог и индексы лежат в `data/` на хосте, дамп — в `dataset/`; в `api`
+они монтируются только на чтение. Веса моделей кэшируются в томе
+`hf-cache` — пересборка образа их не теряет. Первый старт скачивает около
+13 ГБ весов и вместе со сборкой индексов занимает до получаса.
+
+Проверено 2026-09-29 с нуля: чистый клон репозитория, шаг датасета из
+`scripts/setup.sh` распаковал `Датасет.zip` и дамп (файлы совпали с исходной
+распаковкой), `docker compose up --build` собрал образ, `indexer`
+за 6 минут собрал каталог и индексы — байт в байт такие же, как в рабочей
+копии, — и на всех 402 кадрах ответы совпали с прежними замерами, ошибок
+HTTP нет (`data/validation/api_fresh_clone_docker_20260929.json`); скрипт
+кейсодержателя отработал на `dataset/eval`.
 
 Проверено 2026-09-26 на RTX 5060 Ti (`nvidia-container-toolkit`, Docker
 Compose v2): через `docker compose up` ответы совпали с сервисом вне
@@ -290,7 +356,11 @@ cd dataset/eval
   --endpoint 'http://127.0.0.1:8080/v1/eval/predict' --output ./predictions.jsonl
 ```
 
-Собственные метрики:
+Собственные метрики — командные: полевой набор (`data/field`) состоит из
+снимков, которых нет ни в репозитории, ни в датасете кейса, поэтому
+`harness.sh`, `eval_field.py`, `api_check.py` и разбор прогонов требуют этих
+снимков. Из одного датасета воспроизводятся скрипт оценки и синтетические
+замеры (`make_queries.py`, затем `report.py`).
 
 ```bash
 bash pipeline/harness.sh                                    # скрипт кейса + точность
@@ -394,6 +464,7 @@ bash pipeline/harness.sh                                    # скрипт ке�
 | `VLM_MODEL` | `Qwen/Qwen3-VL-4B-Instruct` | модель подтверждения |
 | `VECTOR_BACKEND` | `numpy` | `pgvector` — векторы индекса в PostgreSQL (`DATABASE_URL`) |
 | `DATABASE_URL` | — | строка подключения к PostgreSQL с pgvector |
+| `BRAND_FIRST`, `GEOMETRY_MARGIN`, `KIN_GROUP`, `LABEL_BAND`, `TEXT_VOTE`, `SIFT_*`, `YOLO_CONF`, `YOLO_IMGSZ` | как в `/health` → `settings.rules_env` | экспериментальные переключатели правил поиска; значения по умолчанию — сдаваемая конфигурация |
 
 Веса модели уверенности и оба порога лежат одним файлом
 `data/index/confidence.json`; его пишет `pipeline/calibrate.py --write`,
@@ -434,9 +505,14 @@ bash pipeline/harness.sh                                    # скрипт ке�
 
 ```
 pipeline/   подготовка данных, ядро поиска, замеры
-service/    HTTP API и рекомендации
+core/       нормализация и нечёткое сравнение текста (нужен pipeline/text_match.py)
+service/    HTTP API и рекомендации, Dockerfile
+scripts/    установка, сборка каталога и индексов, запуск
 web/        Nuxt-модуль в стилистике портала
 dataset/    данные кейса (не в репозитории)
 data/       каталог, индексы, валидационные наборы (генерируются)
 docs/       расширенная документация и методика оценки
+app/, mobile/, etl/, tools/, package.json
+            первый офлайн-MVP (PWA, Flutter, обход платформы); для запуска
+            не нужны, описание — docs/pwa.md, docs/mobile.md, docs/etl.md
 ```

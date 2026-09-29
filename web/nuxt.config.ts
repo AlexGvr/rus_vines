@@ -1,6 +1,8 @@
 export default defineNuxtConfig({
   compatibilityDate: '2026-09-01',
   devtools: { enabled: false },
+  // Порт из README; 3000 по умолчанию часто занят.
+  devServer: { port: 3300 },
   // Модуль встраивается в каталог портала, поэтому рендерится на клиенте:
   // страница живёт внутри чужой оболочки и своего SSR не требует.
   ssr: false,

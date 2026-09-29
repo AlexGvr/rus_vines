@@ -285,22 +285,32 @@ flowchart LR
 ```mermaid
 flowchart LR
     subgraph compose["docker compose"]
+        indexer["indexer<br/>scripts/build_artifacts.sh<br/>один раз"]
         api["api<br/>service/Dockerfile<br/>torch cu128, GPU"]
         db[("db<br/>pgvector/pgvector:pg16")]
     end
-    data["./data, ./dataset<br/>только чтение"] --> api
+    dataset["./dataset<br/>датасет кейса"] --> indexer
+    indexer -->|"каталог и индексы"| data["./data"]
+    data -->|"только чтение"| api
+    dataset -->|"только чтение"| api
     cache[("том hf-cache<br/>веса SigLIP и Qwen3-VL")] --> api
     api --> db
     client(["клиент"]) -->|"127.0.0.1:8080"| api
 ```
 
-- **Образ.** В образ входят код сервиса и веса YOLO11m и EasyOCR. Каталог,
-  индексы и дамп монтируются только для чтения.
+- **Образ.** В образ входят код сервиса, скрипты сборки индексов и веса
+  YOLO11m и EasyOCR; версии пакетов — из `requirements.txt`.
+- **Сборка индексов.** Каталог и индексы в git не входят: одноразовый
+  сервис `indexer` того же образа собирает их из `./dataset` в `./data`,
+  если их там нет, и только после его успешного завершения стартует `api`.
+  Сервису `api` данные монтируются только для чтения.
+- **Без видеокарты** — `docker-compose.cpu.yml`: процессорная сборка torch
+  и без резервирования GPU.
 - **Веса SigLIP и Qwen3-VL** скачиваются при первом старте в том
   `hf-cache`.
 - **Старт.** Сервис загружает индекс в pgvector (при изменении — по хешу),
   прогревает модели пустым кадром и только потом отвечает.
-- **Видеопамять:** около 12 ГБ с VLM, около 6 ГБ без неё (`VLM_CONFIRM=0`).
+- **Видеопамять:** около 13 ГБ с VLM (12.3 ГиБ у работающего сервиса), около 6 ГБ без неё (`VLM_CONFIRM=0`).
   Без CUDA VLM выключается сама.
 - **Интерфейс** в compose не входит и поднимается отдельно
   (`npm run dev --prefix web`).

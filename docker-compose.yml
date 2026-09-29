@@ -3,16 +3,49 @@
 #
 #   docker compose up --build
 #
+# Перед сервисом api одноразовый сервис indexer собирает из датасета кейса
+# (dataset/) каталог и индексы в data/, если их там ещё нет; повторные
+# старты его пропускают. Датасет раскладывается по README, «Данные».
+#
 # Секция deploy.resources требует установленного nvidia-container-toolkit.
-# Без GPU уберите её и пересоберите образ с процессорной сборкой torch:
-#   docker compose build --build-arg TORCH_INDEX=https://download.pytorch.org/whl/cpu
+# Без видеокарты — процессорная сборка без резервирования GPU:
+#   docker compose -f docker-compose.yml -f docker-compose.cpu.yml up --build
+
+x-gpu: &gpu
+  resources:
+    reservations:
+      devices:
+        - driver: nvidia
+          count: 1
+          capabilities: [gpu]
+
 services:
+  indexer:
+    build:
+      context: .
+      dockerfile: service/Dockerfile
+      args:
+        TORCH_INDEX: ${TORCH_INDEX:-https://download.pytorch.org/whl/cu128}
+    image: rus_vines-api
+    command: ["bash", "scripts/build_artifacts.sh"]
+    volumes:
+      # Единственный сервис, которому data/ доступна на запись.
+      - ./data:/app/data
+      - ./dataset:/app/dataset:ro
+      - hf-cache:/root/.cache/huggingface
+    environment:
+      PYTHON: python
+      HF_HOME: /root/.cache/huggingface
+      YOLO_WEIGHTS: /app/weights/yolo11m.pt
+    deploy: *gpu
+
   api:
     build:
       context: .
       dockerfile: service/Dockerfile
       args:
         TORCH_INDEX: ${TORCH_INDEX:-https://download.pytorch.org/whl/cu128}
+    image: rus_vines-api
     ports:
       - "127.0.0.1:8080:8080"
     volumes:
@@ -41,15 +74,11 @@ services:
       # разминулась с точками лидера; detect — всегда вырезка.
       VLM_VIEW: ${VLM_VIEW:-auto}
     depends_on:
+      indexer:
+        condition: service_completed_successfully
       db:
         condition: service_healthy
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities: [gpu]
+    deploy: *gpu
     healthcheck:
       test: ["CMD", "python", "-c",
              "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/health')"]

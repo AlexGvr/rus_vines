@@ -5,4 +5,6 @@
 !core/
 !pipeline/
 !service/
+!scripts/
+!requirements.txt
 **/__pycache__

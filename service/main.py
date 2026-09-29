@@ -44,7 +44,7 @@ from fastapi import Body, FastAPI, File, UploadFile
 from fastapi.concurrency import run_in_threadpool
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
-from PIL import Image, ImageFile
+from PIL import Image, ImageFile, ImageOps
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "pipeline"))
@@ -604,7 +604,9 @@ def confidence(candidates: list) -> dict:
 
 def decode_image(raw: bytes) -> Image.Image | None:
     try:
-        img = Image.open(io.BytesIO(raw)).convert("RGB")
+        # Снимок телефона в JPEG часто лежит боком с тегом Orientation;
+        # без поворота детектор и SIFT видят этикетку на боку.
+        img = ImageOps.exif_transpose(Image.open(io.BytesIO(raw))).convert("RGB")
     except Exception:
         return None
     # По хешу /v1/analogs узнаёт снимок, который только что искали.

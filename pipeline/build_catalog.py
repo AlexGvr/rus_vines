@@ -269,7 +269,7 @@ def load_scrape_extras() -> dict[str, dict]:
     """Поля, которых нет в CSV кейса: рейтинг, блюда, крепость, температура."""
     if not SCRAPE.exists():
         return {}
-    wines = json.loads(SCRAPE.read_text())["wines"]
+    wines = json.loads(SCRAPE.read_text(encoding="utf-8"))["wines"]
     return {
         w["slug"]: {
             "rating": w.get("rating"),
